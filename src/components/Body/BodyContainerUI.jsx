@@ -3,7 +3,8 @@ import style from './Body.module.css'
 import LoginPage from "../LoginPage/LoginPage";
 import {Route, Switch} from "react-router-dom";
 
-import BodyContainerUX from "./BodyContainerUX";
+//import BodyContainerUX from "./BodyContainerUX";
+import Body from "./Body";
 
 
 let BodyContainer = () => {
@@ -11,7 +12,7 @@ let BodyContainer = () => {
         <Switch>
             <Route path='/login' render={()=><LoginPage/>}/>
         </Switch>
-        <BodyContainerUX/>
+        <Body/>
     </div>
 };
 

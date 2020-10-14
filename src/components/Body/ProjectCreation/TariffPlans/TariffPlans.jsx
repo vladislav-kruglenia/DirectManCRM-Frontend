@@ -10,7 +10,7 @@ let TariffPlans = () => {
         <div>План2</div>
         <div>План3</div>
         <NavLink to={'/project-creation/project-editing'}>
-            <button>Оформить заказ</button>
+            <button>Далее</button>
         </NavLink>
     </div>
 };
