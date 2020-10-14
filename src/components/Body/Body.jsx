@@ -1,8 +1,8 @@
 import React from 'react';
 import style from './Body.module.css'
-import LoginPage from "./LoginPage/LoginPage";
 import {Redirect, Route, Switch} from "react-router-dom";
-import AdminPanelContainer from "./AdminPanel/AdminPanelContainer";
+import ProjectCreation from "./ProjectCreation/ProjectCreation";
+import AdminPanel from "./AdminPanel/AdminPanel";
 
 
 let Body = () => {
@@ -10,8 +10,8 @@ let Body = () => {
         <Switch>
             <Route exact path='/'
                    render={() => <Redirect to={"/admin"}/>}/>
-            <Route path='/admin' render={()=><AdminPanelContainer/>}/>
-            <Route path='/login' render={()=><LoginPage/>}/>
+            <Route path='/admin' render={()=><AdminPanel/>}/>
+            <Route path='/project-creation' render={()=><ProjectCreation/>}/>
         </Switch>
     </div>
 };
