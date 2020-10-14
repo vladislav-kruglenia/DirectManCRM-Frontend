@@ -1,13 +1,15 @@
 import {applyMiddleware, combineReducers, compose, createStore} from "redux";
-import adminReducer from "./adminReducer";
 import thunkMiddleware from "redux-thunk"
 import { reducer as formReducer } from 'redux-form'
+import adminReducer from "./adminReducer";
 import authReducer from "./authReducer";
+import projectCreationReducer from "./projectCreationReducer";
 
 
 const reducers = combineReducers({
     adminPage: adminReducer,
     auth: authReducer,
+    projectCreation: projectCreationReducer,
     form: formReducer
 });
 
