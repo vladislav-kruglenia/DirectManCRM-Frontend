@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './Body.module.css'
 import {Redirect, Route, Switch} from "react-router-dom";
-import ProjectCreation from "./ProjectCreation/ProjectCreation";
+import ProjectCreation from "./ProjectCreation/ProjectCreationСontainer";
 import AdminPanel from "./AdminPanel/AdminPanel";
 
 

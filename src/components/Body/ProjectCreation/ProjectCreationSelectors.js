@@ -5,6 +5,5 @@ let getNamesDirectionsSelector = (state) => {
 };
 
 export let getNamesDirections = createSelector(getNamesDirectionsSelector, (directions) => {
-    debugger
     return directions.map(d => d.nameDirection);
 });
