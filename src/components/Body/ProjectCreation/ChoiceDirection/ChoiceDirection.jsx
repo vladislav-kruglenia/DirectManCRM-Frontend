@@ -23,8 +23,8 @@ let ChoiceDirection = (props) => {
 
 let Direction = (props) => {
     return <div onClick={() => props.changeDirectionStatus(!props.status, props.index)}>
-        {props.name}
-        {props.status}
+        {props.name} -
+        {`${props.status}`}
     </div>
 };
 

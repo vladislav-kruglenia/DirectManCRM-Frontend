@@ -1,12 +1,15 @@
 import ProjectCreation from "./ProjectCreation";
 import {compose} from "redux";
 import {connect} from "react-redux";
-import {getNamesDirections} from "./ProjectCreationSelectors";
+import {
+    getNamesDirections,
+    getNamesTariffsDependingSelectedDirections} from "./ProjectCreationSelectors";
 import {changeDirectionStatus} from "../../../redux/projectCreationReducer";
 
 let mapStateToProps = (state) => {
     return {
-        directions: getNamesDirections(state)
+        directions: getNamesDirections(state),
+        tariffsAndNamesDirections: getNamesTariffsDependingSelectedDirections(state)
     }
 };
 let dispatchObject = {

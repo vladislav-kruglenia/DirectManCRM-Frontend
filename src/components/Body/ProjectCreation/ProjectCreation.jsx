@@ -15,7 +15,8 @@ let ProjectCreation = (props) => {
             <Route path='/project-creation/choice-direction' render={()=><ChoiceDirection
                 changeDirectionStatus={props.changeDirectionStatus}
                 directions={props.directions}/>}/>
-            <Route path='/project-creation/tariff-plans' render={()=><TariffPlans/>}/>
+            <Route path='/project-creation/tariff-plans' render={()=><TariffPlans
+                tariffsAndNamesDirections={props.tariffsAndNamesDirections}/>}/>
             <Route path='/project-creation/project-editing' render={()=><ProjectEditing/>}/>
         </Switch>
     </div>
