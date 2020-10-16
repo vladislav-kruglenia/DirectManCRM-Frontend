@@ -3,8 +3,12 @@ import {compose} from "redux";
 import {connect} from "react-redux";
 import {
     getNamesDirections,
-    getNamesTariffsDependingSelectedDirections} from "./ProjectCreationSelectors";
-import {changeDirectionStatus} from "../../../redux/projectCreationReducer";
+    getNamesTariffsDependingSelectedDirections
+} from "./ProjectCreationSelectors";
+import {
+    changeDirectionStatus,
+    changeTariffStatus
+} from "../../../redux/projectCreationReducer";
 
 let mapStateToProps = (state) => {
     return {
@@ -13,7 +17,8 @@ let mapStateToProps = (state) => {
     }
 };
 let dispatchObject = {
-    changeDirectionStatus
+    changeDirectionStatus,
+    changeTariffStatus
 };
 
 export default compose(

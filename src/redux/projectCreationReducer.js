@@ -1,10 +1,12 @@
-const CHANGE_DIRECTION_STATUS = "CHANGE_DIRECTION_STATUS";
+const CHANGE_DIRECTION_STATUS_PR_CREATION = "CHANGE_DIRECTION_STATUS_PR_CREATION";
+const CHANGE_TARIFF_STATUS_PR_CREATION = "CHANGE_TARIFF_STATUS_PR_CREATION";
 
 
 let startState = {
         directionsAndTariffs: [
             {
                 nameDirection: 'Контекстная реклама',
+                idDirection: 1,
                 selected: false,
                 tariffsNames: [
                     {
@@ -56,6 +58,7 @@ let startState = {
             },
             {
                 nameDirection: 'Реклама в соц.сетях',
+                idDirection: 2,
                 selected:
                     false,
                 tariffsNames:
@@ -110,6 +113,7 @@ let startState = {
             ,
             {
                 nameDirection: 'Реклама Ютуб',
+                idDirection: 3,
                 selected:
                     false,
                 tariffsNames:
@@ -137,14 +141,35 @@ let startState = {
 
 const projectCreationReducer = (state = startState, action) => {
     switch (action.type) {
-        case CHANGE_DIRECTION_STATUS: {
+        case CHANGE_DIRECTION_STATUS_PR_CREATION: {
             let newState = {
                 ...state,
                 directionsAndTariffs: [
                     ...state.directionsAndTariffs
                 ]
             };
-            newState.directionsAndTariffs[action.index].selected = action.status;
+            newState.directionsAndTariffs[action.index] = {
+                ...newState.directionsAndTariffs[action.index],
+                selected:action.status
+            };
+            return newState
+        }
+        case CHANGE_TARIFF_STATUS_PR_CREATION: {
+            let indexDirection = state.directionsAndTariffs.findIndex(e=>e.idDirection === action.idDirection);
+            let indexTariff = state.directionsAndTariffs[indexDirection].tariffsNames
+                .findIndex(e=>e.id === action.indexTariff + 1);
+            debugger
+            let newState = {
+                ...state,
+                directionsAndTariffs: [
+                    ...state.directionsAndTariffs
+                ]
+            };
+            newState.directionsAndTariffs[indexDirection].tariffsNames[indexTariff] = {
+                ...state.directionsAndTariffs[indexDirection].tariffsNames[indexTariff],
+                selected: action.status
+            };
+            console.log(newState.directionsAndTariffs[indexDirection].tariffsNames[indexTariff]);
             return newState
         }
         default:
@@ -154,8 +179,12 @@ const projectCreationReducer = (state = startState, action) => {
 
 // actionCreators
 export let changeDirectionStatus = (status, index) => {
-    return {type: CHANGE_DIRECTION_STATUS, status, index}
+    return {type: CHANGE_DIRECTION_STATUS_PR_CREATION, status, index}
 };
+export let changeTariffStatus = (status, indexTariff, idDirection) => {
+    return {type: CHANGE_TARIFF_STATUS_PR_CREATION, status, indexTariff, idDirection}
+};
+
 // actionCreators
 
 // thunkCreators

@@ -4,11 +4,13 @@ import {NavLink} from "react-router-dom";
 
 
 let ChoiceDirection = (props) => {
-    let directions = props.directions.map((d, index) => <Direction changeDirectionStatus={props.changeDirectionStatus}
-                                                                   key={d.nameDirection}
-                                                                   status={d.selected}
-                                                                   index={index}
-                                                                   name={d.nameDirection}/>);
+    let directions = props.directions.map((d, index) => <Direction
+        changeDirectionStatus={props.changeDirectionStatus}
+        key={d.idDirection}
+        status={d.selected}
+        index={index}
+        name={d.nameDirection}
+    />);
 
     return <div className={style.bodyContainer}>
         <h3>Выбор направления рекламы</h3>
@@ -18,7 +20,6 @@ let ChoiceDirection = (props) => {
         </NavLink>
     </div>
 };
-
 
 
 let Direction = (props) => {

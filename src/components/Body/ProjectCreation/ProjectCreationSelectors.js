@@ -21,6 +21,7 @@ export let getNamesTariffsDependingSelectedDirections = createSelector(getNamesD
                     // отдаем наверх массив объектов, в котором массив с тарифами и название направления
                     return {
                         nameDirection: d.nameDirection,
+                        idDirection: d.idDirection,
                         namesTariffs
                     }
                 }
@@ -37,7 +38,8 @@ export let getNamesDirections = createSelector(getNamesDirectionsSelector, (dire
     return directions.map(d => (
         {
             nameDirection: d.nameDirection,
-            selected: d.selected
+            selected: d.selected,
+            idDirection: d.idDirection
         }
     ));
 });
