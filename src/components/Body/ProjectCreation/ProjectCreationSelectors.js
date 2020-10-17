@@ -30,7 +30,8 @@ export let getNamesTariffsDependingSelectedDirections = createSelector(getNamesD
                     let namesTariffs = d.tariffsNames.map(tNames => (
                         {
                             tariffName: tNames.name,
-                            tariffStatus: tNames.selected
+                            tariffStatus: tNames.selected,
+                            tariffId: tNames.id
                         }
                     ));
                     // отдаем наверх массив объектов, в котором массив с тарифами и название направления

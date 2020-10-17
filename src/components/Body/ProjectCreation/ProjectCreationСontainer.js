@@ -7,6 +7,7 @@ import {
     getNamesTariffsDependingSelectedDirections
 } from "./ProjectCreationSelectors";
 import {
+    addTariff,
     changeDirectionStatus,
     changeTariffStatus
 } from "../../../redux/projectCreationReducer";
@@ -20,7 +21,8 @@ let mapStateToProps = (state) => {
 };
 let dispatchObject = {
     changeDirectionStatus,
-    changeTariffStatus
+    changeTariffStatus,
+    addTariff
 };
 
 export default compose(

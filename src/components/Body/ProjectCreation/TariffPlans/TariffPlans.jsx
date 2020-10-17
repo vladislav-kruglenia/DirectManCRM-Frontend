@@ -25,11 +25,11 @@ let TariffPlans = (props) => {
 // это нужно поменять после того, как определимся с индексами на бекенде
 
 let TariffPlan = (props) => {
-    let tariffs = props.namesTariffs.map((t, index) => <Tariff
-        key={index}
+    let tariffs = props.namesTariffs.map((t) => <Tariff
+        key={t.tariffId}
         tariffName={t.tariffName}
         tariffStatus={t.tariffStatus}
-        indexTariff={index}
+        tariffId={t.tariffId}
         idDirection={props.idDirection}
         changeTariffStatus={props.changeTariffStatus}
     />);
@@ -39,7 +39,7 @@ let TariffPlan = (props) => {
     </>
 };
 let Tariff = (props) => {
-    return <div onClick={() => props.changeTariffStatus(!props.tariffStatus, props.indexTariff, props.idDirection)}>
+    return <div onClick={() => props.changeTariffStatus(!props.tariffStatus, props.tariffId, props.idDirection)}>
         {props.tariffName} - {`${props.tariffStatus}`}
     </div>
 };

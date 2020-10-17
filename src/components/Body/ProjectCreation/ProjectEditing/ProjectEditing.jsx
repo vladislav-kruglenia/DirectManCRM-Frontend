@@ -6,7 +6,9 @@ let ProjectEditing = (props) => {
     let directions = props.servicesAndNamesTariffs.map(d => <DirectionEditing
         key={d.idDirection}
         namesTariffs={d.namesTariffs}
-        nameDirection={d.nameDirection}/>);
+        nameDirection={d.nameDirection}
+        idDirection={d.idDirection}
+        addTariff={props.addTariff}/>);
     return <div className={style.bodyContainer}>
         <h2>Редактировать заказ</h2>
         {props.servicesAndNamesTariffs.length > 0
@@ -26,7 +28,7 @@ let DirectionEditing = (props) => {
         {props.namesTariffs.length > 0
             ? tariffs
             : <div>Нет выбранных тарифов</div>}
-        <button>Добавить тариф</button>
+        <button onClick={() => props.addTariff(props.idDirection)}>Добавить тариф</button>
     </div>
 };
 
@@ -48,7 +50,6 @@ let ServiceEditing = (props) => {
         <div>{props.serviceName} - {`${props.serviceStatus}`}</div>
     </div>
 };
-
 
 
 export default ProjectEditing
