@@ -8,7 +8,7 @@ import ChoiceDirection from "./ChoiceDirection/ChoiceDirection";
 
 let ProjectCreation = (props) => {
     return <div className={style.bodyContainer}>
-        <h2>Формирование заказа</h2>
+        <h1>Формирование заказа</h1>
         <Switch>
             <Route exact path='/project-creation'
                    render={() => <Redirect to={'/project-creation/choice-direction'}/>}/>
@@ -18,7 +18,8 @@ let ProjectCreation = (props) => {
             <Route path='/project-creation/tariff-plans' render={()=><TariffPlans
                 changeTariffStatus={props.changeTariffStatus}
                 tariffsAndNamesDirections={props.tariffsAndNamesDirections}/>}/>
-            <Route path='/project-creation/project-editing' render={()=><ProjectEditing/>}/>
+            <Route path='/project-creation/project-editing' render={()=><ProjectEditing
+                servicesAndNamesTariffs={props.servicesAndNamesTariffs}/>}/>
         </Switch>
     </div>
 };

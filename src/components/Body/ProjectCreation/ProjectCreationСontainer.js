@@ -3,6 +3,7 @@ import {compose} from "redux";
 import {connect} from "react-redux";
 import {
     getNamesDirections,
+    getNamesServicesDependingSelectedTariffs,
     getNamesTariffsDependingSelectedDirections
 } from "./ProjectCreationSelectors";
 import {
@@ -13,7 +14,8 @@ import {
 let mapStateToProps = (state) => {
     return {
         directions: getNamesDirections(state),
-        tariffsAndNamesDirections: getNamesTariffsDependingSelectedDirections(state)
+        tariffsAndNamesDirections: getNamesTariffsDependingSelectedDirections(state),
+        servicesAndNamesTariffs: getNamesServicesDependingSelectedTariffs(state)
     }
 };
 let dispatchObject = {

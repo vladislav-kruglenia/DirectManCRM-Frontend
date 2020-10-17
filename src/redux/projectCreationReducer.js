@@ -16,7 +16,8 @@ let startState = {
                         services: [
                             {
                                 serviceName: 'Яндекс Поиск',
-                                selected: false
+                                selected: false,
+                                idService: 1
                             }
                         ]
                     },
@@ -27,11 +28,13 @@ let startState = {
                         services: [
                             {
                                 serviceName: 'Яндекс Поиск',
-                                selected: false
+                                selected: false,
+                                idService: 1
                             },
                             {
                                 serviceName: 'Гугл Поиск',
-                                selected: false
+                                selected: false,
+                                idService: 2
                             }
                         ]
                     },
@@ -42,15 +45,18 @@ let startState = {
                         services: [
                             {
                                 serviceName: 'Яндекс Поиск',
-                                selected: false
+                                selected: false,
+                                idService: 1
                             },
                             {
                                 serviceName: 'Гугл Поиск',
-                                selected: false
+                                selected: false,
+                                idService: 2
                             },
                             {
                                 serviceName: 'Цели в Яндекс и Гугл',
-                                selected: false
+                                selected: false,
+                                idService: 3
                             }
                         ]
                     }
@@ -70,11 +76,13 @@ let startState = {
                             services: [
                                 {
                                     serviceName: 'Настройка таргет рекламы',
-                                    selected: false
+                                    selected: false,
+                                    idService: 1
                                 },
                                 {
                                     serviceName: 'Ведение 5 раб. дней',
-                                    selected: false
+                                    selected: false,
+                                    idService: 2
                                 }
                             ]
                         },
@@ -85,11 +93,13 @@ let startState = {
                             services: [
                                 {
                                     serviceName: 'Настройка таргет рекламы',
-                                    selected: false
+                                    selected: false,
+                                    idService: 1
                                 },
                                 {
                                     serviceName: 'Ведение 5 раб. дней',
-                                    selected: false
+                                    selected: false,
+                                    idService: 2
                                 }
                             ]
                         },
@@ -100,11 +110,13 @@ let startState = {
                             services: [
                                 {
                                     serviceName: 'Настройка таргет рекламы',
-                                    selected: false
+                                    selected: false,
+                                    idService: 1
                                 },
                                 {
                                     serviceName: 'Ведение 5 раб. дней',
-                                    selected: false
+                                    selected: false,
+                                    idService: 2
                                 }
                             ]
                         }
@@ -125,11 +137,13 @@ let startState = {
                             services: [
                                 {
                                     serviceName: 'Настройка рекламы на Ютубе',
-                                    selected: false
+                                    selected: false,
+                                    idService: 1
                                 },
                                 {
                                     serviceName: 'Ведение 5 раб. дней',
-                                    selected: false
+                                    selected: false,
+                                    idService: 2
                                 }
                             ]
                         }
@@ -158,7 +172,6 @@ const projectCreationReducer = (state = startState, action) => {
             let indexDirection = state.directionsAndTariffs.findIndex(e=>e.idDirection === action.idDirection);
             let indexTariff = state.directionsAndTariffs[indexDirection].tariffsNames
                 .findIndex(e=>e.id === action.indexTariff + 1);
-            debugger
             let newState = {
                 ...state,
                 directionsAndTariffs: [

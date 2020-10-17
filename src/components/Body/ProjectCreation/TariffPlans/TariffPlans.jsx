@@ -14,7 +14,7 @@ let TariffPlans = (props) => {
     return <div className={style.bodyContainer}>
         {props.tariffsAndNamesDirections.length > 0
             ? directionsWithTariffs
-            : <div>Нет выбранных тарифов</div>}
+            : <div>Нет выбранных направлений</div>}
         <NavLink to={'/project-creation/project-editing'}>
             <button>Далее</button>
         </NavLink>
