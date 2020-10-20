@@ -21,6 +21,7 @@ let ProjectCreation = (props) => {
             <Route path='/project-creation/project-editing' render={()=><ProjectEditing
                 addTariff={props.addTariff}
                 addService={props.addService}
+                deleteService={props.deleteService}
                 servicesAndNamesTariffs={props.servicesAndNamesTariffs}/>}/>
         </Switch>
     </div>

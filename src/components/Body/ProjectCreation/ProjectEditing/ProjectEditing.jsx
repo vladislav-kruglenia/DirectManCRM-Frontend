@@ -10,6 +10,7 @@ let ProjectEditing = (props) => {
         idDirection={d.idDirection}
         addTariff={props.addTariff}
         addService={props.addService}
+        deleteService={props.deleteService}
     />);
     return <div className={style.bodyContainer}>
         <h2>Редактировать заказ</h2>
@@ -28,6 +29,7 @@ let DirectionEditing = (props) => {
         tariffId={t.tariffId}
         tariffName={t.tariffName}
         addService={props.addService}
+        deleteService={props.deleteService}
     />);
     return <div>
         <h3>{props.nameDirection}</h3>
@@ -44,6 +46,9 @@ let TariffEditing = (props) => {
         serviceName={s.serviceName}
         serviceId={s.serviceId}
         serviceStatus={s.serviceStatus}
+        idDirection={props.idDirection}
+        tariffId={props.tariffId}
+        deleteService={props.deleteService}
     />);
     return <div>
         <h4>{props.tariffName}</h4>
@@ -56,7 +61,12 @@ let TariffEditing = (props) => {
 
 let ServiceEditing = (props) => {
     return <div>
-        <div>{props.serviceName} - {`${props.serviceStatus}`}</div>
+        <div>
+            {props.serviceName} - {`${props.serviceStatus} `}
+            <button onClick={() => props.deleteService(props.idDirection, props.tariffId, props.serviceId)}>
+                Удалить услугу
+            </button>
+        </div>
     </div>
 };
 
