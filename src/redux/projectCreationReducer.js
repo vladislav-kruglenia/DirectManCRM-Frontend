@@ -4,6 +4,7 @@ import {v4 as uuidv4} from 'uuid';
 const CHANGE_DIRECTION_STATUS_PR_CREATION = "CHANGE_DIRECTION_STATUS_PR_CREATION";
 const CHANGE_TARIFF_STATUS_PR_CREATION = "CHANGE_TARIFF_STATUS_PR_CREATION";
 const ADD_NEW_TARIFF_PR_CREATION = "ADD_NEW_TARIFF_PR_CREATION";
+const ADD_NEW_SERVICE_PR_CREATION = "ADD_NEW_SERVICE_PR_CREATION";
 
 
 let startState = {
@@ -156,6 +157,31 @@ let startState = {
 
 const projectCreationReducer = (state = startState, action) => {
     switch (action.type) {
+        case ADD_NEW_SERVICE_PR_CREATION: {
+            let indexDirection = state.directionsAndTariffs.findIndex(e => e.idDirection === action.idDirection);
+            let indexTariff = state.directionsAndTariffs[indexDirection].tariffsNames
+                .findIndex(e => e.id === action.idTariff);
+            let newState = {
+                ...state,
+                directionsAndTariffs: [
+                    ...state.directionsAndTariffs
+                ]
+            };
+            newState.directionsAndTariffs[indexDirection] = {
+                ...state.directionsAndTariffs[indexDirection],
+                tariffsNames: [
+                    ...state.directionsAndTariffs[indexDirection].tariffsNames
+                ]
+            };
+            newState.directionsAndTariffs[indexDirection].tariffsNames[indexTariff] = {
+                ...state.directionsAndTariffs[indexDirection].tariffsNames[indexTariff],
+                services: [
+                    ...state.directionsAndTariffs[indexDirection].tariffsNames[indexTariff].services,
+                    action.newService
+                ]
+            };
+            return newState
+        }
         case ADD_NEW_TARIFF_PR_CREATION: {
             let indexDirection = state.directionsAndTariffs.findIndex(e => e.idDirection === action.idDirection);
             let newState = {
@@ -224,6 +250,14 @@ export let addTariff = (idDirection) => {
         services: []
     };
     return {type: ADD_NEW_TARIFF_PR_CREATION,newTariff,idDirection}
+};
+export let addService = (idDirection, idTariff) => {
+    let newService = {
+        idService: uuidv4(),
+        serviceName: 'Новая услуга',
+        selected: true
+    };
+    return {type: ADD_NEW_SERVICE_PR_CREATION, newService, idDirection, idTariff}
 };
 
 // actionCreators

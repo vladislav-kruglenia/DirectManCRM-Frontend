@@ -7,6 +7,7 @@ import {
     getNamesTariffsDependingSelectedDirections
 } from "./ProjectCreationSelectors";
 import {
+    addService,
     addTariff,
     changeDirectionStatus,
     changeTariffStatus
@@ -22,7 +23,8 @@ let mapStateToProps = (state) => {
 let dispatchObject = {
     changeDirectionStatus,
     changeTariffStatus,
-    addTariff
+    addTariff,
+    addService
 };
 
 export default compose(

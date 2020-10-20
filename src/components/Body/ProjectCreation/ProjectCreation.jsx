@@ -20,6 +20,7 @@ let ProjectCreation = (props) => {
                 tariffsAndNamesDirections={props.tariffsAndNamesDirections}/>}/>
             <Route path='/project-creation/project-editing' render={()=><ProjectEditing
                 addTariff={props.addTariff}
+                addService={props.addService}
                 servicesAndNamesTariffs={props.servicesAndNamesTariffs}/>}/>
         </Switch>
     </div>

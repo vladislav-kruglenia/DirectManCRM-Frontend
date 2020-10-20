@@ -8,7 +8,9 @@ let ProjectEditing = (props) => {
         namesTariffs={d.namesTariffs}
         nameDirection={d.nameDirection}
         idDirection={d.idDirection}
-        addTariff={props.addTariff}/>);
+        addTariff={props.addTariff}
+        addService={props.addService}
+    />);
     return <div className={style.bodyContainer}>
         <h2>Редактировать заказ</h2>
         {props.servicesAndNamesTariffs.length > 0
@@ -21,8 +23,12 @@ let ProjectEditing = (props) => {
 let DirectionEditing = (props) => {
     let tariffs = props.namesTariffs.map(t => <TariffEditing
         key={t.tariffId}
+        idDirection={props.idDirection}
         namesServices={t.namesServices}
-        tariffName={t.tariffName}/>);
+        tariffId={t.tariffId}
+        tariffName={t.tariffName}
+        addService={props.addService}
+    />);
     return <div>
         <h3>{props.nameDirection}</h3>
         {props.namesTariffs.length > 0
@@ -42,6 +48,9 @@ let TariffEditing = (props) => {
     return <div>
         <h4>{props.tariffName}</h4>
         {services}
+        <button onClick={() => props.addService(props.idDirection, props.tariffId)}>
+            Добавить услугу
+        </button>
     </div>
 };
 

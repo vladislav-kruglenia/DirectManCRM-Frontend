@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './TariffPlan.module.css'
+import style from './TariffPlan.module.scss'
 import {NavLink} from "react-router-dom";
 
 
@@ -11,7 +11,7 @@ let TariffPlans = (props) => {
         namesTariffs={tAndD.namesTariffs}
         changeTariffStatus={props.changeTariffStatus}
     />);
-    return <div className={style.bodyContainer}>
+    return <div className={style.tariffPlansContainer}>
         {props.tariffsAndNamesDirections.length > 0
             ? directionsWithTariffs
             : <div>Нет выбранных направлений</div>}
