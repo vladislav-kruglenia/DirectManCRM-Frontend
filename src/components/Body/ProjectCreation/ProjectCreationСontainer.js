@@ -9,7 +9,7 @@ import {
 import {
     addService,
     addTariff,
-    changeDirectionStatus,
+    changeDirectionStatus, changeServiceName,
     changeTariffStatus, deleteService
 } from "../../../redux/projectCreationReducer";
 
@@ -25,7 +25,8 @@ let dispatchObject = {
     changeTariffStatus,
     addTariff,
     addService,
-    deleteService
+    deleteService,
+    changeServiceName
 };
 
 export default compose(

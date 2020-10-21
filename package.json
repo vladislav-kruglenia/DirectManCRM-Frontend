@@ -1,5 +1,5 @@
 {
-  "name": "direct-man-frontend",
+  "name": "direct-man-frontend-2.0",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -8,11 +8,10 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.20.0",
     "node-sass": "^4.14.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-redux": "^7.2.1",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3",
+    "react-scripts": "3.4.4",
     "redux": "^4.0.5",
     "redux-form": "^8.3.6",
     "redux-thunk": "^2.3.0",
@@ -39,5 +38,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-redux": "^7.2.1"
   }
 }

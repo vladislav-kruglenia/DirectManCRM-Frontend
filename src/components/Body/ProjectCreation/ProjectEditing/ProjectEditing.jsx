@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import style from './ProjectEditing.module.css'
 
 
@@ -12,6 +12,7 @@ let ProjectEditing = (props) => {
         addService={props.addService}
         changeTariffStatus={props.changeTariffStatus}
         deleteService={props.deleteService}
+        changeServiceName={props.changeServiceName}
     />);
     return <div className={style.bodyContainer}>
         <h2>Редактировать заказ</h2>
@@ -32,6 +33,7 @@ let DirectionEditing = (props) => {
         addService={props.addService}
         changeTariffStatus={props.changeTariffStatus}
         deleteService={props.deleteService}
+        changeServiceName={props.changeServiceName}
     />);
     return <div>
         <h3>{props.nameDirection}</h3>
@@ -51,6 +53,7 @@ let TariffEditing = (props) => {
         idDirection={props.idDirection}
         tariffId={props.tariffId}
         deleteService={props.deleteService}
+        changeServiceName={props.changeServiceName}
     />);
     return <div>
         <div>
@@ -70,13 +73,35 @@ let TariffEditing = (props) => {
 };
 
 let ServiceEditing = (props) => {
+    let [editMode, setEditMode] = useState(false);
+    let [serviceName, changeServiceNameHook] = useState(props.serviceName);
+
     return <div>
-        <div>
-            {props.serviceName} - {`${props.serviceStatus} `}
+        {!editMode
+            ? <div onDoubleClick={() => setEditMode(true)}>
+            {serviceName} - {`${props.serviceStatus} `}
             <button onClick={() => props.deleteService(props.idDirection, props.tariffId, props.serviceId)}>
                 Удалить услугу
             </button>
         </div>
+            : <div>
+                <input
+                    onChange={(e) => changeServiceNameHook(e.currentTarget.value)}
+                    type="text"
+                    value={serviceName}
+                    autoFocus={true}
+                />
+                <button onClick={() => {
+                    props.changeServiceName(
+                        props.idDirection,
+                        props.tariffId,
+                        props.serviceId,
+                        serviceName
+                    );
+                    setEditMode(false);
+                }}>Сохранить</button>
+            </div>
+        }
     </div>
 };
 

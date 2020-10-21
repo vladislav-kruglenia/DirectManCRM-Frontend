@@ -6,6 +6,7 @@ const CHANGE_TARIFF_STATUS_PR_CREATION = "CHANGE_TARIFF_STATUS_PR_CREATION";
 const ADD_NEW_TARIFF_PR_CREATION = "ADD_NEW_TARIFF_PR_CREATION";
 const ADD_NEW_SERVICE_PR_CREATION = "ADD_NEW_SERVICE_PR_CREATION";
 const DELETE_SERVICE_PR_CREATION = "DELETE_SERVICE_PR_CREATION";
+const CHANGE_SERVICE_NAME_PR_CREATION = "CHANGE_SERVICE_NAME_PR_CREATION";
 
 
 let startState = {
@@ -157,6 +158,38 @@ let startState = {
 
 const projectCreationReducer = (state = startState, action) => {
     switch (action.type) {
+        case CHANGE_SERVICE_NAME_PR_CREATION: {
+            let indexDirection = state.directionsAndTariffs
+                .findIndex(e => e.idDirection === action.idDirection);
+            let indexTariff = state.directionsAndTariffs[indexDirection].tariffsNames
+                .findIndex(e => e.id === action.idTariff);
+            let indexService = state.directionsAndTariffs[indexDirection].tariffsNames[indexTariff].services
+                .findIndex(s => s.idService === action.idService);
+            debugger
+            let newState = {
+                ...state,
+                directionsAndTariffs: [
+                    ...state.directionsAndTariffs
+                ]
+            };
+            newState.directionsAndTariffs[indexDirection] = {
+                ...state.directionsAndTariffs[indexDirection],
+                tariffsNames: [
+                    ...state.directionsAndTariffs[indexDirection].tariffsNames
+                ]
+            };
+            newState.directionsAndTariffs[indexDirection].tariffsNames[indexTariff] = {
+                ...state.directionsAndTariffs[indexDirection].tariffsNames[indexTariff],
+                services: [
+                    ...state.directionsAndTariffs[indexDirection].tariffsNames[indexTariff].services
+                ]
+            };
+            newState.directionsAndTariffs[indexDirection]
+                .tariffsNames[indexTariff]
+                .services[indexService]
+                .serviceName = action.serviceName;
+            return newState
+        }
         case DELETE_SERVICE_PR_CREATION: {
             let indexDirection = state.directionsAndTariffs.findIndex(e => e.idDirection === action.idDirection);
             let indexTariff = state.directionsAndTariffs[indexDirection].tariffsNames
@@ -286,6 +319,9 @@ export let addService = (idDirection, idTariff) => {
 };
 export let deleteService = (idDirection, idTariff, idService) => {
     return {type: DELETE_SERVICE_PR_CREATION, idDirection, idTariff, idService}
+};
+export let changeServiceName = (idDirection, idTariff, idService, serviceName) => {
+    return {type: CHANGE_SERVICE_NAME_PR_CREATION, idDirection, idTariff, idService, serviceName}
 };
 
 // actionCreators
