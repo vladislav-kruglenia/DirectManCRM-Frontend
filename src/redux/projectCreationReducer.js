@@ -322,11 +322,13 @@ export let deleteService = (idDirection, idTariff, idService) => {
     return {type: DELETE_SERVICE_PR_CREATION, idDirection, idTariff, idService}
 };
 
-export let changeServiceName = (idDirection, idTariff, idService, serviceName) => {
+export let changeServiceName = (idNumbers, serviceName) => {
+    let {idDirection, idTariff, idService} = idNumbers;
     return {type: CHANGE_SERVICE_NAME_PR_CREATION, idDirection, idTariff, idService, serviceName}
 };
 
-export let changeTariffName = (idDirection, idTariff, tariffName) => {
+export let changeTariffName = (idNumbers, tariffName) => {
+    let {idDirection, idTariff} = idNumbers;
     return {type: CHANGE_TARIFF_NAME_PR_CREATION, idDirection, idTariff, tariffName}
 };
 // actionCreators

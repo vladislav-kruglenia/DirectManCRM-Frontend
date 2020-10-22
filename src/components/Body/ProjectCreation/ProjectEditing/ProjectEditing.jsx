@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import style from './ProjectEditing.module.css'
+import {EditMode} from "./InputEditMode";
 
 
 let ProjectEditing = (props) => {
@@ -71,31 +72,17 @@ let TariffEditing = (props) => {
                     </button>
                 </h4>
             </div>
-            : <div>
-                <div className={style.editLayer}>
-                    <input
-                        onChange={(e) => changeTariffNameHook(e.currentTarget.value)}
-                        type="text"
-                        value={tariffName}
-                        autoFocus={true}
-                    />
-                    <button onClick={() => {
-                        props.changeTariffName(
-                            props.idDirection,
-                            props.tariffId,
-                            tariffName
-                        );
-                        setEditMode(false);
-                    }}>Сохранить
-                    </button>
-                </div>
-                {/*сделали под блоком редактирования большой широкий элемент на весь экран,
-                 но полностью прозрачный,поставили на нём клик событие и скрыли оба слоя*/}
-                <div className={style.transparentLayer} onClick={() => {
-                    changeTariffNameHook(props.tariffName);
-                    setEditMode(false);
-                }}>{}</div>
-            </div>
+            : <EditMode
+                changeNameGlobal={props.changeTariffName}
+                idNumbers={{
+                    idDirection: props.idDirection,
+                    idTariff: props.tariffId
+                }}
+                nameLocal={tariffName}
+                nameGlobal={props.tariffName}
+                setEditMode={(status)=>{setEditMode(status)}}
+                changeNameHook={(name)=>{changeTariffNameHook(name)}}
+            />
         }
         {props.namesServices.length > 0
             ? services
@@ -118,35 +105,20 @@ let ServiceEditing = (props) => {
                     Удалить услугу
                 </button>
             </div>
-            : <div>
-                <div className={style.editLayer}>
-                    <input
-                        onChange={(e) => changeServiceNameHook(e.currentTarget.value)}
-                        type="text"
-                        value={serviceName}
-                        autoFocus={true}
-                    />
-                    <button onClick={() => {
-                        props.changeServiceName(
-                            props.idDirection,
-                            props.tariffId,
-                            props.serviceId,
-                            serviceName
-                        );
-                        setEditMode(false);
-                    }}>Сохранить
-                    </button>
-                </div>
-                {/*сделали под блоком редактирования большой широкий элемент на весь экран,
-                 но полностью прозрачный,поставили на нём клик событие и скрыли оба слоя*/}
-                <div className={style.transparentLayer} onClick={() => {
-                    changeServiceNameHook(props.serviceName);
-                    setEditMode(false);
-                }}>{}</div>
-            </div>
+            : <EditMode
+                changeNameGlobal={props.changeServiceName}
+                idNumbers={{
+                    idDirection: props.idDirection,
+                    idTariff: props.tariffId,
+                    idService: props.serviceId
+                }}
+                nameLocal={serviceName}
+                nameGlobal={props.serviceName}
+                setEditMode={(status)=>{setEditMode(status)}}
+                changeNameHook={(name)=>{changeServiceNameHook(name)}}
+            />
         }
     </div>
 };
-
 
 export default ProjectEditing
