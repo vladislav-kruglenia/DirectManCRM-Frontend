@@ -160,10 +160,7 @@ let startState = {
 const projectCreationReducer = (state = startState, action) => {
     switch (action.type) {
         case CHANGE_TARIFF_NAME_PR_CREATION: {
-            let indexDirection = state.directionsAndTariffs
-                .findIndex(e => e.idDirection === action.idDirection);
-            let indexTariff = state.directionsAndTariffs[indexDirection].tariffsNames
-                .findIndex(e => e.id === action.idTariff);
+            let {indexDirection, indexTariff} = Indexes.getIndexes(state, action);
             let newState = {
                 ...state,
                 directionsAndTariffs: [
@@ -182,13 +179,7 @@ const projectCreationReducer = (state = startState, action) => {
             return newState
         }
         case CHANGE_SERVICE_NAME_PR_CREATION: {
-            let indexDirection = state.directionsAndTariffs
-                .findIndex(e => e.idDirection === action.idDirection);
-            let indexTariff = state.directionsAndTariffs[indexDirection].tariffsNames
-                .findIndex(e => e.id === action.idTariff);
-            let indexService = state.directionsAndTariffs[indexDirection].tariffsNames[indexTariff].services
-                .findIndex(s => s.idService === action.idService);
-            debugger
+            let {indexDirection, indexTariff, indexService} = Indexes.getIndexes(state, action);
             let newState = {
                 ...state,
                 directionsAndTariffs: [
@@ -214,9 +205,7 @@ const projectCreationReducer = (state = startState, action) => {
             return newState
         }
         case DELETE_SERVICE_PR_CREATION: {
-            let indexDirection = state.directionsAndTariffs.findIndex(e => e.idDirection === action.idDirection);
-            let indexTariff = state.directionsAndTariffs[indexDirection].tariffsNames
-                .findIndex(e => e.id === action.idTariff);
+            let {indexDirection, indexTariff} = Indexes.getIndexes(state, action);
             let newState = {
                 ...state,
                 directionsAndTariffs: [
@@ -239,9 +228,7 @@ const projectCreationReducer = (state = startState, action) => {
             return newState
         }
         case ADD_NEW_SERVICE_PR_CREATION: {
-            let indexDirection = state.directionsAndTariffs.findIndex(e => e.idDirection === action.idDirection);
-            let indexTariff = state.directionsAndTariffs[indexDirection].tariffsNames
-                .findIndex(e => e.id === action.idTariff);
+            let {indexDirection, indexTariff} = Indexes.getIndexes(state, action);
             let newState = {
                 ...state,
                 directionsAndTariffs: [
@@ -264,7 +251,7 @@ const projectCreationReducer = (state = startState, action) => {
             return newState
         }
         case ADD_NEW_TARIFF_PR_CREATION: {
-            let indexDirection = state.directionsAndTariffs.findIndex(e => e.idDirection === action.idDirection);
+            let indexDirection = Indexes.getIndexDirection(state, action);
             let newState = {
                 ...state,
                 directionsAndTariffs: [
@@ -281,9 +268,7 @@ const projectCreationReducer = (state = startState, action) => {
             return newState
         }
         case CHANGE_TARIFF_STATUS_PR_CREATION: {
-            let indexDirection = state.directionsAndTariffs.findIndex(e => e.idDirection === action.idDirection);
-            let indexTariff = state.directionsAndTariffs[indexDirection].tariffsNames
-                .findIndex(e => e.id === action.tariffId);
+            let {indexDirection, indexTariff} = Indexes.getIndexes(state, action);
             let newState = {
                 ...state,
                 directionsAndTariffs: [
@@ -314,13 +299,39 @@ const projectCreationReducer = (state = startState, action) => {
             return state
     }
 };
+let Indexes = {
+    getIndexes(state, action) {
+        return {
+            indexDirection: this.getIndexDirection(state, action),
+            indexTariff: this.getIndexTariff(state, action),
+            indexService: this.getIndexService(state, action)
+        }
+    },
+    getIndexDirection(state, action) {
+        return state.directionsAndTariffs
+            .findIndex(e => e.idDirection === action.idDirection);
+    },
+    getIndexTariff(state, action) {
+        let indexDirection = this.getIndexDirection(state, action);
+        return state.directionsAndTariffs[indexDirection].tariffsNames
+            .findIndex(e => e.id === action.idTariff);
+    },
+    getIndexService(state, action) {
+        let indexDirection = this.getIndexDirection(state, action);
+        let indexTariff = this.getIndexTariff(state, action);
+        return state.directionsAndTariffs[indexDirection].tariffsNames[indexTariff].services
+            .findIndex(s => s.idService === action.idService);
+    }
+};
+
 
 // actionCreators
 export let changeDirectionStatus = (status, index) => {
     return {type: CHANGE_DIRECTION_STATUS_PR_CREATION, status, index}
 };
-export let changeTariffStatus = (status, tariffId, idDirection) => {
-    return {type: CHANGE_TARIFF_STATUS_PR_CREATION, status, tariffId, idDirection}
+
+export let changeTariffStatus = (status, idTariff, idDirection) => {
+    return {type: CHANGE_TARIFF_STATUS_PR_CREATION, status, idTariff, idDirection}
 };
 
 export let addTariff = (idDirection) => {
@@ -332,6 +343,7 @@ export let addTariff = (idDirection) => {
     };
     return {type: ADD_NEW_TARIFF_PR_CREATION, newTariff, idDirection}
 };
+
 export let addService = (idDirection, idTariff) => {
     let newService = {
         idService: uuidv4(),
@@ -340,16 +352,18 @@ export let addService = (idDirection, idTariff) => {
     };
     return {type: ADD_NEW_SERVICE_PR_CREATION, newService, idDirection, idTariff}
 };
+
 export let deleteService = (idDirection, idTariff, idService) => {
     return {type: DELETE_SERVICE_PR_CREATION, idDirection, idTariff, idService}
 };
+
 export let changeServiceName = (idDirection, idTariff, idService, serviceName) => {
     return {type: CHANGE_SERVICE_NAME_PR_CREATION, idDirection, idTariff, idService, serviceName}
 };
+
 export let changeTariffName = (idDirection, idTariff, tariffName) => {
     return {type: CHANGE_TARIFF_NAME_PR_CREATION, idDirection, idTariff, tariffName}
 };
-
 // actionCreators
 
 // thunkCreators
