@@ -85,21 +85,29 @@ let ServiceEditing = (props) => {
             </button>
         </div>
             : <div>
-                <input
-                    onChange={(e) => changeServiceNameHook(e.currentTarget.value)}
-                    type="text"
-                    value={serviceName}
-                    autoFocus={true}
-                />
-                <button onClick={() => {
-                    props.changeServiceName(
-                        props.idDirection,
-                        props.tariffId,
-                        props.serviceId,
-                        serviceName
-                    );
+                <div className={style.editLayer}>
+                    <input
+                        onChange={(e) => changeServiceNameHook(e.currentTarget.value)}
+                        type="text"
+                        value={serviceName}
+                        autoFocus={true}
+                    />
+                    <button onClick={() => {
+                        props.changeServiceName(
+                            props.idDirection,
+                            props.tariffId,
+                            props.serviceId,
+                            serviceName
+                        );
+                        setEditMode(false);
+                    }}>Сохранить</button>
+                </div>
+                {/*сделали под блоком редактирования большой широкий элемент на весь экран,
+                 но полностью прозрачный,поставили на нём клик событие и скрыли оба слоя*/}
+                <div className={style.transparentLayer} onClick={()=>{
+                    changeServiceNameHook(props.serviceName);
                     setEditMode(false);
-                }}>Сохранить</button>
+                }}>{}</div>
             </div>
         }
     </div>
