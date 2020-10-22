@@ -7,6 +7,7 @@ const ADD_NEW_TARIFF_PR_CREATION = "ADD_NEW_TARIFF_PR_CREATION";
 const ADD_NEW_SERVICE_PR_CREATION = "ADD_NEW_SERVICE_PR_CREATION";
 const DELETE_SERVICE_PR_CREATION = "DELETE_SERVICE_PR_CREATION";
 const CHANGE_SERVICE_NAME_PR_CREATION = "CHANGE_SERVICE_NAME_PR_CREATION";
+const CHANGE_TARIFF_NAME_PR_CREATION = "CHANGE_TARIFF_NAME_PR_CREATION";
 
 
 let startState = {
@@ -158,6 +159,28 @@ let startState = {
 
 const projectCreationReducer = (state = startState, action) => {
     switch (action.type) {
+        case CHANGE_TARIFF_NAME_PR_CREATION: {
+            let indexDirection = state.directionsAndTariffs
+                .findIndex(e => e.idDirection === action.idDirection);
+            let indexTariff = state.directionsAndTariffs[indexDirection].tariffsNames
+                .findIndex(e => e.id === action.idTariff);
+            let newState = {
+                ...state,
+                directionsAndTariffs: [
+                    ...state.directionsAndTariffs
+                ]
+            };
+            newState.directionsAndTariffs[indexDirection] = {
+                ...state.directionsAndTariffs[indexDirection],
+                tariffsNames: [
+                    ...state.directionsAndTariffs[indexDirection].tariffsNames
+                ]
+            };
+            newState.directionsAndTariffs[indexDirection]
+                .tariffsNames[indexTariff]
+                .name = action.tariffName;
+            return newState
+        }
         case CHANGE_SERVICE_NAME_PR_CREATION: {
             let indexDirection = state.directionsAndTariffs
                 .findIndex(e => e.idDirection === action.idDirection);
@@ -322,6 +345,9 @@ export let deleteService = (idDirection, idTariff, idService) => {
 };
 export let changeServiceName = (idDirection, idTariff, idService, serviceName) => {
     return {type: CHANGE_SERVICE_NAME_PR_CREATION, idDirection, idTariff, idService, serviceName}
+};
+export let changeTariffName = (idDirection, idTariff, tariffName) => {
+    return {type: CHANGE_TARIFF_NAME_PR_CREATION, idDirection, idTariff, tariffName}
 };
 
 // actionCreators

@@ -13,6 +13,7 @@ let ProjectEditing = (props) => {
         changeTariffStatus={props.changeTariffStatus}
         deleteService={props.deleteService}
         changeServiceName={props.changeServiceName}
+        changeTariffName={props.changeTariffName}
     />);
     return <div className={style.bodyContainer}>
         <h2>Редактировать заказ</h2>
@@ -34,6 +35,7 @@ let DirectionEditing = (props) => {
         changeTariffStatus={props.changeTariffStatus}
         deleteService={props.deleteService}
         changeServiceName={props.changeServiceName}
+        changeTariffName={props.changeTariffName}
     />);
     return <div>
         <h3>{props.nameDirection}</h3>
@@ -55,14 +57,46 @@ let TariffEditing = (props) => {
         deleteService={props.deleteService}
         changeServiceName={props.changeServiceName}
     />);
+    let [editMode, setEditMode] = useState(false);
+    let [tariffName, changeTariffNameHook] = useState(props.tariffName);
+
     return <div>
-        <div>
-            <h4>{props.tariffName} -
-                <button onClick={() => props.changeTariffStatus(false, props.tariffId, props.idDirection)}>
-                    Убрать тариф
-                </button>
-            </h4>
-        </div>
+        {!editMode
+            ? <div onDoubleClick={() => {
+                setEditMode(true)
+            }}>
+                <h4>{tariffName} -
+                    <button onClick={() => props.changeTariffStatus(false, props.tariffId, props.idDirection)}>
+                        Убрать тариф
+                    </button>
+                </h4>
+            </div>
+            : <div>
+                <div className={style.editLayer}>
+                    <input
+                        onChange={(e) => changeTariffNameHook(e.currentTarget.value)}
+                        type="text"
+                        value={tariffName}
+                        autoFocus={true}
+                    />
+                    <button onClick={() => {
+                        props.changeTariffName(
+                            props.idDirection,
+                            props.tariffId,
+                            tariffName
+                        );
+                        setEditMode(false);
+                    }}>Сохранить
+                    </button>
+                </div>
+                {/*сделали под блоком редактирования большой широкий элемент на весь экран,
+                 но полностью прозрачный,поставили на нём клик событие и скрыли оба слоя*/}
+                <div className={style.transparentLayer} onClick={() => {
+                    changeTariffNameHook(props.tariffName);
+                    setEditMode(false);
+                }}>{}</div>
+            </div>
+        }
         {props.namesServices.length > 0
             ? services
             : <div>Нет услуг</div>}
@@ -79,11 +113,11 @@ let ServiceEditing = (props) => {
     return <div>
         {!editMode
             ? <div onDoubleClick={() => setEditMode(true)}>
-            {serviceName} - {`${props.serviceStatus} `}
-            <button onClick={() => props.deleteService(props.idDirection, props.tariffId, props.serviceId)}>
-                Удалить услугу
-            </button>
-        </div>
+                {serviceName} - {`${props.serviceStatus} `}
+                <button onClick={() => props.deleteService(props.idDirection, props.tariffId, props.serviceId)}>
+                    Удалить услугу
+                </button>
+            </div>
             : <div>
                 <div className={style.editLayer}>
                     <input
@@ -100,11 +134,12 @@ let ServiceEditing = (props) => {
                             serviceName
                         );
                         setEditMode(false);
-                    }}>Сохранить</button>
+                    }}>Сохранить
+                    </button>
                 </div>
                 {/*сделали под блоком редактирования большой широкий элемент на весь экран,
                  но полностью прозрачный,поставили на нём клик событие и скрыли оба слоя*/}
-                <div className={style.transparentLayer} onClick={()=>{
+                <div className={style.transparentLayer} onClick={() => {
                     changeServiceNameHook(props.serviceName);
                     setEditMode(false);
                 }}>{}</div>
