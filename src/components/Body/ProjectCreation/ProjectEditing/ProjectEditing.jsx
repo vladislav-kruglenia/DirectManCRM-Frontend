@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import style from './ProjectEditing.module.css'
-import {EditMode} from "./InputEditMode";
+import EditMode from "./InputEditMode";
 
 
 let ProjectEditing = (props) => {
@@ -52,21 +52,19 @@ let TariffEditing = (props) => {
         key={s.serviceId}
         serviceName={s.serviceName}
         serviceId={s.serviceId}
-        serviceStatus={s.serviceStatus}
         idDirection={props.idDirection}
         tariffId={props.tariffId}
         deleteService={props.deleteService}
         changeServiceName={props.changeServiceName}
     />);
     let [editMode, setEditMode] = useState(false);
-    let [tariffName, changeTariffNameHook] = useState(props.tariffName);
 
     return <div>
         {!editMode
             ? <div onDoubleClick={() => {
                 setEditMode(true)
             }}>
-                <h4>{tariffName} -
+                <h4>{props.tariffName} -
                     <button onClick={() => props.changeTariffStatus(false, props.tariffId, props.idDirection)}>
                         Убрать тариф
                     </button>
@@ -78,10 +76,8 @@ let TariffEditing = (props) => {
                     idDirection: props.idDirection,
                     idTariff: props.tariffId
                 }}
-                nameLocal={tariffName}
                 nameGlobal={props.tariffName}
                 setEditMode={(status)=>{setEditMode(status)}}
-                changeNameHook={(name)=>{changeTariffNameHook(name)}}
             />
         }
         {props.namesServices.length > 0
@@ -95,12 +91,11 @@ let TariffEditing = (props) => {
 
 let ServiceEditing = (props) => {
     let [editMode, setEditMode] = useState(false);
-    let [serviceName, changeServiceNameHook] = useState(props.serviceName);
 
     return <div>
         {!editMode
             ? <div onDoubleClick={() => setEditMode(true)}>
-                {serviceName} - {`${props.serviceStatus} `}
+                {props.serviceName}
                 <button onClick={() => props.deleteService(props.idDirection, props.tariffId, props.serviceId)}>
                     Удалить услугу
                 </button>
@@ -112,10 +107,8 @@ let ServiceEditing = (props) => {
                     idTariff: props.tariffId,
                     idService: props.serviceId
                 }}
-                nameLocal={serviceName}
                 nameGlobal={props.serviceName}
                 setEditMode={(status)=>{setEditMode(status)}}
-                changeNameHook={(name)=>{changeServiceNameHook(name)}}
             />
         }
     </div>

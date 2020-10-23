@@ -1,30 +1,33 @@
 import style from "./ProjectEditing.module.css";
-import React from "react";
+import React, {useState} from "react";
 
-export let EditMode = (props) => {
+let EditMode = (props) => {
+    let [name, changeNameHook] = useState(props.nameGlobal);
     return <div>
         <div className={style.editLayer}>
             <input
                 onChange={(e) => {
                 debugger
-                    props.changeNameHook(e.currentTarget.value)
+                    changeNameHook(e.currentTarget.value)
                 }}
                 type="text"
-                value={props.nameLocal}
+                value={name}
                 autoFocus={true}
             />
             <button onClick={() => {
                 props.changeNameGlobal(
                     props.idNumbers,
-                    props.nameLocal
+                    name
                 );
                 props.setEditMode(false);
             }}>Сохранить
             </button>
         </div>
         <div className={style.transparentLayer} onClick={() => {
-            props.changeNameHook(props.nameGlobal);
+            changeNameHook(props.nameGlobal);
             props.setEditMode(false);
         }}>{}</div>
     </div>
 };
+
+export default EditMode
