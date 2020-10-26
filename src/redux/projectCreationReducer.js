@@ -16,16 +16,21 @@ let startState = {
             nameDirection: 'Контекстная реклама',
             idDirection: 1,
             selected: false,
+            paymentInFull: true,
             tariffsNames: [
                 {
                     id: 1,
                     name: 'Тариф Микро',
                     selected: false,
+                    packetPrice: 1000,
+                    paymentAPackageServices: true,
+                    periodOfExecution: 3,
                     services: [
                         {
                             serviceName: 'Яндекс Поиск',
                             selected: false,
-                            idService: 1
+                            idService: 1,
+                            servicePrice: 100
                         }
                     ]
                 },
@@ -33,16 +38,21 @@ let startState = {
                     id: 2,
                     name: 'Тариф Старндарт',
                     selected: false,
+                    packetPrice: 1000,
+                    paymentAPackageServices: true,
+                    periodOfExecution: 5,
                     services: [
                         {
                             serviceName: 'Яндекс Поиск',
                             selected: false,
-                            idService: 1
+                            idService: 1,
+                            servicePrice: 100
                         },
                         {
                             serviceName: 'Гугл Поиск',
                             selected: false,
-                            idService: 2
+                            idService: 2,
+                            servicePrice: 100
                         }
                     ]
                 },
@@ -50,21 +60,27 @@ let startState = {
                     id: 3,
                     name: 'Тариф Максимум',
                     selected: false,
+                    packetPrice: 1000,
+                    paymentAPackageServices: true,
+                    periodOfExecution: 10,
                     services: [
                         {
                             serviceName: 'Яндекс Поиск',
                             selected: false,
-                            idService: 1
+                            idService: 1,
+                            servicePrice: 100
                         },
                         {
                             serviceName: 'Гугл Поиск',
                             selected: false,
-                            idService: 2
+                            idService: 2,
+                            servicePrice: 100
                         },
                         {
                             serviceName: 'Цели в Яндекс и Гугл',
                             selected: false,
-                            idService: 3
+                            idService: 3,
+                            servicePrice: 100
                         }
                     ]
                 }
@@ -73,23 +89,27 @@ let startState = {
         {
             nameDirection: 'Реклама в соц.сетях',
             idDirection: 2,
-            selected:
-                false,
+            selected: false,
+            paymentInFull: true,
             tariffsNames: [
                 {
                     id: 1,
                     name: 'Инстаграм',
                     selected: false,
+                    packetPrice: 1000,
+                    paymentAPackageServices: true,
                     services: [
                         {
                             serviceName: 'Настройка таргет рекламы',
                             selected: false,
-                            idService: 1
+                            idService: 1,
+                            servicePrice: 100
                         },
                         {
                             serviceName: 'Ведение 5 раб. дней',
                             selected: false,
-                            idService: 2
+                            idService: 2,
+                            servicePrice: 100
                         }
                     ]
                 },
@@ -97,16 +117,20 @@ let startState = {
                     id: 2,
                     name: 'ВК',
                     selected: false,
+                    packetPrice: 1000,
+                    paymentAPackageServices: true,
                     services: [
                         {
                             serviceName: 'Настройка таргет рекламы',
                             selected: false,
-                            idService: 1
+                            idService: 1,
+                            servicePrice: 100
                         },
                         {
                             serviceName: 'Ведение 5 раб. дней',
                             selected: false,
-                            idService: 2
+                            idService: 2,
+                            servicePrice: 100
                         }
                     ]
                 },
@@ -114,16 +138,20 @@ let startState = {
                     id: 3,
                     name: 'Фейсбук',
                     selected: false,
+                    packetPrice: 1000,
+                    paymentAPackageServices: true,
                     services: [
                         {
                             serviceName: 'Настройка таргет рекламы',
                             selected: false,
-                            idService: 1
+                            idService: 1,
+                            servicePrice: 100
                         },
                         {
                             serviceName: 'Ведение 5 раб. дней',
                             selected: false,
-                            idService: 2
+                            idService: 2,
+                            servicePrice: 100
                         }
                     ]
                 }
@@ -132,23 +160,27 @@ let startState = {
         {
             nameDirection: 'Реклама Ютуб',
             idDirection: 3,
-            selected:
-                false,
+            selected: false,
+            paymentInFull: true,
             tariffsNames: [
                 {
                     id: 1,
                     name: 'Баннерная реклама',
                     selected: false,
+                    packetPrice: 1000,
+                    paymentAPackageServices: true,
                     services: [
                         {
                             serviceName: 'Настройка рекламы на Ютубе',
                             selected: false,
-                            idService: 1
+                            idService: 1,
+                            servicePrice: 100
                         },
                         {
                             serviceName: 'Ведение 5 раб. дней',
                             selected: false,
-                            idService: 2
+                            idService: 2,
+                            servicePrice: 100
                         }
                     ]
                 }
