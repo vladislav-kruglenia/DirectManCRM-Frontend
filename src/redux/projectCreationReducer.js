@@ -23,7 +23,8 @@ let startState = {
                     name: 'Тариф Микро',
                     selected: false,
                     packetPrice: 1000,
-                    paymentAPackageServices: true,
+                    totalCostOfServices: null,
+                    paymentAPackageServices: false,
                     periodOfExecution: 3,
                     services: [
                         {
@@ -39,6 +40,7 @@ let startState = {
                     name: 'Тариф Старндарт',
                     selected: false,
                     packetPrice: 1000,
+                    totalCostOfServices: null,
                     paymentAPackageServices: true,
                     periodOfExecution: 5,
                     services: [
@@ -61,6 +63,7 @@ let startState = {
                     name: 'Тариф Максимум',
                     selected: false,
                     packetPrice: 1000,
+                    totalCostOfServices: null,
                     paymentAPackageServices: true,
                     periodOfExecution: 10,
                     services: [
@@ -97,6 +100,7 @@ let startState = {
                     name: 'Инстаграм',
                     selected: false,
                     packetPrice: 1000,
+                    totalCostOfServices: null,
                     paymentAPackageServices: true,
                     services: [
                         {
@@ -118,6 +122,7 @@ let startState = {
                     name: 'ВК',
                     selected: false,
                     packetPrice: 1000,
+                    totalCostOfServices: null,
                     paymentAPackageServices: true,
                     services: [
                         {
@@ -139,6 +144,7 @@ let startState = {
                     name: 'Фейсбук',
                     selected: false,
                     packetPrice: 1000,
+                    totalCostOfServices: null,
                     paymentAPackageServices: true,
                     services: [
                         {
@@ -168,6 +174,7 @@ let startState = {
                     name: 'Баннерная реклама',
                     selected: false,
                     packetPrice: 1000,
+                    totalCostOfServices: null,
                     paymentAPackageServices: true,
                     services: [
                         {
