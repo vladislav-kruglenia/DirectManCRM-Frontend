@@ -23,7 +23,6 @@ let startState = {
                     name: 'Тариф Микро',
                     selected: false,
                     packetPrice: 1000,
-                    totalCostOfServices: null,
                     paymentAPackageServices: false,
                     periodOfExecution: 3,
                     services: [
@@ -40,7 +39,6 @@ let startState = {
                     name: 'Тариф Старндарт',
                     selected: false,
                     packetPrice: 1000,
-                    totalCostOfServices: null,
                     paymentAPackageServices: true,
                     periodOfExecution: 5,
                     services: [
@@ -63,7 +61,6 @@ let startState = {
                     name: 'Тариф Максимум',
                     selected: false,
                     packetPrice: 1000,
-                    totalCostOfServices: null,
                     paymentAPackageServices: true,
                     periodOfExecution: 10,
                     services: [
@@ -100,7 +97,6 @@ let startState = {
                     name: 'Инстаграм',
                     selected: false,
                     packetPrice: 1000,
-                    totalCostOfServices: null,
                     paymentAPackageServices: true,
                     services: [
                         {
@@ -122,7 +118,6 @@ let startState = {
                     name: 'ВК',
                     selected: false,
                     packetPrice: 1000,
-                    totalCostOfServices: null,
                     paymentAPackageServices: true,
                     services: [
                         {
@@ -144,7 +139,6 @@ let startState = {
                     name: 'Фейсбук',
                     selected: false,
                     packetPrice: 1000,
-                    totalCostOfServices: null,
                     paymentAPackageServices: true,
                     services: [
                         {
@@ -174,7 +168,6 @@ let startState = {
                     name: 'Баннерная реклама',
                     selected: false,
                     packetPrice: 1000,
-                    totalCostOfServices: null,
                     paymentAPackageServices: true,
                     services: [
                         {
@@ -273,6 +266,7 @@ const projectCreationReducer = (state = startState, action) => {
             return state
     }
 };
+
 let CopyState = {
     getNewState(state) {
         return {
@@ -343,6 +337,9 @@ export let addTariff = (idDirection) => {
         id: uuidv4(),
         name: 'Новый тариф',
         selected: true,
+        packetPrice: 1500,
+        paymentAPackageServices: true,
+        periodOfExecution: 10,
         services: []
     };
     return {type: ADD_NEW_TARIFF_PR_CREATION, newTariff, idDirection}
@@ -352,7 +349,8 @@ export let addService = (idDirection, idTariff) => {
     let newService = {
         idService: uuidv4(),
         serviceName: 'Новая услуга',
-        selected: true
+        selected: true,
+        servicePrice: 150
     };
     return {type: ADD_NEW_SERVICE_PR_CREATION, newService, idDirection, idTariff}
 };
