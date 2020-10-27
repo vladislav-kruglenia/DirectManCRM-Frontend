@@ -8,6 +8,7 @@ const ADD_NEW_SERVICE_PR_CREATION = "ADD_NEW_SERVICE_PR_CREATION";
 const DELETE_SERVICE_PR_CREATION = "DELETE_SERVICE_PR_CREATION";
 const CHANGE_SERVICE_NAME_PR_CREATION = "CHANGE_SERVICE_NAME_PR_CREATION";
 const CHANGE_TARIFF_NAME_PR_CREATION = "CHANGE_TARIFF_NAME_PR_CREATION";
+const CHANGE_PAYMENT_PACKAGE_PR_CREATION = "CHANGE_PAYMENT_PACKAGE_PR_CREATION";
 
 
 let startState = {
@@ -98,6 +99,7 @@ let startState = {
                     selected: false,
                     packetPrice: 1000,
                     paymentAPackageServices: true,
+                    periodOfExecution: 5,
                     services: [
                         {
                             serviceName: 'Настройка таргет рекламы',
@@ -119,6 +121,7 @@ let startState = {
                     selected: false,
                     packetPrice: 1000,
                     paymentAPackageServices: true,
+                    periodOfExecution: 5,
                     services: [
                         {
                             serviceName: 'Настройка таргет рекламы',
@@ -140,6 +143,7 @@ let startState = {
                     selected: false,
                     packetPrice: 1000,
                     paymentAPackageServices: true,
+                    periodOfExecution: 5,
                     services: [
                         {
                             serviceName: 'Настройка таргет рекламы',
@@ -169,6 +173,7 @@ let startState = {
                     selected: false,
                     packetPrice: 1000,
                     paymentAPackageServices: true,
+                    periodOfExecution: 5,
                     services: [
                         {
                             serviceName: 'Настройка рекламы на Ютубе',
@@ -197,6 +202,14 @@ const projectCreationReducer = (state = startState, action) => {
             newState.directionsAndTariffs[indexDirection]
                 .tariffsNames[indexTariff]
                 .name = action.tariffName;
+            return newState
+        }
+        case CHANGE_PAYMENT_PACKAGE_PR_CREATION: {
+            let {indexDirection, indexTariff} = Indexes.getIndexes(state, action);
+            let newState = CopyState.copyStateTariffs(state, indexDirection);
+            newState.directionsAndTariffs[indexDirection]
+                .tariffsNames[indexTariff]
+                .paymentAPackageServices = action.status;
             return newState
         }
         case CHANGE_SERVICE_NAME_PR_CREATION: {
@@ -330,6 +343,10 @@ export let changeDirectionStatus = (status, index) => {
 
 export let changeTariffStatus = (status, idTariff, idDirection) => {
     return {type: CHANGE_TARIFF_STATUS_PR_CREATION, status, idTariff, idDirection}
+};
+
+export let changePaymentPackage = (status, idTariff, idDirection) => {
+    return {type: CHANGE_PAYMENT_PACKAGE_PR_CREATION, status, idTariff, idDirection}
 };
 
 export let addTariff = (idDirection) => {

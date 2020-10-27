@@ -19,6 +19,7 @@ let ProjectEditing = (props) => {
         deleteService={props.deleteService}
         changeServiceName={props.changeServiceName}
         changeTariffName={props.changeTariffName}
+        changePaymentPackage={props.changePaymentPackage}
     />);
     return <div className={style.bodyContainer}>
         <h2>Редактировать заказ</h2>
@@ -39,6 +40,7 @@ let DirectionEditing = (props) => {
         tariffName={t.tariffName}
         totalPriceTariff={t.totalPrice}
         deadlineTariff={t.deadline}
+        paymentPackage={t.paymentPackage}
 
         // functions
         addService={props.addService}
@@ -46,6 +48,7 @@ let DirectionEditing = (props) => {
         deleteService={props.deleteService}
         changeServiceName={props.changeServiceName}
         changeTariffName={props.changeTariffName}
+        changePaymentPackage={props.changePaymentPackage}
     />);
     return <div>
         <h3>{props.nameDirection}</h3>
@@ -87,8 +90,14 @@ let TariffEditing = (props) => {
                     </button>
                 </h4>
                 <h5>
+                    <div onClick={() => {
+                        props.changePaymentPackage(!props.paymentPackage, props.tariffId, props.idDirection)
+                    }}>
+                        Способ оплаты:
+                        {props.paymentPackage ? ' Пакет' : ' Сумма стоимости услуг'}
+                    </div>
                     <div>
-                        Цена тарифа: {props.totalPriceTariff}
+                        Цена тарифа: {props.totalPriceTariff} р.
                     </div>
                     <div>
                         Количество дней на настройку: {`${props.deadlineTariff}`}
