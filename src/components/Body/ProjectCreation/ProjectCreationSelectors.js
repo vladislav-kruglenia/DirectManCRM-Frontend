@@ -1,21 +1,10 @@
 import {createSelector} from "reselect";
 
 let Directions = {
-
-
-    // Отдает сумму всех услуг, влюченных в тариф
-    getTariffPrice(services) {
-        return services
-            .map(service => service.servicePrice)
-            .reduce((sum, current) => {
-                return current === null ? null : sum + current
-            }, 0);
-    },
-
-    // Отдает сумму всех услуг, влюченных в тариф
-    getDirectionPrice(tariffs) {
-        return tariffs
-            .map(tariff => tariff.totalPrice)
+    // Отдает сумму по параметру
+    getTotalPrice(items, param) {
+        return items
+            .map(item => item[param])
             .reduce((sum, current) => sum + current, 0);
     },
 
@@ -38,7 +27,7 @@ let Directions = {
                     };
                     // если есть тариф и в нем присутствует свойство deadline, то возвращаем также итоговую цену направления
                     return namesTariffs.length > 0 && namesTariffs[0].deadline
-                        ? {...direction, directionTotalPrice: Directions.getDirectionPrice(namesTariffs)}
+                        ? {...direction, directionTotalPrice: Directions.getTotalPrice(namesTariffs,'totalPrice')}
                         : direction
                 }
                 return null
@@ -64,7 +53,7 @@ let Directions = {
             if (tNames.selected) {
                 // пробегаемся по массиву тарифа и выдаем массив объектов в которых название услуги и статус
                 let namesServices = Directions.getServiceInformationForServices(tNames);
-                let servicesCost = Directions.getTariffPrice(tNames.services);
+                let servicesCost = Directions.getTotalPrice(tNames.services,'servicePrice');
                 // отдаем наверх массив объектов, в котором массив с именами услуг и название тарифа
                 return {
                     tariffName: tNames.name,
