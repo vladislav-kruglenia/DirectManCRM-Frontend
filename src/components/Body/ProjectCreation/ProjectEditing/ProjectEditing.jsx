@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import style from './ProjectEditing.module.css'
-import EditMode from "./InputEditMode";
+import EditModeText from "./InputEditModeText";
+import PriceDisplay from "./InputEditModeNumber";
 
 
 let ProjectEditing = (props) => {
@@ -20,6 +21,7 @@ let ProjectEditing = (props) => {
         changeServiceName={props.changeServiceName}
         changeTariffName={props.changeTariffName}
         changePaymentPackage={props.changePaymentPackage}
+        changeServicePrice={props.changeServicePrice}
     />);
     return <div className={style.bodyContainer}>
         <h2>Редактировать заказ</h2>
@@ -49,6 +51,7 @@ let DirectionEditing = (props) => {
         changeServiceName={props.changeServiceName}
         changeTariffName={props.changeTariffName}
         changePaymentPackage={props.changePaymentPackage}
+        changeServicePrice={props.changeServicePrice}
     />);
     return <div>
         <h3>{props.nameDirection}</h3>
@@ -76,6 +79,7 @@ let TariffEditing = (props) => {
         // functions
         deleteService={props.deleteService}
         changeServiceName={props.changeServiceName}
+        changeServicePrice={props.changeServicePrice}
     />);
     let [editMode, setEditMode] = useState(false);
 
@@ -85,7 +89,9 @@ let TariffEditing = (props) => {
                 setEditMode(true)
             }}>
                 <h4>{props.tariffName} -
-                    <button onClick={() => props.changeTariffStatus(false, props.tariffId, props.idDirection)}>
+                    <button onClick={() => {
+                        props.changeTariffStatus(false, props.tariffId, props.idDirection)
+                    }}>
                         Убрать тариф
                     </button>
                 </h4>
@@ -104,7 +110,7 @@ let TariffEditing = (props) => {
                     </div>
                 </h5>
             </div>
-            : <EditMode
+            : <EditModeText
                 changeNameGlobal={props.changeTariffName}
                 idNumbers={{
                     idDirection: props.idDirection,
@@ -126,29 +132,38 @@ let TariffEditing = (props) => {
 };
 
 let ServiceEditing = (props) => {
-    let [editMode, setEditMode] = useState(false);
-
+    let [editModeServiceName, setEditModeServiceName] = useState(false);
+    let idNumbers = {
+        idDirection: props.idDirection,
+        idTariff: props.tariffId,
+        idService: props.serviceId
+    };
     return <div>
-        {!editMode
-            ? <div onDoubleClick={() => setEditMode(true)}>
-                {props.serviceName} - {`${props.servicePrice} р.`}
-                <button onClick={() => props.deleteService(props.idDirection, props.tariffId, props.serviceId)}>
-                    Удалить услугу
-                </button>
+        {!editModeServiceName
+            ? <div onDoubleClick={() => setEditModeServiceName(true)}>
+                {props.serviceName} -
             </div>
-            : <EditMode
+            : <EditModeText
                 changeNameGlobal={props.changeServiceName}
-                idNumbers={{
-                    idDirection: props.idDirection,
-                    idTariff: props.tariffId,
-                    idService: props.serviceId
-                }}
+                idNumbers={idNumbers}
                 nameGlobal={props.serviceName}
                 setEditMode={(status) => {
-                    setEditMode(status)
+                    setEditModeServiceName(status)
                 }}
             />
         }
+        <div>
+            <PriceDisplay
+                idNumbers={idNumbers}
+                servicePrice={props.servicePrice}
+                changeServicePrice={props.changeServicePrice}
+            />
+            <button onClick={() => {
+                props.deleteService(props.idDirection, props.tariffId, props.serviceId)
+            }}>
+                Удалить услугу
+            </button>
+        </div>
     </div>
 };
 

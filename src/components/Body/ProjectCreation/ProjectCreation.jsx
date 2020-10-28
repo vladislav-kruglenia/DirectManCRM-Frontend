@@ -26,6 +26,7 @@ let ProjectCreation = (props) => {
                 changeServiceName={props.changeServiceName}
                 changeTariffName={props.changeTariffName}
                 changePaymentPackage={props.changePaymentPackage}
+                changeServicePrice={props.changeServicePrice}
                 servicesAndNamesTariffs={props.servicesAndNamesTariffs}/>}/>
         </Switch>
     </div>

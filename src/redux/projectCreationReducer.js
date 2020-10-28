@@ -9,6 +9,7 @@ const DELETE_SERVICE_PR_CREATION = "DELETE_SERVICE_PR_CREATION";
 const CHANGE_SERVICE_NAME_PR_CREATION = "CHANGE_SERVICE_NAME_PR_CREATION";
 const CHANGE_TARIFF_NAME_PR_CREATION = "CHANGE_TARIFF_NAME_PR_CREATION";
 const CHANGE_PAYMENT_PACKAGE_PR_CREATION = "CHANGE_PAYMENT_PACKAGE_PR_CREATION";
+const CHANGE_SERVICE_PRICE_PR_CREATION = "CHANGE_SERVICE_PRICE_PR_CREATION";
 
 
 let startState = {
@@ -221,6 +222,15 @@ const projectCreationReducer = (state = startState, action) => {
                 .serviceName = action.serviceName;
             return newState
         }
+        case CHANGE_SERVICE_PRICE_PR_CREATION: {
+            let {indexDirection, indexTariff, indexService} = Indexes.getIndexes(state, action);
+            let newState = CopyState.copyStateServices(state, indexDirection, indexTariff);
+            newState.directionsAndTariffs[indexDirection]
+                .tariffsNames[indexTariff]
+                .services[indexService]
+                .servicePrice = action.number;
+            return newState
+        }
         case DELETE_SERVICE_PR_CREATION: {
             let {indexDirection, indexTariff} = Indexes.getIndexes(state, action);
             let newState = CopyState.copyStateTariffs(state, indexDirection);
@@ -385,6 +395,12 @@ export let changeTariffName = (idNumbers, tariffName) => {
     let {idDirection, idTariff} = idNumbers;
     return {type: CHANGE_TARIFF_NAME_PR_CREATION, idDirection, idTariff, tariffName}
 };
+
+export let changeServicePrice = (idNumbers, number) => {
+    let {idDirection, idTariff, idService} = idNumbers;
+    return {type: CHANGE_SERVICE_PRICE_PR_CREATION, idDirection, idTariff, idService, number}
+};
+
 // actionCreators
 
 // thunkCreators

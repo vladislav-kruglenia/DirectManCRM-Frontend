@@ -1,13 +1,12 @@
 import style from "./ProjectEditing.module.css";
 import React, {useState} from "react";
 
-let EditMode = (props) => {
+let EditModeText = (props) => {
     let [name, changeNameHook] = useState(props.nameGlobal);
     return <div>
         <div className={style.editLayer}>
             <input
                 onChange={(e) => {
-                debugger
                     changeNameHook(e.currentTarget.value)
                 }}
                 type="text"
@@ -30,4 +29,4 @@ let EditMode = (props) => {
     </div>
 };
 
-export default EditMode
+export default EditModeText
