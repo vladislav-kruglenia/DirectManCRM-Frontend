@@ -10,6 +10,7 @@ const CHANGE_SERVICE_NAME_PR_CREATION = "CHANGE_SERVICE_NAME_PR_CREATION";
 const CHANGE_TARIFF_NAME_PR_CREATION = "CHANGE_TARIFF_NAME_PR_CREATION";
 const CHANGE_PAYMENT_PACKAGE_PR_CREATION = "CHANGE_PAYMENT_PACKAGE_PR_CREATION";
 const CHANGE_SERVICE_PRICE_PR_CREATION = "CHANGE_SERVICE_PRICE_PR_CREATION";
+const CHANGE_PACKET_PRICE_PR_CREATION = "CHANGE_PACKET_PRICE_PR_CREATION";
 
 
 let startState = {
@@ -203,6 +204,14 @@ const projectCreationReducer = (state = startState, action) => {
             newState.directionsAndTariffs[indexDirection]
                 .tariffsNames[indexTariff]
                 .name = action.tariffName;
+            return newState
+        }
+        case CHANGE_PACKET_PRICE_PR_CREATION: {
+            let {indexDirection, indexTariff} = Indexes.getIndexes(state, action);
+            let newState = CopyState.copyStateTariffs(state, indexDirection);
+            newState.directionsAndTariffs[indexDirection]
+                .tariffsNames[indexTariff]
+                .packetPrice = action.number;
             return newState
         }
         case CHANGE_PAYMENT_PACKAGE_PR_CREATION: {
@@ -399,6 +408,11 @@ export let changeTariffName = (idNumbers, tariffName) => {
 export let changeServicePrice = (idNumbers, number) => {
     let {idDirection, idTariff, idService} = idNumbers;
     return {type: CHANGE_SERVICE_PRICE_PR_CREATION, idDirection, idTariff, idService, number}
+};
+
+export let changePacketPrice = (idNumbers, number) => {
+    let {idDirection, idTariff} = idNumbers;
+    return {type: CHANGE_PACKET_PRICE_PR_CREATION, idDirection, idTariff, number}
 };
 
 // actionCreators

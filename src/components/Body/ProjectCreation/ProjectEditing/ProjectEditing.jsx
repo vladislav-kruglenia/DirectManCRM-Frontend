@@ -22,6 +22,7 @@ let ProjectEditing = (props) => {
         changeTariffName={props.changeTariffName}
         changePaymentPackage={props.changePaymentPackage}
         changeServicePrice={props.changeServicePrice}
+        changePacketPrice={props.changePacketPrice}
     />);
     return <div className={style.bodyContainer}>
         <h2>Редактировать заказ</h2>
@@ -52,6 +53,7 @@ let DirectionEditing = (props) => {
         changeTariffName={props.changeTariffName}
         changePaymentPackage={props.changePaymentPackage}
         changeServicePrice={props.changeServicePrice}
+        changePacketPrice={props.changePacketPrice}
     />);
     return <div>
         <h3>{props.nameDirection}</h3>
@@ -82,46 +84,53 @@ let TariffEditing = (props) => {
         changeServicePrice={props.changeServicePrice}
     />);
     let [editMode, setEditMode] = useState(false);
+    let idNumbers = {
+        idDirection: props.idDirection,
+        idTariff: props.tariffId
+    };
 
     return <div>
         {!editMode
             ? <div onDoubleClick={() => {
                 setEditMode(true)
             }}>
-                <h4>{props.tariffName} -
-                    <button onClick={() => {
-                        props.changeTariffStatus(false, props.tariffId, props.idDirection)
-                    }}>
-                        Убрать тариф
-                    </button>
-                </h4>
-                <h5>
-                    <div onClick={() => {
-                        props.changePaymentPackage(!props.paymentPackage, props.tariffId, props.idDirection)
-                    }}>
-                        Способ оплаты:
-                        {props.paymentPackage ? ' Пакет' : ' Сумма стоимости услуг'}
-                    </div>
-                    <div>
-                        Цена тарифа: {props.totalPriceTariff} р.
-                    </div>
-                    <div>
-                        Количество дней на настройку: {`${props.deadlineTariff}`}
-                    </div>
-                </h5>
+                <h4>{props.tariffName} -</h4>
             </div>
             : <EditModeText
                 changeNameGlobal={props.changeTariffName}
-                idNumbers={{
-                    idDirection: props.idDirection,
-                    idTariff: props.tariffId
-                }}
+                idNumbers={idNumbers}
                 nameGlobal={props.tariffName}
                 setEditMode={(status) => {
                     setEditMode(status)
                 }}
             />
         }
+        <button onClick={() => {
+            props.changeTariffStatus(false, props.tariffId, props.idDirection)
+        }}>
+            Убрать тариф
+        </button>
+        <h5>
+            <div onClick={() => {
+                props.changePaymentPackage(!props.paymentPackage, props.tariffId, props.idDirection)
+            }}>
+                Способ оплаты:
+                {props.paymentPackage ? ' Пакет' : ' Сумма стоимости услуг'}
+            </div>
+            <div>
+                Цена тарифа: {props.paymentPackage
+                ? <PriceDisplay
+                    idNumbers={idNumbers}
+                    price={props.totalPriceTariff}
+                    changePrice={props.changePacketPrice}
+                />
+                : props.totalPriceTariff}
+
+            </div>
+            <div>
+                Количество дней на настройку: {`${props.deadlineTariff}`}
+            </div>
+        </h5>
         {props.namesServices.length > 0
             ? services
             : <div>Нет услуг</div>}
@@ -155,8 +164,8 @@ let ServiceEditing = (props) => {
         <div>
             <PriceDisplay
                 idNumbers={idNumbers}
-                servicePrice={props.servicePrice}
-                changeServicePrice={props.changeServicePrice}
+                price={props.servicePrice}
+                changePrice={props.changeServicePrice}
             />
             <button onClick={() => {
                 props.deleteService(props.idDirection, props.tariffId, props.serviceId)

@@ -9,8 +9,14 @@ import {
 import {
     addService,
     addTariff,
-    changeDirectionStatus, changePaymentPackage, changeServiceName, changeServicePrice, changeTariffName,
-    changeTariffStatus, deleteService
+    changeDirectionStatus,
+    changePacketPrice,
+    changePaymentPackage,
+    changeServiceName,
+    changeServicePrice,
+    changeTariffName,
+    changeTariffStatus,
+    deleteService
 } from "../../../redux/projectCreationReducer";
 
 let mapStateToProps = (state) => {
@@ -30,6 +36,7 @@ let dispatchObject = {
     changeTariffName,
     changePaymentPackage,
     changeServicePrice,
+    changePacketPrice,
 };
 
 export default compose(

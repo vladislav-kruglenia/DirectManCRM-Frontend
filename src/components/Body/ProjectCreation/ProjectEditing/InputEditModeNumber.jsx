@@ -6,11 +6,11 @@ let PriceDisplay = (props) => {
     return <>
         {!editModePrice
             ? <div onDoubleClick={() => setEditModePrice(true)}>
-                {`${props.servicePrice} р.`}</div>
+                {`${props.price} р.`}</div>
             : <EditModeNumber
-                changeNameGlobal={props.changeServicePrice}
+                changeNameGlobal={props.changePrice}
                 idNumbers={props.idNumbers}
-                numberGlobal={props.servicePrice}
+                numberGlobal={props.price}
                 setEditMode={(status) => {
                     setEditModePrice(status)
                 }}
