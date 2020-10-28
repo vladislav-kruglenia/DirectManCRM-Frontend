@@ -8,7 +8,7 @@ import {
 } from "./ProjectCreationSelectors";
 import {
     addService,
-    addTariff,
+    addTariff, changeDeadlineTariff,
     changeDirectionStatus,
     changePacketPrice,
     changePaymentPackage,
@@ -37,6 +37,7 @@ let dispatchObject = {
     changePaymentPackage,
     changeServicePrice,
     changePacketPrice,
+    changeDeadlineTariff,
 };
 
 export default compose(

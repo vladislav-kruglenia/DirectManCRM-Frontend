@@ -23,6 +23,7 @@ let ProjectEditing = (props) => {
         changePaymentPackage={props.changePaymentPackage}
         changeServicePrice={props.changeServicePrice}
         changePacketPrice={props.changePacketPrice}
+        changeDeadlineTariff={props.changeDeadlineTariff}
     />);
     return <div className={style.bodyContainer}>
         <h2>Редактировать заказ</h2>
@@ -54,6 +55,7 @@ let DirectionEditing = (props) => {
         changePaymentPackage={props.changePaymentPackage}
         changeServicePrice={props.changeServicePrice}
         changePacketPrice={props.changePacketPrice}
+        changeDeadlineTariff={props.changeDeadlineTariff}
     />);
     return <div>
         <h3>{props.nameDirection}</h3>
@@ -125,10 +127,14 @@ let TariffEditing = (props) => {
                     changePrice={props.changePacketPrice}
                 />
                 : props.totalPriceTariff}
-
             </div>
             <div>
-                Количество дней на настройку: {`${props.deadlineTariff}`}
+                Количество дней на настройку:
+                <PriceDisplay
+                    idNumbers={idNumbers}
+                    price={props.deadlineTariff}
+                    changePrice={props.changeDeadlineTariff}
+                />
             </div>
         </h5>
         {props.namesServices.length > 0
