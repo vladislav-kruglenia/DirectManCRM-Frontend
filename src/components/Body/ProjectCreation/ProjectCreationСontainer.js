@@ -10,7 +10,7 @@ import {
     addService,
     addTariff, changeDeadlineTariff,
     changeDirectionStatus,
-    changePacketPrice,
+    changePacketPrice, changePaymentInFull,
     changePaymentPackage,
     changeServiceName,
     changeServicePrice,
@@ -38,6 +38,7 @@ let dispatchObject = {
     changeServicePrice,
     changePacketPrice,
     changeDeadlineTariff,
+    changePaymentInFull,
 };
 
 export default compose(

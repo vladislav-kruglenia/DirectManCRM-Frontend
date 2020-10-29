@@ -23,6 +23,7 @@ let Directions = {
                     let direction = {
                         nameDirection: d.nameDirection,
                         idDirection: d.idDirection,
+                        paymentInFull: d.paymentInFull,
                         namesTariffs
                     };
                     // если есть тариф и в нем присутствует свойство deadline, то возвращаем также итоговую цену направления

@@ -12,6 +12,7 @@ let ProjectEditing = (props) => {
         nameDirection={d.nameDirection}
         idDirection={d.idDirection}
         directionTotalPrice={d.directionTotalPrice}
+        paymentInFull={d.paymentInFull}
 
         // functions
         addTariff={props.addTariff}
@@ -24,6 +25,7 @@ let ProjectEditing = (props) => {
         changeServicePrice={props.changeServicePrice}
         changePacketPrice={props.changePacketPrice}
         changeDeadlineTariff={props.changeDeadlineTariff}
+        changePaymentInFull={props.changePaymentInFull}
     />);
     return <div className={style.bodyContainer}>
         <h2>Редактировать заказ</h2>
@@ -62,7 +64,25 @@ let DirectionEditing = (props) => {
         {props.namesTariffs.length > 0
             ? <div>
                 {tariffs}
-                Итоговая цена: {`${props.directionTotalPrice} р.`}
+                <div>
+                    Тип оплаты:
+                    <div
+                        className={`${props.paymentInFull && style.paymentInFull}`}
+                        onClick={() => {props.changePaymentInFull(props.idDirection, true)}}
+                    >
+                        100%
+                    </div>
+                    <div
+                        className={`${!props.paymentInFull && style.paymentInFull}`}
+                        onClick={() => {props.changePaymentInFull(props.idDirection, false)}}
+                    >
+                        50%
+                    </div>
+                </div>
+                <div>
+                    {!props.paymentInFull && <div>Промежуточная цена: {props.directionTotalPrice / 2} р.</div>}
+                    <div>Итоговая цена: {`${props.directionTotalPrice} р.`}</div>
+                </div>
             </div>
             : <div>Нет выбранных тарифов</div>}
 

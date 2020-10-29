@@ -12,6 +12,7 @@ const CHANGE_PAYMENT_PACKAGE_PR_CREATION = "CHANGE_PAYMENT_PACKAGE_PR_CREATION";
 const CHANGE_SERVICE_PRICE_PR_CREATION = "CHANGE_SERVICE_PRICE_PR_CREATION";
 const CHANGE_PACKET_PRICE_PR_CREATION = "CHANGE_PACKET_PRICE_PR_CREATION";
 const CHANGE_DEADLINE_TARIFF_PR_CREATION = "CHANGE_DEADLINE_TARIFF_PR_CREATION";
+const CHANGE_PAYMENT_IN_FULL_PR_CREATION = "CHANGE_PAYMENT_IN_FULL_PR_CREATION";
 
 
 let startState = {
@@ -285,6 +286,12 @@ const projectCreationReducer = (state = startState, action) => {
             };
             return newState
         }
+        case CHANGE_PAYMENT_IN_FULL_PR_CREATION: {
+            let indexDirection = Indexes.getIndexDirection(state, action);
+            let newState = CopyState.getNewState(state);
+            newState.directionsAndTariffs[indexDirection].paymentInFull = action.status;
+            return newState
+        }
         case CHANGE_TARIFF_STATUS_PR_CREATION: {
             let {indexDirection, indexTariff} = Indexes.getIndexes(state, action);
             let newState = CopyState.getNewState(state);
@@ -388,6 +395,10 @@ export let addTariff = (idDirection) => {
         services: []
     };
     return {type: ADD_NEW_TARIFF_PR_CREATION, newTariff, idDirection}
+};
+
+export let changePaymentInFull = (idDirection, status) => {
+    return {type: CHANGE_PAYMENT_IN_FULL_PR_CREATION, idDirection, status}
 };
 
 export let addService = (idDirection, idTariff) => {
