@@ -1,19 +1,11 @@
 import {v4 as uuidv4} from 'uuid';
 
-
-const CHANGE_DIRECTION_STATUS_PR_CREATION = "CHANGE_DIRECTION_STATUS_PR_CREATION";
-const CHANGE_TARIFF_STATUS_PR_CREATION = "CHANGE_TARIFF_STATUS_PR_CREATION";
+const CHANGE_DIRECTION_PROPERTY_PR_CREATION = "CHANGE_DIRECTION_PROPERTY_PR_CREATION";
+const CHANGE_TARIFF_PROPERTY_PR_CREATION = "CHANGE_TARIFF_NAME_PR_CREATION";
+const CHANGE_SERVICE_PROPERTY_PR_CREATION = "CHANGE_SERVICE_PROPERTY_PR_CREATION";
 const ADD_NEW_TARIFF_PR_CREATION = "ADD_NEW_TARIFF_PR_CREATION";
 const ADD_NEW_SERVICE_PR_CREATION = "ADD_NEW_SERVICE_PR_CREATION";
 const DELETE_SERVICE_PR_CREATION = "DELETE_SERVICE_PR_CREATION";
-const CHANGE_SERVICE_NAME_PR_CREATION = "CHANGE_SERVICE_NAME_PR_CREATION";
-const CHANGE_TARIFF_NAME_PR_CREATION = "CHANGE_TARIFF_NAME_PR_CREATION";
-const CHANGE_PAYMENT_PACKAGE_PR_CREATION = "CHANGE_PAYMENT_PACKAGE_PR_CREATION";
-const CHANGE_SERVICE_PRICE_PR_CREATION = "CHANGE_SERVICE_PRICE_PR_CREATION";
-const CHANGE_PACKET_PRICE_PR_CREATION = "CHANGE_PACKET_PRICE_PR_CREATION";
-const CHANGE_DEADLINE_TARIFF_PR_CREATION = "CHANGE_DEADLINE_TARIFF_PR_CREATION";
-const CHANGE_PAYMENT_IN_FULL_PR_CREATION = "CHANGE_PAYMENT_IN_FULL_PR_CREATION";
-
 
 let startState = {
     directionsAndTariffs: [
@@ -200,64 +192,30 @@ let startState = {
 
 const projectCreationReducer = (state = startState, action) => {
     switch (action.type) {
-        case CHANGE_TARIFF_NAME_PR_CREATION: {
-            let {indexDirection, indexTariff} = Indexes.getIndexes(state, action);
-            let newState = CopyState.copyStateTariffs(state, indexDirection);
-            newState.directionsAndTariffs[indexDirection]
-                .tariffsNames[indexTariff]
-                .name = action.tariffName;
-            return newState
+        // Direction properties
+        case CHANGE_DIRECTION_PROPERTY_PR_CREATION: {
+            return NewStateElement.getNewState(state,action,"directions")
         }
-        case CHANGE_DEADLINE_TARIFF_PR_CREATION: {
-            let {indexDirection, indexTariff} = Indexes.getIndexes(state, action);
-            let newState = CopyState.copyStateTariffs(state, indexDirection);
-            newState.directionsAndTariffs[indexDirection]
-                .tariffsNames[indexTariff]
-                .periodOfExecution = action.number;
-            return newState
+
+        // Tariff properties
+        case CHANGE_TARIFF_PROPERTY_PR_CREATION: {
+            return NewStateElement.getNewState(state,action,"tariffs")
         }
-        case CHANGE_PACKET_PRICE_PR_CREATION: {
-            let {indexDirection, indexTariff} = Indexes.getIndexes(state, action);
-            let newState = CopyState.copyStateTariffs(state, indexDirection);
-            newState.directionsAndTariffs[indexDirection]
-                .tariffsNames[indexTariff]
-                .packetPrice = action.number;
-            return newState
+
+        // Service properties
+        case CHANGE_SERVICE_PROPERTY_PR_CREATION: {
+            return NewStateElement.getNewState(state,action,"services")
         }
-        case CHANGE_PAYMENT_PACKAGE_PR_CREATION: {
-            let {indexDirection, indexTariff} = Indexes.getIndexes(state, action);
-            let newState = CopyState.copyStateTariffs(state, indexDirection);
-            newState.directionsAndTariffs[indexDirection]
-                .tariffsNames[indexTariff]
-                .paymentAPackageServices = action.status;
-            return newState
-        }
-        case CHANGE_SERVICE_NAME_PR_CREATION: {
-            let {indexDirection, indexTariff, indexService} = Indexes.getIndexes(state, action);
-            let newState = CopyState.copyStateServices(state, indexDirection, indexTariff);
-            newState.directionsAndTariffs[indexDirection]
-                .tariffsNames[indexTariff]
-                .services[indexService]
-                .serviceName = action.serviceName;
-            return newState
-        }
-        case CHANGE_SERVICE_PRICE_PR_CREATION: {
-            let {indexDirection, indexTariff, indexService} = Indexes.getIndexes(state, action);
-            let newState = CopyState.copyStateServices(state, indexDirection, indexTariff);
-            newState.directionsAndTariffs[indexDirection]
-                .tariffsNames[indexTariff]
-                .services[indexService]
-                .servicePrice = action.number;
-            return newState
-        }
-        case DELETE_SERVICE_PR_CREATION: {
-            let {indexDirection, indexTariff} = Indexes.getIndexes(state, action);
-            let newState = CopyState.copyStateTariffs(state, indexDirection);
-            newState.directionsAndTariffs[indexDirection].tariffsNames[indexTariff] = {
-                ...state.directionsAndTariffs[indexDirection].tariffsNames[indexTariff],
-                services: [
-                    ...state.directionsAndTariffs[indexDirection].tariffsNames[indexTariff].services
-                        .filter(service => service.idService !== action.idService)
+
+        // Adding new elements
+        case ADD_NEW_TARIFF_PR_CREATION: {
+            let indexDirection = Indexes.getIndexDirection(state, action);
+            let newState = CopyState.getNewState(state);
+            newState.directionsAndTariffs[indexDirection] = {
+                ...state.directionsAndTariffs[indexDirection],
+                tariffsNames: [
+                    ...state.directionsAndTariffs[indexDirection].tariffsNames,
+                    action.newTariff
                 ]
             };
             return newState
@@ -274,45 +232,57 @@ const projectCreationReducer = (state = startState, action) => {
             };
             return newState
         }
-        case ADD_NEW_TARIFF_PR_CREATION: {
-            let indexDirection = Indexes.getIndexDirection(state, action);
-            let newState = CopyState.getNewState(state);
-            newState.directionsAndTariffs[indexDirection] = {
-                ...state.directionsAndTariffs[indexDirection],
-                tariffsNames: [
-                    ...state.directionsAndTariffs[indexDirection].tariffsNames,
-                    action.newTariff
+        case DELETE_SERVICE_PR_CREATION: {
+            let {indexDirection, indexTariff} = Indexes.getIndexes(state, action);
+            let newState = CopyState.copyStateTariffs(state, indexDirection);
+            newState.directionsAndTariffs[indexDirection].tariffsNames[indexTariff] = {
+                ...state.directionsAndTariffs[indexDirection].tariffsNames[indexTariff],
+                services: [
+                    ...state.directionsAndTariffs[indexDirection].tariffsNames[indexTariff].services
+                        .filter(service => service.idService !== action.idService)
                 ]
             };
             return newState
         }
-        case CHANGE_PAYMENT_IN_FULL_PR_CREATION: {
-            let indexDirection = Indexes.getIndexDirection(state, action);
-            let newState = CopyState.getNewState(state);
-            newState.directionsAndTariffs[indexDirection].paymentInFull = action.status;
-            return newState
-        }
-        case CHANGE_TARIFF_STATUS_PR_CREATION: {
-            let {indexDirection, indexTariff} = Indexes.getIndexes(state, action);
-            let newState = CopyState.getNewState(state);
-            newState.directionsAndTariffs[indexDirection].tariffsNames[indexTariff] = {
-                ...state.directionsAndTariffs[indexDirection].tariffsNames[indexTariff],
-                selected: action.status
-            };
-            console.log(newState.directionsAndTariffs[indexDirection].tariffsNames[indexTariff]);
-            return newState
-        }
-        case CHANGE_DIRECTION_STATUS_PR_CREATION: {
-            let newState = CopyState.getNewState(state);
-            newState.directionsAndTariffs[action.index] = {
-                ...newState.directionsAndTariffs[action.index],
-                selected: action.status
-            };
-            return newState
-        }
+
         default:
             return state
     }
+};
+
+let NewStateElement = {
+    getNewState(state, action, elementStateKey){
+        let {newState, element} = this[elementStateKey](state, action);
+        element[action.propertyName] = action.propertyValue;
+        return newState
+    },
+    directions(state, action) {
+        let indexDirection = Indexes.getIndexDirection(state, action);
+        let newState = CopyState.getNewState(state);
+        let element = newState.directionsAndTariffs[indexDirection];
+        return {newState, element}
+    },
+    tariffs(state, action) {
+        let indexTariff = Indexes.getIndexTariff(state, action);
+        let {newState, element} = this.directions(state, action);
+        element = element.tariffsNames[indexTariff];
+        return {newState, element}
+    },
+    services(state, action) {
+        let indexService = Indexes.getIndexService(state, action);
+        let {newState, element} = this.tariffs(state, action);
+        element = element.services[indexService];
+        return {newState, element}
+    },
+
+    // Эта функция должна помочь схлопнуть повторяющийся код directions, tariffs и services
+    // Но там, судя по ошибкам где-то теряется this, поэтому отложил пока ее использование
+    getNewStateElement(state, action, getNewState, getIndex, stateKey) {
+        let index = getIndex(state, action);
+        let {newState, element} = getNewState(state, action);
+        element = element[stateKey][index];
+        return {newState, element}
+    },
 };
 
 let CopyState = {
@@ -371,19 +341,77 @@ let Indexes = {
     }
 };
 
-// actionCreators
-export let changeDirectionStatus = (status, index) => {
-    return {type: CHANGE_DIRECTION_STATUS_PR_CREATION, status, index}
+// actionCreators ////////////////////
+export let changeDirectionStatus = (propertyValue, idDirection) => {
+    return {type: CHANGE_DIRECTION_PROPERTY_PR_CREATION, propertyName: "selected", idDirection, propertyValue}
 };
 
-export let changeTariffStatus = (status, idTariff, idDirection) => {
-    return {type: CHANGE_TARIFF_STATUS_PR_CREATION, status, idTariff, idDirection}
+export let changePaymentInFull = (idDirection, propertyValue) => {
+    return {type: CHANGE_DIRECTION_PROPERTY_PR_CREATION, propertyName: "paymentInFull", idDirection, propertyValue}
 };
 
-export let changePaymentPackage = (status, idTariff, idDirection) => {
-    return {type: CHANGE_PAYMENT_PACKAGE_PR_CREATION, status, idTariff, idDirection}
+// Tariff properties
+export let changeTariffStatus = (propertyValue, idTariff, idDirection) => {
+    return {type: CHANGE_TARIFF_PROPERTY_PR_CREATION, propertyName: "selected", propertyValue, idTariff, idDirection}
 };
 
+export let changePaymentPackage = (propertyValue, idTariff, idDirection) => {
+    return {
+        type: CHANGE_TARIFF_PROPERTY_PR_CREATION,
+        propertyName: "paymentAPackageServices",
+        propertyValue,
+        idTariff,
+        idDirection
+    }
+};
+
+export let changeTariffName = (idNumbers, propertyValue) => {
+    let {idDirection, idTariff} = idNumbers;
+    return {type: CHANGE_TARIFF_PROPERTY_PR_CREATION, propertyName: "name", idDirection, idTariff, propertyValue}
+};
+
+export let changePacketPrice = (idNumbers, propertyValue) => {
+    let {idDirection, idTariff} = idNumbers;
+    return {type: CHANGE_TARIFF_PROPERTY_PR_CREATION, propertyName: "packetPrice", idDirection, idTariff, propertyValue}
+};
+
+export let changeDeadlineTariff = (idNumbers, propertyValue) => {
+    let {idDirection, idTariff} = idNumbers;
+    return {
+        type: CHANGE_TARIFF_PROPERTY_PR_CREATION,
+        propertyName: "periodOfExecution",
+        idDirection,
+        idTariff,
+        propertyValue
+    }
+};
+
+// Service properties
+export let changeServiceName = (idNumbers, propertyValue) => {
+    let {idDirection, idTariff, idService} = idNumbers;
+    return {
+        type: CHANGE_SERVICE_PROPERTY_PR_CREATION,
+        propertyName: "serviceName",
+        idDirection,
+        idTariff,
+        idService,
+        propertyValue
+    }
+};
+
+export let changeServicePrice = (idNumbers, propertyValue) => {
+    let {idDirection, idTariff, idService} = idNumbers;
+    return {
+        type: CHANGE_SERVICE_PROPERTY_PR_CREATION,
+        propertyName: "servicePrice",
+        idDirection,
+        idTariff,
+        idService,
+        propertyValue
+    }
+};
+
+// Adding new elements
 export let addTariff = (idDirection) => {
     let newTariff = {
         id: uuidv4(),
@@ -395,10 +423,6 @@ export let addTariff = (idDirection) => {
         services: []
     };
     return {type: ADD_NEW_TARIFF_PR_CREATION, newTariff, idDirection}
-};
-
-export let changePaymentInFull = (idDirection, status) => {
-    return {type: CHANGE_PAYMENT_IN_FULL_PR_CREATION, idDirection, status}
 };
 
 export let addService = (idDirection, idTariff) => {
@@ -414,33 +438,7 @@ export let addService = (idDirection, idTariff) => {
 export let deleteService = (idDirection, idTariff, idService) => {
     return {type: DELETE_SERVICE_PR_CREATION, idDirection, idTariff, idService}
 };
-
-export let changeServiceName = (idNumbers, serviceName) => {
-    let {idDirection, idTariff, idService} = idNumbers;
-    return {type: CHANGE_SERVICE_NAME_PR_CREATION, idDirection, idTariff, idService, serviceName}
-};
-
-export let changeTariffName = (idNumbers, tariffName) => {
-    let {idDirection, idTariff} = idNumbers;
-    return {type: CHANGE_TARIFF_NAME_PR_CREATION, idDirection, idTariff, tariffName}
-};
-
-export let changeServicePrice = (idNumbers, number) => {
-    let {idDirection, idTariff, idService} = idNumbers;
-    return {type: CHANGE_SERVICE_PRICE_PR_CREATION, idDirection, idTariff, idService, number}
-};
-
-export let changePacketPrice = (idNumbers, number) => {
-    let {idDirection, idTariff} = idNumbers;
-    return {type: CHANGE_PACKET_PRICE_PR_CREATION, idDirection, idTariff, number}
-};
-
-export let changeDeadlineTariff = (idNumbers, number) => {
-    let {idDirection, idTariff} = idNumbers;
-    return {type: CHANGE_DEADLINE_TARIFF_PR_CREATION, idDirection, idTariff, number}
-};
-
-// actionCreators
+// actionCreators ////////////////////
 
 // thunkCreators
 // thunkCreators
