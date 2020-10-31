@@ -194,54 +194,39 @@ const projectCreationReducer = (state = startState, action) => {
     switch (action.type) {
         // Direction properties
         case CHANGE_DIRECTION_PROPERTY_PR_CREATION: {
-            return NewStateElement.getNewState(state,action,"directions")
+            return NewStateElement.getNewState(state, action, "directions")
         }
 
         // Tariff properties
         case CHANGE_TARIFF_PROPERTY_PR_CREATION: {
-            return NewStateElement.getNewState(state,action,"tariffs")
+            return NewStateElement.getNewState(state, action, "tariffs")
         }
 
         // Service properties
         case CHANGE_SERVICE_PROPERTY_PR_CREATION: {
-            return NewStateElement.getNewState(state,action,"services")
+            return NewStateElement.getNewState(state, action, "services")
         }
 
         // Adding new elements
         case ADD_NEW_TARIFF_PR_CREATION: {
             let indexDirection = Indexes.getIndexDirection(state, action);
-            let newState = CopyState.getNewState(state);
-            newState.directionsAndTariffs[indexDirection] = {
-                ...state.directionsAndTariffs[indexDirection],
-                tariffsNames: [
-                    ...state.directionsAndTariffs[indexDirection].tariffsNames,
-                    action.newTariff
-                ]
-            };
+            let newState = CopyState.copyStateTariffs(state, indexDirection);
+            StateLayers.getTariffLayer(newState, indexDirection).push(action.newTariff);
             return newState
         }
         case ADD_NEW_SERVICE_PR_CREATION: {
             let {indexDirection, indexTariff} = Indexes.getIndexes(state, action);
-            let newState = CopyState.copyStateTariffs(state, indexDirection);
-            newState.directionsAndTariffs[indexDirection].tariffsNames[indexTariff] = {
-                ...state.directionsAndTariffs[indexDirection].tariffsNames[indexTariff],
-                services: [
-                    ...state.directionsAndTariffs[indexDirection].tariffsNames[indexTariff].services,
-                    action.newService
-                ]
-            };
+            let newState = CopyState.copyStateServices(state, indexDirection, indexTariff);
+            StateLayers.getServiceLayer(newState, indexDirection, indexTariff).push(action.newService);
             return newState
         }
         case DELETE_SERVICE_PR_CREATION: {
             let {indexDirection, indexTariff} = Indexes.getIndexes(state, action);
-            let newState = CopyState.copyStateTariffs(state, indexDirection);
-            newState.directionsAndTariffs[indexDirection].tariffsNames[indexTariff] = {
-                ...state.directionsAndTariffs[indexDirection].tariffsNames[indexTariff],
-                services: [
-                    ...state.directionsAndTariffs[indexDirection].tariffsNames[indexTariff].services
-                        .filter(service => service.idService !== action.idService)
-                ]
-            };
+            let newState = CopyState.copyStateServices(state, indexDirection, indexTariff);
+            newState.directionsAndTariffs[indexDirection].tariffsNames[indexTariff].services = [
+                ...StateLayers.getServiceLayer(state, indexDirection, indexTariff)
+                    .filter(service => service.idService !== action.idService)
+            ];
             return newState
         }
 
@@ -251,7 +236,7 @@ const projectCreationReducer = (state = startState, action) => {
 };
 
 let NewStateElement = {
-    getNewState(state, action, elementStateKey){
+    getNewState(state, action, elementStateKey) {
         let {newState, element} = this[elementStateKey](state, action);
         element[action.propertyName] = action.propertyValue;
         return newState
@@ -259,29 +244,32 @@ let NewStateElement = {
     directions(state, action) {
         let indexDirection = Indexes.getIndexDirection(state, action);
         let newState = CopyState.getNewState(state);
-        let element = newState.directionsAndTariffs[indexDirection];
+        let element = StateLayers.getDirectionLayer(newState)[indexDirection];
         return {newState, element}
     },
     tariffs(state, action) {
-        let indexTariff = Indexes.getIndexTariff(state, action);
-        let {newState, element} = this.directions(state, action);
-        element = element.tariffsNames[indexTariff];
+        let {indexDirection, indexTariff} = Indexes.getIndexes(state, action);
+        let newState = CopyState.copyStateTariffs(state, indexDirection);
+        let element = StateLayers.getTariffLayer(newState, indexDirection)[indexTariff];
         return {newState, element}
     },
     services(state, action) {
-        let indexService = Indexes.getIndexService(state, action);
-        let {newState, element} = this.tariffs(state, action);
-        element = element.services[indexService];
+        let {indexDirection, indexTariff, indexService} = Indexes.getIndexes(state, action);
+        let newState = CopyState.copyStateServices(state, indexDirection, indexTariff);
+        let element = StateLayers.getServiceLayer(newState, indexDirection, indexTariff)[indexService];
         return {newState, element}
-    },
+    }
+};
 
-    // Эта функция должна помочь схлопнуть повторяющийся код directions, tariffs и services
-    // Но там, судя по ошибкам где-то теряется this, поэтому отложил пока ее использование
-    getNewStateElement(state, action, getNewState, getIndex, stateKey) {
-        let index = getIndex(state, action);
-        let {newState, element} = getNewState(state, action);
-        element = element[stateKey][index];
-        return {newState, element}
+let StateLayers = {
+    getDirectionLayer(currentState) {
+        return currentState.directionsAndTariffs
+    },
+    getTariffLayer(currentState, indexDirection) {
+        return currentState.directionsAndTariffs[indexDirection].tariffsNames
+    },
+    getServiceLayer(currentState, indexDirection, indexTariff) {
+        return currentState.directionsAndTariffs[indexDirection].tariffsNames[indexTariff].services
     },
 };
 
@@ -290,26 +278,26 @@ let CopyState = {
         return {
             ...state,
             directionsAndTariffs: [
-                ...state.directionsAndTariffs
+                ...StateLayers.getDirectionLayer(state)
             ]
         }
     },
     copyStateTariffs(state, indexDirection) {
         let newState = this.getNewState(state);
-        newState.directionsAndTariffs[indexDirection] = {
-            ...state.directionsAndTariffs[indexDirection],
+        StateLayers.getDirectionLayer(newState)[indexDirection] = {
+            ...StateLayers.getDirectionLayer(state)[indexDirection],
             tariffsNames: [
-                ...state.directionsAndTariffs[indexDirection].tariffsNames
+                ...StateLayers.getTariffLayer(state, indexDirection)
             ]
         };
         return newState
     },
     copyStateServices(state, indexDirection, indexTariff) {
         let newState = this.copyStateTariffs(state, indexDirection);
-        newState.directionsAndTariffs[indexDirection].tariffsNames[indexTariff] = {
-            ...state.directionsAndTariffs[indexDirection].tariffsNames[indexTariff],
+        StateLayers.getTariffLayer(newState, indexDirection)[indexTariff] = {
+            ...StateLayers.getTariffLayer(state, indexDirection)[indexTariff],
             services: [
-                ...state.directionsAndTariffs[indexDirection].tariffsNames[indexTariff].services
+                ...StateLayers.getServiceLayer(state, indexDirection, indexTariff)
             ]
         };
         return newState
