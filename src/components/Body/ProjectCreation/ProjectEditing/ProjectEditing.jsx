@@ -1,6 +1,15 @@
 import React from 'react';
 import style from './ProjectEditing.module.css'
 import ValueDisplay from "./DisplayingDifferentData/InputEditMode";
+import {AddTariff, PaymentType, TotalPrice} from "./DirectionEditing/Components";
+import {
+    AddNewService,
+    DeleteTariff,
+    DisplayDeadlineTariff,
+    DisplayTariffName,
+    DisplayTariffPrice,
+    PaymentMethod
+} from "./TariffEditing/Components";
 
 
 let ProjectEditing = (props) => {
@@ -63,29 +72,18 @@ let DirectionEditing = (props) => {
         {props.namesTariffs.length > 0
             ? <div>
                 {tariffs}
-                <div>
-                    Тип оплаты:
-                    <div
-                        className={`${props.paymentInFull && style.paymentInFull}`}
-                        onClick={() => {props.changePaymentInFull(props.idDirection, true)}}
-                    >
-                        100%
-                    </div>
-                    <div
-                        className={`${!props.paymentInFull && style.paymentInFull}`}
-                        onClick={() => {props.changePaymentInFull(props.idDirection, false)}}
-                    >
-                        50%
-                    </div>
-                </div>
-                <div>
-                    {!props.paymentInFull && <div>Промежуточная цена: {props.directionTotalPrice / 2} р.</div>}
-                    <div>Итоговая цена: {`${props.directionTotalPrice} р.`}</div>
-                </div>
+                <PaymentType
+                    paymentInFull={props.paymentInFull}
+                    changePaymentInFull={props.changePaymentInFull}
+                    idDirection={props.idDirection}
+                />
+                <TotalPrice
+                    paymentInFull={props.paymentInFull}
+                    directionTotalPrice={props.directionTotalPrice}
+                />
             </div>
             : <div>Нет выбранных тарифов</div>}
-
-        <button onClick={() => props.addTariff(props.idDirection)}>Добавить тариф</button>
+        <AddTariff addTariff={props.addTariff} idDirection={props.idDirection}/>
     </div>
 };
 
@@ -109,53 +107,43 @@ let TariffEditing = (props) => {
         idTariff: props.tariffId
     };
     return <div>
-        <ValueDisplay
-            valueGlobal={props.tariffName}
-            changeValueGlobal={props.changeTariffName}
+        <DisplayTariffName
+            tariffName={props.tariffName}
+            changeTariffName={props.changeTariffName}
             idNumbers={idNumbers}
-            displayType={"text"}
-            type={"text"}
         />
-        <button onClick={() => {
-            props.changeTariffStatus(false, props.tariffId, props.idDirection)
-        }}>
-            Убрать тариф
-        </button>
+        <DeleteTariff
+            changeTariffStatus={props.changeTariffStatus}
+            tariffId={props.tariffId}
+            idDirection={props.idDirection}
+        />
         <h5>
-            <div onClick={() => {
-                props.changePaymentPackage(!props.paymentPackage, props.tariffId, props.idDirection)
-            }}>
-                Способ оплаты:
-                {props.paymentPackage ? ' Пакет' : ' Сумма стоимости услуг'}
-            </div>
-            <div>
-                Цена тарифа: {props.paymentPackage
-                ? <ValueDisplay
-                    valueGlobal={props.totalPriceTariff}
-                    changeValueGlobal={props.changePacketPrice}
-                    idNumbers={idNumbers}
-                    displayType={"price"}
-                    type={"number"}
-                />
-                : `${props.totalPriceTariff} р.`}
-            </div>
-            <div>
-                Количество дней на настройку:
-                <ValueDisplay
-                    valueGlobal={props.deadlineTariff}
-                    changeValueGlobal={props.changeDeadlineTariff}
-                    idNumbers={idNumbers}
-                    displayType={"number"}
-                    type={"number"}
-                />
-            </div>
+            <PaymentMethod
+                changePaymentPackage={props.changePaymentPackage}
+                paymentPackage={props.paymentPackage}
+                tariffId={props.tariffId}
+                idDirection={props.idDirection}
+            />
+            <DisplayTariffPrice
+                paymentPackage={props.paymentPackage}
+                totalPriceTariff={props.totalPriceTariff}
+                changePacketPrice={props.changePacketPrice}
+                idNumbers={idNumbers}
+            />
+            <DisplayDeadlineTariff
+                deadlineTariff={props.deadlineTariff}
+                changeDeadlineTariff={props.changeDeadlineTariff}
+                idNumbers={idNumbers}
+            />
         </h5>
         {props.namesServices.length > 0
             ? services
             : <div>Нет услуг</div>}
-        <button onClick={() => props.addService(props.idDirection, props.tariffId)}>
-            Добавить услугу
-        </button>
+        <AddNewService
+            addService={props.addService}
+            idDirection={props.idDirection}
+            tariffId={props.tariffId}
+        />
     </div>
 };
 
