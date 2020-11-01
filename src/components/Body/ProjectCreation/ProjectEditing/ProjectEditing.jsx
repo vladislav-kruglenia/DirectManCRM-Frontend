@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import style from './ProjectEditing.module.css'
-import EditModeText from "./InputEditModeText";
+import {TextDisplay} from "./InputEditModeText";
 import PriceDisplay from "./InputEditModeNumber";
 
 
@@ -105,28 +105,16 @@ let TariffEditing = (props) => {
         changeServiceName={props.changeServiceName}
         changeServicePrice={props.changeServicePrice}
     />);
-    let [editMode, setEditMode] = useState(false);
     let idNumbers = {
         idDirection: props.idDirection,
         idTariff: props.tariffId
     };
-
     return <div>
-        {!editMode
-            ? <div onDoubleClick={() => {
-                setEditMode(true)
-            }}>
-                <h4>{props.tariffName} -</h4>
-            </div>
-            : <EditModeText
-                changeNameGlobal={props.changeTariffName}
-                idNumbers={idNumbers}
-                nameGlobal={props.tariffName}
-                setEditMode={(status) => {
-                    setEditMode(status)
-                }}
-            />
-        }
+        <TextDisplay
+            nameGlobal={props.tariffName}
+            changeNameGlobal={props.changeTariffName}
+            idNumbers={idNumbers}
+        />
         <button onClick={() => {
             props.changeTariffStatus(false, props.tariffId, props.idDirection)
         }}>
@@ -167,26 +155,17 @@ let TariffEditing = (props) => {
 };
 
 let ServiceEditing = (props) => {
-    let [editModeServiceName, setEditModeServiceName] = useState(false);
     let idNumbers = {
         idDirection: props.idDirection,
         idTariff: props.tariffId,
         idService: props.serviceId
     };
     return <div>
-        {!editModeServiceName
-            ? <div onDoubleClick={() => setEditModeServiceName(true)}>
-                {props.serviceName} -
-            </div>
-            : <EditModeText
-                changeNameGlobal={props.changeServiceName}
-                idNumbers={idNumbers}
-                nameGlobal={props.serviceName}
-                setEditMode={(status) => {
-                    setEditModeServiceName(status)
-                }}
-            />
-        }
+        <TextDisplay
+            nameGlobal={props.serviceName}
+            changeNameGlobal={props.changeServiceName}
+            idNumbers={idNumbers}
+        />
         <div>
             <PriceDisplay
                 idNumbers={idNumbers}
