@@ -194,30 +194,30 @@ const projectCreationReducer = (state = startState, action) => {
     switch (action.type) {
         // Direction properties
         case CHANGE_DIRECTION_PROPERTY_PR_CREATION: {
-            return NewStateElement.getNewState(state, action, "directions")
+            return NewStateElementForChangeProperty.getNewState(state, action, "directions")
         }
 
         // Tariff properties
         case CHANGE_TARIFF_PROPERTY_PR_CREATION: {
-            return NewStateElement.getNewState(state, action, "tariffs")
+            return NewStateElementForChangeProperty.getNewState(state, action, "tariffs")
         }
 
         // Service properties
         case CHANGE_SERVICE_PROPERTY_PR_CREATION: {
-            return NewStateElement.getNewState(state, action, "services")
+            return NewStateElementForChangeProperty.getNewState(state, action, "services")
         }
 
         // Adding new elements
         case ADD_NEW_TARIFF_PR_CREATION: {
             let indexDirection = Indexes.getIndexDirection(state, action);
             let newState = CopyState.copyStateTariffs(state, indexDirection);
-            StateLayers.getTariffLayer(newState, indexDirection).push(action.newTariff);
+            StateLayers.getTariffLayer(newState, indexDirection).push(action.newElement);
             return newState
         }
         case ADD_NEW_SERVICE_PR_CREATION: {
             let {indexDirection, indexTariff} = Indexes.getIndexes(state, action);
             let newState = CopyState.copyStateServices(state, indexDirection, indexTariff);
-            StateLayers.getServiceLayer(newState, indexDirection, indexTariff).push(action.newService);
+            StateLayers.getServiceLayer(newState, indexDirection, indexTariff).push(action.newElement);
             return newState
         }
         case DELETE_SERVICE_PR_CREATION: {
@@ -235,24 +235,29 @@ const projectCreationReducer = (state = startState, action) => {
     }
 };
 
-let NewStateElement = {
+// Объект создан для разгрузки кода изменения свойства на уровне направления, тарифа и услуги
+let NewStateElementForChangeProperty = {
+    // Отдает скопированное состояние в зависимости от выбранного ключа для изменения
     getNewState(state, action, elementStateKey) {
         let {newState, element} = this[elementStateKey](state, action);
         element[action.propertyName] = action.propertyValue;
         return newState
     },
+    // Отдает объект Direction, который нужно изменить, и скопированный State
     directions(state, action) {
         let indexDirection = Indexes.getIndexDirection(state, action);
         let newState = CopyState.getNewState(state);
         let element = StateLayers.getDirectionLayer(newState)[indexDirection];
         return {newState, element}
     },
+    // Отдает объект Tariff, который нужно изменить, и скопированный State
     tariffs(state, action) {
         let {indexDirection, indexTariff} = Indexes.getIndexes(state, action);
         let newState = CopyState.copyStateTariffs(state, indexDirection);
         let element = StateLayers.getTariffLayer(newState, indexDirection)[indexTariff];
         return {newState, element}
     },
+    // Отдает объект Service, который нужно изменить, и скопированный State
     services(state, action) {
         let {indexDirection, indexTariff, indexService} = Indexes.getIndexes(state, action);
         let newState = CopyState.copyStateServices(state, indexDirection, indexTariff);
@@ -261,6 +266,7 @@ let NewStateElement = {
     }
 };
 
+// Инкапсулирует пути до directions, tariffsNames и services
 let StateLayers = {
     getDirectionLayer(currentState) {
         return currentState.directionsAndTariffs
@@ -273,6 +279,7 @@ let StateLayers = {
     },
 };
 
+// Возвращает копии State на уровнях directions, tariffsNames и services
 let CopyState = {
     getNewState(state) {
         return {
@@ -304,7 +311,9 @@ let CopyState = {
     }
 };
 
+// Отдает индексы directions, tariffsNames и services(ищет по id)
 let Indexes = {
+    // Удобно вызывать при использовании деструктуризации, когда нужно сразу несколько индексов
     getIndexes(state, action) {
         return {
             indexDirection: this.getIndexDirection(state, action),
@@ -330,6 +339,7 @@ let Indexes = {
 };
 
 // actionCreators ////////////////////
+// Direction properties
 export let changeDirectionStatus = (propertyValue, idDirection) => {
     return {type: CHANGE_DIRECTION_PROPERTY_PR_CREATION, propertyName: "selected", idDirection, propertyValue}
 };
@@ -401,7 +411,7 @@ export let changeServicePrice = (idNumbers, propertyValue) => {
 
 // Adding new elements
 export let addTariff = (idDirection) => {
-    let newTariff = {
+    let newElement = {
         id: uuidv4(),
         name: 'Новый тариф',
         selected: true,
@@ -410,17 +420,17 @@ export let addTariff = (idDirection) => {
         periodOfExecution: 10,
         services: []
     };
-    return {type: ADD_NEW_TARIFF_PR_CREATION, newTariff, idDirection}
+    return {type: ADD_NEW_TARIFF_PR_CREATION, newElement, idDirection}
 };
 
 export let addService = (idDirection, idTariff) => {
-    let newService = {
+    let newElement = {
         idService: uuidv4(),
         serviceName: 'Новая услуга',
         selected: true,
         servicePrice: 150
     };
-    return {type: ADD_NEW_SERVICE_PR_CREATION, newService, idDirection, idTariff}
+    return {type: ADD_NEW_SERVICE_PR_CREATION, newElement, idDirection, idTariff}
 };
 
 export let deleteService = (idDirection, idTariff, idService) => {
