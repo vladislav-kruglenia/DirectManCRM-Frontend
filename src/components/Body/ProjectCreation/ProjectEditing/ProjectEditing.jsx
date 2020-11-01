@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './ProjectEditing.module.css'
-import ValueDisplay from "./InputEditMode";
+import ValueDisplay from "./DisplayingDifferentData/InputEditMode";
 
 
 let ProjectEditing = (props) => {
@@ -113,6 +113,7 @@ let TariffEditing = (props) => {
             valueGlobal={props.tariffName}
             changeValueGlobal={props.changeTariffName}
             idNumbers={idNumbers}
+            displayType={"text"}
             type={"text"}
         />
         <button onClick={() => {
@@ -133,9 +134,10 @@ let TariffEditing = (props) => {
                     valueGlobal={props.totalPriceTariff}
                     changeValueGlobal={props.changePacketPrice}
                     idNumbers={idNumbers}
+                    displayType={"price"}
                     type={"number"}
                 />
-                : props.totalPriceTariff}
+                : `${props.totalPriceTariff} р.`}
             </div>
             <div>
                 Количество дней на настройку:
@@ -143,13 +145,9 @@ let TariffEditing = (props) => {
                     valueGlobal={props.deadlineTariff}
                     changeValueGlobal={props.changeDeadlineTariff}
                     idNumbers={idNumbers}
+                    displayType={"number"}
                     type={"number"}
                 />
-                {/*<PriceDisplay
-                    idNumbers={idNumbers}
-                    price={props.deadlineTariff}
-                    changePrice={props.changeDeadlineTariff}
-                />*/}
             </div>
         </h5>
         {props.namesServices.length > 0
@@ -172,6 +170,7 @@ let ServiceEditing = (props) => {
             valueGlobal={props.serviceName}
             changeValueGlobal={props.changeServiceName}
             idNumbers={idNumbers}
+            displayType={"text"}
             type={"text"}
         />
         <div>
@@ -179,6 +178,7 @@ let ServiceEditing = (props) => {
                 valueGlobal={props.servicePrice}
                 changeValueGlobal={props.changeServicePrice}
                 idNumbers={idNumbers}
+                displayType={"price"}
                 type={"number"}
             />
             <button onClick={() => {

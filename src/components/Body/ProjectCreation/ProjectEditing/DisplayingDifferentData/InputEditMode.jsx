@@ -1,12 +1,15 @@
-import style from "./ProjectEditing.module.css";
+import style from "../ProjectEditing.module.css";
 import React, {useState} from "react";
+import {DisplayingDifferentData} from "./DisplayingDifferentData";
 
 let ValueDisplay = (props) => {
     let [editMode, setEditMode] = useState(false);
     return <>
         {!editMode
             ? <div onDoubleClick={() => setEditMode(true)}>
-                {props.valueGlobal}</div>
+                <DisplayingDifferentData
+                    value={props.valueGlobal}
+                    displayType={props.displayType}/></div>
             : <EditModeValue
                 type={props.type}
                 changeValueGlobal={props.changeValueGlobal}
