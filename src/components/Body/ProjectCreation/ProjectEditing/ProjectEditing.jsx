@@ -1,7 +1,6 @@
 import React from 'react';
 import style from './ProjectEditing.module.css'
-import {TextDisplay} from "./InputEditModeText";
-import PriceDisplay from "./InputEditModeNumber";
+import ValueDisplay from "./InputEditMode";
 
 
 let ProjectEditing = (props) => {
@@ -110,10 +109,11 @@ let TariffEditing = (props) => {
         idTariff: props.tariffId
     };
     return <div>
-        <TextDisplay
-            nameGlobal={props.tariffName}
-            changeNameGlobal={props.changeTariffName}
+        <ValueDisplay
+            valueGlobal={props.tariffName}
+            changeValueGlobal={props.changeTariffName}
             idNumbers={idNumbers}
+            type={"text"}
         />
         <button onClick={() => {
             props.changeTariffStatus(false, props.tariffId, props.idDirection)
@@ -129,20 +129,27 @@ let TariffEditing = (props) => {
             </div>
             <div>
                 Цена тарифа: {props.paymentPackage
-                ? <PriceDisplay
+                ? <ValueDisplay
+                    valueGlobal={props.totalPriceTariff}
+                    changeValueGlobal={props.changePacketPrice}
                     idNumbers={idNumbers}
-                    price={props.totalPriceTariff}
-                    changePrice={props.changePacketPrice}
+                    type={"number"}
                 />
                 : props.totalPriceTariff}
             </div>
             <div>
                 Количество дней на настройку:
-                <PriceDisplay
+                <ValueDisplay
+                    valueGlobal={props.deadlineTariff}
+                    changeValueGlobal={props.changeDeadlineTariff}
+                    idNumbers={idNumbers}
+                    type={"number"}
+                />
+                {/*<PriceDisplay
                     idNumbers={idNumbers}
                     price={props.deadlineTariff}
                     changePrice={props.changeDeadlineTariff}
-                />
+                />*/}
             </div>
         </h5>
         {props.namesServices.length > 0
@@ -161,16 +168,18 @@ let ServiceEditing = (props) => {
         idService: props.serviceId
     };
     return <div>
-        <TextDisplay
-            nameGlobal={props.serviceName}
-            changeNameGlobal={props.changeServiceName}
+        <ValueDisplay
+            valueGlobal={props.serviceName}
+            changeValueGlobal={props.changeServiceName}
             idNumbers={idNumbers}
+            type={"text"}
         />
         <div>
-            <PriceDisplay
+            <ValueDisplay
+                valueGlobal={props.servicePrice}
+                changeValueGlobal={props.changeServicePrice}
                 idNumbers={idNumbers}
-                price={props.servicePrice}
-                changePrice={props.changeServicePrice}
+                type={"number"}
             />
             <button onClick={() => {
                 props.deleteService(props.idDirection, props.tariffId, props.serviceId)
