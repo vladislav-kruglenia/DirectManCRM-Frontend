@@ -1,6 +1,5 @@
 import React from 'react';
 import style from './ProjectEditing.module.css'
-import ValueDisplay from "./DisplayingDifferentData/InputEditMode";
 import {AddTariff, PaymentType, TotalPrice} from "./DirectionEditing/Components";
 import {
     AddNewService,
@@ -10,6 +9,7 @@ import {
     DisplayTariffPrice,
     PaymentMethod
 } from "./TariffEditing/Components";
+import {DeleteService, DisplayServiceName, DisplayServicePrice} from "./ServiceEditing/Components";
 
 
 let ProjectEditing = (props) => {
@@ -154,26 +154,21 @@ let ServiceEditing = (props) => {
         idService: props.serviceId
     };
     return <div>
-        <ValueDisplay
-            valueGlobal={props.serviceName}
-            changeValueGlobal={props.changeServiceName}
+        <DisplayServiceName
+            serviceName={props.serviceName}
+            changeServiceName={props.changeServiceName}
             idNumbers={idNumbers}
-            displayType={"text"}
-            type={"text"}
         />
         <div>
-            <ValueDisplay
-                valueGlobal={props.servicePrice}
-                changeValueGlobal={props.changeServicePrice}
+            <DisplayServicePrice
+                servicePrice={props.servicePrice}
+                changeServicePrice={props.changeServicePrice}
                 idNumbers={idNumbers}
-                displayType={"price"}
-                type={"number"}
             />
-            <button onClick={() => {
-                props.deleteService(props.idDirection, props.tariffId, props.serviceId)
-            }}>
-                Удалить услугу
-            </button>
+            <DeleteService
+                deleteService={props.deleteService}
+                idNumbers={idNumbers}
+            />
         </div>
     </div>
 };

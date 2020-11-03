@@ -433,7 +433,8 @@ export let addService = (idDirection, idTariff) => {
     return {type: ADD_NEW_SERVICE_PR_CREATION, newElement, idDirection, idTariff}
 };
 
-export let deleteService = (idDirection, idTariff, idService) => {
+export let deleteService = (idNumbers) => {
+    let {idDirection, idTariff, idService} = idNumbers;
     return {type: DELETE_SERVICE_PR_CREATION, idDirection, idTariff, idService}
 };
 // actionCreators ////////////////////
