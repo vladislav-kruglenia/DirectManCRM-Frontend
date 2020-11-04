@@ -2,6 +2,8 @@ import ProjectCreation from "./ProjectCreation";
 import {compose} from "redux";
 import {connect} from "react-redux";
 import {
+    getClientContacts,
+    getNameProject,
     getNamesDirections,
     getNamesServicesDependingSelectedTariffs,
     getNamesTariffsDependingSelectedDirections
@@ -9,7 +11,7 @@ import {
 import {
     addService,
     addTariff, changeDeadlineTariff,
-    changeDirectionStatus,
+    changeDirectionStatus, changeNameProject,
     changePacketPrice, changePaymentInFull,
     changePaymentPackage,
     changeServiceName,
@@ -21,9 +23,11 @@ import {
 
 let mapStateToProps = (state) => {
     return {
+        nameProject: getNameProject(state),
+        clientContacts: getClientContacts(state),
         directions: getNamesDirections(state),
         tariffsAndNamesDirections: getNamesTariffsDependingSelectedDirections(state),
-        servicesAndNamesTariffs: getNamesServicesDependingSelectedTariffs(state)
+        servicesAndNamesTariffs: getNamesServicesDependingSelectedTariffs(state),
     }
 };
 let dispatchObject = {
@@ -39,6 +43,7 @@ let dispatchObject = {
     changePacketPrice,
     changeDeadlineTariff,
     changePaymentInFull,
+    changeNameProject,
 };
 
 export default compose(

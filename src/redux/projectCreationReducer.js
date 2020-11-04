@@ -6,8 +6,17 @@ const CHANGE_SERVICE_PROPERTY_PR_CREATION = "CHANGE_SERVICE_PROPERTY_PR_CREATION
 const ADD_NEW_TARIFF_PR_CREATION = "ADD_NEW_TARIFF_PR_CREATION";
 const ADD_NEW_SERVICE_PR_CREATION = "ADD_NEW_SERVICE_PR_CREATION";
 const DELETE_SERVICE_PR_CREATION = "DELETE_SERVICE_PR_CREATION";
+const CHANGE_NAME_PROJECT_PR_CREATION = "CHANGE_NAME_PROJECT_PR_CREATION";
 
 let startState = {
+    nameProject: "vk.com",
+    clientContacts: [
+        {
+            name: "Владислав",
+            email: "32334309vlad@gmail.com",
+            phoneNumber: "+375 29 381-75-00",
+        }
+    ],
     directionsAndTariffs: [
         {
             nameDirection: 'Контекстная реклама',
@@ -192,6 +201,13 @@ let startState = {
 
 const projectCreationReducer = (state = startState, action) => {
     switch (action.type) {
+        case CHANGE_NAME_PROJECT_PR_CREATION: {
+            return {
+                ...state,
+                nameProject: action.propertyValue
+            }
+        }
+
         // Direction properties
         case CHANGE_DIRECTION_PROPERTY_PR_CREATION: {
             return NewStateElementForChangeProperty.getNewState(state, action, "directions")
@@ -246,7 +262,7 @@ let NewStateElementForChangeProperty = {
     // Отдает объект Direction, который нужно изменить, и скопированный State
     directions(state, action) {
         let indexDirection = Indexes.getIndexDirection(state, action);
-        let newState = CopyState.getNewState(state);
+        let newState = CopyState.copyStateDirections(state);
         let element = StateLayers.getDirectionLayer(newState)[indexDirection];
         return {newState, element}
     },
@@ -281,7 +297,7 @@ let StateLayers = {
 
 // Возвращает копии State на уровнях directions, tariffsNames и services
 let CopyState = {
-    getNewState(state) {
+    copyStateDirections(state) {
         return {
             ...state,
             directionsAndTariffs: [
@@ -290,7 +306,7 @@ let CopyState = {
         }
     },
     copyStateTariffs(state, indexDirection) {
-        let newState = this.getNewState(state);
+        let newState = this.copyStateDirections(state);
         StateLayers.getDirectionLayer(newState)[indexDirection] = {
             ...StateLayers.getDirectionLayer(state)[indexDirection],
             tariffsNames: [
@@ -339,6 +355,10 @@ let Indexes = {
 };
 
 // actionCreators ////////////////////
+
+export let changeNameProject = (idNumbers = null, propertyValue) => {
+    return {type: CHANGE_NAME_PROJECT_PR_CREATION, propertyValue}
+};
 // Direction properties
 export let changeDirectionStatus = (propertyValue, idDirection) => {
     return {type: CHANGE_DIRECTION_PROPERTY_PR_CREATION, propertyName: "selected", idDirection, propertyValue}

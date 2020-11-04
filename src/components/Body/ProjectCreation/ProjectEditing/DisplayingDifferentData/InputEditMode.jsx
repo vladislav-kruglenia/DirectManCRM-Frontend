@@ -39,6 +39,7 @@ let EditModeValue = (props) => {
                 }}/>}
 
             <button onClick={() => {
+                debugger
                 props.changeValueGlobal(
                     props.idNumbers,
                     value
@@ -66,6 +67,7 @@ let InputNumber = (props) =>{
       autoFocus={true}
   />
 };
+
 let InputText = (props) =>{
   return <input
       onChange={(e) => {

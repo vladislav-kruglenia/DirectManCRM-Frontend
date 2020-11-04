@@ -28,7 +28,7 @@ let Directions = {
                     };
                     // если есть тариф и в нем присутствует свойство deadline, то возвращаем также итоговую цену направления
                     return namesTariffs.length > 0 && namesTariffs[0].deadline
-                        ? {...direction, directionTotalPrice: Directions.getTotalPrice(namesTariffs,'totalPrice')}
+                        ? {...direction, directionTotalPrice: Directions.getTotalPrice(namesTariffs, 'totalPrice')}
                         : direction
                 }
                 return null
@@ -54,7 +54,7 @@ let Directions = {
             if (tNames.selected) {
                 // пробегаемся по массиву тарифа и выдаем массив объектов в которых название услуги и статус
                 let namesServices = Directions.getServiceInformationForServices(tNames);
-                let servicesCost = Directions.getTotalPrice(tNames.services,'servicePrice');
+                let servicesCost = Directions.getTotalPrice(tNames.services, 'servicePrice');
                 // отдаем наверх массив объектов, в котором массив с именами услуг и название тарифа
                 return {
                     tariffName: tNames.name,
@@ -84,6 +84,17 @@ let Directions = {
     },
 };
 
+// Отдает имя проекта
+export let getNameProjectSelector = (state) => {
+    return state.projectCreation.nameProject
+};
+
+// Отдает массив контактов клиента
+export let getClientContactsSelector = (state) => {
+    return state.projectCreation.clientContacts
+};
+
+
 
 export let getNamesDirections = createSelector(Directions.getNamesDirectionsSelector, (directions) => {
     return directions.map(d => (
@@ -103,6 +114,16 @@ export let getNamesTariffsDependingSelectedDirections = createSelector(Direction
 export let getNamesServicesDependingSelectedTariffs = createSelector(Directions.getNamesDirectionsSelector,
     (directions) => {
         return Directions.getNamesDirectionsFunc(directions, Directions.getNamesTariffsForServices)
+    });
+
+export let getNameProject = createSelector(getNameProjectSelector,
+    (name) => {
+        return name
+    });
+
+export let getClientContacts = createSelector(getClientContactsSelector,
+    (contactsArray) => {
+        return contactsArray
     });
 
 
