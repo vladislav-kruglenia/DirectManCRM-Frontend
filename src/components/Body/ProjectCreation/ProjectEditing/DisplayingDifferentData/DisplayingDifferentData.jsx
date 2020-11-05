@@ -6,6 +6,7 @@ export let DisplayingDifferentData = (props)=>{
         {props.displayType === "price" && <div>{props.value} р.</div>}
         {props.displayType === "number" && <div>{props.value}</div>}
         {props.displayType === "text" && <div>{props.value}</div>}
+        {props.displayType === "component" && <>{props.displayComponent}</>}
     </div>
 };
 

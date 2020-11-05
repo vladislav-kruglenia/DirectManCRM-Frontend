@@ -12,10 +12,18 @@ let startState = {
     nameProject: "vk.com",
     clientContacts: [
         {
+            id: 1,
             name: "Владислав",
             email: "32334309vlad@gmail.com",
             phoneNumber: "+375 29 381-75-00",
-        }
+        },
+        {
+            id: 2,
+            name: "Владислав",
+            email: "32334309vlad@gmail.com",
+            phoneNumber: "+375 29 381-75-00",
+        },
+        
     ],
     directionsAndTariffs: [
         {

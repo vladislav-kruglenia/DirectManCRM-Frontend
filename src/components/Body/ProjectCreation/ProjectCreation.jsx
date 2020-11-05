@@ -5,6 +5,7 @@ import ProjectEditing from "./ProjectEditing/ProjectEditing";
 import style from './ProjectFormation.module.css'
 import ChoiceDirection from "./ChoiceDirection/ChoiceDirection";
 import {ProjectName} from "./ProjectEditing/ProjectName/ProjectName";
+import {ClientContactsComponent} from "./ProjectEditing/ClientContacts/ClientContactsComponent";
 
 
 let ProjectCreation = (props) => {
@@ -38,6 +39,7 @@ let ProjectCreation = (props) => {
                 changePaymentInFull={props.changePaymentInFull}
                 servicesAndNamesTariffs={props.servicesAndNamesTariffs}/>}/>
         </Switch>
+        <ClientContactsComponent clientContacts = {props.clientContacts}/>
     </div>
 };
 
