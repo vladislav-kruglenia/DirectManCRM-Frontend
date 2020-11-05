@@ -2,7 +2,11 @@ import React from "react";
 import ValueDisplay from "../DisplayingDifferentData/InputEditMode";
 
 export let ClientContactsComponent = (props) => {
-    let Contacts = props.clientContacts.map(contact => <ContactContainer key={contact.id} contacts={contact}/>);
+    let Contacts = props.clientContacts.map(contact => <ContactContainer
+        key={contact.idClient}
+        contacts={contact}
+        changeData={props.changeClientData}
+    />);
     return <div>
         <h3>ClientContacts</h3>
         {Contacts}
@@ -12,7 +16,7 @@ export let ClientContactsComponent = (props) => {
 export let ContactContainer = (props) => {
     return <ValueDisplay
         valueGlobal={props.contacts}
-        changeValueGlobal={props.changeNameProject}
+        changeValueGlobal={props.changeData}
         displayComponent={<Contact contacts={props.contacts}/>}
         grandFormType={"contactsEditing"}
         displayType={"component"}

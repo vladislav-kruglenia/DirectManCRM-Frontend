@@ -3,8 +3,10 @@ import {createField, Input} from "../../../../Common/Forms/FormsControl";
 import {reduxForm} from "redux-form";
 
 let EditingContacts = (props) => {
-    const changeContactData = (contactsFormData) =>{
+    let changeContactData = (contactsFormData) => {
         console.log(contactsFormData);
+        props.changeValueGlobal(contactsFormData);
+        props.setEditMode(false)
     };
     return <ContactFormContainer onSubmit={changeContactData} initialValues={props.contacts}/>
 };

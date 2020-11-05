@@ -39,7 +39,7 @@ let ProjectCreation = (props) => {
                 changePaymentInFull={props.changePaymentInFull}
                 servicesAndNamesTariffs={props.servicesAndNamesTariffs}/>}/>
         </Switch>
-        <ClientContactsComponent clientContacts = {props.clientContacts}/>
+        <ClientContactsComponent changeClientData={props.changeClientData} clientContacts = {props.clientContacts}/>
     </div>
 };
 

@@ -7,23 +7,24 @@ const ADD_NEW_TARIFF_PR_CREATION = "ADD_NEW_TARIFF_PR_CREATION";
 const ADD_NEW_SERVICE_PR_CREATION = "ADD_NEW_SERVICE_PR_CREATION";
 const DELETE_SERVICE_PR_CREATION = "DELETE_SERVICE_PR_CREATION";
 const CHANGE_NAME_PROJECT_PR_CREATION = "CHANGE_NAME_PROJECT_PR_CREATION";
+const CHANGE_CLIENT_DATA_PR_CREATION = "CHANGE_CLIENT_DATA_PR_CREATION";
 
 let startState = {
     nameProject: "vk.com",
     clientContacts: [
         {
-            id: 1,
+            idClient: 1,
             name: "Владислав",
             email: "32334309vlad@gmail.com",
             phoneNumber: "+375 29 381-75-00",
         },
         {
-            id: 2,
+            idClient: 2,
             name: "Владислав",
             email: "32334309vlad@gmail.com",
             phoneNumber: "+375 29 381-75-00",
         },
-        
+
     ],
     directionsAndTariffs: [
         {
@@ -209,6 +210,9 @@ let startState = {
 
 const projectCreationReducer = (state = startState, action) => {
     switch (action.type) {
+        case CHANGE_CLIENT_DATA_PR_CREATION: {
+            return NewStateForContacts.changeClientData(state, action);
+        }
         case CHANGE_NAME_PROJECT_PR_CREATION: {
             return {
                 ...state,
@@ -259,6 +263,15 @@ const projectCreationReducer = (state = startState, action) => {
     }
 };
 
+let NewStateForContacts = {
+    changeClientData(state, action) {
+        let newState = CopyState.copyStateClientContacts(state);
+        let indexClient = Indexes.getIndexClientContacts(state, action);
+        newState.clientContacts[indexClient] = action.newClientData;
+        return newState
+    }
+};
+
 // Объект создан для разгрузки кода изменения свойства на уровне направления, тарифа и услуги
 let NewStateElementForChangeProperty = {
     // Отдает скопированное состояние в зависимости от выбранного ключа для изменения
@@ -292,6 +305,9 @@ let NewStateElementForChangeProperty = {
 
 // Инкапсулирует пути до directions, tariffsNames и services
 let StateLayers = {
+    getClientContactsLayer(currentState) {
+        return currentState.clientContacts
+    },
     getDirectionLayer(currentState) {
         return currentState.directionsAndTariffs
     },
@@ -303,8 +319,16 @@ let StateLayers = {
     },
 };
 
-// Возвращает копии State на уровнях directions, tariffsNames и services
+// Возвращает копии State на уровнях directions, tariffsNames, services, clientContacts
 let CopyState = {
+    copyStateClientContacts(state) {
+        return {
+            ...state,
+            clientContacts: [
+                ...StateLayers.getClientContactsLayer(state)
+            ]
+        }
+    },
     copyStateDirections(state) {
         return {
             ...state,
@@ -345,6 +369,10 @@ let Indexes = {
             indexService: this.getIndexService(state, action)
         }
     },
+    getIndexClientContacts(state, action) {
+        return state.clientContacts
+            .findIndex(e => e.idClient === action.idClient);
+    },
     getIndexDirection(state, action) {
         return state.directionsAndTariffs
             .findIndex(e => e.idDirection === action.idDirection);
@@ -364,9 +392,16 @@ let Indexes = {
 
 // actionCreators ////////////////////
 
+//Client Contacts
+export let changeClientData = (newClientData) => {
+    let {idClient} = newClientData;
+    return {type: CHANGE_CLIENT_DATA_PR_CREATION, idClient, newClientData}
+};
+
 export let changeNameProject = (idNumbers = null, propertyValue) => {
     return {type: CHANGE_NAME_PROJECT_PR_CREATION, propertyValue}
 };
+
 // Direction properties
 export let changeDirectionStatus = (propertyValue, idDirection) => {
     return {type: CHANGE_DIRECTION_PROPERTY_PR_CREATION, propertyName: "selected", idDirection, propertyValue}

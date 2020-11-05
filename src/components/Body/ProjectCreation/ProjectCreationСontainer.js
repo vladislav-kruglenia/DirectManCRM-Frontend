@@ -10,7 +10,7 @@ import {
 } from "./ProjectCreationSelectors";
 import {
     addService,
-    addTariff, changeDeadlineTariff,
+    addTariff, changeClientData, changeDeadlineTariff,
     changeDirectionStatus, changeNameProject,
     changePacketPrice, changePaymentInFull,
     changePaymentPackage,
@@ -44,6 +44,7 @@ let dispatchObject = {
     changeDeadlineTariff,
     changePaymentInFull,
     changeNameProject,
+    changeClientData,
 };
 
 export default compose(

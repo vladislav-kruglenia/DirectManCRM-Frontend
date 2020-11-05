@@ -46,6 +46,10 @@ let EditModeValue = (props) => {
                 : <GrandForm
                     grandFormType={props.grandFormType}
                     grandFormData={props.valueGlobal}
+                    changeValueGlobal={props.changeValueGlobal}
+                    setEditMode={(status) => {
+                        props.setEditMode(status)
+                    }}
                 />}
         </div>
         <div className={style.transparentLayer} onClick={() => {
@@ -107,7 +111,14 @@ let InputText = (props) => {
 let GrandForm = (props) => {
     return <>
         {props.grandFormType === "contactsEditing" &&
-        <EditingContacts idNumbers={props.grandFormData.id} contacts={props.grandFormData}/>}
+        <EditingContacts
+            changeValueGlobal={props.changeValueGlobal}
+            idNumbers={props.grandFormData.id}
+            contacts={props.grandFormData}
+            setEditMode={(status) => {
+                props.setEditMode(status)
+            }}
+        />}
     </>
 };
 
