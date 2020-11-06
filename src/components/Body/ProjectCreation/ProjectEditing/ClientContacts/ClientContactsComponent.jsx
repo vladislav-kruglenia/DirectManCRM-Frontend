@@ -10,18 +10,24 @@ export let ClientContactsComponent = (props) => {
     return <div>
         <h3>ClientContacts</h3>
         {Contacts}
+        <div>
+            <button onClick={()=>{props.addContact()}}>Добавить контакт</button>
+        </div>
     </div>
 };
 
 export let ContactContainer = (props) => {
-    return <ValueDisplay
-        valueGlobal={props.contacts}
-        changeValueGlobal={props.changeData}
-        displayComponent={<Contact contacts={props.contacts}/>}
-        grandFormType={"contactsEditing"}
-        displayType={"component"}
-        type={"grandForm"}
-    />
+    return <>
+        <ValueDisplay
+            valueGlobal={props.contacts}
+            changeValueGlobal={props.changeData}
+            displayComponent={<Contact contacts={props.contacts}/>}
+            grandFormType={"contactsEditing"}
+            displayType={"component"}
+            type={"grandForm"}
+        />
+        <button>Удалить контакт</button>
+    </>
 };
 
 export let Contact = (props) => {

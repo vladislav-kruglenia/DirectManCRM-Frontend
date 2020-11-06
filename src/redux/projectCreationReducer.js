@@ -8,6 +8,7 @@ const ADD_NEW_SERVICE_PR_CREATION = "ADD_NEW_SERVICE_PR_CREATION";
 const DELETE_SERVICE_PR_CREATION = "DELETE_SERVICE_PR_CREATION";
 const CHANGE_NAME_PROJECT_PR_CREATION = "CHANGE_NAME_PROJECT_PR_CREATION";
 const CHANGE_CLIENT_DATA_PR_CREATION = "CHANGE_CLIENT_DATA_PR_CREATION";
+const ADD_NEW_CONTACT_PR_CREATION = "ADD_NEW_CONTACT_PR_CREATION";
 
 let startState = {
     nameProject: "vk.com",
@@ -213,6 +214,11 @@ const projectCreationReducer = (state = startState, action) => {
         case CHANGE_CLIENT_DATA_PR_CREATION: {
             return NewStateForContacts.changeClientData(state, action);
         }
+
+        case ADD_NEW_CONTACT_PR_CREATION: {
+            return NewStateForContacts.addNewContact(state, action);
+        }
+
         case CHANGE_NAME_PROJECT_PR_CREATION: {
             return {
                 ...state,
@@ -268,6 +274,11 @@ let NewStateForContacts = {
         let newState = CopyState.copyStateClientContacts(state);
         let indexClient = Indexes.getIndexClientContacts(state, action);
         newState.clientContacts[indexClient] = action.newClientData;
+        return newState
+    },
+    addNewContact(state, action) {
+        let newState = CopyState.copyStateClientContacts(state);
+        StateLayers.getClientContactsLayer(newState).push(action.newElement);
         return newState
     }
 };
@@ -396,6 +407,16 @@ let Indexes = {
 export let changeClientData = (newClientData) => {
     let {idClient} = newClientData;
     return {type: CHANGE_CLIENT_DATA_PR_CREATION, idClient, newClientData}
+};
+
+export let addContact = () => {
+    let newElement = {
+        idClient: uuidv4(),
+        name: null,
+        email: null,
+        phoneNumber: null,
+    };
+    return {type: ADD_NEW_CONTACT_PR_CREATION, newElement}
 };
 
 export let changeNameProject = (idNumbers = null, propertyValue) => {

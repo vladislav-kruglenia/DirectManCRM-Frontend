@@ -9,6 +9,7 @@ import {
     getNamesTariffsDependingSelectedDirections
 } from "./ProjectCreationSelectors";
 import {
+    addContact,
     addService,
     addTariff, changeClientData, changeDeadlineTariff,
     changeDirectionStatus, changeNameProject,
@@ -45,6 +46,7 @@ let dispatchObject = {
     changePaymentInFull,
     changeNameProject,
     changeClientData,
+    addContact,
 };
 
 export default compose(
