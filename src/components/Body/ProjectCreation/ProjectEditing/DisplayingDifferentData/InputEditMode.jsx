@@ -4,7 +4,7 @@ import {DisplayingDifferentData} from "./DisplayingDifferentData";
 import EditingContacts from "../ClientContacts/ClientContactsForm";
 
 let ValueDisplay = (props) => {
-    let [editMode, setEditMode] = useState(false);
+    let [editMode, setEditMode] = useState(props.editModeStatus||false);
     return <>
         {!editMode
             ? <div onDoubleClick={() => setEditMode(true)}>

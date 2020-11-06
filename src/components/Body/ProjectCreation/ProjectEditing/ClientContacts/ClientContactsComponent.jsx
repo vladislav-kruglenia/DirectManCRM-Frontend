@@ -11,14 +11,21 @@ export let ClientContactsComponent = (props) => {
         <h3>ClientContacts</h3>
         {Contacts}
         <div>
-            <button onClick={()=>{props.addContact()}}>Добавить контакт</button>
+            <button onClick={() => {
+                props.addContact()
+            }}>Добавить контакт
+            </button>
         </div>
     </div>
 };
 
 export let ContactContainer = (props) => {
+    let editModeStatus = props.contacts.name === null
+        && props.contacts.email === null
+        && props.contacts.phoneNumber === null;
     return <>
         <ValueDisplay
+            editModeStatus={editModeStatus}
             valueGlobal={props.contacts}
             changeValueGlobal={props.changeData}
             displayComponent={<Contact contacts={props.contacts}/>}
