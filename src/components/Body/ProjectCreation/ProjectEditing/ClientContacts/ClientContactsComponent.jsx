@@ -6,10 +6,13 @@ export let ClientContactsComponent = (props) => {
         key={contact.idClient}
         contacts={contact}
         changeData={props.changeClientData}
+        deleteContact={props.deleteContact}
     />);
     return <div>
         <h3>ClientContacts</h3>
-        {Contacts}
+        {props.clientContacts.length > 0
+            ? Contacts
+            : "Контактов нет"}
         <div>
             <button onClick={() => {
                 props.addContact()
@@ -33,7 +36,7 @@ export let ContactContainer = (props) => {
             displayType={"component"}
             type={"grandForm"}
         />
-        <button>Удалить контакт</button>
+        <button onClick={()=>{props.deleteContact(props.contacts.idClient)}}>Удалить контакт</button>
     </>
 };
 

@@ -9,6 +9,7 @@ const DELETE_SERVICE_PR_CREATION = "DELETE_SERVICE_PR_CREATION";
 const CHANGE_NAME_PROJECT_PR_CREATION = "CHANGE_NAME_PROJECT_PR_CREATION";
 const CHANGE_CLIENT_DATA_PR_CREATION = "CHANGE_CLIENT_DATA_PR_CREATION";
 const ADD_NEW_CONTACT_PR_CREATION = "ADD_NEW_CONTACT_PR_CREATION";
+const DELETE_CONTACT_PR_CREATION = "DELETE_CONTACT_PR_CREATION";
 
 let startState = {
     nameProject: "vk.com",
@@ -219,6 +220,15 @@ const projectCreationReducer = (state = startState, action) => {
             return NewStateForContacts.addNewContact(state, action);
         }
 
+        case DELETE_CONTACT_PR_CREATION: {
+            return {
+                ...state,
+                clientContacts: [
+                    ...state.clientContacts.filter(client => client.idClient !== action.idClient)
+                ]
+            };
+        }
+
         case CHANGE_NAME_PROJECT_PR_CREATION: {
             return {
                 ...state,
@@ -417,6 +427,10 @@ export let addContact = () => {
         phoneNumber: null,
     };
     return {type: ADD_NEW_CONTACT_PR_CREATION, newElement}
+};
+
+export let deleteContact = (idClient) => {
+    return {type: DELETE_CONTACT_PR_CREATION, idClient}
 };
 
 export let changeNameProject = (idNumbers = null, propertyValue) => {

@@ -42,6 +42,7 @@ let ProjectCreation = (props) => {
         <ClientContactsComponent
             changeClientData={props.changeClientData}
             addContact={props.addContact}
+            deleteContact={props.deleteContact}
             clientContacts = {props.clientContacts}
         />
     </div>
