@@ -20,12 +20,6 @@ let startState = {
             email: "32334309vlad@gmail.com",
             phoneNumber: "+375 29 381-75-00",
         },
-        {
-            idClient: 2,
-            name: "Владислав",
-            email: "32334309vlad@gmail.com",
-            phoneNumber: "+375 29 381-75-00",
-        },
 
     ],
     directionsAndTariffs: [
@@ -273,7 +267,6 @@ const projectCreationReducer = (state = startState, action) => {
             ];
             return newState
         }
-
         default:
             return state
     }

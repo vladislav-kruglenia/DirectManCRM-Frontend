@@ -13,12 +13,12 @@ let EditingContacts = (props) => {
 
 let ContactForm = ({handleSubmit}) => {
     return <>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} onKeyPress={(event) => {if (event.key === "Enter") handleSubmit();}}>
+            <div>Имя клиента:</div>
+            {createField('name', Input, 'name', null, {type: "text", autoFocus: true})}
+
             <div>Email:</div>
             {createField('email', Input, 'email', null, {type: "text"})}
-
-            <div>Имя клиента:</div>
-            {createField('name', Input, 'name', null, {type: "text"})}
 
             <div>Телефон:</div>
             {createField('phoneNumber', Input, 'phoneNumber', null, {type: "text"})}

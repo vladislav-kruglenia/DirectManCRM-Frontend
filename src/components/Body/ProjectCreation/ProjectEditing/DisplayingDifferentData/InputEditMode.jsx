@@ -4,7 +4,7 @@ import {DisplayingDifferentData} from "./DisplayingDifferentData";
 import EditingContacts from "../ClientContacts/ClientContactsForm";
 
 let ValueDisplay = (props) => {
-    let [editMode, setEditMode] = useState(props.editModeStatus||false);
+    let [editMode, setEditMode] = useState(props.editModeStatus || false);
     return <>
         {!editMode
             ? <div onDoubleClick={() => setEditMode(true)}>
@@ -28,7 +28,12 @@ let ValueDisplay = (props) => {
 
 let EditModeValue = (props) => {
     let [value, changeValueHook] = useState(props.valueGlobal);
-    return <div>
+    return <div onKeyDown={(event) =>{
+        if (event.key === "Escape") {
+            changeValueHook(props.numberGlobal);
+            props.setEditMode(false);
+        }
+    }}>
         <div className={style.editLayer}>
             {props.type !== "grandForm"
                 ? <InputForm
@@ -52,15 +57,25 @@ let EditModeValue = (props) => {
                     }}
                 />}
         </div>
-        <div className={style.transparentLayer} onClick={() => {
-            changeValueHook(props.numberGlobal);
-            props.setEditMode(false);
-        }}>{}</div>
+        <div className={style.transparentLayer}
+             onClick={() => {
+                 changeValueHook(props.numberGlobal);
+                 props.setEditMode(false);
+             }}>{}</div>
     </div>
 };
 
 let InputForm = (props) => {
-    return <>
+    let saveData = () => {
+        props.changeValueGlobal(
+            props.idNumbers,
+            props.value
+        );
+        props.setEditMode(false);
+    };
+    return <div onKeyPress={(event) => {
+        if (event.key === "Enter") saveData();
+    }}>
         {props.type === "number" && <InputNumber
             value={props.value}
             changeValueHook={(value) => {
@@ -71,17 +86,11 @@ let InputForm = (props) => {
             changeValueHook={(value) => {
                 props.changeValueHook(value)
             }}/>}
-
         <button onClick={() => {
-        debugger
-            props.changeValueGlobal(
-                props.idNumbers,
-                props.value
-            );
-            props.setEditMode(false);
+            saveData()
         }}>Сохранить
         </button>
-    </>
+    </div>
 };
 
 let InputNumber = (props) => {
