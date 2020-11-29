@@ -1,9 +1,9 @@
 import React from "react";
 import {reduxForm} from "redux-form";
 import style from "./LoginPage.module.css"
-import {createField, Input} from "../Common/Forms/FormsControl";
+import {createField, Input} from "./../../Common/Forms/FormsControl";
 import {connect} from "react-redux";
-import {loginThunkCreator} from "../../redux/authReducer";
+import {loginThunkCreator} from "./../../../redux/authReducer";
 import {Redirect} from "react-router-dom";
 
 let LoginForm = ({handleSubmit}) => {

@@ -11,16 +11,45 @@ const CHANGE_CLIENT_DATA_PR_CREATION = "CHANGE_CLIENT_DATA_PR_CREATION";
 const ADD_NEW_CONTACT_PR_CREATION = "ADD_NEW_CONTACT_PR_CREATION";
 const DELETE_CONTACT_PR_CREATION = "DELETE_CONTACT_PR_CREATION";
 
+/*directionsAndTariffs: [
+    {
+        nameDirection: {type: String, default: ""},
+        idDirection: {type: Number, default: -1},
+        paymentInFull: {type: Boolean, default: true},
+        directionTotalPrice: {type: Number, default: -1},
+        namesTariffs: [
+            {
+                tariffId: {type: Number, default: -1},
+                tariffName: {type: String, default: ""},
+                tariffStatus: {type: Boolean, default: false},
+                packetPrice: {type: Number, default: -1},
+                paymentPackage: {type: Boolean, default: true},
+                deadline: {type: Number, default: -1},
+                totalPrice: {type: Number, default: -1},
+                services: [
+                    {
+                        serviceName: {type: String, default: ""},
+                        serviceStatus: {type: Boolean, default: false},
+                        serviceId: {type: Number, default: -1},
+                        servicePrice: {type: Number, default: -1}
+                    }
+                ]
+            }
+        ]
+    }
+]*/
+
 let startState = {
     nameProject: "vk.com",
     clientContacts: [
-        {
+       /*
+       {
             idClient: 1,
             name: "Владислав",
             email: "32334309vlad@gmail.com",
             phoneNumber: "+375 29 381-75-00",
         },
-
+        */
     ],
     directionsAndTariffs: [
         {
@@ -28,69 +57,69 @@ let startState = {
             idDirection: 1,
             selected: false,
             paymentInFull: true,
-            tariffsNames: [
+            namesTariffs: [
                 {
-                    id: 1,
-                    name: 'Тариф Микро',
-                    selected: false,
+                    tariffId: 1,
+                    tariffName: 'Тариф Микро',
+                    tariffStatus: false,
                     packetPrice: 1000,
-                    paymentAPackageServices: false,
-                    periodOfExecution: 3,
+                    paymentPackage: false,
+                    deadline: 3,
                     services: [
                         {
                             serviceName: 'Яндекс Поиск',
-                            selected: false,
-                            idService: 1,
+                            serviceStatus: false,
+                            serviceId: 1,
                             servicePrice: 100
                         }
                     ]
                 },
                 {
-                    id: 2,
-                    name: 'Тариф Старндарт',
-                    selected: false,
+                    tariffId: 2,
+                    tariffName: 'Тариф Старндарт',
+                    tariffStatus: false,
                     packetPrice: 1000,
-                    paymentAPackageServices: true,
-                    periodOfExecution: 5,
+                    paymentPackage: true,
+                    deadline: 5,
                     services: [
                         {
                             serviceName: 'Яндекс Поиск',
-                            selected: false,
-                            idService: 1,
+                            serviceStatus: false,
+                            serviceId: 1,
                             servicePrice: 100
                         },
                         {
                             serviceName: 'Гугл Поиск',
-                            selected: false,
-                            idService: 2,
+                            serviceStatus: false,
+                            serviceId: 2,
                             servicePrice: 100
                         }
                     ]
                 },
                 {
-                    id: 3,
-                    name: 'Тариф Максимум',
-                    selected: false,
+                    tariffId: 3,
+                    tariffName: 'Тариф Максимум',
+                    tariffStatus: false,
                     packetPrice: 1000,
-                    paymentAPackageServices: true,
-                    periodOfExecution: 10,
+                    paymentPackage: true,
+                    deadline: 10,
                     services: [
                         {
                             serviceName: 'Яндекс Поиск',
-                            selected: false,
-                            idService: 1,
+                            serviceStatus: false,
+                            serviceId: 1,
                             servicePrice: 100
                         },
                         {
                             serviceName: 'Гугл Поиск',
-                            selected: false,
-                            idService: 2,
+                            serviceStatus: false,
+                            serviceId: 2,
                             servicePrice: 100
                         },
                         {
                             serviceName: 'Цели в Яндекс и Гугл',
-                            selected: false,
-                            idService: 3,
+                            serviceStatus: false,
+                            serviceId: 3,
                             servicePrice: 100
                         }
                     ]
@@ -102,69 +131,69 @@ let startState = {
             idDirection: 2,
             selected: false,
             paymentInFull: true,
-            tariffsNames: [
+            namesTariffs: [
                 {
-                    id: 1,
-                    name: 'Инстаграм',
-                    selected: false,
+                    tariffId: 1,
+                    tariffName: 'Инстаграм',
+                    tariffStatus: false,
                     packetPrice: 1000,
-                    paymentAPackageServices: true,
-                    periodOfExecution: 5,
+                    paymentPackage: true,
+                    deadline: 5,
                     services: [
                         {
                             serviceName: 'Настройка таргет рекламы',
-                            selected: false,
-                            idService: 1,
+                            serviceStatus: false,
+                            serviceId: 1,
                             servicePrice: 100
                         },
                         {
                             serviceName: 'Ведение 5 раб. дней',
-                            selected: false,
-                            idService: 2,
+                            serviceStatus: false,
+                            serviceId: 2,
                             servicePrice: 100
                         }
                     ]
                 },
                 {
-                    id: 2,
-                    name: 'ВК',
-                    selected: false,
+                    tariffId: 2,
+                    tariffName: 'ВК',
+                    tariffStatus: false,
                     packetPrice: 1000,
-                    paymentAPackageServices: true,
-                    periodOfExecution: 5,
+                    paymentPackage: true,
+                    deadline: 5,
                     services: [
                         {
                             serviceName: 'Настройка таргет рекламы',
-                            selected: false,
-                            idService: 1,
+                            serviceStatus: false,
+                            serviceId: 1,
                             servicePrice: 100
                         },
                         {
                             serviceName: 'Ведение 5 раб. дней',
-                            selected: false,
-                            idService: 2,
+                            serviceStatus: false,
+                            serviceId: 2,
                             servicePrice: 100
                         }
                     ]
                 },
                 {
-                    id: 3,
-                    name: 'Фейсбук',
-                    selected: false,
+                    tariffId: 3,
+                    tariffName: 'Фейсбук',
+                    tariffStatus: false,
                     packetPrice: 1000,
-                    paymentAPackageServices: true,
-                    periodOfExecution: 5,
+                    paymentPackage: true,
+                    deadline: 5,
                     services: [
                         {
                             serviceName: 'Настройка таргет рекламы',
-                            selected: false,
-                            idService: 1,
+                            serviceStatus: false,
+                            serviceId: 1,
                             servicePrice: 100
                         },
                         {
                             serviceName: 'Ведение 5 раб. дней',
-                            selected: false,
-                            idService: 2,
+                            serviceStatus: false,
+                            serviceId: 2,
                             servicePrice: 100
                         }
                     ]
@@ -176,25 +205,25 @@ let startState = {
             idDirection: 3,
             selected: false,
             paymentInFull: true,
-            tariffsNames: [
+            namesTariffs: [
                 {
-                    id: 1,
-                    name: 'Баннерная реклама',
-                    selected: false,
+                    tariffId: 1,
+                    tariffName: 'Баннерная реклама',
+                    tariffStatus: false,
                     packetPrice: 1000,
-                    paymentAPackageServices: true,
-                    periodOfExecution: 5,
+                    paymentPackage: true,
+                    deadline: 5,
                     services: [
                         {
                             serviceName: 'Настройка рекламы на Ютубе',
-                            selected: false,
-                            idService: 1,
+                            serviceStatus: false,
+                            serviceId: 1,
                             servicePrice: 100
                         },
                         {
                             serviceName: 'Ведение 5 раб. дней',
-                            selected: false,
-                            idService: 2,
+                            serviceStatus: false,
+                            serviceId: 2,
                             servicePrice: 100
                         }
                     ]
@@ -206,14 +235,13 @@ let startState = {
 
 const projectCreationReducer = (state = startState, action) => {
     switch (action.type) {
+        // Client contacts
         case CHANGE_CLIENT_DATA_PR_CREATION: {
             return NewStateForContacts.changeClientData(state, action);
         }
-
         case ADD_NEW_CONTACT_PR_CREATION: {
             return NewStateForContacts.addNewContact(state, action);
         }
-
         case DELETE_CONTACT_PR_CREATION: {
             return {
                 ...state,
@@ -222,7 +250,6 @@ const projectCreationReducer = (state = startState, action) => {
                 ]
             };
         }
-
         case CHANGE_NAME_PROJECT_PR_CREATION: {
             return {
                 ...state,
@@ -261,9 +288,9 @@ const projectCreationReducer = (state = startState, action) => {
         case DELETE_SERVICE_PR_CREATION: {
             let {indexDirection, indexTariff} = Indexes.getIndexes(state, action);
             let newState = CopyState.copyStateServices(state, indexDirection, indexTariff);
-            newState.directionsAndTariffs[indexDirection].tariffsNames[indexTariff].services = [
+            newState.directionsAndTariffs[indexDirection].namesTariffs[indexTariff].services = [
                 ...StateLayers.getServiceLayer(state, indexDirection, indexTariff)
-                    .filter(service => service.idService !== action.idService)
+                    .filter(service => service.serviceId !== action.idService)
             ];
             return newState
         }
@@ -317,7 +344,7 @@ let NewStateElementForChangeProperty = {
     }
 };
 
-// Инкапсулирует пути до directions, tariffsNames и services
+// Инкапсулирует пути до directions, namesTariffs и services
 let StateLayers = {
     getClientContactsLayer(currentState) {
         return currentState.clientContacts
@@ -326,10 +353,10 @@ let StateLayers = {
         return currentState.directionsAndTariffs
     },
     getTariffLayer(currentState, indexDirection) {
-        return currentState.directionsAndTariffs[indexDirection].tariffsNames
+        return currentState.directionsAndTariffs[indexDirection].namesTariffs
     },
     getServiceLayer(currentState, indexDirection, indexTariff) {
-        return currentState.directionsAndTariffs[indexDirection].tariffsNames[indexTariff].services
+        return currentState.directionsAndTariffs[indexDirection].namesTariffs[indexTariff].services
     },
 };
 
@@ -355,7 +382,7 @@ let CopyState = {
         let newState = this.copyStateDirections(state);
         StateLayers.getDirectionLayer(newState)[indexDirection] = {
             ...StateLayers.getDirectionLayer(state)[indexDirection],
-            tariffsNames: [
+            namesTariffs: [
                 ...StateLayers.getTariffLayer(state, indexDirection)
             ]
         };
@@ -393,14 +420,14 @@ let Indexes = {
     },
     getIndexTariff(state, action) {
         let indexDirection = this.getIndexDirection(state, action);
-        return state.directionsAndTariffs[indexDirection].tariffsNames
-            .findIndex(e => e.id === action.idTariff);
+        return state.directionsAndTariffs[indexDirection].namesTariffs
+            .findIndex(e => e.tariffId === action.idTariff);
     },
     getIndexService(state, action) {
         let indexDirection = this.getIndexDirection(state, action);
         let indexTariff = this.getIndexTariff(state, action);
-        return state.directionsAndTariffs[indexDirection].tariffsNames[indexTariff].services
-            .findIndex(s => s.idService === action.idService);
+        return state.directionsAndTariffs[indexDirection].namesTariffs[indexTariff].services
+            .findIndex(s => s.serviceId === action.idService);
     }
 };
 
@@ -441,13 +468,13 @@ export let changePaymentInFull = (idDirection, propertyValue) => {
 
 // Tariff properties
 export let changeTariffStatus = (propertyValue, idTariff, idDirection) => {
-    return {type: CHANGE_TARIFF_PROPERTY_PR_CREATION, propertyName: "selected", propertyValue, idTariff, idDirection}
+    return {type: CHANGE_TARIFF_PROPERTY_PR_CREATION, propertyName: "tariffStatus", propertyValue, idTariff, idDirection}
 };
 
 export let changePaymentPackage = (propertyValue, idTariff, idDirection) => {
     return {
         type: CHANGE_TARIFF_PROPERTY_PR_CREATION,
-        propertyName: "paymentAPackageServices",
+        propertyName: "paymentPackage",
         propertyValue,
         idTariff,
         idDirection
@@ -456,7 +483,7 @@ export let changePaymentPackage = (propertyValue, idTariff, idDirection) => {
 
 export let changeTariffName = (idNumbers, propertyValue) => {
     let {idDirection, idTariff} = idNumbers;
-    return {type: CHANGE_TARIFF_PROPERTY_PR_CREATION, propertyName: "name", idDirection, idTariff, propertyValue}
+    return {type: CHANGE_TARIFF_PROPERTY_PR_CREATION, propertyName: "tariffName", idDirection, idTariff, propertyValue}
 };
 
 export let changePacketPrice = (idNumbers, propertyValue) => {
@@ -468,7 +495,7 @@ export let changeDeadlineTariff = (idNumbers, propertyValue) => {
     let {idDirection, idTariff} = idNumbers;
     return {
         type: CHANGE_TARIFF_PROPERTY_PR_CREATION,
-        propertyName: "periodOfExecution",
+        propertyName: "deadline",
         idDirection,
         idTariff,
         propertyValue
@@ -503,12 +530,12 @@ export let changeServicePrice = (idNumbers, propertyValue) => {
 // Adding new elements
 export let addTariff = (idDirection) => {
     let newElement = {
-        id: uuidv4(),
-        name: 'Новый тариф',
-        selected: true,
+        tariffId: uuidv4(),
+        tariffName: 'Новый тариф',
+        tariffStatus: true,
         packetPrice: 1500,
-        paymentAPackageServices: true,
-        periodOfExecution: 10,
+        paymentPackage: true,
+        deadline: 10,
         services: []
     };
     return {type: ADD_NEW_TARIFF_PR_CREATION, newElement, idDirection}
@@ -516,9 +543,9 @@ export let addTariff = (idDirection) => {
 
 export let addService = (idDirection, idTariff) => {
     let newElement = {
-        idService: uuidv4(),
+        serviceId: uuidv4(),
         serviceName: 'Новая услуга',
-        selected: true,
+        serviceStatus: true,
         servicePrice: 150
     };
     return {type: ADD_NEW_SERVICE_PR_CREATION, newElement, idDirection, idTariff}

@@ -42,8 +42,8 @@ export let ContactContainer = (props) => {
 
 export let Contact = (props) => {
     return <>
-        <div><b>Имя клиента - {props.contacts.name}</b></div>
-        <div>Email - {props.contacts.email}</div>
-        <div>Телефон - {props.contacts.phoneNumber}</div>
+        <div><b>Имя клиента - {props.contacts.name || "Не указано"}</b></div>
+        <div>Email - {props.contacts.email || "Не указано"}</div>
+        <div>Телефон - {props.contacts.phoneNumber || "Не указано"}</div>
     </>
 };

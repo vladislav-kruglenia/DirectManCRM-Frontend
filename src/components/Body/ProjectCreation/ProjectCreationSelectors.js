@@ -39,31 +39,31 @@ let Directions = {
 
     // Отдает массив объектов с информацией о тарифах
     getNamesTariffsForTariffs(direction) {
-        return direction.tariffsNames.map(tNames => (
+        return direction.namesTariffs.map(tNames => (
             {
-                tariffName: tNames.name,
-                tariffStatus: tNames.selected,
-                tariffId: tNames.id
+                tariffName: tNames.tariffName,
+                tariffStatus: tNames.tariffStatus,
+                tariffId: tNames.tariffId
             }
         ));
     },
 
     // Отдает массив объектов с информацией о тарифах, в каждом из которых лежит массив объектов с информацией о услугах
     getNamesTariffsForServices(direction) {
-        return direction.tariffsNames.map(tNames => {
-            if (tNames.selected) {
+        return direction.namesTariffs.map(tNames => {
+            if (tNames.tariffStatus) {
                 // пробегаемся по массиву тарифа и выдаем массив объектов в которых название услуги и статус
                 let namesServices = Directions.getServiceInformationForServices(tNames);
                 let servicesCost = Directions.getTotalPrice(tNames.services, 'servicePrice');
                 // отдаем наверх массив объектов, в котором массив с именами услуг и название тарифа
                 return {
-                    tariffName: tNames.name,
+                    tariffName: tNames.tariffName,
                     tariffStatus: tNames.selected,
-                    tariffId: tNames.id,
+                    tariffId: tNames.tariffId,
                     packetPrice: tNames.packetPrice,
-                    deadline: tNames.periodOfExecution,
-                    paymentPackage: tNames.paymentAPackageServices,
-                    totalPrice: tNames.paymentAPackageServices ? tNames.packetPrice : servicesCost,
+                    deadline: tNames.deadline,
+                    paymentPackage: tNames.paymentPackage,
+                    totalPrice: tNames.paymentPackage ? tNames.packetPrice : servicesCost,
                     namesServices
                 }
             }
@@ -76,8 +76,8 @@ let Directions = {
         return tariffName.services.map(sNames => (
             {
                 serviceName: sNames.serviceName,
-                serviceStatus: sNames.selected,
-                serviceId: sNames.idService,
+                serviceStatus: sNames.serviceStatus,
+                serviceId: sNames.serviceId,
                 servicePrice: sNames.servicePrice
             }
         ));

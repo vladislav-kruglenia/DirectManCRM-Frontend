@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './Body.module.css'
-import LoginPage from "../LoginPage/LoginPage";
+import LoginPage from "./LoginPage/LoginPage";
 import {Route, Switch} from "react-router-dom";
 
 //import BodyContainerUX from "./BodyContainerUX";
