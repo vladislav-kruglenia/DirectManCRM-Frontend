@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import ProjectCreation from "./ProjectCreation";
 import {compose} from "redux";
 import {connect} from "react-redux";
@@ -7,7 +7,7 @@ import {
     getNameProject,
     getNamesDirections,
     getNamesServicesDependingSelectedTariffs,
-    getNamesTariffsDependingSelectedDirections
+    getNamesTariffsDependingSelectedDirections, getUserId
 } from "./ProjectCreationSelectors";
 import {
     addContact,
@@ -20,7 +20,7 @@ import {
     changeServicePrice,
     changeTariffName,
     changeTariffStatus, deleteContact,
-    deleteService, getTariffsInfoThunkCreator
+    deleteService, getTariffsInfoThunkCreator, saveOrderInfoThunkCreator
 } from "../../../redux/projectCreationReducer";
 import Preloader from "../../Common/Preloader/Preloader";
 
@@ -28,6 +28,7 @@ let mapStateToProps = (state) => {
     let dataLoaded = state.projectCreation.dataLoaded;
     if (dataLoaded) {
         return {
+            userId: getUserId(state),
             dataLoaded: dataLoaded,
             nameProject: getNameProject(state),
             clientContacts: getClientContacts(state),
@@ -60,12 +61,18 @@ let dispatchObject = {
     changeClientData,
     addContact,
     deleteContact,
-    getTariffsInfoThunkCreator,
+    getTariffsInfo: getTariffsInfoThunkCreator,
+    saveOrderInfo: saveOrderInfoThunkCreator,
 };
 
 let ProjectCreationContainer = ({dataLoaded, ...props}) => {
+    useEffect(()=>{
+        if (!dataLoaded) {
+            props.getTariffsInfo();
+        }
+    });
     if (!dataLoaded) {
-        props.getTariffsInfoThunkCreator();
+        /*props.getTariffsInfo();*/
         return <Preloader/>;
     }
     return <ProjectCreation {...props}/>

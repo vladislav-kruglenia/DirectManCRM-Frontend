@@ -53,18 +53,17 @@ let Directions = {
         return direction.namesTariffs.map(tNames => {
             if (tNames.tariffStatus) {
                 // пробегаемся по массиву тарифа и выдаем массив объектов в которых название услуги и статус
-                let namesServices = Directions.getServiceInformationForServices(tNames);
+                let services = Directions.getServiceInformationForServices(tNames);
                 let servicesCost = Directions.getTotalPrice(tNames.services, 'servicePrice');
                 // отдаем наверх массив объектов, в котором массив с именами услуг и название тарифа
                 return {
                     tariffName: tNames.tariffName,
-                    tariffStatus: tNames.selected,
                     tariffId: tNames.tariffId,
                     packetPrice: tNames.packetPrice,
                     deadline: tNames.deadline,
                     paymentPackage: tNames.paymentPackage,
                     totalPrice: tNames.paymentPackage ? tNames.packetPrice : servicesCost,
-                    namesServices
+                    services
                 }
             }
             return null
@@ -92,6 +91,11 @@ export let getNameProjectSelector = (state) => {
 // Отдает массив контактов клиента
 export let getClientContactsSelector = (state) => {
     return state.projectCreation.clientContacts
+};
+
+// Отдает ID заказчика
+export let getUserIdSelector = (state) => {
+    return state.projectCreation.userId
 };
 
 
@@ -124,6 +128,11 @@ export let getNameProject = createSelector(getNameProjectSelector,
 export let getClientContacts = createSelector(getClientContactsSelector,
     (contactsArray) => {
         return contactsArray
+    });
+
+export let getUserId = createSelector(getUserIdSelector,
+    id => {
+        return id
     });
 
 

@@ -37,6 +37,9 @@ let ProjectCreation = (props) => {
                 changePacketPrice={props.changePacketPrice}
                 changeDeadlineTariff={props.changeDeadlineTariff}
                 changePaymentInFull={props.changePaymentInFull}
+                saveOrderInfo={props.saveOrderInfo}
+                nameProject = {props.nameProject}
+                userId = {props.userId}
                 servicesAndNamesTariffs={props.servicesAndNamesTariffs}/>}/>
         </Switch>
         <ClientContactsComponent

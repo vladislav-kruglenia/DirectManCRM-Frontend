@@ -222,8 +222,9 @@ const ADDING_TARIFFS_DATA_PR_CREATION = "ADDING_TARIFFS_DATA_PR_CREATION";
 ]*/
 
 let startState = {
+    userId: null,
     dataLoaded: false,
-    nameProject: "",
+    nameProject: 'Название проекта не выбрано',
     clientContacts: [
         /*
         {
@@ -586,8 +587,21 @@ export let getTariffsInfoThunkCreator = () => async (dispatch) => {
     if (response.status === 202) {
         dispatch(addingTariffsData(response.data.tariffsInfo))
     }
-
 };
+
+export let saveOrderInfoThunkCreator = (orderData, nameProject, userId) => async () => {
+    let response = await projectCreationAPI.saveOrderInfo({
+        userId,
+        nameProject,
+        directionsAndTariffs: orderData
+    });
+    if (response.status === 202) {
+        console.log(orderData);
+        console.log(response.data.message)
+    }
+};
+
+
 // thunkCreators
 
 export default projectCreationReducer

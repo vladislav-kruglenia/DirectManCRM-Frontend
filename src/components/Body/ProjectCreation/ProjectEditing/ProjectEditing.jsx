@@ -40,7 +40,9 @@ let ProjectEditing = (props) => {
         {props.servicesAndNamesTariffs.length > 0
             ? directions
             : <div>Нет выбранных направлений</div>}
-        <button>Оформить заказ</button>
+        <button onClick={() => {
+            props.saveOrderInfo(props.servicesAndNamesTariffs, props.nameProject, props.userId)
+        }}>Оформить заказ</button>
     </div>
 };
 
@@ -49,7 +51,7 @@ let DirectionEditing = (props) => {
         // values
         key={t.tariffId}
         idDirection={props.idDirection}
-        namesServices={t.namesServices}
+        services={t.services}
         tariffId={t.tariffId}
         tariffName={t.tariffName}
         totalPriceTariff={t.totalPrice}
@@ -88,7 +90,7 @@ let DirectionEditing = (props) => {
 };
 
 let TariffEditing = (props) => {
-    let services = props.namesServices.map(s => <ServiceEditing
+    let services = props.services.map(s => <ServiceEditing
         // values
         key={s.serviceId}
         serviceName={s.serviceName}
@@ -136,7 +138,7 @@ let TariffEditing = (props) => {
                 idNumbers={idNumbers}
             />
         </h5>
-        {props.namesServices.length > 0
+        {props.services.length > 0
             ? services
             : <div>Нет услуг</div>}
         <AddNewService

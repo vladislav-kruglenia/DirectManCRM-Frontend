@@ -16,5 +16,8 @@ export let projectCreationAPI = {
     getTariffsInfo: async () => {
         return await instance.get('getTariffsInfo')
     },
+    saveOrderInfo: async (orderData) => {
+        return await instance.post('saveOrderInfo', orderData)
+    },
 };
 
