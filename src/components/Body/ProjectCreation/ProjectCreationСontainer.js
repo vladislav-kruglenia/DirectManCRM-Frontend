@@ -1,3 +1,4 @@
+import React from "react";
 import ProjectCreation from "./ProjectCreation";
 import {compose} from "redux";
 import {connect} from "react-redux";
@@ -19,16 +20,27 @@ import {
     changeServicePrice,
     changeTariffName,
     changeTariffStatus, deleteContact,
-    deleteService
+    deleteService, getTariffsInfoThunkCreator
 } from "../../../redux/projectCreationReducer";
+import Preloader from "../../Common/Preloader/Preloader";
 
 let mapStateToProps = (state) => {
-    return {
-        nameProject: getNameProject(state),
-        clientContacts: getClientContacts(state),
-        directions: getNamesDirections(state),
-        tariffsAndNamesDirections: getNamesTariffsDependingSelectedDirections(state),
-        servicesAndNamesTariffs: getNamesServicesDependingSelectedTariffs(state),
+    let dataLoaded = state.projectCreation.dataLoaded;
+    if (dataLoaded) {
+        return {
+            dataLoaded: dataLoaded,
+            nameProject: getNameProject(state),
+            clientContacts: getClientContacts(state),
+            directions: getNamesDirections(state),
+            tariffsAndNamesDirections: getNamesTariffsDependingSelectedDirections(state),
+            servicesAndNamesTariffs: getNamesServicesDependingSelectedTariffs(state),
+        }
+    } else {
+        return {
+            dataLoaded: dataLoaded,
+            nameProject: getNameProject(state),
+            clientContacts: getClientContacts(state),
+        }
     }
 };
 let dispatchObject = {
@@ -48,8 +60,17 @@ let dispatchObject = {
     changeClientData,
     addContact,
     deleteContact,
+    getTariffsInfoThunkCreator,
+};
+
+let ProjectCreationContainer = ({dataLoaded, ...props}) => {
+    if (!dataLoaded) {
+        props.getTariffsInfoThunkCreator();
+        return <Preloader/>;
+    }
+    return <ProjectCreation {...props}/>
 };
 
 export default compose(
     connect(mapStateToProps, dispatchObject)
-)(ProjectCreation)
+)(ProjectCreationContainer)

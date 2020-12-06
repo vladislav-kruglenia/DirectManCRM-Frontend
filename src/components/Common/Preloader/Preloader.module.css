@@ -1,0 +1,9 @@
+.preloaderContainer{
+    display: flex;
+    justify-content: center;
+    /*border: 1px solid blue;*/
+}
+.preloaderContainer img{
+    width: 100px;
+    height: 100px;
+}
