@@ -15,7 +15,7 @@ let TariffPlans = (props) => {
         {props.tariffsAndNamesDirections.length > 0
             ? directionsWithTariffs
             : <div>Нет выбранных направлений</div>}
-        <NavLink to={'/project-creation/project-editing'}>
+        <NavLink to={`/${props.typeURL}/project-editing`}>
             <button>Далее</button>
         </NavLink>
     </div>

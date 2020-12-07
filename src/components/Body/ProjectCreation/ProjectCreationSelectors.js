@@ -98,6 +98,9 @@ export let getUserIdSelector = (state) => {
     return state.projectCreation.userId
 };
 
+export let getDirectionsAndTariffsSelector = (state) => {
+    return state.projectCreation.directionsAndTariffs
+};
 
 
 export let getNamesDirections = createSelector(Directions.getNamesDirectionsSelector, (directions) => {
@@ -133,6 +136,22 @@ export let getClientContacts = createSelector(getClientContactsSelector,
 export let getUserId = createSelector(getUserIdSelector,
     id => {
         return id
+    });
+
+export let getDirectionsAndTariffs = createSelector(getDirectionsAndTariffsSelector,
+    directionsAndTariffs => {
+        return directionsAndTariffs.map(direction => {
+            return {
+                ...direction,
+                selected: false,
+                namesTariffs: direction.namesTariffs.map(tariff => {
+                    return{
+                        ...tariff,
+                        tariffStatus: false,
+                    }
+                })
+            }
+        })
     });
 
 

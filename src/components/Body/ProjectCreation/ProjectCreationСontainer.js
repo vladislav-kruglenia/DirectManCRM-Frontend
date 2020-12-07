@@ -3,7 +3,7 @@ import ProjectCreation from "./ProjectCreation";
 import {compose} from "redux";
 import {connect} from "react-redux";
 import {
-    getClientContacts,
+    getClientContacts, getDirectionsAndTariffs,
     getNameProject,
     getNamesDirections,
     getNamesServicesDependingSelectedTariffs,
@@ -20,11 +20,11 @@ import {
     changeServicePrice,
     changeTariffName,
     changeTariffStatus, deleteContact,
-    deleteService, getTariffsInfoThunkCreator, saveOrderInfoThunkCreator
+    deleteService, editTariffsInfoThunkCreator, getTariffsInfoThunkCreator, saveOrderInfoThunkCreator
 } from "../../../redux/projectCreationReducer";
 import Preloader from "../../Common/Preloader/Preloader";
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state,props) => {
     let dataLoaded = state.projectCreation.dataLoaded;
     if (dataLoaded) {
         return {
@@ -35,6 +35,8 @@ let mapStateToProps = (state) => {
             directions: getNamesDirections(state),
             tariffsAndNamesDirections: getNamesTariffsDependingSelectedDirections(state),
             servicesAndNamesTariffs: getNamesServicesDependingSelectedTariffs(state),
+            typeComponent: props.type,
+            directionsAndTariffs: props.type === "editTariffsData" ? getDirectionsAndTariffs(state) : null,
         }
     } else {
         return {
@@ -63,6 +65,7 @@ let dispatchObject = {
     deleteContact,
     getTariffsInfo: getTariffsInfoThunkCreator,
     saveOrderInfo: saveOrderInfoThunkCreator,
+    editTariffsInfo: editTariffsInfoThunkCreator,
 };
 
 let ProjectCreationContainer = ({dataLoaded, ...props}) => {

@@ -12,6 +12,7 @@ const CHANGE_CLIENT_DATA_PR_CREATION = "CHANGE_CLIENT_DATA_PR_CREATION";
 const ADD_NEW_CONTACT_PR_CREATION = "ADD_NEW_CONTACT_PR_CREATION";
 const DELETE_CONTACT_PR_CREATION = "DELETE_CONTACT_PR_CREATION";
 const ADDING_TARIFFS_DATA_PR_CREATION = "ADDING_TARIFFS_DATA_PR_CREATION";
+const DELETE_TARIFFS_DATA_PR_CREATION = "DELETE_TARIFFS_DATA_PR_CREATION";
 
 /*directionsAndTariffs: [
     {
@@ -222,8 +223,8 @@ const ADDING_TARIFFS_DATA_PR_CREATION = "ADDING_TARIFFS_DATA_PR_CREATION";
 ]*/
 
 let startState = {
-    userId: null,
-    dataLoaded: false,
+    userId: 1,
+    dataLoaded: true,
     nameProject: 'Название проекта не выбрано',
     clientContacts: [
         /*
@@ -235,7 +236,186 @@ let startState = {
          },
          */
     ],
-    directionsAndTariffs: null
+    directionsAndTariffs: [
+        {
+            nameDirection: 'Контекстная реклама',
+            idDirection: 1,
+            selected: false,
+            paymentInFull: true,
+            namesTariffs: [
+                {
+                    tariffId: 1,
+                    tariffName: 'Тариф Микро',
+                    tariffStatus: false,
+                    packetPrice: 1000,
+                    paymentPackage: false,
+                    deadline: 3,
+                    services: [
+                        {
+                            serviceName: 'Яндекс Поиск',
+                            serviceStatus: false,
+                            serviceId: 1,
+                            servicePrice: 100
+                        }
+                    ]
+                },
+                {
+                    tariffId: 2,
+                    tariffName: 'Тариф Старндарт',
+                    tariffStatus: false,
+                    packetPrice: 1000,
+                    paymentPackage: true,
+                    deadline: 5,
+                    services: [
+                        {
+                            serviceName: 'Яндекс Поиск',
+                            serviceStatus: false,
+                            serviceId: 1,
+                            servicePrice: 100
+                        },
+                        {
+                            serviceName: 'Гугл Поиск',
+                            serviceStatus: false,
+                            serviceId: 2,
+                            servicePrice: 100
+                        }
+                    ]
+                },
+                {
+                    tariffId: 3,
+                    tariffName: 'Тариф Максимум',
+                    tariffStatus: false,
+                    packetPrice: 1000,
+                    paymentPackage: true,
+                    deadline: 10,
+                    services: [
+                        {
+                            serviceName: 'Яндекс Поиск',
+                            serviceStatus: false,
+                            serviceId: 1,
+                            servicePrice: 100
+                        },
+                        {
+                            serviceName: 'Гугл Поиск',
+                            serviceStatus: false,
+                            serviceId: 2,
+                            servicePrice: 100
+                        },
+                        {
+                            serviceName: 'Цели в Яндекс и Гугл',
+                            serviceStatus: false,
+                            serviceId: 3,
+                            servicePrice: 100
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            nameDirection: 'Реклама в соц.сетях',
+            idDirection: 2,
+            selected: false,
+            paymentInFull: true,
+            namesTariffs: [
+                {
+                    tariffId: 1,
+                    tariffName: 'Инстаграм',
+                    tariffStatus: false,
+                    packetPrice: 1000,
+                    paymentPackage: true,
+                    deadline: 5,
+                    services: [
+                        {
+                            serviceName: 'Настройка таргет рекламы',
+                            serviceStatus: false,
+                            serviceId: 1,
+                            servicePrice: 100
+                        },
+                        {
+                            serviceName: 'Ведение 5 раб. дней',
+                            serviceStatus: false,
+                            serviceId: 2,
+                            servicePrice: 100
+                        }
+                    ]
+                },
+                {
+                    tariffId: 2,
+                    tariffName: 'ВК',
+                    tariffStatus: false,
+                    packetPrice: 1000,
+                    paymentPackage: true,
+                    deadline: 5,
+                    services: [
+                        {
+                            serviceName: 'Настройка таргет рекламы',
+                            serviceStatus: false,
+                            serviceId: 1,
+                            servicePrice: 100
+                        },
+                        {
+                            serviceName: 'Ведение 5 раб. дней',
+                            serviceStatus: false,
+                            serviceId: 2,
+                            servicePrice: 100
+                        }
+                    ]
+                },
+                {
+                    tariffId: 3,
+                    tariffName: 'Фейсбук',
+                    tariffStatus: false,
+                    packetPrice: 1000,
+                    paymentPackage: true,
+                    deadline: 5,
+                    services: [
+                        {
+                            serviceName: 'Настройка таргет рекламы',
+                            serviceStatus: false,
+                            serviceId: 1,
+                            servicePrice: 100
+                        },
+                        {
+                            serviceName: 'Ведение 5 раб. дней',
+                            serviceStatus: false,
+                            serviceId: 2,
+                            servicePrice: 100
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            nameDirection: 'Реклама Ютуб',
+            idDirection: 3,
+            selected: false,
+            paymentInFull: true,
+            namesTariffs: [
+                {
+                    tariffId: 1,
+                    tariffName: 'Баннерная реклама',
+                    tariffStatus: false,
+                    packetPrice: 1000,
+                    paymentPackage: true,
+                    deadline: 5,
+                    services: [
+                        {
+                            serviceName: 'Настройка рекламы на Ютубе',
+                            serviceStatus: false,
+                            serviceId: 1,
+                            servicePrice: 100
+                        },
+                        {
+                            serviceName: 'Ведение 5 раб. дней',
+                            serviceStatus: false,
+                            serviceId: 2,
+                            servicePrice: 100
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
 };
 
 const projectCreationReducer = (state = startState, action) => {
@@ -286,6 +466,14 @@ const projectCreationReducer = (state = startState, action) => {
                 userId: uuidv4()
             }
         }
+        case DELETE_TARIFFS_DATA_PR_CREATION: {
+                    return {
+                        ...state,
+                        directionsAndTariffs: null,
+                        dataLoaded: false,
+                        userId: null
+                    }
+                }
 
         case ADD_NEW_TARIFF_PR_CREATION: {
             let indexDirection = Indexes.getIndexDirection(state, action);
@@ -552,6 +740,10 @@ export let addingTariffsData = (data) => {
     return {type: ADDING_TARIFFS_DATA_PR_CREATION, data}
 };
 
+export let deleteTariffsData = () => {
+    return {type: DELETE_TARIFFS_DATA_PR_CREATION}
+};
+
 export let addTariff = (idDirection) => {
     let newElement = {
         tariffId: uuidv4(),
@@ -582,6 +774,15 @@ export let deleteService = (idNumbers) => {
 // actionCreators ////////////////////
 
 // thunkCreators
+
+export let editTariffsInfoThunkCreator = (directionsAndTariffs) => async (dispatch) => {
+    let response = await projectCreationAPI.editTariffsInfo({directionsAndTariffs});
+    if (response.status === 202) {
+        dispatch(deleteTariffsData());
+        console.log(response.data.message);
+    }
+};
+
 export let getTariffsInfoThunkCreator = () => async (dispatch) => {
     let response = await projectCreationAPI.getTariffsInfo();
     if (response.status === 202) {
@@ -589,17 +790,20 @@ export let getTariffsInfoThunkCreator = () => async (dispatch) => {
     }
 };
 
-export let saveOrderInfoThunkCreator = (orderData, nameProject, userId) => async () => {
+export let saveOrderInfoThunkCreator = (orderData, nameProject, userId) => async (dispatch) => {
     let response = await projectCreationAPI.saveOrderInfo({
         userId,
         nameProject,
         directionsAndTariffs: orderData
     });
     if (response.status === 202) {
+        dispatch(deleteTariffsData());
         console.log(orderData);
         console.log(response.data.message)
     }
 };
+
+
 
 
 // thunkCreators

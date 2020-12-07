@@ -15,7 +15,7 @@ let ChoiceDirection = (props) => {
     return <div className={style.bodyContainer}>
         <h3>Выбор направления рекламы</h3>
         {directions}
-        <NavLink to={'/project-creation/tariff-plans'}>
+        <NavLink to={`/${props.typeURL}/tariff-plans`}>
             <button>Далее</button>
         </NavLink>
     </div>

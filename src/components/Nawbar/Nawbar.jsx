@@ -9,7 +9,10 @@ let NawBar = () => {
             <NavLink to={'/admin'}>Admin Panel</NavLink>
         </div>
         <div>
-            <NavLink to={'/project-creation'}>Project Creation</NavLink>
+            <NavLink to={'/projectCreation'}>Project Creation</NavLink>
+        </div>
+        <div>
+            <NavLink to={'/editTariffsData'}>Edit Tariffs Data</NavLink>
         </div>
 
     </div>

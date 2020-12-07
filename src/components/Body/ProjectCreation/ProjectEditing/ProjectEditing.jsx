@@ -10,6 +10,7 @@ import {
     PaymentMethod
 } from "./TariffEditing/Components";
 import {DeleteService, DisplayServiceName, DisplayServicePrice} from "./ServiceEditing/Components";
+import {NavLink} from "react-router-dom";
 
 
 let ProjectEditing = (props) => {
@@ -21,6 +22,7 @@ let ProjectEditing = (props) => {
         idDirection={d.idDirection}
         directionTotalPrice={d.directionTotalPrice}
         paymentInFull={d.paymentInFull}
+        typeComponent={d.typeComponent}
 
         // functions
         addTariff={props.addTariff}
@@ -40,9 +42,20 @@ let ProjectEditing = (props) => {
         {props.servicesAndNamesTariffs.length > 0
             ? directions
             : <div>Нет выбранных направлений</div>}
-        <button onClick={() => {
-            props.saveOrderInfo(props.servicesAndNamesTariffs, props.nameProject, props.userId)
-        }}>Оформить заказ</button>
+        <NavLink to={'/admin'}>
+            {props.typeComponent === "projectCreation"
+            && <button onClick={() => {
+                props.saveOrderInfo(props.servicesAndNamesTariffs, props.nameProject, props.userId)
+            }}>Оформить заказ</button>}
+
+            {props.typeComponent === "editTariffsData" &&
+            <button onClick={() => {
+                props.editTariffsInfo(props.directionsAndTariffs)
+            }}>Сохранить
+            </button>
+            }
+        </NavLink>
+
     </div>
 };
 
@@ -74,15 +87,18 @@ let DirectionEditing = (props) => {
         {props.namesTariffs.length > 0
             ? <div>
                 {tariffs}
-                <PaymentType
-                    paymentInFull={props.paymentInFull}
-                    changePaymentInFull={props.changePaymentInFull}
-                    idDirection={props.idDirection}
-                />
-                <TotalPrice
-                    paymentInFull={props.paymentInFull}
-                    directionTotalPrice={props.directionTotalPrice}
-                />
+                {props.typeComponent === "projectCreation" && <div>
+                    <PaymentType
+                        paymentInFull={props.paymentInFull}
+                        changePaymentInFull={props.changePaymentInFull}
+                        idDirection={props.idDirection}
+                    />
+                    <TotalPrice
+                        paymentInFull={props.paymentInFull}
+                        directionTotalPrice={props.directionTotalPrice}
+                    />
+                </div>
+                }
             </div>
             : <div>Нет выбранных тарифов</div>}
         <AddTariff addTariff={props.addTariff} idDirection={props.idDirection}/>

@@ -17,15 +17,24 @@ let ProjectCreation = (props) => {
             changeNameProject = {props.changeNameProject}
         />
         <Switch>
-            <Route exact path='/project-creation'
-                   render={() => <Redirect to={'/project-creation/choice-direction'}/>}/>
-            <Route path='/project-creation/choice-direction' render={() => <ChoiceDirection
+            <Route exact path={`/${props.typeComponent}`}
+                   render={() => <Redirect to={`/${props.typeComponent}/choice-direction`}/>}/>
+
+
+            <Route path={`/${props.typeComponent}/choice-direction`} render={() => <ChoiceDirection
                 changeDirectionStatus={props.changeDirectionStatus}
+                typeURL={props.typeComponent}
                 directions={props.directions}/>}/>
-            <Route path='/project-creation/tariff-plans' render={() => <TariffPlans
+
+
+            <Route path={`/${props.typeComponent}/tariff-plans`} render={() => <TariffPlans
                 changeTariffStatus={props.changeTariffStatus}
+                typeURL={props.typeComponent}
                 tariffsAndNamesDirections={props.tariffsAndNamesDirections}/>}/>
-            <Route path='/project-creation/project-editing' render={() => <ProjectEditing
+
+
+            <Route path={`/${props.typeComponent}/project-editing`} render={() => <ProjectEditing
+                // functions
                 addTariff={props.addTariff}
                 addService={props.addService}
                 changeTariffStatus={props.changeTariffStatus}
@@ -38,6 +47,11 @@ let ProjectCreation = (props) => {
                 changeDeadlineTariff={props.changeDeadlineTariff}
                 changePaymentInFull={props.changePaymentInFull}
                 saveOrderInfo={props.saveOrderInfo}
+                editTariffsInfo={props.editTariffsInfo}
+
+                // data
+                typeComponent = {props.typeComponent}
+                directionsAndTariffs = {props.directionsAndTariffs}
                 nameProject = {props.nameProject}
                 userId = {props.userId}
                 servicesAndNamesTariffs={props.servicesAndNamesTariffs}/>}/>
