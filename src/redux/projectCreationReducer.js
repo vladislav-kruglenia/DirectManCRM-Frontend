@@ -747,7 +747,7 @@ export let deleteTariffsData = () => {
 export let addTariff = (idDirection) => {
     let newElement = {
         tariffId: uuidv4(),
-        tariffName: 'Новый тариф',
+        tariffName: null,
         tariffStatus: true,
         packetPrice: 1500,
         paymentPackage: true,
@@ -760,7 +760,7 @@ export let addTariff = (idDirection) => {
 export let addService = (idDirection, idTariff) => {
     let newElement = {
         serviceId: uuidv4(),
-        serviceName: 'Новая услуга',
+        serviceName: null,
         serviceStatus: true,
         servicePrice: 150
     };

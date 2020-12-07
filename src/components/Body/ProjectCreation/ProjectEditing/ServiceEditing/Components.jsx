@@ -2,8 +2,10 @@ import React from "react";
 import ValueDisplay from "../DisplayingDifferentData/InputEditMode";
 
 export let DisplayServiceName = (props) => {
+    let editModeStatus = props.serviceName === null;
     return <div>
         <ValueDisplay
+            editModeStatus={editModeStatus}
             valueGlobal={props.serviceName}
             changeValueGlobal={props.changeServiceName}
             idNumbers={props.idNumbers}
