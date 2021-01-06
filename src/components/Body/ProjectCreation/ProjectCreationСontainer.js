@@ -1,30 +1,40 @@
-import React, {useEffect} from "react";
+import React from "react";
 import ProjectCreation from "./ProjectCreation";
 import {compose} from "redux";
 import {connect} from "react-redux";
 import {
-    getClientContacts, getDirectionsAndTariffs,
+    getClientContacts,
+    getDirectionsAndTariffs,
     getNameProject,
     getNamesDirections,
     getNamesServicesDependingSelectedTariffs,
-    getNamesTariffsDependingSelectedDirections, getUserId
+    getNamesTariffsDependingSelectedDirections,
+    getUserId
 } from "./ProjectCreationSelectors";
 import {
     addContact,
     addService,
-    addTariff, changeClientData, changeDeadlineTariff,
-    changeDirectionStatus, changeNameProject,
-    changePacketPrice, changePaymentInFull,
+    addTariff,
+    changeClientData,
+    changeDeadlineTariff,
+    changeDirectionStatus,
+    changeNameProject,
+    changePacketPrice,
+    changePaymentInFull,
     changePaymentPackage,
     changeServiceName,
     changeServicePrice,
     changeTariffName,
-    changeTariffStatus, deleteContact,
-    deleteService, editTariffsInfoThunkCreator, getTariffsInfoThunkCreator, saveOrderInfoThunkCreator
+    changeTariffStatus,
+    deleteContact,
+    deleteService,
+    editTariffsInfoThunkCreator,
+    getTariffsInfoThunkCreator,
+    saveOrderInfoThunkCreator
 } from "../../../redux/projectCreationReducer";
 import Preloader from "../../Common/Preloader/Preloader";
 
-let mapStateToProps = (state,props) => {
+let mapStateToProps = (state, props) => {
     let dataLoaded = state.projectCreation.dataLoaded;
     if (dataLoaded) {
         return {
@@ -69,13 +79,13 @@ let dispatchObject = {
 };
 
 let ProjectCreationContainer = ({dataLoaded, ...props}) => {
-    useEffect(()=>{
+    /*useEffect(()=>{
         if (!dataLoaded) {
             props.getTariffsInfo();
         }
-    });
+    });*/
     if (!dataLoaded) {
-        /*props.getTariffsInfo();*/
+        props.getTariffsInfo();
         return <Preloader/>;
     }
     return <ProjectCreation {...props}/>

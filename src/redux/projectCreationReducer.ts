@@ -1,250 +1,73 @@
 import {v4 as uuidv4} from 'uuid';
 import {projectCreationAPI} from "../api/api";
+import {
+    ClientContactType,
+    CopyStateType,
+    IndexesType,
+    NewStateElementType,
+    StateLayersType,
+    StateType,
+    ThunkType
+} from "./Types/ProjectCreation/ProjectCreationReducerTypes";
+import {ServicesType, TariffsInfoType, TariffsOrderInfoType, TariffsType} from "../api/Types/ApiTypes";
+import {
+    ActionCreatorsType,
+    AddContactAC,
+    AddingTariffsDataAC,
+    AddServiceAC,
+    AddTariffAC,
+    ChangeClientDataAC,
+    ChangeDeadlineTariffAC,
+    ChangeDirectionStatusAC,
+    ChangeNameProjectAC,
+    ChangePacketPriceAC,
+    ChangePaymentInFullAC,
+    ChangePaymentPackageAC,
+    ChangeServiceNameAC,
+    ChangeServicePriceAC,
+    ChangeTariffNameAC,
+    ChangeTariffStatusAC,
+    DeleteContactAC,
+    DeleteServiceAC,
+    DeleteTariffsDataAC,
+    IdNumbersType
+} from "./Types/ProjectCreation/ActionCreators";
 
-const CHANGE_DIRECTION_PROPERTY_PR_CREATION = "CHANGE_DIRECTION_PROPERTY_PR_CREATION";
-const CHANGE_TARIFF_PROPERTY_PR_CREATION = "CHANGE_TARIFF_NAME_PR_CREATION";
-const CHANGE_SERVICE_PROPERTY_PR_CREATION = "CHANGE_SERVICE_PROPERTY_PR_CREATION";
-const ADD_NEW_TARIFF_PR_CREATION = "ADD_NEW_TARIFF_PR_CREATION";
-const ADD_NEW_SERVICE_PR_CREATION = "ADD_NEW_SERVICE_PR_CREATION";
-const DELETE_SERVICE_PR_CREATION = "DELETE_SERVICE_PR_CREATION";
-const CHANGE_NAME_PROJECT_PR_CREATION = "CHANGE_NAME_PROJECT_PR_CREATION";
-const CHANGE_CLIENT_DATA_PR_CREATION = "CHANGE_CLIENT_DATA_PR_CREATION";
-const ADD_NEW_CONTACT_PR_CREATION = "ADD_NEW_CONTACT_PR_CREATION";
-const DELETE_CONTACT_PR_CREATION = "DELETE_CONTACT_PR_CREATION";
-const ADDING_TARIFFS_DATA_PR_CREATION = "ADDING_TARIFFS_DATA_PR_CREATION";
-const DELETE_TARIFFS_DATA_PR_CREATION = "DELETE_TARIFFS_DATA_PR_CREATION";
+export const CHANGE_DIRECTION_PROPERTY_PR_CREATION = "CHANGE_DIRECTION_PROPERTY_PR_CREATION";
+export const CHANGE_TARIFF_PROPERTY_PR_CREATION = "CHANGE_TARIFF_NAME_PR_CREATION";
+export const CHANGE_SERVICE_PROPERTY_PR_CREATION = "CHANGE_SERVICE_PROPERTY_PR_CREATION";
+export const ADD_NEW_TARIFF_PR_CREATION = "ADD_NEW_TARIFF_PR_CREATION";
+export const ADD_NEW_SERVICE_PR_CREATION = "ADD_NEW_SERVICE_PR_CREATION";
+export const DELETE_SERVICE_PR_CREATION = "DELETE_SERVICE_PR_CREATION";
+export const CHANGE_NAME_PROJECT_PR_CREATION = "CHANGE_NAME_PROJECT_PR_CREATION";
+export const CHANGE_CLIENT_DATA_PR_CREATION = "CHANGE_CLIENT_DATA_PR_CREATION";
+export const ADD_NEW_CONTACT_PR_CREATION = "ADD_NEW_CONTACT_PR_CREATION";
+export const DELETE_CONTACT_PR_CREATION = "DELETE_CONTACT_PR_CREATION";
+export const ADDING_TARIFFS_DATA_PR_CREATION = "ADDING_TARIFFS_DATA_PR_CREATION";
+export const DELETE_TARIFFS_DATA_PR_CREATION = "DELETE_TARIFFS_DATA_PR_CREATION";
 
-/*directionsAndTariffs: [
-    {
-        nameDirection: {type: String, default: ""},
-        idDirection: {type: Number, default: -1},
-        paymentInFull: {type: Boolean, default: true},
-        directionTotalPrice: {type: Number, default: -1},
-        namesTariffs: [
-            {
-                tariffId: {type: Number, default: -1},
-                tariffName: {type: String, default: ""},
-                tariffStatus: {type: Boolean, default: false},
-                packetPrice: {type: Number, default: -1},
-                paymentPackage: {type: Boolean, default: true},
-                deadline: {type: Number, default: -1},
-                totalPrice: {type: Number, default: -1},
-                services: [
-                    {
-                        serviceName: {type: String, default: ""},
-                        serviceStatus: {type: Boolean, default: false},
-                        serviceId: {type: Number, default: -1},
-                        servicePrice: {type: Number, default: -1}
-                    }
-                ]
-            }
-        ]
-    }
-]*/
-/*[
-    {
-        nameDirection: 'Контекстная реклама',
-        idDirection: 1,
-        selected: false,
-        paymentInFull: true,
-        namesTariffs: [
-            {
-                tariffId: 1,
-                tariffName: 'Тариф Микро',
-                tariffStatus: false,
-                packetPrice: 1000,
-                paymentPackage: false,
-                deadline: 3,
-                services: [
-                    {
-                        serviceName: 'Яндекс Поиск',
-                        serviceStatus: false,
-                        serviceId: 1,
-                        servicePrice: 100
-                    }
-                ]
-            },
-            {
-                tariffId: 2,
-                tariffName: 'Тариф Старндарт',
-                tariffStatus: false,
-                packetPrice: 1000,
-                paymentPackage: true,
-                deadline: 5,
-                services: [
-                    {
-                        serviceName: 'Яндекс Поиск',
-                        serviceStatus: false,
-                        serviceId: 1,
-                        servicePrice: 100
-                    },
-                    {
-                        serviceName: 'Гугл Поиск',
-                        serviceStatus: false,
-                        serviceId: 2,
-                        servicePrice: 100
-                    }
-                ]
-            },
-            {
-                tariffId: 3,
-                tariffName: 'Тариф Максимум',
-                tariffStatus: false,
-                packetPrice: 1000,
-                paymentPackage: true,
-                deadline: 10,
-                services: [
-                    {
-                        serviceName: 'Яндекс Поиск',
-                        serviceStatus: false,
-                        serviceId: 1,
-                        servicePrice: 100
-                    },
-                    {
-                        serviceName: 'Гугл Поиск',
-                        serviceStatus: false,
-                        serviceId: 2,
-                        servicePrice: 100
-                    },
-                    {
-                        serviceName: 'Цели в Яндекс и Гугл',
-                        serviceStatus: false,
-                        serviceId: 3,
-                        servicePrice: 100
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        nameDirection: 'Реклама в соц.сетях',
-        idDirection: 2,
-        selected: false,
-        paymentInFull: true,
-        namesTariffs: [
-            {
-                tariffId: 1,
-                tariffName: 'Инстаграм',
-                tariffStatus: false,
-                packetPrice: 1000,
-                paymentPackage: true,
-                deadline: 5,
-                services: [
-                    {
-                        serviceName: 'Настройка таргет рекламы',
-                        serviceStatus: false,
-                        serviceId: 1,
-                        servicePrice: 100
-                    },
-                    {
-                        serviceName: 'Ведение 5 раб. дней',
-                        serviceStatus: false,
-                        serviceId: 2,
-                        servicePrice: 100
-                    }
-                ]
-            },
-            {
-                tariffId: 2,
-                tariffName: 'ВК',
-                tariffStatus: false,
-                packetPrice: 1000,
-                paymentPackage: true,
-                deadline: 5,
-                services: [
-                    {
-                        serviceName: 'Настройка таргет рекламы',
-                        serviceStatus: false,
-                        serviceId: 1,
-                        servicePrice: 100
-                    },
-                    {
-                        serviceName: 'Ведение 5 раб. дней',
-                        serviceStatus: false,
-                        serviceId: 2,
-                        servicePrice: 100
-                    }
-                ]
-            },
-            {
-                tariffId: 3,
-                tariffName: 'Фейсбук',
-                tariffStatus: false,
-                packetPrice: 1000,
-                paymentPackage: true,
-                deadline: 5,
-                services: [
-                    {
-                        serviceName: 'Настройка таргет рекламы',
-                        serviceStatus: false,
-                        serviceId: 1,
-                        servicePrice: 100
-                    },
-                    {
-                        serviceName: 'Ведение 5 раб. дней',
-                        serviceStatus: false,
-                        serviceId: 2,
-                        servicePrice: 100
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        nameDirection: 'Реклама Ютуб',
-        idDirection: 3,
-        selected: false,
-        paymentInFull: true,
-        namesTariffs: [
-            {
-                tariffId: 1,
-                tariffName: 'Баннерная реклама',
-                tariffStatus: false,
-                packetPrice: 1000,
-                paymentPackage: true,
-                deadline: 5,
-                services: [
-                    {
-                        serviceName: 'Настройка рекламы на Ютубе',
-                        serviceStatus: false,
-                        serviceId: 1,
-                        servicePrice: 100
-                    },
-                    {
-                        serviceName: 'Ведение 5 раб. дней',
-                        serviceStatus: false,
-                        serviceId: 2,
-                        servicePrice: 100
-                    }
-                ]
-            }
-        ]
-    }
-]*/
 
-let startState = {
-    userId: 1,
+let startState: StateType = {
+    userId: "1",
     dataLoaded: true,
     nameProject: 'Название проекта не выбрано',
     clientContacts: [
-        /*
         {
-             idClient: 1,
-             name: "Владислав",
-             email: "32334309vlad@gmail.com",
-             phoneNumber: "+375 29 381-75-00",
-         },
-         */
+            idClient: "1",
+            name: "Владислав",
+            email: "32334309vlad@gmail.com",
+            phoneNumber: "+375 29 381-75-00",
+        },
     ],
     directionsAndTariffs: [
         {
             nameDirection: 'Контекстная реклама',
-            idDirection: 1,
+            idDirection: "1",
             selected: false,
             paymentInFull: true,
             namesTariffs: [
                 {
-                    tariffId: 1,
+                    tariffId: "1",
                     tariffName: 'Тариф Микро',
                     tariffStatus: false,
                     packetPrice: 1000,
@@ -254,13 +77,13 @@ let startState = {
                         {
                             serviceName: 'Яндекс Поиск',
                             serviceStatus: false,
-                            serviceId: 1,
+                            serviceId: "1",
                             servicePrice: 100
                         }
                     ]
                 },
                 {
-                    tariffId: 2,
+                    tariffId: "2",
                     tariffName: 'Тариф Старндарт',
                     tariffStatus: false,
                     packetPrice: 1000,
@@ -270,19 +93,19 @@ let startState = {
                         {
                             serviceName: 'Яндекс Поиск',
                             serviceStatus: false,
-                            serviceId: 1,
+                            serviceId: "1",
                             servicePrice: 100
                         },
                         {
                             serviceName: 'Гугл Поиск',
                             serviceStatus: false,
-                            serviceId: 2,
+                            serviceId: "2",
                             servicePrice: 100
                         }
                     ]
                 },
                 {
-                    tariffId: 3,
+                    tariffId: "3",
                     tariffName: 'Тариф Максимум',
                     tariffStatus: false,
                     packetPrice: 1000,
@@ -292,19 +115,19 @@ let startState = {
                         {
                             serviceName: 'Яндекс Поиск',
                             serviceStatus: false,
-                            serviceId: 1,
+                            serviceId: "1",
                             servicePrice: 100
                         },
                         {
                             serviceName: 'Гугл Поиск',
                             serviceStatus: false,
-                            serviceId: 2,
+                            serviceId: "2",
                             servicePrice: 100
                         },
                         {
                             serviceName: 'Цели в Яндекс и Гугл',
                             serviceStatus: false,
-                            serviceId: 3,
+                            serviceId: "3",
                             servicePrice: 100
                         }
                     ]
@@ -313,12 +136,12 @@ let startState = {
         },
         {
             nameDirection: 'Реклама в соц.сетях',
-            idDirection: 2,
+            idDirection: "2",
             selected: false,
             paymentInFull: true,
             namesTariffs: [
                 {
-                    tariffId: 1,
+                    tariffId: "1",
                     tariffName: 'Инстаграм',
                     tariffStatus: false,
                     packetPrice: 1000,
@@ -328,19 +151,19 @@ let startState = {
                         {
                             serviceName: 'Настройка таргет рекламы',
                             serviceStatus: false,
-                            serviceId: 1,
+                            serviceId: "1",
                             servicePrice: 100
                         },
                         {
                             serviceName: 'Ведение 5 раб. дней',
                             serviceStatus: false,
-                            serviceId: 2,
+                            serviceId: "2",
                             servicePrice: 100
                         }
                     ]
                 },
                 {
-                    tariffId: 2,
+                    tariffId: "2",
                     tariffName: 'ВК',
                     tariffStatus: false,
                     packetPrice: 1000,
@@ -350,19 +173,19 @@ let startState = {
                         {
                             serviceName: 'Настройка таргет рекламы',
                             serviceStatus: false,
-                            serviceId: 1,
+                            serviceId: "1",
                             servicePrice: 100
                         },
                         {
                             serviceName: 'Ведение 5 раб. дней',
                             serviceStatus: false,
-                            serviceId: 2,
+                            serviceId: "2",
                             servicePrice: 100
                         }
                     ]
                 },
                 {
-                    tariffId: 3,
+                    tariffId: "3",
                     tariffName: 'Фейсбук',
                     tariffStatus: false,
                     packetPrice: 1000,
@@ -372,13 +195,13 @@ let startState = {
                         {
                             serviceName: 'Настройка таргет рекламы',
                             serviceStatus: false,
-                            serviceId: 1,
+                            serviceId: "1",
                             servicePrice: 100
                         },
                         {
                             serviceName: 'Ведение 5 раб. дней',
                             serviceStatus: false,
-                            serviceId: 2,
+                            serviceId: "2",
                             servicePrice: 100
                         }
                     ]
@@ -387,12 +210,12 @@ let startState = {
         },
         {
             nameDirection: 'Реклама Ютуб',
-            idDirection: 3,
+            idDirection: "3",
             selected: false,
             paymentInFull: true,
             namesTariffs: [
                 {
-                    tariffId: 1,
+                    tariffId: "1",
                     tariffName: 'Баннерная реклама',
                     tariffStatus: false,
                     packetPrice: 1000,
@@ -402,13 +225,13 @@ let startState = {
                         {
                             serviceName: 'Настройка рекламы на Ютубе',
                             serviceStatus: false,
-                            serviceId: 1,
+                            serviceId: "1",
                             servicePrice: 100
                         },
                         {
                             serviceName: 'Ведение 5 раб. дней',
                             serviceStatus: false,
-                            serviceId: 2,
+                            serviceId: "2",
                             servicePrice: 100
                         }
                     ]
@@ -418,7 +241,7 @@ let startState = {
     ]
 };
 
-const projectCreationReducer = (state = startState, action) => {
+const projectCreationReducer = (state: StateType = startState, action: ActionCreatorsType): StateType => {
     switch (action.type) {
         // Client contacts
         case CHANGE_CLIENT_DATA_PR_CREATION: {
@@ -467,13 +290,13 @@ const projectCreationReducer = (state = startState, action) => {
             }
         }
         case DELETE_TARIFFS_DATA_PR_CREATION: {
-                    return {
-                        ...state,
-                        directionsAndTariffs: null,
-                        dataLoaded: false,
-                        userId: null
-                    }
-                }
+            return {
+                ...state,
+                directionsAndTariffs: [],
+                dataLoaded: false,
+                userId: null
+            }
+        }
 
         case ADD_NEW_TARIFF_PR_CREATION: {
             let indexDirection = Indexes.getIndexDirection(state, action);
@@ -492,7 +315,7 @@ const projectCreationReducer = (state = startState, action) => {
             let newState = CopyState.copyStateServices(state, indexDirection, indexTariff);
             newState.directionsAndTariffs[indexDirection].namesTariffs[indexTariff].services = [
                 ...StateLayers.getServiceLayer(state, indexDirection, indexTariff)
-                    .filter(service => service.serviceId !== action.idService)
+                    .filter((service: ServicesType) => service.serviceId !== action.idService)
             ];
             return newState
         }
@@ -502,69 +325,73 @@ const projectCreationReducer = (state = startState, action) => {
 };
 
 let NewStateForContacts = {
-    changeClientData(state, action) {
+    changeClientData(state: StateType, action: ChangeClientDataAC) {
         let newState = CopyState.copyStateClientContacts(state);
         let indexClient = Indexes.getIndexClientContacts(state, action);
         newState.clientContacts[indexClient] = action.newClientData;
         return newState
     },
-    addNewContact(state, action) {
+    addNewContact(state: StateType, action: AddContactAC) {
         let newState = CopyState.copyStateClientContacts(state);
         StateLayers.getClientContactsLayer(newState).push(action.newElement);
         return newState
     }
 };
 
+
 // Объект создан для разгрузки кода изменения свойства на уровне направления, тарифа и услуги
-let NewStateElementForChangeProperty = {
+export let NewStateElementForChangeProperty: NewStateElementType = {
     // Отдает скопированное состояние в зависимости от выбранного ключа для изменения
-    getNewState(state, action, elementStateKey) {
+    getNewState (state, action, elementStateKey) {
+        // @ts-ignore Todo: ts-ignore
         let {newState, element} = this[elementStateKey](state, action);
         element[action.propertyName] = action.propertyValue;
         return newState
     },
     // Отдает объект Direction, который нужно изменить, и скопированный State
-    directions(state, action) {
+    directions (state, action) {
         let indexDirection = Indexes.getIndexDirection(state, action);
         let newState = CopyState.copyStateDirections(state);
         let element = StateLayers.getDirectionLayer(newState)[indexDirection];
         return {newState, element}
     },
     // Отдает объект Tariff, который нужно изменить, и скопированный State
-    tariffs(state, action) {
+    tariffs (state, action) {
         let {indexDirection, indexTariff} = Indexes.getIndexes(state, action);
         let newState = CopyState.copyStateTariffs(state, indexDirection);
-        let element = StateLayers.getTariffLayer(newState, indexDirection)[indexTariff];
+        let element = StateLayers.getTariffLayer(newState, indexDirection)[indexTariff] as any;
+        element[action.propertyName]  = action.propertyValue;
         return {newState, element}
     },
     // Отдает объект Service, который нужно изменить, и скопированный State
-    services(state, action) {
+    services (state, action) {
         let {indexDirection, indexTariff, indexService} = Indexes.getIndexes(state, action);
         let newState = CopyState.copyStateServices(state, indexDirection, indexTariff);
-        let element = StateLayers.getServiceLayer(newState, indexDirection, indexTariff)[indexService];
+        let element = StateLayers.getServiceLayer(newState, indexDirection, indexTariff)[indexService]  as any;
+        element[action.propertyName] = action.propertyValue;
         return {newState, element}
     }
 };
 
 // Инкапсулирует пути до directions, namesTariffs и services
-let StateLayers = {
-    getClientContactsLayer(currentState) {
+let StateLayers: StateLayersType = {
+    getClientContactsLayer: (currentState) => {
         return currentState.clientContacts
     },
-    getDirectionLayer(currentState) {
+    getDirectionLayer: (currentState) => {
         return currentState.directionsAndTariffs
     },
-    getTariffLayer(currentState, indexDirection) {
+    getTariffLayer: (currentState, indexDirection) => {
         return currentState.directionsAndTariffs[indexDirection].namesTariffs
     },
-    getServiceLayer(currentState, indexDirection, indexTariff) {
+    getServiceLayer: (currentState, indexDirection, indexTariff) => {
         return currentState.directionsAndTariffs[indexDirection].namesTariffs[indexTariff].services
     },
 };
 
 // Возвращает копии State на уровнях directions, tariffsNames, services, clientContacts
-let CopyState = {
-    copyStateClientContacts(state) {
+let CopyState: CopyStateType = {
+    copyStateClientContacts (state) {
         return {
             ...state,
             clientContacts: [
@@ -572,7 +399,7 @@ let CopyState = {
             ]
         }
     },
-    copyStateDirections(state) {
+    copyStateDirections (state) {
         return {
             ...state,
             directionsAndTariffs: [
@@ -580,7 +407,7 @@ let CopyState = {
             ]
         }
     },
-    copyStateTariffs(state, indexDirection) {
+    copyStateTariffs (state, indexDirection) {
         let newState = this.copyStateDirections(state);
         StateLayers.getDirectionLayer(newState)[indexDirection] = {
             ...StateLayers.getDirectionLayer(state)[indexDirection],
@@ -590,7 +417,7 @@ let CopyState = {
         };
         return newState
     },
-    copyStateServices(state, indexDirection, indexTariff) {
+    copyStateServices (state, indexDirection, indexTariff) {
         let newState = this.copyStateTariffs(state, indexDirection);
         StateLayers.getTariffLayer(newState, indexDirection)[indexTariff] = {
             ...StateLayers.getTariffLayer(state, indexDirection)[indexTariff],
@@ -603,7 +430,7 @@ let CopyState = {
 };
 
 // Отдает индексы directions, tariffsNames и services(ищет по id)
-let Indexes = {
+let Indexes: IndexesType = {
     // Удобно вызывать при использовании деструктуризации, когда нужно сразу несколько индексов
     getIndexes(state, action) {
         return {
@@ -629,20 +456,20 @@ let Indexes = {
         let indexDirection = this.getIndexDirection(state, action);
         let indexTariff = this.getIndexTariff(state, action);
         return state.directionsAndTariffs[indexDirection].namesTariffs[indexTariff].services
-            .findIndex(s => s.serviceId === action.idService);
+            .findIndex((s: ServicesType) => s.serviceId === action.idService);
     }
 };
 
 // actionCreators ////////////////////
 
 //Client Contacts
-export let changeClientData = (newClientData) => {
+export let changeClientData = (newClientData: ClientContactType): ChangeClientDataAC => {
     let {idClient} = newClientData;
     return {type: CHANGE_CLIENT_DATA_PR_CREATION, idClient, newClientData}
 };
 
-export let addContact = () => {
-    let newElement = {
+export let addContact = (): AddContactAC => {
+    let newElement/*: ClientContactType*/ = {
         idClient: uuidv4(),
         name: null,
         email: null,
@@ -651,25 +478,25 @@ export let addContact = () => {
     return {type: ADD_NEW_CONTACT_PR_CREATION, newElement}
 };
 
-export let deleteContact = (idClient) => {
+export let deleteContact = (idClient: string): DeleteContactAC => {
     return {type: DELETE_CONTACT_PR_CREATION, idClient}
 };
 
-export let changeNameProject = (idNumbers = null, propertyValue) => {
+export let changeNameProject = (idNumbers: IdNumbersType | null = null, propertyValue: string): ChangeNameProjectAC => {
     return {type: CHANGE_NAME_PROJECT_PR_CREATION, propertyValue}
 };
 
 // Direction properties
-export let changeDirectionStatus = (propertyValue, idDirection) => {
+export let changeDirectionStatus = (propertyValue: boolean, idDirection: string): ChangeDirectionStatusAC => {
     return {type: CHANGE_DIRECTION_PROPERTY_PR_CREATION, propertyName: "selected", idDirection, propertyValue}
 };
 
-export let changePaymentInFull = (idDirection, propertyValue) => {
+export let changePaymentInFull = (idDirection: string, propertyValue: boolean): ChangePaymentInFullAC => {
     return {type: CHANGE_DIRECTION_PROPERTY_PR_CREATION, propertyName: "paymentInFull", idDirection, propertyValue}
 };
 
 // Tariff properties
-export let changeTariffStatus = (propertyValue, idTariff, idDirection) => {
+export let changeTariffStatus = (propertyValue: string, idTariff: string, idDirection: string): ChangeTariffStatusAC => {
     return {
         type: CHANGE_TARIFF_PROPERTY_PR_CREATION,
         propertyName: "tariffStatus",
@@ -679,7 +506,7 @@ export let changeTariffStatus = (propertyValue, idTariff, idDirection) => {
     }
 };
 
-export let changePaymentPackage = (propertyValue, idTariff, idDirection) => {
+export let changePaymentPackage = (propertyValue: boolean, idTariff: string, idDirection: string): ChangePaymentPackageAC => {
     return {
         type: CHANGE_TARIFF_PROPERTY_PR_CREATION,
         propertyName: "paymentPackage",
@@ -689,17 +516,17 @@ export let changePaymentPackage = (propertyValue, idTariff, idDirection) => {
     }
 };
 
-export let changeTariffName = (idNumbers, propertyValue) => {
+export let changeTariffName = (idNumbers: IdNumbersType, propertyValue: string): ChangeTariffNameAC => {
     let {idDirection, idTariff} = idNumbers;
     return {type: CHANGE_TARIFF_PROPERTY_PR_CREATION, propertyName: "tariffName", idDirection, idTariff, propertyValue}
 };
 
-export let changePacketPrice = (idNumbers, propertyValue) => {
+export let changePacketPrice = (idNumbers: IdNumbersType, propertyValue: number): ChangePacketPriceAC => {
     let {idDirection, idTariff} = idNumbers;
     return {type: CHANGE_TARIFF_PROPERTY_PR_CREATION, propertyName: "packetPrice", idDirection, idTariff, propertyValue}
 };
 
-export let changeDeadlineTariff = (idNumbers, propertyValue) => {
+export let changeDeadlineTariff = (idNumbers: IdNumbersType, propertyValue: number): ChangeDeadlineTariffAC => {
     let {idDirection, idTariff} = idNumbers;
     return {
         type: CHANGE_TARIFF_PROPERTY_PR_CREATION,
@@ -711,7 +538,7 @@ export let changeDeadlineTariff = (idNumbers, propertyValue) => {
 };
 
 // Service properties
-export let changeServiceName = (idNumbers, propertyValue) => {
+export let changeServiceName = (idNumbers: IdNumbersType, propertyValue: string): ChangeServiceNameAC => {
     let {idDirection, idTariff, idService} = idNumbers;
     return {
         type: CHANGE_SERVICE_PROPERTY_PR_CREATION,
@@ -723,7 +550,7 @@ export let changeServiceName = (idNumbers, propertyValue) => {
     }
 };
 
-export let changeServicePrice = (idNumbers, propertyValue) => {
+export let changeServicePrice = (idNumbers: IdNumbersType, propertyValue: number): ChangeServicePriceAC => {
     let {idDirection, idTariff, idService} = idNumbers;
     return {
         type: CHANGE_SERVICE_PROPERTY_PR_CREATION,
@@ -736,16 +563,16 @@ export let changeServicePrice = (idNumbers, propertyValue) => {
 };
 
 // Adding new elements
-export let addingTariffsData = (data) => {
+export let addingTariffsData = (data: TariffsInfoType): AddingTariffsDataAC => {
     return {type: ADDING_TARIFFS_DATA_PR_CREATION, data}
 };
 
-export let deleteTariffsData = () => {
+export let deleteTariffsData = (): DeleteTariffsDataAC => {
     return {type: DELETE_TARIFFS_DATA_PR_CREATION}
 };
 
-export let addTariff = (idDirection) => {
-    let newElement = {
+export let addTariff = (idDirection: string): AddTariffAC => {
+    let newElement: TariffsType = {
         tariffId: uuidv4(),
         tariffName: null,
         tariffStatus: true,
@@ -757,8 +584,8 @@ export let addTariff = (idDirection) => {
     return {type: ADD_NEW_TARIFF_PR_CREATION, newElement, idDirection}
 };
 
-export let addService = (idDirection, idTariff) => {
-    let newElement = {
+export let addService = (idDirection: string, idTariff: string): AddServiceAC => {
+    let newElement: ServicesType = {
         serviceId: uuidv4(),
         serviceName: null,
         serviceStatus: true,
@@ -767,7 +594,7 @@ export let addService = (idDirection, idTariff) => {
     return {type: ADD_NEW_SERVICE_PR_CREATION, newElement, idDirection, idTariff}
 };
 
-export let deleteService = (idNumbers) => {
+export let deleteService = (idNumbers: IdNumbersType): DeleteServiceAC => {
     let {idDirection, idTariff, idService} = idNumbers;
     return {type: DELETE_SERVICE_PR_CREATION, idDirection, idTariff, idService}
 };
@@ -775,7 +602,7 @@ export let deleteService = (idNumbers) => {
 
 // thunkCreators
 
-export let editTariffsInfoThunkCreator = (directionsAndTariffs) => async (dispatch) => {
+export let editTariffsInfoThunkCreator = (directionsAndTariffs: TariffsInfoType): ThunkType => async (dispatch) => {
     let response = await projectCreationAPI.editTariffsInfo({directionsAndTariffs});
     if (response.status === 202) {
         dispatch(deleteTariffsData());
@@ -783,29 +610,26 @@ export let editTariffsInfoThunkCreator = (directionsAndTariffs) => async (dispat
     }
 };
 
-export let getTariffsInfoThunkCreator = () => async (dispatch) => {
+export let getTariffsInfoThunkCreator = (): ThunkType => async (dispatch) => {
     let response = await projectCreationAPI.getTariffsInfo();
     if (response.status === 202) {
         dispatch(addingTariffsData(response.data.tariffsInfo))
     }
 };
 
-export let saveOrderInfoThunkCreator = (orderData, nameProject, userId) => async (dispatch) => {
-    let response = await projectCreationAPI.saveOrderInfo({
-        userId,
-        nameProject,
-        directionsAndTariffs: orderData
-    });
-    if (response.status === 202) {
-        dispatch(deleteTariffsData());
-        console.log(orderData);
-        console.log(response.data.message)
-    }
-};
-
-
-
-
+export let saveOrderInfoThunkCreator = (orderData: TariffsOrderInfoType, nameProject: string, userId: string): ThunkType =>
+    async (dispatch) => {
+        let response = await projectCreationAPI.saveOrderInfo({
+            userId,
+            nameProject,
+            directionsAndTariffs: orderData
+        });
+        if (response.status === 202) {
+            dispatch(deleteTariffsData());
+            console.log(orderData);
+            console.log(response.data.message)
+        }
+    };
 // thunkCreators
 
 export default projectCreationReducer
