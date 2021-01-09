@@ -63,7 +63,7 @@ export type ChangePaymentInFullAC = {
 export type ChangeTariffStatusAC = {
     type: typeof CHANGE_TARIFF_PROPERTY_PR_CREATION,
     propertyName: "tariffStatus",
-    propertyValue: string,
+    propertyValue: boolean,
     idTariff: string,
     idDirection: string
 }

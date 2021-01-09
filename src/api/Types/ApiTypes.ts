@@ -18,7 +18,7 @@ export type TariffsType = {
 export type TariffsOrderType = {
     tariffId: string,
     tariffName: string,
-    tariffStatus: boolean,
+    tariffStatus?: boolean,
     packetPrice: number,
     paymentPackage: boolean,
     deadline: number,
@@ -27,20 +27,20 @@ export type TariffsOrderType = {
 }
 
 
-export type DirectionType = {
+export type DirectionType<T = Array<TariffsType>> = {
     nameDirection: string,
     idDirection: string,
     selected: boolean,
     paymentInFull: boolean,
-    namesTariffs: Array<TariffsType>
+    namesTariffs: T
 }
 
-export type DirectionOrderType = {
+export type DirectionOrderType<T = Array<TariffsOrderType>> = {
     nameDirection: string,
     idDirection: string,
     paymentInFull: boolean,
-    directionTotalPrice: number,
-    namesTariffs: Array<TariffsOrderType>
+    directionTotalPrice?: number,
+    namesTariffs: T
 }
 
 export type TariffsInfoType = Array<DirectionType>

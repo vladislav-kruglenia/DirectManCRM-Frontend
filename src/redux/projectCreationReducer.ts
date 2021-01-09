@@ -1,37 +1,35 @@
 import {v4 as uuidv4} from 'uuid';
 import {projectCreationAPI} from "../api/api";
 import {
-    ClientContactType,
+    addContactType,
+    addingTariffsDataType,
+    addServiceType,
+    addTariffType,
+    changeClientDataType,
+    changeDeadlineTariffType,
+    changeDirectionStatusType,
+    changeNameProjectType,
+    changePacketPriceType,
+    changePaymentInFullType,
+    changePaymentPackageType,
+    changeServiceNameType,
+    changeServicePriceType,
+    changeTariffNameType,
+    changeTariffStatusType,
     CopyStateType,
+    deleteContactType,
+    deleteServiceType,
+    deleteTariffsDataType,
+    editTariffsInfoType,
+    getTariffsInfoType,
     IndexesType,
     NewStateElementType,
+    saveOrderInfoType,
     StateLayersType,
-    StateType,
-    ThunkType
+    StateType
 } from "./Types/ProjectCreation/ProjectCreationReducerTypes";
-import {ServicesType, TariffsInfoType, TariffsOrderInfoType, TariffsType} from "../api/Types/ApiTypes";
-import {
-    ActionCreatorsType,
-    AddContactAC,
-    AddingTariffsDataAC,
-    AddServiceAC,
-    AddTariffAC,
-    ChangeClientDataAC,
-    ChangeDeadlineTariffAC,
-    ChangeDirectionStatusAC,
-    ChangeNameProjectAC,
-    ChangePacketPriceAC,
-    ChangePaymentInFullAC,
-    ChangePaymentPackageAC,
-    ChangeServiceNameAC,
-    ChangeServicePriceAC,
-    ChangeTariffNameAC,
-    ChangeTariffStatusAC,
-    DeleteContactAC,
-    DeleteServiceAC,
-    DeleteTariffsDataAC,
-    IdNumbersType
-} from "./Types/ProjectCreation/ActionCreators";
+import {ServicesType, TariffsType} from "../api/Types/ApiTypes";
+import {ActionCreatorsType, AddContactAC, ChangeClientDataAC} from "./Types/ProjectCreation/ActionCreators";
 
 export const CHANGE_DIRECTION_PROPERTY_PR_CREATION = "CHANGE_DIRECTION_PROPERTY_PR_CREATION";
 export const CHANGE_TARIFF_PROPERTY_PR_CREATION = "CHANGE_TARIFF_NAME_PR_CREATION";
@@ -463,12 +461,12 @@ let Indexes: IndexesType = {
 // actionCreators ////////////////////
 
 //Client Contacts
-export let changeClientData = (newClientData: ClientContactType): ChangeClientDataAC => {
+export let changeClientData: changeClientDataType = (newClientData) => {
     let {idClient} = newClientData;
     return {type: CHANGE_CLIENT_DATA_PR_CREATION, idClient, newClientData}
 };
 
-export let addContact = (): AddContactAC => {
+export let addContact: addContactType = () => {
     let newElement/*: ClientContactType*/ = {
         idClient: uuidv4(),
         name: null,
@@ -478,25 +476,25 @@ export let addContact = (): AddContactAC => {
     return {type: ADD_NEW_CONTACT_PR_CREATION, newElement}
 };
 
-export let deleteContact = (idClient: string): DeleteContactAC => {
+export let deleteContact: deleteContactType = (idClient) => {
     return {type: DELETE_CONTACT_PR_CREATION, idClient}
 };
 
-export let changeNameProject = (idNumbers: IdNumbersType | null = null, propertyValue: string): ChangeNameProjectAC => {
+export let changeNameProject:changeNameProjectType = (idNumbers = null, propertyValue) => {
     return {type: CHANGE_NAME_PROJECT_PR_CREATION, propertyValue}
 };
 
 // Direction properties
-export let changeDirectionStatus = (propertyValue: boolean, idDirection: string): ChangeDirectionStatusAC => {
+export let changeDirectionStatus: changeDirectionStatusType = (propertyValue, idDirection) => {
     return {type: CHANGE_DIRECTION_PROPERTY_PR_CREATION, propertyName: "selected", idDirection, propertyValue}
 };
 
-export let changePaymentInFull = (idDirection: string, propertyValue: boolean): ChangePaymentInFullAC => {
+export let changePaymentInFull: changePaymentInFullType = (idDirection, propertyValue) => {
     return {type: CHANGE_DIRECTION_PROPERTY_PR_CREATION, propertyName: "paymentInFull", idDirection, propertyValue}
 };
 
 // Tariff properties
-export let changeTariffStatus = (propertyValue: string, idTariff: string, idDirection: string): ChangeTariffStatusAC => {
+export let changeTariffStatus: changeTariffStatusType = (propertyValue, idTariff, idDirection) => {
     return {
         type: CHANGE_TARIFF_PROPERTY_PR_CREATION,
         propertyName: "tariffStatus",
@@ -506,7 +504,7 @@ export let changeTariffStatus = (propertyValue: string, idTariff: string, idDire
     }
 };
 
-export let changePaymentPackage = (propertyValue: boolean, idTariff: string, idDirection: string): ChangePaymentPackageAC => {
+export let changePaymentPackage: changePaymentPackageType = (propertyValue, idTariff, idDirection) => {
     return {
         type: CHANGE_TARIFF_PROPERTY_PR_CREATION,
         propertyName: "paymentPackage",
@@ -516,17 +514,17 @@ export let changePaymentPackage = (propertyValue: boolean, idTariff: string, idD
     }
 };
 
-export let changeTariffName = (idNumbers: IdNumbersType, propertyValue: string): ChangeTariffNameAC => {
+export let changeTariffName: changeTariffNameType = (idNumbers, propertyValue) => {
     let {idDirection, idTariff} = idNumbers;
     return {type: CHANGE_TARIFF_PROPERTY_PR_CREATION, propertyName: "tariffName", idDirection, idTariff, propertyValue}
 };
 
-export let changePacketPrice = (idNumbers: IdNumbersType, propertyValue: number): ChangePacketPriceAC => {
+export let changePacketPrice: changePacketPriceType = (idNumbers, propertyValue) => {
     let {idDirection, idTariff} = idNumbers;
     return {type: CHANGE_TARIFF_PROPERTY_PR_CREATION, propertyName: "packetPrice", idDirection, idTariff, propertyValue}
 };
 
-export let changeDeadlineTariff = (idNumbers: IdNumbersType, propertyValue: number): ChangeDeadlineTariffAC => {
+export let changeDeadlineTariff: changeDeadlineTariffType = (idNumbers, propertyValue) => {
     let {idDirection, idTariff} = idNumbers;
     return {
         type: CHANGE_TARIFF_PROPERTY_PR_CREATION,
@@ -538,7 +536,7 @@ export let changeDeadlineTariff = (idNumbers: IdNumbersType, propertyValue: numb
 };
 
 // Service properties
-export let changeServiceName = (idNumbers: IdNumbersType, propertyValue: string): ChangeServiceNameAC => {
+export let changeServiceName: changeServiceNameType = (idNumbers, propertyValue) => {
     let {idDirection, idTariff, idService} = idNumbers;
     return {
         type: CHANGE_SERVICE_PROPERTY_PR_CREATION,
@@ -550,7 +548,7 @@ export let changeServiceName = (idNumbers: IdNumbersType, propertyValue: string)
     }
 };
 
-export let changeServicePrice = (idNumbers: IdNumbersType, propertyValue: number): ChangeServicePriceAC => {
+export let changeServicePrice: changeServicePriceType = (idNumbers, propertyValue) => {
     let {idDirection, idTariff, idService} = idNumbers;
     return {
         type: CHANGE_SERVICE_PROPERTY_PR_CREATION,
@@ -563,15 +561,15 @@ export let changeServicePrice = (idNumbers: IdNumbersType, propertyValue: number
 };
 
 // Adding new elements
-export let addingTariffsData = (data: TariffsInfoType): AddingTariffsDataAC => {
+export let addingTariffsData: addingTariffsDataType = (data) => {
     return {type: ADDING_TARIFFS_DATA_PR_CREATION, data}
 };
 
-export let deleteTariffsData = (): DeleteTariffsDataAC => {
+export let deleteTariffsData: deleteTariffsDataType = () => {
     return {type: DELETE_TARIFFS_DATA_PR_CREATION}
 };
 
-export let addTariff = (idDirection: string): AddTariffAC => {
+export let addTariff: addTariffType = (idDirection) => {
     let newElement: TariffsType = {
         tariffId: uuidv4(),
         tariffName: null,
@@ -584,7 +582,7 @@ export let addTariff = (idDirection: string): AddTariffAC => {
     return {type: ADD_NEW_TARIFF_PR_CREATION, newElement, idDirection}
 };
 
-export let addService = (idDirection: string, idTariff: string): AddServiceAC => {
+export let addService: addServiceType = (idDirection, idTariff) => {
     let newElement: ServicesType = {
         serviceId: uuidv4(),
         serviceName: null,
@@ -594,7 +592,7 @@ export let addService = (idDirection: string, idTariff: string): AddServiceAC =>
     return {type: ADD_NEW_SERVICE_PR_CREATION, newElement, idDirection, idTariff}
 };
 
-export let deleteService = (idNumbers: IdNumbersType): DeleteServiceAC => {
+export let deleteService: deleteServiceType = (idNumbers) => {
     let {idDirection, idTariff, idService} = idNumbers;
     return {type: DELETE_SERVICE_PR_CREATION, idDirection, idTariff, idService}
 };
@@ -602,22 +600,27 @@ export let deleteService = (idNumbers: IdNumbersType): DeleteServiceAC => {
 
 // thunkCreators
 
-export let editTariffsInfoThunkCreator = (directionsAndTariffs: TariffsInfoType): ThunkType => async (dispatch) => {
-    let response = await projectCreationAPI.editTariffsInfo({directionsAndTariffs});
-    if (response.status === 202) {
-        dispatch(deleteTariffsData());
-        console.log(response.data.message);
+export let editTariffsInfoThunkCreator: editTariffsInfoType = (directionsAndTariffs) => async (dispatch) => {
+    if (directionsAndTariffs !== null){
+        let response = await projectCreationAPI.editTariffsInfo({directionsAndTariffs});
+        if (response.status === 202) {
+            dispatch(deleteTariffsData());
+            console.log(response.data.message);
+        }
+    } else {
+        console.log('Error(editTariffsInfoThunkCreator): directionsAndTariffs === null!')
     }
+
 };
 
-export let getTariffsInfoThunkCreator = (): ThunkType => async (dispatch) => {
+export let getTariffsInfoThunkCreator: getTariffsInfoType = () => async (dispatch) => {
     let response = await projectCreationAPI.getTariffsInfo();
     if (response.status === 202) {
         dispatch(addingTariffsData(response.data.tariffsInfo))
     }
 };
 
-export let saveOrderInfoThunkCreator = (orderData: TariffsOrderInfoType, nameProject: string, userId: string): ThunkType =>
+export let saveOrderInfoThunkCreator: saveOrderInfoType = (orderData, nameProject, userId) =>
     async (dispatch) => {
         let response = await projectCreationAPI.saveOrderInfo({
             userId,
