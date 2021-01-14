@@ -1,0 +1,97 @@
+.TariffNameContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+  height: 50px;
+  /*border: 1px solid violet;*/
+
+  .DisplayTariffNameContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 70%;
+    height: 100%;
+
+    .DisplayTariffName {
+      cursor: pointer;
+      /*border: 1px solid blueviolet;*/
+    }
+  }
+
+  .DeleteTariffContainer {
+    cursor: pointer;
+    width: 30%;
+    /*border: 1px solid aqua;*/
+    .DeleteTariff {
+      display: none;
+    }
+  }
+}
+
+.TariffNameContainer:hover .DeleteTariff {
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+
+.DisplayTariffProperties {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding: 10px 0;
+  /*border: 1px solid black;*/
+
+  .TariffProperty {
+    display: flex;
+    flex: 1 2 0;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 60px;
+    /*border: 1px solid red;*/
+
+    .description {
+      display: flex;
+      align-items: center;
+      font-style: italic;
+      /*!*border: 1px solid orange;*!*/
+    }
+
+    %TariffPropertyValue{
+      display: flex;
+      justify-content: center;
+      min-width: 50%;
+    }
+
+    .value {
+      @extend %TariffPropertyValue;
+      margin: 10px 0 0 0;
+      /*border: 1px solid blueviolet;*/
+
+      .valueChildren{
+        @extend %TariffPropertyValue;
+        margin: 0;
+        width: 100%
+      }
+      .InputNumber {
+        width: 100%;
+        margin: 0 0 3px 0;
+      }
+      /*& div {
+        width: 100%;
+        margin: 0 0 3px 0;
+      }*/
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+

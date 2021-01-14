@@ -7,6 +7,12 @@ import {
     changeTariffStatusType
 } from "../../../../../../redux/Types/ProjectCreation/ProjectCreationReducerTypes";
 
+export enum DisplayNumberEnum {
+    number = "number",
+    price = "price",
+    day = "day"
+}
+
 export type IdNumbersType = {
     idDirection: string,
     idTariff: string
@@ -14,14 +20,30 @@ export type IdNumbersType = {
 
 export type DisplayTariffNamePropsType = {
     tariffName: string,
+    tariffId: string,
+    idDirection: string
+    idNumbers: IdNumbersType,
     changeTariffName: changeTariffNameType,
-    idNumbers: IdNumbersType
+    changeTariffStatus: changeTariffStatusType,
 }
 
 export type DeleteTariffPropsType = {
-    changeTariffStatus: changeTariffStatusType,
     tariffId: string,
     idDirection: string
+    changeTariffStatus: changeTariffStatusType,
+    runEditModeStatus: (editModeStatus: boolean) => void
+}
+
+export type DisplayTariffPropertiesPropsType = {
+    paymentPackage: boolean,
+    tariffId: string,
+    idDirection: string
+    totalPriceTariff: number,
+    deadlineTariff: number,
+    idNumbers: IdNumbersType,
+    changePacketPrice: changePacketPriceType,
+    changeDeadlineTariff: changeDeadlineTariffType,
+    changePaymentPackage: changePaymentPackageType,
 }
 
 export type PaymentMethodPropsType = {
@@ -48,4 +70,9 @@ export type AddNewServicePropsType = {
     addService: addServiceType,
     idDirection: string,
     tariffId: string
+}
+
+export type DisplayNumberButtonPropsType = {
+    type: DisplayNumberEnum,
+    number: number
 }

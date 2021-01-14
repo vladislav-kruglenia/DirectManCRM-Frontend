@@ -1,15 +1,12 @@
 import React, {FC} from 'react';
 import style from './ProjectEditing.module.css'
-import {AddTariff, PaymentType, TotalPrice} from "./SecondaryComponents/DirectionEditing/DirectionEditingComponents";
+import {AddTariff, DisplayTotalPrice} from "./SecondaryComponents/DirectionEditing/DirectionEditingComponents";
 import {
     AddNewService,
-    DeleteTariff,
-    DisplayDeadlineTariff,
     DisplayTariffName,
-    DisplayTariffPrice,
-    PaymentMethod
+    DisplayTariffProperties
 } from "./SecondaryComponents/TariffEditing/TariffEditingComponents";
-import {DeleteService, DisplayServiceName, DisplayServicePrice} from "./SecondaryComponents/ServiceEditing/ServiceEditingComponents";
+import {DisplayServiceData} from "./SecondaryComponents/ServiceEditing/ServiceEditingComponents";
 import {NavLink} from "react-router-dom";
 import {
     DirectionEditingPropsType,
@@ -18,6 +15,7 @@ import {
     TariffEditingPropsType
 } from "./Types/ProjectEditingTypes";
 import {ProjectCreationEnum} from "../../../../AppGlobalTypes/TypesComponents";
+import {Button, Divider, Typography} from "@material-ui/core";
 
 
 let ProjectEditing: FC<ProjectEditingPropsType> = (props) => {
@@ -45,13 +43,15 @@ let ProjectEditing: FC<ProjectEditingPropsType> = (props) => {
         changePaymentInFull={props.changePaymentInFull}
     />);
     return <div className={style.bodyContainer}>
-        <h2>Редактировать заказ</h2>
+        <Typography className={`${style.ChoiceDirectionTitle}`} component={'h4'} variant={"h4"}>
+            Редактировать заказ:
+        </Typography>
         {props.servicesAndNamesTariffs.length > 0
             ? directions
             : <div>Нет выбранных направлений</div>}
         <NavLink to={'/admin'}>
-            {props.typeComponent === "projectCreation"
-            && <button onClick={() => {
+            {props.typeComponent === "projectCreation" &&
+            <Button href={''} variant={"contained"} color={"primary"} onClick={() => {
                 props.saveOrderInfo(
                     props.servicesAndNamesTariffs,
                     props.nameProject,
@@ -59,13 +59,16 @@ let ProjectEditing: FC<ProjectEditingPropsType> = (props) => {
                         ? props.userId
                         : ""
                 )
-            }}>Оформить заказ</button>}
+            }}>
+                Оформить заказ
+            </Button>}
 
             {props.typeComponent === ProjectCreationEnum.editTariffsData &&
-            <button onClick={() => {
+            <Button href={''} variant={"contained"} color={"primary"} onClick={() => {
                 props.editTariffsInfo(props.directionsAndTariffs)
-            }}>Сохранить
-            </button>
+            }}>
+                Сохранить
+            </Button>
             }
         </NavLink>
 
@@ -96,25 +99,25 @@ let DirectionEditing: FC<DirectionEditingPropsType> = (props) => {
         changeDeadlineTariff={props.changeDeadlineTariff}
     />);
     return <div>
-        <h3>{props.nameDirection}</h3>
+        <Typography className={`${style.ChoiceDirectionTitle}`} component={'h5'} variant={"h5"}>
+            {props.nameDirection}
+        </Typography>
+
         {props.namesTariffs.length > 0
             ? <div>
                 {tariffs}
-                {props.typeComponent === "projectCreation" && <div>
-                    <PaymentType
-                        paymentInFull={props.paymentInFull}
-                        changePaymentInFull={props.changePaymentInFull}
-                        idDirection={props.idDirection}
-                    />
-                    <TotalPrice
-                        paymentInFull={props.paymentInFull}
-                        directionTotalPrice={props.directionTotalPrice}
-                    />
-                </div>
-                }
+                <AddTariff addTariff={props.addTariff} idDirection={props.idDirection}/>
+                <DisplayTotalPrice
+                    paymentInFull={props.paymentInFull}
+                    changePaymentInFull={props.changePaymentInFull}
+                    idDirection={props.idDirection}
+                    directionTotalPrice={props.directionTotalPrice}
+                />
             </div>
-            : <div>Нет выбранных тарифов</div>}
-        <AddTariff addTariff={props.addTariff} idDirection={props.idDirection}/>
+            : <div>
+                Нет выбранных тарифов
+                <AddTariff addTariff={props.addTariff} idDirection={props.idDirection}/>
+            </div>}
     </div>
 };
 
@@ -142,31 +145,15 @@ let TariffEditing: FC<TariffEditingPropsType> = (props) => {
             tariffName={props.tariffName}
             changeTariffName={props.changeTariffName}
             idNumbers={idNumbers}
-        />
-        <DeleteTariff
             changeTariffStatus={props.changeTariffStatus}
             tariffId={props.tariffId}
             idDirection={props.idDirection}
         />
-        <h5>
-            <PaymentMethod
-                changePaymentPackage={props.changePaymentPackage}
-                paymentPackage={props.paymentPackage}
-                tariffId={props.tariffId}
-                idDirection={props.idDirection}
-            />
-            <DisplayTariffPrice
-                paymentPackage={props.paymentPackage}
-                totalPriceTariff={props.totalPriceTariff}
-                changePacketPrice={props.changePacketPrice}
-                idNumbers={idNumbers}
-            />
-            <DisplayDeadlineTariff
-                deadlineTariff={props.deadlineTariff}
-                changeDeadlineTariff={props.changeDeadlineTariff}
-                idNumbers={idNumbers}
-            />
-        </h5>
+
+
+        <Divider component={'div'}/>
+
+
         {props.services.length > 0
             ? services
             : <div>Нет услуг</div>}
@@ -174,6 +161,17 @@ let TariffEditing: FC<TariffEditingPropsType> = (props) => {
             addService={props.addService}
             idDirection={props.idDirection}
             tariffId={props.tariffId}
+        />
+        <DisplayTariffProperties
+            changePaymentPackage={props.changePaymentPackage}
+            paymentPackage={props.paymentPackage}
+            tariffId={props.tariffId}
+            idDirection={props.idDirection}
+            totalPriceTariff={props.totalPriceTariff}
+            changePacketPrice={props.changePacketPrice}
+            deadlineTariff={props.deadlineTariff}
+            changeDeadlineTariff={props.changeDeadlineTariff}
+            idNumbers={idNumbers}
         />
     </div>
 };
@@ -185,22 +183,14 @@ let ServiceEditing: FC<ServiceEditingPropsType> = (props) => {
         idService: props.serviceId
     };
     return <div>
-        <DisplayServiceName
+        <DisplayServiceData
             serviceName={props.serviceName}
             changeServiceName={props.changeServiceName}
+            servicePrice={props.servicePrice}
+            changeServicePrice={props.changeServicePrice}
+            deleteService={props.deleteService}
             idNumbers={idNumbers}
         />
-        <div>
-            <DisplayServicePrice
-                servicePrice={props.servicePrice}
-                changeServicePrice={props.changeServicePrice}
-                idNumbers={idNumbers}
-            />
-            <DeleteService
-                deleteService={props.deleteService}
-                idNumbers={idNumbers}
-            />
-        </div>
     </div>
 };
 

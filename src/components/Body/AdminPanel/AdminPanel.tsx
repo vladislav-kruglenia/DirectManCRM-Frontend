@@ -1,9 +1,10 @@
 import React from 'react';
-import style from './AdminPanel.module.css'
+import {useAdminPanelStyles} from "./Styles/useAdminPanelStyles";
 
 
 let AdminPanel = () => {
-    return <div className={style.bodyContainer}>
+    const classes = useAdminPanelStyles();
+    return <div className={classes.AdminContainer}>
         AdminPanel
     </div>
 };

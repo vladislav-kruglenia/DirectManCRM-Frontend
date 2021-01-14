@@ -1,5 +1,6 @@
-import style from "../ProjectEditing.module.css";
-import React, {FC, useState} from "react";
+import style from "./Styles/InputEditMode.module.scss";
+import tariffEditingStyle from "./../SecondaryComponents/TariffEditing/TariffEditing.module.scss";
+import React, {ChangeEvent, FC, useState} from "react";
 import {DisplayingDifferentData} from "./DisplayingDifferentData";
 import EditingContacts from "../ClientContacts/ClientContactsForm";
 import {
@@ -12,9 +13,17 @@ import {
     InputTextPropsType,
     ValueDisplayPropsType
 } from "./Types/InputEditModeTypes";
+import {Button, TextField} from "@material-ui/core";
+
+
 
 let ValueDisplay: FC<ValueDisplayPropsType> = (props) => {
-    let [editMode, setEditMode] = useState(props.editModeStatus || false);
+
+    let [editModeHook, setEditModeHook] = useState(props.editModeStatus);
+    let [editMode, setEditMode] = !props.setEditModeInProps
+        ? [editModeHook, setEditModeHook]
+        : [props.editModeStatus, props.setEditModeInProps];
+
     return <>
         {!editMode
             ? <div onDoubleClick={() => setEditMode(true)}>
@@ -22,7 +31,7 @@ let ValueDisplay: FC<ValueDisplayPropsType> = (props) => {
                     value={props.valueGlobal}
                     displayComponent={props.displayComponent}
                     displayType={props.displayType}/></div>
-    // @ts-ignore //TODO: Type 'FormTypeEnum' is not assignable to type 'FormTypeEnum.grandForm'. Нигде нет FormTypeEnum без свойства
+            // @ts-ignore //TODO: Type 'FormTypeEnum' is not assignable to type 'FormTypeEnum.grandForm'. Нигде нет FormTypeEnum без свойства
             : <EditModeValue
                 type={props.type}
                 valueGlobal={props.valueGlobal}
@@ -39,7 +48,7 @@ let ValueDisplay: FC<ValueDisplayPropsType> = (props) => {
 
 let EditModeValue: FC<EditModeValuePropsType> = (props) => {
     let [value, changeValueHook] = useState(props.valueGlobal as string | number);
-    return <div onKeyDown={(event) =>{
+    return <div onKeyDown={(event) => {
         if (event.key === "Escape") {
             changeValueHook(props.valueGlobal as string | number);
             // changeValueHook(props.numberGlobal);
@@ -90,6 +99,7 @@ let InputForm: FC<InputFormType> = (props) => {
     return <div onKeyPress={(event) => {
         if (event.key === "Enter") saveData();
     }}>
+
         {props.type === FormTypeEnum.number && <InputNumber
             value={props.value}
             changeValueHook={(value: number) => {
@@ -100,15 +110,35 @@ let InputForm: FC<InputFormType> = (props) => {
             changeValueHook={(value: string) => {
                 props.changeValueHook(value)
             }}/>}
-        <button onClick={() => {
+
+        <Button href={''} variant={"outlined"} size={"small"} onClick={() => {
             saveData()
         }}>Сохранить
-        </button>
+        </Button>
     </div>
 };
 
 let InputNumber: FC<InputNumberPropsType> = (props) => {
-    return <input
+    let [error, changeError] = useState(false);
+    return <div className={tariffEditingStyle.InputNumber}>
+        <TextField className={style.InputNumber} id="outlined-basic" label="Outlined" variant="outlined"
+                   onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                       let value = parseInt(e.currentTarget.value);
+                       if (value > -1) {
+                           changeError(false);
+                           props.changeValueHook(value)
+                       } else {
+                           changeError(true)
+                       }
+                   }}
+                   type="number"
+                   value={props.value}
+                   autoFocus={true}
+                   error={error}
+        />
+    </div>
+
+    /*return <input
         onChange={(e) => {
             props.changeValueHook(parseInt(e.currentTarget.value))
         }}
@@ -117,7 +147,7 @@ let InputNumber: FC<InputNumberPropsType> = (props) => {
         max={1000000}
         value={props.value}
         autoFocus={true}
-    />
+    />*/
 };
 
 let InputText: FC<InputTextPropsType> = (props) => {

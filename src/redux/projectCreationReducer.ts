@@ -61,13 +61,13 @@ let startState: StateType = {
         {
             nameDirection: 'Контекстная реклама',
             idDirection: "1",
-            selected: false,
+            selected: true,
             paymentInFull: true,
             namesTariffs: [
                 {
                     tariffId: "1",
                     tariffName: 'Тариф Микро',
-                    tariffStatus: false,
+                    tariffStatus: true,
                     packetPrice: 1000,
                     paymentPackage: false,
                     deadline: 3,

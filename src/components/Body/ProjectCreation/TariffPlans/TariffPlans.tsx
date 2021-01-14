@@ -2,9 +2,10 @@ import React, {FC} from 'react';
 import style from './TariffPlan.module.scss'
 import {NavLink} from "react-router-dom";
 import {TariffPlanPropsType, TariffPlansPropsType, TariffType} from "./Types/TariffPlansTypes";
+import {Button, Switch, Typography} from "@material-ui/core";
 
 
-let TariffPlans:FC<TariffPlansPropsType> = (props) => {
+let TariffPlans: FC<TariffPlansPropsType> = (props) => {
     let directionsWithTariffs = props.tariffsAndNamesDirections.map(tAndD => <TariffPlan
         key={tAndD.idDirection}
         nameDirection={tAndD.nameDirection}
@@ -16,8 +17,11 @@ let TariffPlans:FC<TariffPlansPropsType> = (props) => {
         {props.tariffsAndNamesDirections.length > 0
             ? directionsWithTariffs
             : <div>Нет выбранных направлений</div>}
+        <NavLink to={`/${props.typeURL}/choice-direction`}>
+            <Button href={''} variant="outlined" color="primary">Назад</Button>
+        </NavLink>
         <NavLink to={`/${props.typeURL}/project-editing`}>
-            <button>Далее</button>
+            <Button href={''} variant="contained" color="primary">Далее</Button>
         </NavLink>
     </div>
 };
@@ -32,13 +36,21 @@ let TariffPlan: FC<TariffPlanPropsType> = (props) => {
         changeTariffStatus={props.changeTariffStatus}
     />);
     return <>
-        <h3>{props.nameDirection}</h3>
+        <Typography className={`${style.ChoiceDirectionTitle}`} component={'div'} variant={"h5"}>
+            {props.nameDirection}
+        </Typography>
         {tariffs}
     </>
 };
 let Tariff: FC<TariffType> = (props) => {
     return <div onClick={() => props.changeTariffStatus(!props.tariffStatus, props.tariffId, props.idDirection)}>
-        {props.tariffName} - {`${props.tariffStatus}`}
+        {props.tariffName}
+        <Switch
+            checked={props.tariffStatus}
+            color="primary"
+            name="checkedB"
+            inputProps={{'aria-label': 'primary checkbox'}}
+        />
     </div>
 };
 

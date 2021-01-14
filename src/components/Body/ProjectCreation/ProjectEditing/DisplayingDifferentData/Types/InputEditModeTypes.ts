@@ -34,6 +34,7 @@ export type ChangeValueGlobalType = (idNumbers: IdNumbersType, value: number| st
     | changeClientDataType
 
 export type ValueDisplayPropsType = {
+    setEditModeInProps?: (value: boolean) => void,
     editModeStatus: boolean,
     valueGlobal: any,
     displayComponent?: any,

@@ -5,6 +5,7 @@ import {
     ContactContainerPropsType,
     ContactPropsType
 } from "./Types/ClientContactsComponentTypes";
+import style from "./Styles/ClientContacts.module.css"
 import {FormTypeEnum, GrandFormTypeEnum} from "../DisplayingDifferentData/Types/InputEditModeTypes";
 import {DisplayTypeEnum} from "../DisplayingDifferentData/Types/DisplayingDifferentDataTypes";
 
@@ -15,7 +16,7 @@ export let ClientContactsComponent: FC<ClientContactsFCPropsType> = (props) => {
         changeData={props.changeClientData}
         deleteContact={props.deleteContact}
     />);
-    return <div>
+    return <div className={style.ClientContactsComponent}>
         <h3>ClientContacts</h3>
         {props.clientContacts.length > 0
             ? Contacts

@@ -3,6 +3,13 @@ import {
     changePaymentInFullType
 } from "../../../../../../redux/Types/ProjectCreation/ProjectCreationReducerTypes";
 
+export type DisplayTotalPricePropsType ={
+    paymentInFull: boolean,
+    changePaymentInFull: changePaymentInFullType,
+    idDirection: string,
+    directionTotalPrice: number | undefined
+}
+
 export type PaymentPropsType = {
     paymentInFull: boolean,
     changePaymentInFull: changePaymentInFullType
