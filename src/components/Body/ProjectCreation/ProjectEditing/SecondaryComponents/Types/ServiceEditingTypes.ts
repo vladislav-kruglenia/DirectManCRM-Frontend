@@ -1,7 +1,8 @@
 import {
+    changeServiceInfoType,
     changeServiceNameType,
     changeServicePriceType,
-    deleteServiceType
+    deleteServiceType, ServiceDataType
 } from "../../../../../../redux/Types/ProjectCreation/ProjectCreationReducerTypes";
 
 export type IdNumbersType = {
@@ -16,23 +17,16 @@ export type DisplayServiceDataPropsType = {
     servicePrice: number,
     changeServicePrice: changeServicePriceType,
     deleteService: deleteServiceType,
+    changeServiceInfo: changeServiceInfoType
     idNumbers: IdNumbersType
 }
 
 export type DisplayServiceNamePropsType = {
     serviceName: string | null,
-    changeServiceName: changeServiceNameType,
-    idNumbers: IdNumbersType,
-    editModeStatus: boolean,
-    changeEditModeStatus: (status: boolean) => void
 }
 
 export type DisplayServicePricePropsType = {
     servicePrice: number,
-    changeServicePrice: changeServicePriceType,
-    idNumbers: IdNumbersType
-    editModeStatus: boolean,
-    changeEditModeStatus: (status: boolean) => void
 }
 
 export type DeleteServicePropsType = {
@@ -40,3 +34,16 @@ export type DeleteServicePropsType = {
     idNumbers: IdNumbersType,
     changeEditModeStatus: (status: boolean) => void
 }
+
+export type ServiceDataPropsType = {
+    serviceName: string | null
+    servicePrice: number
+}
+
+export type EditServiceFormPropsType = {
+    idNumbers: IdNumbersType
+    changeServiceInfo: changeServiceInfoType
+    serviceData: ServiceDataType
+    setEditMode: (status: boolean) => void
+}
+

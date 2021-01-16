@@ -4,7 +4,7 @@ import {
     changeDeadlineTariffType,
     changePacketPriceType,
     changePaymentInFullType,
-    changePaymentPackageType,
+    changePaymentPackageType, changeServiceInfoType,
     changeServiceNameType,
     changeServicePriceType,
     changeTariffNameType,
@@ -31,6 +31,7 @@ export type ProjectEditingPropsType = {
     changePaymentInFull: changePaymentInFullType,
     saveOrderInfo: saveOrderInfoType,
     editTariffsInfo: editTariffsInfoType,
+    changeServiceInfo: changeServiceInfoType
 
     // data
     typeComponent: ProjectCreationEnum
@@ -62,6 +63,7 @@ export type DirectionEditingPropsType = {
     changePacketPrice: changePacketPriceType,
     changeDeadlineTariff: changeDeadlineTariffType,
     changePaymentInFull: changePaymentInFullType,
+    changeServiceInfo: changeServiceInfoType
 }
 
 export type TariffEditingPropsType = {
@@ -85,6 +87,7 @@ export type TariffEditingPropsType = {
     changeServicePrice: changeServicePriceType,
     changePacketPrice: changePacketPriceType,
     changeDeadlineTariff: changeDeadlineTariffType,
+    changeServiceInfo: changeServiceInfoType
 }
 
 export type ServiceEditingPropsType = {
@@ -100,4 +103,5 @@ export type ServiceEditingPropsType = {
     deleteService: deleteServiceType,
     changeServiceName: changeServiceNameType,
     changeServicePrice: changeServicePriceType,
+    changeServiceInfo: changeServiceInfoType
 }

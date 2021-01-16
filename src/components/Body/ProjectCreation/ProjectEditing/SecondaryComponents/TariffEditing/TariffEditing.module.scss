@@ -1,30 +1,35 @@
 .TariffNameContainer {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 50%;
-  height: 50px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  min-height: 60px;
   /*border: 1px solid violet;*/
 
   .DisplayTariffNameContainer {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 70%;
-    height: 100%;
+    width: 80%;
 
     .DisplayTariffName {
+      width: 100%;
+      word-break: break-word;
       cursor: pointer;
-      /*border: 1px solid blueviolet;*/
+      /*border: 1px solid firebrick;*/
     }
   }
 
   .DeleteTariffContainer {
     cursor: pointer;
-    width: 30%;
+    width: 20%;
     /*border: 1px solid aqua;*/
     .DeleteTariff {
       display: none;
+
+      .buttonEditTariffName{
+        width: 40px;
+        height: 40px;
+        margin: 0 10px 0 0;
+      }
     }
   }
 }

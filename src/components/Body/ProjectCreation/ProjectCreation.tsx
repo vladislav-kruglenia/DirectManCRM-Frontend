@@ -8,18 +8,27 @@ import {ClientContactsComponent} from "./ProjectEditing/ClientContacts/ClientCon
 import {PropsTypes} from "./Types/ProjectCreationTypes";
 import {ChoiceDirection} from "./ChoiceDirection/ChoiceDirection";
 import {Typography} from "@material-ui/core";
+import {ProjectCreationEnum} from "../../../AppGlobalTypes/TypesComponents";
 
 
 let ProjectCreation: FC<PropsTypes> = (props) => {
     return <div className={style.ProjectCreationContainer}>
-        <Typography className={`${style.ProjectCreationTitle}`} component={'h2'} variant={"h2"}>Формирование заказа</Typography>
-        <ProjectName
-            nameProject = {props.nameProject}
-            clientContacts = {props.clientContacts}
-            changeNameProject = {props.changeNameProject}
-        />
+        {/*<Typography className={`${style.ProjectCreationTitle}`} component={'h2'} variant={"h2"}>Формирование заказа</Typography>*/}
         <div className={style.contentDataContainer}>
             <div className={style.editingDataContainer}>
+                <div className={style.editingDataTitle}>
+                    {
+                        props.typeComponent === ProjectCreationEnum.prCreation
+                            ? <ProjectName
+                                nameProject={props.nameProject}
+                                clientContacts={props.clientContacts}
+                                changeNameProject={props.changeNameProject}
+                            />
+                            : <Typography className={style.Typography} component={'h4'} variant={"h4"}>
+                                Редактировать информацию о тарифах:
+                            </Typography>
+                    }
+                </div>
                 <Switch>
                     <Route exact path={`/${props.typeComponent}`}
                            render={() => <Redirect to={`/${props.typeComponent}/choice-direction`}/>}/>
@@ -52,12 +61,13 @@ let ProjectCreation: FC<PropsTypes> = (props) => {
                         changePaymentInFull={props.changePaymentInFull}
                         saveOrderInfo={props.saveOrderInfo}
                         editTariffsInfo={props.editTariffsInfo}
+                        changeServiceInfo={props.changeServiceInfo}
 
                         // data
-                        typeComponent = {props.typeComponent}
-                        directionsAndTariffs = {props.directionsAndTariffs}
-                        nameProject = {props.nameProject}
-                        userId = {props.userId}
+                        typeComponent={props.typeComponent}
+                        directionsAndTariffs={props.directionsAndTariffs}
+                        nameProject={props.nameProject}
+                        userId={props.userId}
                         servicesAndNamesTariffs={props.servicesAndNamesTariffs}/>}/>
                 </Switch>
             </div>
@@ -65,7 +75,7 @@ let ProjectCreation: FC<PropsTypes> = (props) => {
                 changeClientData={props.changeClientData}
                 addContact={props.addContact}
                 deleteContact={props.deleteContact}
-                clientContacts = {props.clientContacts}
+                clientContacts={props.clientContacts}
             />
         </div>
 

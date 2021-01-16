@@ -10,6 +10,7 @@ import {
     changePacketPriceType,
     changePaymentInFullType,
     changePaymentPackageType,
+    changeServiceInfoType,
     changeServiceNameType,
     changeServicePriceType,
     changeTariffNameType,
@@ -85,6 +86,7 @@ export type DispatchPropsType = {
     getTariffsInfo: getTariffsInfoType,
     saveOrderInfo: saveOrderInfoType,
     editTariffsInfo: editTariffsInfoType,
+    changeServiceInfo: changeServiceInfoType
 }
 
 

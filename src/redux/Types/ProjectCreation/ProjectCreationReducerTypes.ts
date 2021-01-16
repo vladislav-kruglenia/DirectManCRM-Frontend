@@ -100,9 +100,13 @@ export type addingTariffsDataType = (data: TariffsInfoType) => AddingTariffsData
 export type deleteTariffsDataType = () => DeleteTariffsDataAC
 
 
+export type ServiceDataType = {serviceName: string | null, servicePrice: number}
+
+
 export type getTariffsInfoType = () => ThunkType
 export type saveOrderInfoType = (orderData: TariffsOrderInfoType, nameProject: string, userId: string) => ThunkType
 export type editTariffsInfoType = (directionsAndTariffs: TariffsInfoType | null) => ThunkType
+export type changeServiceInfoType = (idNumbers: IdNumbersType, serviceData: ServiceDataType) => ThunkType
 
 export type ThunkType = CommonThunkType<StateType, ActionCreatorsType>
 //export type ThunkType = ThunkAction<Promise<void>, StateType, unknown, ActionCreatorsType>

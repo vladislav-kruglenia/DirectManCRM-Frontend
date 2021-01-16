@@ -1,6 +1,12 @@
 import {
-    changeClientDataType, changeDeadlineTariffType,
-    changeNameProjectType, changePacketPriceType, changeServiceNameType, changeServicePriceType, changeTariffNameType,
+    changeClientDataType,
+    changeDeadlineTariffType,
+    changeNameProjectType,
+    changePacketPriceType,
+    changeServiceInfoType,
+    changeServiceNameType,
+    changeServicePriceType,
+    changeTariffNameType,
     ClientContactType
 } from "../../../../../../redux/Types/ProjectCreation/ProjectCreationReducerTypes";
 import {DisplayTypeEnum} from "./DisplayingDifferentDataTypes";
@@ -19,7 +25,8 @@ export enum FormTypeEnum {
 }
 
 export enum GrandFormTypeEnum {
-    contactsEditing = "contactsEditing"
+    contactsEditing = "contactsEditing",
+    serviceEditing = "serviceEditing"
 }
 
 export type IdNumbersType = {
@@ -41,6 +48,7 @@ export type ValueDisplayPropsType = {
     displayType: DisplayTypeEnum,
     type: FormTypeEnum.number | FormTypeEnum.text | FormTypeEnum.grandForm,
     grandFormType?: GrandFormTypeEnum,
+    grandFormComponent?: any,
     changeValueGlobal: ChangeValueGlobalType
         | changeClientDataType
         | changeServiceNameType
@@ -48,6 +56,7 @@ export type ValueDisplayPropsType = {
         | changeTariffNameType
         | changePacketPriceType
         | changeDeadlineTariffType
+        | changeServiceInfoType
         | changeNameProjectType,
     idNumbers: IdNumbersType,
 }
@@ -67,6 +76,7 @@ export type EditModeGrandFormPropsType = {
     type: FormTypeEnum.grandForm,
     changeValueGlobal: changeClientDataType,
     grandFormType: GrandFormTypeEnum,
+    grandFormComponent?: any
     setEditMode: (status: boolean) => void,
     idNumbers: IdNumbersType,
 }
@@ -91,9 +101,10 @@ export type InputTextPropsType = {
 }
 
 export type GrandFormPropsType = {
-    grandFormType: GrandFormTypeEnum
-    grandFormData: ClientContactType
-    changeValueGlobal: changeClientDataType
-    setEditMode: (status: boolean) => void
+    grandFormType: GrandFormTypeEnum,
+    grandFormData: ClientContactType,
+    grandFormComponent?: any
+    changeValueGlobal: changeClientDataType,
+    setEditMode: (status: boolean) => void,
 }
 

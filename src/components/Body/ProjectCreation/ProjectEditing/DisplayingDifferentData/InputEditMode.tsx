@@ -16,7 +16,6 @@ import {
 import {Button, TextField} from "@material-ui/core";
 
 
-
 let ValueDisplay: FC<ValueDisplayPropsType> = (props) => {
 
     let [editModeHook, setEditModeHook] = useState(props.editModeStatus);
@@ -38,6 +37,7 @@ let ValueDisplay: FC<ValueDisplayPropsType> = (props) => {
                 changeValueGlobal={props.changeValueGlobal}
                 idNumbers={props.idNumbers}
                 grandFormType={props.grandFormType}
+                grandFormComponent = {props.grandFormComponent}
                 setEditMode={(status: boolean) => {
                     setEditMode(status)
                 }}
@@ -73,6 +73,7 @@ let EditModeValue: FC<EditModeValuePropsType> = (props) => {
                     grandFormType={props.grandFormType}
                     grandFormData={props.valueGlobal}
                     changeValueGlobal={props.changeValueGlobal}
+                    grandFormComponent = {props.grandFormComponent}
                     setEditMode={(status: boolean) => {
                         props.setEditMode(status)
                     }}
@@ -137,28 +138,23 @@ let InputNumber: FC<InputNumberPropsType> = (props) => {
                    error={error}
         />
     </div>
-
-    /*return <input
-        onChange={(e) => {
-            props.changeValueHook(parseInt(e.currentTarget.value))
-        }}
-        type="number"
-        min={0}
-        max={1000000}
-        value={props.value}
-        autoFocus={true}
-    />*/
 };
 
 let InputText: FC<InputTextPropsType> = (props) => {
-    return <input
-        onChange={(e) => {
-            props.changeValueHook(e.currentTarget.value)
-        }}
-        type="text"
-        value={props.value}
-        autoFocus={true}
-    />
+    return <div>
+        <TextField className={style.InputText} id="outlined-basic" label="Outlined" variant="outlined"
+                   onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                       /*let {value} = e.currentTarget;
+                       if(value !== ''){
+                           changeError(false);*/
+                       props.changeValueHook(e.currentTarget.value)
+                       /*} else changeError(true)*/
+                   }}
+                   type="text"
+                   value={props.value}
+                   autoFocus={true}/>
+    </div>
+
 };
 
 let GrandForm: FC<GrandFormPropsType> = (props) => {
@@ -172,6 +168,7 @@ let GrandForm: FC<GrandFormPropsType> = (props) => {
                 props.setEditMode(status)
             }}
         />}
+        {props.grandFormType === GrandFormTypeEnum.serviceEditing && props.grandFormComponent}
     </>
 };
 

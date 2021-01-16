@@ -12,6 +12,7 @@ import {
     changePacketPriceType,
     changePaymentInFullType,
     changePaymentPackageType,
+    changeServiceInfoType,
     changeServiceNameType,
     changeServicePriceType,
     changeTariffNameType,
@@ -340,32 +341,32 @@ let NewStateForContacts = {
 // Объект создан для разгрузки кода изменения свойства на уровне направления, тарифа и услуги
 export let NewStateElementForChangeProperty: NewStateElementType = {
     // Отдает скопированное состояние в зависимости от выбранного ключа для изменения
-    getNewState (state, action, elementStateKey) {
+    getNewState(state, action, elementStateKey) {
         // @ts-ignore Todo: ts-ignore
         let {newState, element} = this[elementStateKey](state, action);
         element[action.propertyName] = action.propertyValue;
         return newState
     },
     // Отдает объект Direction, который нужно изменить, и скопированный State
-    directions (state, action) {
+    directions(state, action) {
         let indexDirection = Indexes.getIndexDirection(state, action);
         let newState = CopyState.copyStateDirections(state);
         let element = StateLayers.getDirectionLayer(newState)[indexDirection];
         return {newState, element}
     },
     // Отдает объект Tariff, который нужно изменить, и скопированный State
-    tariffs (state, action) {
+    tariffs(state, action) {
         let {indexDirection, indexTariff} = Indexes.getIndexes(state, action);
         let newState = CopyState.copyStateTariffs(state, indexDirection);
         let element = StateLayers.getTariffLayer(newState, indexDirection)[indexTariff] as any;
-        element[action.propertyName]  = action.propertyValue;
+        element[action.propertyName] = action.propertyValue;
         return {newState, element}
     },
     // Отдает объект Service, который нужно изменить, и скопированный State
-    services (state, action) {
+    services(state, action) {
         let {indexDirection, indexTariff, indexService} = Indexes.getIndexes(state, action);
         let newState = CopyState.copyStateServices(state, indexDirection, indexTariff);
-        let element = StateLayers.getServiceLayer(newState, indexDirection, indexTariff)[indexService]  as any;
+        let element = StateLayers.getServiceLayer(newState, indexDirection, indexTariff)[indexService] as any;
         element[action.propertyName] = action.propertyValue;
         return {newState, element}
     }
@@ -389,7 +390,7 @@ let StateLayers: StateLayersType = {
 
 // Возвращает копии State на уровнях directions, tariffsNames, services, clientContacts
 let CopyState: CopyStateType = {
-    copyStateClientContacts (state) {
+    copyStateClientContacts(state) {
         return {
             ...state,
             clientContacts: [
@@ -397,7 +398,7 @@ let CopyState: CopyStateType = {
             ]
         }
     },
-    copyStateDirections (state) {
+    copyStateDirections(state) {
         return {
             ...state,
             directionsAndTariffs: [
@@ -405,7 +406,7 @@ let CopyState: CopyStateType = {
             ]
         }
     },
-    copyStateTariffs (state, indexDirection) {
+    copyStateTariffs(state, indexDirection) {
         let newState = this.copyStateDirections(state);
         StateLayers.getDirectionLayer(newState)[indexDirection] = {
             ...StateLayers.getDirectionLayer(state)[indexDirection],
@@ -415,7 +416,7 @@ let CopyState: CopyStateType = {
         };
         return newState
     },
-    copyStateServices (state, indexDirection, indexTariff) {
+    copyStateServices(state, indexDirection, indexTariff) {
         let newState = this.copyStateTariffs(state, indexDirection);
         StateLayers.getTariffLayer(newState, indexDirection)[indexTariff] = {
             ...StateLayers.getTariffLayer(state, indexDirection)[indexTariff],
@@ -480,7 +481,7 @@ export let deleteContact: deleteContactType = (idClient) => {
     return {type: DELETE_CONTACT_PR_CREATION, idClient}
 };
 
-export let changeNameProject:changeNameProjectType = (idNumbers = null, propertyValue) => {
+export let changeNameProject: changeNameProjectType = (idNumbers = null, propertyValue) => {
     return {type: CHANGE_NAME_PROJECT_PR_CREATION, propertyValue}
 };
 
@@ -601,7 +602,7 @@ export let deleteService: deleteServiceType = (idNumbers) => {
 // thunkCreators
 
 export let editTariffsInfoThunkCreator: editTariffsInfoType = (directionsAndTariffs) => async (dispatch) => {
-    if (directionsAndTariffs !== null){
+    if (directionsAndTariffs !== null) {
         let response = await projectCreationAPI.editTariffsInfo({directionsAndTariffs});
         if (response.status === 202) {
             dispatch(deleteTariffsData());
@@ -633,6 +634,13 @@ export let saveOrderInfoThunkCreator: saveOrderInfoType = (orderData, nameProjec
             console.log(response.data.message)
         }
     };
+
+export let changeServiceInfo: changeServiceInfoType = (idNumbers, serviceData) => async (dispatch) => {
+    let {serviceName, servicePrice} = serviceData;
+    serviceName = serviceName === null ? '' : serviceName;
+    dispatch(changeServiceName(idNumbers, serviceName));
+    dispatch(changeServicePrice(idNumbers, servicePrice))
+};
 // thunkCreators
 
 export default projectCreationReducer

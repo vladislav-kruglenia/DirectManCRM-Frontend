@@ -21,7 +21,7 @@ import {
     changeNameProject,
     changePacketPrice,
     changePaymentInFull,
-    changePaymentPackage,
+    changePaymentPackage, changeServiceInfo,
     changeServiceName,
     changeServicePrice,
     changeTariffName,
@@ -88,6 +88,7 @@ let dispatchObject: DispatchPropsType = {
     getTariffsInfo: getTariffsInfoThunkCreator,
     saveOrderInfo: saveOrderInfoThunkCreator,
     editTariffsInfo: editTariffsInfoThunkCreator,
+    changeServiceInfo: changeServiceInfo
 };
 
 let ProjectCreationContainer: FC<ProjectCreationContainerProps> = ({...props}) => {

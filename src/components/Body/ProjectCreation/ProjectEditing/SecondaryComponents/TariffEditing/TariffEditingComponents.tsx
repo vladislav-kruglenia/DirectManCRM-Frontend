@@ -30,7 +30,7 @@ export let DisplayTariffName: FC<DisplayTariffNamePropsType> = (props) => {
     //let editModeStatus = props.tariffName === null;
     return <div className={style.TariffNameContainer}>
         <div className={style.DisplayTariffNameContainer}>
-            <Typography className={`${style.DisplayTariffName}`} component={'h6'} variant={"h6"}>
+            <Typography className={style.DisplayTariffName} component={'h6'} variant={"h6"}>
                 <ValueDisplay
                     editModeStatus={editModeStatus}
                     valueGlobal={props.tariffName}
@@ -59,15 +59,17 @@ export let DisplayTariffName: FC<DisplayTariffNamePropsType> = (props) => {
 export let DeleteTariff: FC<DeleteTariffPropsType> = (props) => {
     return <div className={style.DeleteTariffContainer}>
         <div className={style.DeleteTariff}>
-            <IconButton href={''} aria-label="delete" onClick={() => {
-                props.runEditModeStatus(true)
-            }}>
-                <EditIcon />
+            <IconButton className={style.buttonEditTariffName} size={"medium"} href={''} aria-label="delete"
+                        onClick={() => {
+                            props.runEditModeStatus(true)
+                        }}>
+                <EditIcon fontSize={"inherit"}/>
             </IconButton>
-            <IconButton about={'Убрать тариф из заказа'} href={''} aria-label="delete" onClick={() => {
-                props.changeTariffStatus(false, props.tariffId, props.idDirection)
-            }}>
-                <DeleteIcon/>
+            <IconButton className={style.buttonEditTariffName} size={"medium"} about={'Убрать тариф из заказа'} href={''} aria-label="delete"
+                        onClick={() => {
+                            props.changeTariffStatus(false, props.tariffId, props.idDirection)
+                        }}>
+                <DeleteIcon fontSize={"inherit"}/>
             </IconButton>
         </div>
     </div>
@@ -110,7 +112,6 @@ export let PaymentMethod: FC<PaymentMethodPropsType> = (props) => {
         </div>
     </div>
 };
-
 
 
 export let DisplayTariffPrice: FC<DisplayTariffPricePropsType> = (props) => {
@@ -182,7 +183,7 @@ export let DisplayNumberButton: FC<DisplayNumberButtonPropsType> = (props) => {
         <Button href={''} variant="text" color="primary">
             {props.type === DisplayNumberEnum.number && props.number}
             {props.type === DisplayNumberEnum.price && `${props.number} р.`}
-            {props.type === DisplayNumberEnum.day && `${props.number} дня`}
+            {props.type === DisplayNumberEnum.day && `${props.number} дн.`}
         </Button>
     </div>
 };

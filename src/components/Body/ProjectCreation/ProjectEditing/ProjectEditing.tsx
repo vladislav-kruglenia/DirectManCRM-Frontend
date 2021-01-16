@@ -41,11 +41,9 @@ let ProjectEditing: FC<ProjectEditingPropsType> = (props) => {
         changePacketPrice={props.changePacketPrice}
         changeDeadlineTariff={props.changeDeadlineTariff}
         changePaymentInFull={props.changePaymentInFull}
+        changeServiceInfo={props.changeServiceInfo}
     />);
     return <div className={style.bodyContainer}>
-        <Typography className={`${style.ChoiceDirectionTitle}`} component={'h4'} variant={"h4"}>
-            Редактировать заказ:
-        </Typography>
         {props.servicesAndNamesTariffs.length > 0
             ? directions
             : <div>Нет выбранных направлений</div>}
@@ -97,6 +95,7 @@ let DirectionEditing: FC<DirectionEditingPropsType> = (props) => {
         changeServicePrice={props.changeServicePrice}
         changePacketPrice={props.changePacketPrice}
         changeDeadlineTariff={props.changeDeadlineTariff}
+        changeServiceInfo={props.changeServiceInfo}
     />);
     return <div>
         <Typography className={`${style.ChoiceDirectionTitle}`} component={'h5'} variant={"h5"}>
@@ -135,6 +134,7 @@ let TariffEditing: FC<TariffEditingPropsType> = (props) => {
         deleteService={props.deleteService}
         changeServiceName={props.changeServiceName}
         changeServicePrice={props.changeServicePrice}
+        changeServiceInfo={props.changeServiceInfo}
     />);
     let idNumbers = {
         idDirection: props.idDirection,
@@ -189,6 +189,7 @@ let ServiceEditing: FC<ServiceEditingPropsType> = (props) => {
             servicePrice={props.servicePrice}
             changeServicePrice={props.changeServicePrice}
             deleteService={props.deleteService}
+            changeServiceInfo={props.changeServiceInfo}
             idNumbers={idNumbers}
         />
     </div>
