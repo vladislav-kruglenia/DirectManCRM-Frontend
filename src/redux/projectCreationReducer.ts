@@ -21,6 +21,7 @@ import {
     deleteContactType,
     deleteServiceType,
     deleteTariffsDataType,
+    deleteTariffType,
     editTariffsInfoType,
     getTariffsInfoType,
     IndexesType,
@@ -44,6 +45,7 @@ export const ADD_NEW_CONTACT_PR_CREATION = "ADD_NEW_CONTACT_PR_CREATION";
 export const DELETE_CONTACT_PR_CREATION = "DELETE_CONTACT_PR_CREATION";
 export const ADDING_TARIFFS_DATA_PR_CREATION = "ADDING_TARIFFS_DATA_PR_CREATION";
 export const DELETE_TARIFFS_DATA_PR_CREATION = "DELETE_TARIFFS_DATA_PR_CREATION";
+export const TARIFF_DELETE_PR_CREATION = "TARIFF_DELETE_PR_CREATION";
 
 
 let startState: StateType = {
@@ -318,6 +320,21 @@ const projectCreationReducer = (state: StateType = startState, action: ActionCre
             ];
             return newState
         }
+
+        case TARIFF_DELETE_PR_CREATION: {
+            let indexDirection = Indexes.getIndexDirection(state, action);
+
+            let newState = CopyState.copyStateTariffs(state, indexDirection);
+            newState.directionsAndTariffs[indexDirection].namesTariffs = [
+                ...state.directionsAndTariffs[indexDirection].namesTariffs
+                    .filter((tariff) => tariff.tariffId !== action.idTariff)
+            ];
+                    //.filter((tariff) => tariff.tariffId !== action.idTariff);
+
+            console.log(newState);
+            debugger
+            return newState
+        }
         default:
             return state
     }
@@ -517,6 +534,7 @@ export let changePaymentPackage: changePaymentPackageType = (propertyValue, idTa
 
 export let changeTariffName: changeTariffNameType = (idNumbers, propertyValue) => {
     let {idDirection, idTariff} = idNumbers;
+    propertyValue = propertyValue === '' ? 'Название не указано' : propertyValue;
     return {type: CHANGE_TARIFF_PROPERTY_PR_CREATION, propertyName: "tariffName", idDirection, idTariff, propertyValue}
 };
 
@@ -539,6 +557,7 @@ export let changeDeadlineTariff: changeDeadlineTariffType = (idNumbers, property
 // Service properties
 export let changeServiceName: changeServiceNameType = (idNumbers, propertyValue) => {
     let {idDirection, idTariff, idService} = idNumbers;
+    propertyValue = propertyValue === '' ? 'Название не указано' : propertyValue;
     return {
         type: CHANGE_SERVICE_PROPERTY_PR_CREATION,
         propertyName: "serviceName",
@@ -573,7 +592,7 @@ export let deleteTariffsData: deleteTariffsDataType = () => {
 export let addTariff: addTariffType = (idDirection) => {
     let newElement: TariffsType = {
         tariffId: uuidv4(),
-        tariffName: null,
+        tariffName: "",
         tariffStatus: true,
         packetPrice: 1500,
         paymentPackage: true,
@@ -586,7 +605,7 @@ export let addTariff: addTariffType = (idDirection) => {
 export let addService: addServiceType = (idDirection, idTariff) => {
     let newElement: ServicesType = {
         serviceId: uuidv4(),
-        serviceName: null,
+        serviceName: "",
         serviceStatus: true,
         servicePrice: 150
     };
@@ -596,6 +615,11 @@ export let addService: addServiceType = (idDirection, idTariff) => {
 export let deleteService: deleteServiceType = (idNumbers) => {
     let {idDirection, idTariff, idService} = idNumbers;
     return {type: DELETE_SERVICE_PR_CREATION, idDirection, idTariff, idService}
+};
+
+export let deleteTariff: deleteTariffType = (idNumbers) => {
+    let {idDirection, idTariff} = idNumbers;
+    return {type: TARIFF_DELETE_PR_CREATION, idDirection, idTariff}
 };
 // actionCreators ////////////////////
 

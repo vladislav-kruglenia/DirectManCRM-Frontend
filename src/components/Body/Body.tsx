@@ -3,7 +3,7 @@ import style from './Body.module.css'
 import {Redirect, Route, Switch} from "react-router-dom";
 import ProjectCreation from "./ProjectCreation/ProjectCreationСontainer";
 import AdminPanel from "./AdminPanel/AdminPanel";
-import {ProjectCreationEnum} from "../../AppGlobalTypes/TypesComponents";
+import {NavBarLinks, ProjectCreationEnum} from "../../AppGlobalTypes/TypesComponents";
 
 
 
@@ -12,9 +12,9 @@ let Body = () => {
         <Switch>
             <Route exact path='/'
                    render={() => <Redirect to={"/admin"}/>}/>
-            <Route path='/admin' render={()=><AdminPanel/>}/>
-            <Route path={`/${ProjectCreationEnum.prCreation}`} render={()=><ProjectCreation type={ProjectCreationEnum.prCreation}/>}/>
-            <Route path={`/${ProjectCreationEnum.editTariffsData}`} render={()=><ProjectCreation type={ProjectCreationEnum.editTariffsData}/>}/>
+            <Route path={NavBarLinks.admin} render={()=><AdminPanel/>}/>
+            <Route path={NavBarLinks.prCreation} render={()=><ProjectCreation type={ProjectCreationEnum.prCreation}/>}/>
+            <Route path={NavBarLinks.editTariffsData} render={()=><ProjectCreation type={ProjectCreationEnum.editTariffsData}/>}/>
         </Switch>
     </div>
 };

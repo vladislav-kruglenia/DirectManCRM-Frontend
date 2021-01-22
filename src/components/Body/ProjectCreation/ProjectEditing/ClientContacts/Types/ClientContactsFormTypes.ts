@@ -15,3 +15,12 @@ export type EditingContactsPropsType = {
 export type ContactFormOwnProps = {}
 
 export type ContactFormKeysType = ReturnKeysReduxForm<ClientContactFormType>
+
+export type EditContactsFormPropsType = {
+    idClient: string,
+    email: string | null,
+    name: string | null,
+    phoneNumber: string | null,
+    changeClientData: changeClientDataType,
+    setEditMode: (status: boolean) => void
+}

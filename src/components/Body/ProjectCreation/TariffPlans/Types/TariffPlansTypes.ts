@@ -10,6 +10,7 @@ export type TariffPlansPropsType = {
 
 export type TariffPlanPropsType = {
     key: string
+    typeURL: ProjectCreationEnum
     nameDirection: string
     idDirection: string
     namesTariffs: Array<TariffName>

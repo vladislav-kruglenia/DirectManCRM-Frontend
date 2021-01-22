@@ -1,4 +1,6 @@
 import React, {FC, useState} from "react";
+import style from "./TariffEditing.module.scss";
+import projectEditingStyle from "../../ProjectEditing.module.scss";
 import ValueDisplay from "../../DisplayingDifferentData/InputEditMode";
 import {
     AddNewServicePropsType,
@@ -13,25 +15,25 @@ import {
 } from "../Types/TariffEditingTypes";
 import {FormTypeEnum} from "../../DisplayingDifferentData/Types/InputEditModeTypes";
 import {DisplayTypeEnum} from "../../DisplayingDifferentData/Types/DisplayingDifferentDataTypes";
-import style from "./TariffEditing.module.scss";
 import {IconButton, Typography} from "@material-ui/core";
-import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import Button from "@material-ui/core/Button";
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import AccountBalanceWalletRoundedIcon from '@material-ui/icons/AccountBalanceWalletRounded';
 import AttachMoneySharpIcon from '@material-ui/icons/AttachMoneySharp';
 import UpdateSharpIcon from '@material-ui/icons/UpdateSharp';
+import ClearIcon from '@material-ui/icons/Clear';
 
 
 export let DisplayTariffName: FC<DisplayTariffNamePropsType> = (props) => {
-    let [editModeStatus, changeEditModeStatus] = useState(props.tariffName === null);
+    let [editModeStatus, changeEditModeStatus] = useState(props.tariffName === "");
 
     //let editModeStatus = props.tariffName === null;
     return <div className={style.TariffNameContainer}>
         <div className={style.DisplayTariffNameContainer}>
             <Typography className={style.DisplayTariffName} component={'h6'} variant={"h6"}>
                 <ValueDisplay
+                    inputLabel={'Название тарифа'}
                     editModeStatus={editModeStatus}
                     valueGlobal={props.tariffName}
                     changeValueGlobal={props.changeTariffName}
@@ -69,7 +71,7 @@ export let DeleteTariff: FC<DeleteTariffPropsType> = (props) => {
                         onClick={() => {
                             props.changeTariffStatus(false, props.tariffId, props.idDirection)
                         }}>
-                <DeleteIcon fontSize={"inherit"}/>
+                <ClearIcon fontSize={"inherit"}/>
             </IconButton>
         </div>
     </div>
@@ -100,7 +102,9 @@ export let DisplayTariffProperties: FC<DisplayTariffPropertiesPropsType> = (prop
 export let PaymentMethod: FC<PaymentMethodPropsType> = (props) => {
     return <div className={style.TariffProperty}>
         <div className={style.description}>
-            <AccountBalanceWalletRoundedIcon color={"action"} fontSize={"small"}/>
+            <div className={projectEditingStyle.icon}>
+                <AccountBalanceWalletRoundedIcon color={"action"} fontSize={"small"}/>
+            </div>
             <div className="">Способ оплаты:</div>
         </div>
         <div className={style.value}>
@@ -117,7 +121,9 @@ export let PaymentMethod: FC<PaymentMethodPropsType> = (props) => {
 export let DisplayTariffPrice: FC<DisplayTariffPricePropsType> = (props) => {
     return <div className={style.TariffProperty}>
         <div className={style.description}>
-            <AttachMoneySharpIcon color={"action"} fontSize={"small"}/>
+            <div className={projectEditingStyle.icon}>
+                <AttachMoneySharpIcon color={"action"} fontSize={"small"}/>
+            </div>
             <div>Цена тарифа:</div>
         </div>
         <div className={style.value}>
@@ -145,7 +151,9 @@ export let DisplayTariffPrice: FC<DisplayTariffPricePropsType> = (props) => {
 export let DisplayDeadlineTariff: FC<DisplayDeadlineTariffPropsType> = (props) => {
     return <div className={style.TariffProperty}>
         <div className={style.description}>
-            <UpdateSharpIcon color={"action"} fontSize={"small"}/>
+            <div className={projectEditingStyle.icon}>
+                <UpdateSharpIcon color={"action"} fontSize={"small"}/>
+            </div>
             <div>Количество дней на настройку:</div>
         </div>
         <div className={style.value}>
@@ -172,7 +180,9 @@ export let AddNewService: FC<AddNewServicePropsType> = (props) => {
                 onClick={() => {
                     props.addService(props.idDirection, props.tariffId)
                 }}>
-            <PlaylistAddIcon color={"action"}/>
+            <div className={projectEditingStyle.icon}>
+                <PlaylistAddIcon color={"action"}/>
+            </div>
             Добавить услугу
         </Button>
     </div>

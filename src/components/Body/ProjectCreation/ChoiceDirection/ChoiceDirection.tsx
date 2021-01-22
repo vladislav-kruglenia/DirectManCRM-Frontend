@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import style from './Styles/ChoiceDirection.module.css'
+import style from './Styles/ChoiceDirection.module.scss'
 import {NavLink} from "react-router-dom";
 import {ChoiceDirectionPropsType, DirectionPropsType} from "./Types/ChoiceDirectionTypes";
 import {Button, Switch, Typography} from "@material-ui/core";
@@ -14,11 +14,13 @@ export let ChoiceDirection: FC<ChoiceDirectionPropsType> = (props) => {
         name={d.nameDirection}
     />);
 
-    return <div className={style.bodyContainer}>
-        <Typography className={`${style.ChoiceDirectionTitle}`} component={'div'} variant={"h5"}>
+    return <div className={style.ChoiceDirection}>
+        <Typography className={style.ChoiceDirectionTitle} component={'div'} variant={"h5"}>
             Выбор направления рекламы
         </Typography>
-        {directions}
+        <div className={style.directions}>
+            {directions}
+        </div>
         <NavLink to={`/${props.typeURL}/tariff-plans`}>
             {/*<button>Далее</button>*/}
             <Button href={''} variant="contained" color="primary">Далее</Button>
@@ -28,7 +30,7 @@ export let ChoiceDirection: FC<ChoiceDirectionPropsType> = (props) => {
 
 
 let Direction: FC<DirectionPropsType> = (props) => {
-    return <div onClick={() => props.changeDirectionStatus(!props.status, props.idDirection)}>
+    return <div className={style.Direction} onClick={() => props.changeDirectionStatus(!props.status, props.idDirection)}>
         {props.name}
         <Switch
             checked={props.status}

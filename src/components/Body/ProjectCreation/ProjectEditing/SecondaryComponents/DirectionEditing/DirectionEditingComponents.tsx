@@ -1,5 +1,6 @@
 import React, {FC} from "react";
 import style from "./DirectionEditing.module.scss";
+import projectEditingStyle from "../../ProjectEditing.module.scss";
 import {
     AddTariffPropsType,
     DisplayTotalPricePropsType,
@@ -70,8 +71,13 @@ export let TotalPrice: FC<TotalPricePropsType> = (props) => {
 export let AddTariff: FC<AddTariffPropsType> = (props) => {
     return <div className={style.AddTariff}>
         <Button className={style.buttonAddTariff} href={''} variant={"text"} onClick={() => props.addTariff(props.idDirection)}>
-            <PlaylistAddIcon color={"action"}/>
-            Добавить тариф
+            <div className={style.addTariffWrapper}>
+                <div className={projectEditingStyle.icon}>
+                    <PlaylistAddIcon color={"action"}/>
+                </div>
+                <div>Создать тариф</div>
+            </div>
+
         </Button>
     </div>
 };

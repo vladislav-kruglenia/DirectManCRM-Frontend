@@ -2,12 +2,9 @@ import style from "./Styles/InputEditMode.module.scss";
 import tariffEditingStyle from "./../SecondaryComponents/TariffEditing/TariffEditing.module.scss";
 import React, {ChangeEvent, FC, useState} from "react";
 import {DisplayingDifferentData} from "./DisplayingDifferentData";
-import EditingContacts from "../ClientContacts/ClientContactsForm";
 import {
     EditModeValuePropsType,
     FormTypeEnum,
-    GrandFormPropsType,
-    GrandFormTypeEnum,
     InputFormType,
     InputNumberPropsType,
     InputTextPropsType,
@@ -23,7 +20,7 @@ let ValueDisplay: FC<ValueDisplayPropsType> = (props) => {
         ? [editModeHook, setEditModeHook]
         : [props.editModeStatus, props.setEditModeInProps];
 
-    return <>
+    return <div>
         {!editMode
             ? <div onDoubleClick={() => setEditMode(true)}>
                 <DisplayingDifferentData
@@ -32,17 +29,18 @@ let ValueDisplay: FC<ValueDisplayPropsType> = (props) => {
                     displayType={props.displayType}/></div>
             // @ts-ignore //TODO: Type 'FormTypeEnum' is not assignable to type 'FormTypeEnum.grandForm'. Нигде нет FormTypeEnum без свойства
             : <EditModeValue
+                inputLabel={props.inputLabel}
                 type={props.type}
                 valueGlobal={props.valueGlobal}
                 changeValueGlobal={props.changeValueGlobal}
-                idNumbers={props.idNumbers}
+                idNumbers={props.idNumbers || {}}
                 grandFormType={props.grandFormType}
                 grandFormComponent = {props.grandFormComponent}
                 setEditMode={(status: boolean) => {
                     setEditMode(status)
                 }}
             />}
-    </>
+    </div>
 
 };
 
@@ -61,6 +59,7 @@ let EditModeValue: FC<EditModeValuePropsType> = (props) => {
                     type={props.type}
                     value={value}
                     idNumbers={props.idNumbers}
+                    inputLabel={props.inputLabel}
                     changeValueHook={(value: string | number) => {
                         changeValueHook(value)
                     }}
@@ -69,15 +68,8 @@ let EditModeValue: FC<EditModeValuePropsType> = (props) => {
                     }}
                     changeValueGlobal={props.changeValueGlobal}
                 />
-                : <GrandForm
-                    grandFormType={props.grandFormType}
-                    grandFormData={props.valueGlobal}
-                    changeValueGlobal={props.changeValueGlobal}
-                    grandFormComponent = {props.grandFormComponent}
-                    setEditMode={(status: boolean) => {
-                        props.setEditMode(status)
-                    }}
-                />}
+                : props.grandFormComponent
+            }
         </div>
 
         <div className={style.transparentLayer}
@@ -107,6 +99,7 @@ let InputForm: FC<InputFormType> = (props) => {
                 props.changeValueHook(value)
             }}/>}
         {props.type === FormTypeEnum.text && <InputText
+            inputLabel={props.inputLabel}
             value={props.value}
             changeValueHook={(value: string) => {
                 props.changeValueHook(value)
@@ -142,13 +135,9 @@ let InputNumber: FC<InputNumberPropsType> = (props) => {
 
 let InputText: FC<InputTextPropsType> = (props) => {
     return <div>
-        <TextField className={style.InputText} id="outlined-basic" label="Outlined" variant="outlined"
+        <TextField className={style.InputText} id="outlined-basic" label={props.inputLabel} variant="outlined"
                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                       /*let {value} = e.currentTarget;
-                       if(value !== ''){
-                           changeError(false);*/
                        props.changeValueHook(e.currentTarget.value)
-                       /*} else changeError(true)*/
                    }}
                    type="text"
                    value={props.value}
@@ -156,20 +145,4 @@ let InputText: FC<InputTextPropsType> = (props) => {
     </div>
 
 };
-
-let GrandForm: FC<GrandFormPropsType> = (props) => {
-    return <>
-        {props.grandFormType === GrandFormTypeEnum.contactsEditing &&
-        <EditingContacts
-            changeValueGlobal={props.changeValueGlobal}
-            idNumbers={{idClient: props.grandFormData.idClient}}
-            contacts={props.grandFormData}
-            setEditMode={(status) => {
-                props.setEditMode(status)
-            }}
-        />}
-        {props.grandFormType === GrandFormTypeEnum.serviceEditing && props.grandFormComponent}
-    </>
-};
-
 export default ValueDisplay

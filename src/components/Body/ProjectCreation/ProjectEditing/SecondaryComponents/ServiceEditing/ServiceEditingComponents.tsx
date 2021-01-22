@@ -3,11 +3,10 @@ import style from "./ServiceEditing.module.scss"
 import {
     DeleteServicePropsType,
     DisplayServiceDataPropsType,
-    DisplayServiceNamePropsType,
-    DisplayServicePricePropsType, EditServiceFormPropsType,
+    EditServiceFormPropsType,
     ServiceDataPropsType
 } from "../Types/ServiceEditingTypes";
-import {Button, IconButton, TextField} from "@material-ui/core";
+import {Button, IconButton, TextField, Typography} from "@material-ui/core";
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import * as yup from 'yup';
@@ -24,46 +23,29 @@ export let DisplayServiceData: FC<DisplayServiceDataPropsType> = (props) => {
         servicePrice: props.servicePrice
     };
     return <div className={style.DisplayServiceDataContainer}>
-        <ValueDisplay
-            editModeStatus={editModeStatus}
-            valueGlobal={serviceData}
-            displayType={DisplayTypeEnum.component}
-            type={FormTypeEnum.grandForm}
-            changeValueGlobal={props.changeServiceInfo}
-            idNumbers={props.idNumbers}
-            grandFormType={GrandFormTypeEnum.serviceEditing}
-            setEditModeInProps={changeEditModeStatus}
-            displayComponent={<ServiceData
-                serviceName={props.serviceName}
-                servicePrice={props.servicePrice}
-            />}
-            grandFormComponent={<EditServiceForm
-                changeServiceInfo={props.changeServiceInfo}
-                idNumbers={props.idNumbers}
-                serviceData={serviceData}
-                setEditMode={(status) => {
-                    changeEditModeStatus(status)
-                }}
-            />}
-        />
-        {/*<DisplayServiceName
-            serviceName={props.serviceName}
-            changeServiceName={props.changeServiceName}
-            idNumbers={props.idNumbers}
-            editModeStatus={editModeStatus}
-            changeEditModeStatus={(status) => {
-                changeEditModeStatus(status)
-            }}
-        />
-        <DisplayServicePrice
-            servicePrice={props.servicePrice}
-            changeServicePrice={props.changeServicePrice}
-            idNumbers={props.idNumbers}
-            editModeStatus={editModeStatus}
-            changeEditModeStatus={(status) => {
-                changeEditModeStatus(status)
-            }}
-        />*/}
+        <div className={style.DisplayServiceData}>
+            <ValueDisplay
+                displayType={DisplayTypeEnum.component}
+                type={FormTypeEnum.grandForm}
+                grandFormType={GrandFormTypeEnum.UniversalComponent}
+                editModeStatus={editModeStatus}
+                setEditModeInProps={changeEditModeStatus}
+                displayComponent={<ServiceData
+                    serviceName={props.serviceName}
+                    servicePrice={props.servicePrice}
+                />}
+                grandFormComponent={<EditServiceForm
+                    changeServiceInfo={props.changeServiceInfo}
+                    idNumbers={props.idNumbers}
+                    serviceData={serviceData}
+                    setEditMode={(status) => {
+                        changeEditModeStatus(status)
+                    }}
+                />}
+            />
+        </div>
+
+
         <DeleteService
             deleteService={props.deleteService}
             idNumbers={props.idNumbers}
@@ -74,43 +56,17 @@ export let DisplayServiceData: FC<DisplayServiceDataPropsType> = (props) => {
     </div>
 };
 
-
-export let DisplayServiceName: FC<DisplayServiceNamePropsType> = (props) => {
-    return <div>
-        {props.serviceName}
-    </div>
-};
-
-export let DisplayServicePrice: FC<DisplayServicePricePropsType> = (props) => {
-    return <div>
-        {props.servicePrice} р.
-    </div>
-};
-
-export let DeleteService: FC<DeleteServicePropsType> = (props) => {
-    return <div>
-        <IconButton color={"primary"} size={"small"} href={''} onClick={() => {
-            props.changeEditModeStatus(true)
-        }}>
-            <EditIcon/>
-        </IconButton>
-        <IconButton color={"secondary"} size={"small"} href={''} onClick={() => {
-            props.deleteService(props.idNumbers)
-        }}>
-            <DeleteIcon/>
-        </IconButton>
-    </div>
-};
-
 export let ServiceData: FC<ServiceDataPropsType> = (props) => {
-    return <>
-        <DisplayServiceName
-            serviceName={props.serviceName}
-        /> -
-        <DisplayServicePrice
-            servicePrice={props.servicePrice}
-        />
-    </>
+    return <div className={style.ServiceData}>
+        <div className={style.ServiceName}>
+            <Typography component={'div'} variant={"subtitle1"}>{props.serviceName}</Typography>
+        </div>
+        <div className={style.ServicePrice}>
+            <Typography component={'div'} variant={"subtitle1"}>{props.servicePrice} Р.</Typography>
+        </div>
+
+
+    </div>
 };
 
 export let EditServiceForm: FC<EditServiceFormPropsType> = (props) => {
@@ -137,24 +93,50 @@ export let EditServiceForm: FC<EditServiceFormPropsType> = (props) => {
     });
     return <>
         <form onSubmit={Form.handleSubmit}>
-            <TextField id="serviceName" label="Название услуги" variant="outlined"
-                       value={Form.values.serviceName}
-                       onChange={Form.handleChange}
-                       error={Form.touched.serviceName && Boolean(Form.errors.serviceName)}
-                       helperText={Form.touched.serviceName && Form.errors.serviceName}
-            />
-            <TextField id="servicePrice" label="Стоимость" variant="outlined"
-                       type="number"
-                       value={Form.values.servicePrice}
-                       onChange={Form.handleChange}
-                       error={Form.touched.servicePrice && Boolean(Form.errors.servicePrice)}
-                       helperText={Form.touched.servicePrice && Form.errors.servicePrice}
-            />
-            <Button href={''} color="primary" variant="contained" type="submit">
-                Сохранить
-            </Button>
+            <div className={style.ServiceData}>
+                <TextField className={style.serviceNameInput} id="serviceName"
+                           label="Название услуги" variant="outlined" size={"small"}
+                           value={Form.values.serviceName}
+                           onChange={Form.handleChange}
+                           error={Form.touched.serviceName && Boolean(Form.errors.serviceName)}
+                           helperText={Form.touched.serviceName && Form.errors.serviceName}
+                           autoFocus={true}
+                />
+                <TextField className={style.servicePriceInput} id="servicePrice"
+                           label="Стоимость" variant="outlined" size={"small"}
+                           type="number"
+                           value={Form.values.servicePrice}
+                           onChange={Form.handleChange}
+                           error={Form.touched.servicePrice && Boolean(Form.errors.servicePrice)}
+                           helperText={Form.touched.servicePrice && Form.errors.servicePrice}
+                />
+            </div>
+            <div className={style.serviceEditButton}>
+                <Button size={"small"} href={''} color="default" variant="outlined" type="submit">
+                    Сохранить
+                </Button>
+            </div>
+
         </form>
     </>
 };
+
+
+export let DeleteService: FC<DeleteServicePropsType> = (props) => {
+    return <div className={style.DeleteService}>
+        <IconButton color={"default"} size={"small"} href={''} onClick={() => {
+            props.changeEditModeStatus(true)
+        }}>
+            <EditIcon/>
+        </IconButton>
+        <IconButton color={"default"} size={"small"} href={''} onClick={() => {
+            props.deleteService(props.idNumbers)
+        }}>
+            <DeleteIcon/>
+        </IconButton>
+    </div>
+};
+
+
 
 

@@ -1,0 +1,23 @@
+.ChoiceDirection {
+  width: 100%;
+  padding: 10px 20px;
+  /*border: 1px solid violet;*/
+
+  .ChoiceDirectionTitle {
+    padding: 10px 0;
+  }
+
+  .directions {
+    padding: 0 0 10px 10px;
+    /*border: 1px solid lawngreen;*/
+    .Direction{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      width: 40%;
+      /*border: 1px solid blue;*/
+    }
+  }
+}
+

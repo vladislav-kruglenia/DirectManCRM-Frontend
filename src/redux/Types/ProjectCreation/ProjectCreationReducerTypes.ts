@@ -20,8 +20,8 @@ import {
     ChangeTariffPropertiesACType,
     ChangeTariffStatusAC,
     DeleteContactAC,
-    DeleteServiceAC, DeleteTariffsDataAC,
-    IdNumbersType
+    DeleteServiceAC, TariffDeleteAC, DeleteTariffsDataAC,
+    IdNumbersType, IdDirectionAndTariffType
 } from "./ActionCreators";
 import {CommonThunkType} from "../CommonTypes";
 
@@ -85,6 +85,7 @@ export type changeTariffStatusType = (propertyValue: boolean, idTariff: string, 
 export type addTariffType = (idDirection: string) => AddTariffAC
 export type addServiceType = (idDirection: string, idTariff: string) => AddServiceAC
 export type deleteServiceType = (idNumbers: IdNumbersType) => DeleteServiceAC
+export type deleteTariffType = (idNumbers: IdDirectionAndTariffType) => TariffDeleteAC
 export type changeServiceNameType = (idNumbers: IdNumbersType, propertyValue: string) => ChangeServiceNameAC
 export type changeTariffNameType = (idNumbers: IdNumbersType, propertyValue: string) => ChangeTariffNameAC
 export type changePaymentPackageType = (propertyValue: boolean, idTariff: string, idDirection: string) => ChangePaymentPackageAC

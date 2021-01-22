@@ -1,6 +1,6 @@
 .ProjectCreationContainer {
     background-color: #e8eaf6;
-    border: 1px solid red;
+    /*border: 1px solid red;*/
 
 
     .contentDataContainer {
@@ -8,7 +8,7 @@
         align-items: flex-start;
         justify-content: center;
         padding: 3%;
-        border: 1px solid mediumvioletred;
+        /*border: 1px solid mediumvioletred;*/
 
         .editingDataContainer {
             margin-right: 3%;
@@ -21,6 +21,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                padding: 10px;
                 /*border: 1px solid navy;*/
 
                 .Typography{

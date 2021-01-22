@@ -1,0 +1,42 @@
+.ProjectEditing{
+  padding: 0 20px 20px 20px;
+
+  .DirectionEditing{
+
+    .directionTitle{
+      /*border: 1px solid blue;*/
+    }
+
+    .tariffs{
+      padding: 10px 10px 0 10px;
+      /*border: 1px solid darkviolet;*/
+
+      .services{
+        padding: 15px 10px 5px 10px;
+        /*border: 1px solid fuchsia;*/
+      }
+    }
+  }
+
+  .buttons{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 10px 5px 10px;
+    /*border: 1px solid black;*/
+  }
+}
+
+.icon{
+  display: flex;
+  margin: 0 5px 0 0;
+  /*border: 1px solid cadetblue;*/
+}
+
+
+
+
+
+
+
+
+

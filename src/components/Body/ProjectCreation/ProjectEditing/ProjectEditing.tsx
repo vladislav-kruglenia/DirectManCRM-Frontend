@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import style from './ProjectEditing.module.css'
+import style from './ProjectEditing.module.scss'
 import {AddTariff, DisplayTotalPrice} from "./SecondaryComponents/DirectionEditing/DirectionEditingComponents";
 import {
     AddNewService,
@@ -16,9 +16,11 @@ import {
 } from "./Types/ProjectEditingTypes";
 import {ProjectCreationEnum} from "../../../../AppGlobalTypes/TypesComponents";
 import {Button, Divider, Typography} from "@material-ui/core";
+import {NoDirections, NoTariffs} from "./Errors/ErrorsComponents";
 
 
 let ProjectEditing: FC<ProjectEditingPropsType> = (props) => {
+    let isChooseDirection = props.servicesAndNamesTariffs.length > 0;
     let directions = props.servicesAndNamesTariffs.map(d => <DirectionEditing
         // values
         key={d.idDirection}
@@ -43,33 +45,49 @@ let ProjectEditing: FC<ProjectEditingPropsType> = (props) => {
         changePaymentInFull={props.changePaymentInFull}
         changeServiceInfo={props.changeServiceInfo}
     />);
-    return <div className={style.bodyContainer}>
-        {props.servicesAndNamesTariffs.length > 0
-            ? directions
-            : <div>Нет выбранных направлений</div>}
-        <NavLink to={'/admin'}>
-            {props.typeComponent === "projectCreation" &&
-            <Button href={''} variant={"contained"} color={"primary"} onClick={() => {
-                props.saveOrderInfo(
-                    props.servicesAndNamesTariffs,
-                    props.nameProject,
-                    props.userId !== null
-                        ? props.userId
-                        : ""
-                )
-            }}>
-                Оформить заказ
-            </Button>}
+    return <div className={style.ProjectEditing}>
+        {
+            isChooseDirection
+                ? directions
+                : <NoDirections
+                    typeMainComponent={props.typeComponent}
+                />
+        }
+        <div className={style.buttons}>
+            <NavLink to={`/${props.typeComponent}/tariff-plans`}>
+                <Button href={''} variant="outlined" color="primary">Назад</Button>
+            </NavLink>
+            {
+                isChooseDirection &&
+                <NavLink to={'/admin'}>
+                    {
+                        props.typeComponent === "projectCreation" &&
+                        <Button href={''} variant={"contained"} color={"primary"} disabled={!isChooseDirection}
+                                onClick={() => {
+                                    props.saveOrderInfo(
+                                        props.servicesAndNamesTariffs,
+                                        props.nameProject,
+                                        props.userId !== null
+                                            ? props.userId
+                                            : ""
+                                    )
+                                }}>
+                            Оформить заказ
+                        </Button>
+                    }
 
-            {props.typeComponent === ProjectCreationEnum.editTariffsData &&
-            <Button href={''} variant={"contained"} color={"primary"} onClick={() => {
-                props.editTariffsInfo(props.directionsAndTariffs)
-            }}>
-                Сохранить
-            </Button>
+                    {
+                        props.typeComponent === ProjectCreationEnum.editTariffsData &&
+                        <Button href={''} variant={"contained"} color={"primary"} disabled={!isChooseDirection}
+                                onClick={() => {
+                                    props.editTariffsInfo(props.directionsAndTariffs)
+                                }}>
+                            Сохранить
+                        </Button>
+                    }
+                </NavLink>
             }
-        </NavLink>
-
+        </div>
     </div>
 };
 
@@ -97,13 +115,13 @@ let DirectionEditing: FC<DirectionEditingPropsType> = (props) => {
         changeDeadlineTariff={props.changeDeadlineTariff}
         changeServiceInfo={props.changeServiceInfo}
     />);
-    return <div>
-        <Typography className={`${style.ChoiceDirectionTitle}`} component={'h5'} variant={"h5"}>
+    return <div className={style.DirectionEditing}>
+        <Typography className={style.directionTitle} component={'h5'} variant={"h5"}>
             {props.nameDirection}
         </Typography>
 
         {props.namesTariffs.length > 0
-            ? <div>
+            ? <div className={style.tariffs}>
                 {tariffs}
                 <AddTariff addTariff={props.addTariff} idDirection={props.idDirection}/>
                 <DisplayTotalPrice
@@ -114,7 +132,7 @@ let DirectionEditing: FC<DirectionEditingPropsType> = (props) => {
                 />
             </div>
             : <div>
-                Нет выбранных тарифов
+                <NoTariffs typeMainComponent={props.typeComponent}/>
                 <AddTariff addTariff={props.addTariff} idDirection={props.idDirection}/>
             </div>}
     </div>
@@ -153,15 +171,17 @@ let TariffEditing: FC<TariffEditingPropsType> = (props) => {
 
         <Divider component={'div'}/>
 
+        <div className={style.services}>
+            {props.services.length > 0
+                ? services
+                : <Typography variant={"h6"} color={"error"}>Нет услуг</Typography>}
+            <AddNewService
+                addService={props.addService}
+                idDirection={props.idDirection}
+                tariffId={props.tariffId}
+            />
+        </div>
 
-        {props.services.length > 0
-            ? services
-            : <div>Нет услуг</div>}
-        <AddNewService
-            addService={props.addService}
-            idDirection={props.idDirection}
-            tariffId={props.tariffId}
-        />
         <DisplayTariffProperties
             changePaymentPackage={props.changePaymentPackage}
             paymentPackage={props.paymentPackage}

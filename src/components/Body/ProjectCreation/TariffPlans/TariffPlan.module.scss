@@ -1,3 +1,51 @@
-.tariffPlansContainer{
-    width: 100%;
+.TariffPlans {
+  width: 100%;
+  padding: 0 20px 10px 20px;
+  /*border: 1px solid mediumblue;*/
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 175px;
+    margin: 5px 0 0 0;
+    /*border: 1px solid red;*/
+  }
+
+  .direction {
+    padding: 15px 0 0 0;
+
+    .directionTitle {
+    }
+
+    .tariffs {
+      padding: 0 0 10px 10px;
+      /*border: 1px solid darkolivegreen;*/
+
+      .Tariff {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        cursor: pointer;
+        width: 40%;
+        /*border: 1px solid palevioletred;*/
+
+        .helpButtons{
+          display: flex;
+          height: 50px;
+          align-items: center;
+          padding: 0 0 0 10px;
+          /*border: 1px solid blue;*/
+
+          .deleteButton{
+            display: none;
+          }
+
+          &:hover .deleteButton{
+            display:flex;
+          }
+        }
+      }
+    }
+  }
 }

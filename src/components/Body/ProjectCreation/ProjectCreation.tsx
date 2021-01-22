@@ -13,7 +13,6 @@ import {ProjectCreationEnum} from "../../../AppGlobalTypes/TypesComponents";
 
 let ProjectCreation: FC<PropsTypes> = (props) => {
     return <div className={style.ProjectCreationContainer}>
-        {/*<Typography className={`${style.ProjectCreationTitle}`} component={'h2'} variant={"h2"}>Формирование заказа</Typography>*/}
         <div className={style.contentDataContainer}>
             <div className={style.editingDataContainer}>
                 <div className={style.editingDataTitle}>
@@ -71,14 +70,14 @@ let ProjectCreation: FC<PropsTypes> = (props) => {
                         servicesAndNamesTariffs={props.servicesAndNamesTariffs}/>}/>
                 </Switch>
             </div>
+            {props.typeComponent === ProjectCreationEnum.prCreation &&
             <ClientContactsComponent
                 changeClientData={props.changeClientData}
                 addContact={props.addContact}
                 deleteContact={props.deleteContact}
                 clientContacts={props.clientContacts}
-            />
+            />}
         </div>
-
     </div>
 };
 

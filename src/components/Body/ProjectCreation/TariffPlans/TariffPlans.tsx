@@ -2,27 +2,40 @@ import React, {FC} from 'react';
 import style from './TariffPlan.module.scss'
 import {NavLink} from "react-router-dom";
 import {TariffPlanPropsType, TariffPlansPropsType, TariffType} from "./Types/TariffPlansTypes";
-import {Button, Switch, Typography} from "@material-ui/core";
+import {Button, IconButton, Switch, Typography} from "@material-ui/core";
+import {NoDirections, NoTariffs} from "../ProjectEditing/Errors/ErrorsComponents";
+import {useDispatch} from "react-redux";
+import {deleteTariff} from "../../../../redux/projectCreationReducer";
+import {IdDirectionAndTariffType} from "../../../../redux/Types/ProjectCreation/ActionCreators";
+import DeleteIcon from '@material-ui/icons/Delete';
 
 
 let TariffPlans: FC<TariffPlansPropsType> = (props) => {
     let directionsWithTariffs = props.tariffsAndNamesDirections.map(tAndD => <TariffPlan
+        typeURL={props.typeURL}
         key={tAndD.idDirection}
         nameDirection={tAndD.nameDirection}
         idDirection={tAndD.idDirection}
         namesTariffs={tAndD.namesTariffs}
         changeTariffStatus={props.changeTariffStatus}
     />);
-    return <div className={style.tariffPlansContainer}>
-        {props.tariffsAndNamesDirections.length > 0
-            ? directionsWithTariffs
-            : <div>Нет выбранных направлений</div>}
-        <NavLink to={`/${props.typeURL}/choice-direction`}>
-            <Button href={''} variant="outlined" color="primary">Назад</Button>
-        </NavLink>
-        <NavLink to={`/${props.typeURL}/project-editing`}>
-            <Button href={''} variant="contained" color="primary">Далее</Button>
-        </NavLink>
+    return <div className={style.TariffPlans}>
+        {
+            props.tariffsAndNamesDirections.length > 0
+                ? directionsWithTariffs
+                : <NoDirections
+                    typeMainComponent={props.typeURL}
+                />
+        }
+        <div className={style.buttons}>
+            <NavLink to={`/${props.typeURL}/choice-direction`}>
+                <Button href={''} variant="outlined" color="primary">Назад</Button>
+            </NavLink>
+            <NavLink to={`/${props.typeURL}/project-editing`}>
+                <Button href={''} variant="contained" color="primary">Далее</Button>
+            </NavLink>
+        </div>
+
     </div>
 };
 
@@ -35,22 +48,43 @@ let TariffPlan: FC<TariffPlanPropsType> = (props) => {
         idDirection={props.idDirection}
         changeTariffStatus={props.changeTariffStatus}
     />);
-    return <>
-        <Typography className={`${style.ChoiceDirectionTitle}`} component={'div'} variant={"h5"}>
+    return <div className={style.direction}>
+        <Typography className={style.directionTitle} component={'div'} variant={"h5"}>
             {props.nameDirection}
         </Typography>
-        {tariffs}
-    </>
+        <div className={style.tariffs}>
+            {props.namesTariffs.length > 0 ? tariffs : <NoTariffs typeMainComponent={props.typeURL}/>}
+        </div>
+    </div>
 };
+
+
 let Tariff: FC<TariffType> = (props) => {
-    return <div onClick={() => props.changeTariffStatus(!props.tariffStatus, props.tariffId, props.idDirection)}>
+    let dispatch = useDispatch();
+    let deleteTariffFunc = () => {
+        let idNumbers: IdDirectionAndTariffType = {
+            idDirection: props.idDirection,
+            idTariff: props.tariffId
+        };
+        dispatch(deleteTariff(idNumbers))
+    };
+    return <div className={style.Tariff}>
         {props.tariffName}
-        <Switch
-            checked={props.tariffStatus}
-            color="primary"
-            name="checkedB"
-            inputProps={{'aria-label': 'primary checkbox'}}
-        />
+        <div className={style.helpButtons}>
+            <Switch
+                checked={props.tariffStatus}
+                color="primary"
+                name="checkedB"
+                inputProps={{'aria-label': 'primary checkbox'}}
+                onClick={() => props.changeTariffStatus(!props.tariffStatus, props.tariffId, props.idDirection)}
+            />
+            <IconButton className={style.deleteButton} size={'medium'} href={''} onClick={() => {
+                deleteTariffFunc()
+            }}>
+                <DeleteIcon fontSize={"inherit"}/>
+            </IconButton>
+        </div>
+
     </div>
 };
 

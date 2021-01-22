@@ -10,7 +10,7 @@ import {
     CHANGE_SERVICE_PROPERTY_PR_CREATION,
     CHANGE_TARIFF_PROPERTY_PR_CREATION,
     DELETE_CONTACT_PR_CREATION,
-    DELETE_SERVICE_PR_CREATION,
+    DELETE_SERVICE_PR_CREATION, TARIFF_DELETE_PR_CREATION,
     DELETE_TARIFFS_DATA_PR_CREATION
 } from "../../projectCreationReducer";
 import {ServicesType, TariffsInfoType, TariffsType} from "../../../api/Types/ApiTypes";
@@ -26,6 +26,12 @@ export type IdNumbersType = {
     idTariff: string,
     idService: string
 }
+
+export type IdDirectionAndTariffType = {
+    idDirection: string,
+    idTariff: string
+}
+
 export type ChangeClientDataAC = {
     type: typeof CHANGE_CLIENT_DATA_PR_CREATION,
     idClient: string,
@@ -137,6 +143,12 @@ export type DeleteServiceAC = {
     idService: string
 }
 
+export type TariffDeleteAC = {
+    type: typeof TARIFF_DELETE_PR_CREATION,
+    idDirection: string,
+    idTariff: string
+}
+
 export type ChangeDirectionPropertiesACType = ChangeDirectionStatusAC | ChangePaymentInFullAC
 export type ChangeServicePropertiesACType = ChangeServiceNameAC | ChangeServicePriceAC
 export type ChangeTariffPropertiesACType = ChangeTariffStatusAC
@@ -168,3 +180,4 @@ export type ActionCreatorsType = ChangeClientDataAC
     | AddTariffAC
     | AddServiceAC
     | DeleteServiceAC
+    | TariffDeleteAC

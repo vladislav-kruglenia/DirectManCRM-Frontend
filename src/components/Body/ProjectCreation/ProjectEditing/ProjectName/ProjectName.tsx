@@ -10,6 +10,7 @@ export let ProjectName: FC<PropsTypes> = ({nameProject, changeNameProject}) => {
     return <div className={style.Typography}>
         <Typography  component={'div'} variant={'h4'}>
             <ValueDisplay
+                inputLabel={'Название проекта'}
                 valueGlobal={nameProject}
                 changeValueGlobal={changeNameProject}
                 idNumbers={{}}

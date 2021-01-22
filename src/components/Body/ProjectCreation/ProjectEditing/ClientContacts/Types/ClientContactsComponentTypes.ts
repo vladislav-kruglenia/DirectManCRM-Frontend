@@ -22,3 +22,9 @@ export type ContactContainerPropsType = {
 export type ContactPropsType = {
     contacts: ClientContactType
 }
+
+export type EditAndDeletePropsType = {
+    contacts: ClientContactType,
+    deleteContact: deleteContactType,
+    setEditMode: (status: boolean) => void
+}

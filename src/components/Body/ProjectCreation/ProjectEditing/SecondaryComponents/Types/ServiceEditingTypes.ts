@@ -21,13 +21,6 @@ export type DisplayServiceDataPropsType = {
     idNumbers: IdNumbersType
 }
 
-export type DisplayServiceNamePropsType = {
-    serviceName: string | null,
-}
-
-export type DisplayServicePricePropsType = {
-    servicePrice: number,
-}
 
 export type DeleteServicePropsType = {
     deleteService: deleteServiceType,

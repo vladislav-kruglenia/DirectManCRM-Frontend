@@ -25,8 +25,7 @@ export enum FormTypeEnum {
 }
 
 export enum GrandFormTypeEnum {
-    contactsEditing = "contactsEditing",
-    serviceEditing = "serviceEditing"
+    UniversalComponent = "UniversalComponent"
 }
 
 export type IdNumbersType = {
@@ -37,19 +36,20 @@ export type IdNumbersType = {
     idService?: string
 }
 
-export type ChangeValueGlobalType = (idNumbers: IdNumbersType, value: number| string | boolean) => void
+export type ChangeValueGlobalType = (idNumbers: IdNumbersType, value: number | string | boolean) => void
     | changeClientDataType
 
 export type ValueDisplayPropsType = {
+    inputLabel?: string,
     setEditModeInProps?: (value: boolean) => void,
     editModeStatus: boolean,
-    valueGlobal: any,
+    valueGlobal?: any,
     displayComponent?: any,
     displayType: DisplayTypeEnum,
     type: FormTypeEnum.number | FormTypeEnum.text | FormTypeEnum.grandForm,
     grandFormType?: GrandFormTypeEnum,
     grandFormComponent?: any,
-    changeValueGlobal: ChangeValueGlobalType
+    changeValueGlobal?: ChangeValueGlobalType
         | changeClientDataType
         | changeServiceNameType
         | changeServicePriceType
@@ -58,12 +58,13 @@ export type ValueDisplayPropsType = {
         | changeDeadlineTariffType
         | changeServiceInfoType
         | changeNameProjectType,
-    idNumbers: IdNumbersType,
+    idNumbers?: IdNumbersType,
 }
 
 export type EditModeValuePropsType = EditModeInputPropsType | EditModeGrandFormPropsType
 
 export type EditModeInputPropsType = {
+    inputLabel: string,
     valueGlobal: string,
     type: FormTypeEnum.text | FormTypeEnum.number,
     changeValueGlobal: any,
@@ -85,6 +86,7 @@ export type InputFormType = {
     value: string | number,
     type: FormTypeEnum.text | FormTypeEnum.number,
     idNumbers: IdNumbersType,
+    inputLabel: string,
     setEditMode: (status: boolean) => void,
     changeValueHook: (value: string | number) => void,
     changeValueGlobal: ChangeValueGlobalType,
@@ -97,14 +99,7 @@ export type InputNumberPropsType = {
 
 export type InputTextPropsType = {
     value: string | number,
+    inputLabel: string,
     changeValueHook: (value: string) => void
-}
-
-export type GrandFormPropsType = {
-    grandFormType: GrandFormTypeEnum,
-    grandFormData: ClientContactType,
-    grandFormComponent?: any
-    changeValueGlobal: changeClientDataType,
-    setEditMode: (status: boolean) => void,
 }
 
