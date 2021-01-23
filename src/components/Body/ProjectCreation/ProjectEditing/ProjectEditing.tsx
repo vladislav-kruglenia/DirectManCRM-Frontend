@@ -14,7 +14,7 @@ import {
     ServiceEditingPropsType,
     TariffEditingPropsType
 } from "./Types/ProjectEditingTypes";
-import {ProjectCreationEnum} from "../../../../AppGlobalTypes/TypesComponents";
+import {ProjectCreationEnum} from "../../../../AppGlobal/AppGlobalTypes/LinksComponents";
 import {Button, Divider, Typography} from "@material-ui/core";
 import {NoDirections, NoTariffs} from "./Errors/ErrorsComponents";
 

@@ -13,7 +13,7 @@ import {
     editTariffsInfoType,
     saveOrderInfoType
 } from "../../../../../redux/Types/ProjectCreation/ProjectCreationReducerTypes";
-import {ProjectCreationEnum} from "../../../../../AppGlobalTypes/TypesComponents";
+import {ProjectCreationEnum} from "../../../../../AppGlobal/AppGlobalTypes/LinksComponents";
 import {ServicesType, TariffsInfoType, TariffsOrderInfoType, TariffsOrderType} from "../../../../../api/Types/ApiTypes";
 
 export type ProjectEditingPropsType = {

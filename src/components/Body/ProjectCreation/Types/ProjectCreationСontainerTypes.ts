@@ -1,4 +1,4 @@
-import {ProjectCreationEnum} from "../../../../AppGlobalTypes/TypesComponents";
+import {ProjectCreationEnum} from "../../../../AppGlobal/AppGlobalTypes/LinksComponents";
 import {
     addContactType,
     addServiceType,

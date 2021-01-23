@@ -12,7 +12,7 @@ import {
     MapDispatchProps,
     MapStateProps
 } from "./Types/LoginPageTypes";
-import {AppStateType} from "../../../AppGlobalTypes/AppGlobalTypes";
+import {AppStateType} from "../../../AppGlobal/AppGlobalTypes/AppGlobalTypes";
 
 let LoginForm: FC<InjectedFormProps<LoginFormData, LoginFormOwnProps> & LoginFormOwnProps> =
     ({handleSubmit}) => {

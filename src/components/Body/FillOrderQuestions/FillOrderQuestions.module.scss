@@ -1,0 +1,55 @@
+.FillOrderQuestions{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 50px 0;
+  /*border: 1px solid black;*/
+
+  .questionsContainer{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    padding: 30px 40px;
+    background-color: #ffffff;
+    /*border: 1px solid blueviolet;*/
+
+    .questions{
+      padding: 10px 10px;
+      /*border: 1px solid red;*/
+
+      .questionContainer{
+        margin: 20px 0 0 0;
+        /*border: 1px solid green;*/
+
+        %wordBreak{
+          word-break: break-word;
+        }
+
+        .question{
+          @extend %wordBreak;
+          margin: 0 0 10px 0;
+          /*border: 1px solid #3f51b5;*/
+        }
+        .response{
+          @extend %wordBreak;
+          white-space: pre-line;
+          padding: 10px 28px;
+          /*border: 1px solid olivedrab;*/
+        }
+        .editResponseContainer{
+          padding: 10px 13px;
+          /*border: 1px solid fuchsia;*/
+
+          .editResponse{
+            width: 100%;
+            height: auto;
+          }
+
+          .editButton{
+            margin: 5px 0 0 0;
+          }
+        }
+      }
+    }
+  }
+}

@@ -8,7 +8,7 @@ import {ClientContactsComponent} from "./ProjectEditing/ClientContacts/ClientCon
 import {PropsTypes} from "./Types/ProjectCreationTypes";
 import {ChoiceDirection} from "./ChoiceDirection/ChoiceDirection";
 import {Typography} from "@material-ui/core";
-import {ProjectCreationEnum} from "../../../AppGlobalTypes/TypesComponents";
+import {ProjectCreationEnum} from "../../../AppGlobal/AppGlobalTypes/LinksComponents";
 
 
 let ProjectCreation: FC<PropsTypes> = (props) => {

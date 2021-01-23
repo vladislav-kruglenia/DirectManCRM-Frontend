@@ -3,7 +3,7 @@ import {
     ClientContactType
 } from "../../../../../../redux/Types/ProjectCreation/ProjectCreationReducerTypes";
 import {ClientContactFormType} from "../../../../../../redux/Types/ProjectCreation/ActionCreators";
-import {ReturnKeysReduxForm} from "../../../../../../AppGlobalTypes/AppGlobalTypes";
+import {ReturnKeysReduxForm} from "../../../../../../AppGlobal/AppGlobalTypes/AppGlobalTypes";
 
 export type EditingContactsPropsType = {
     changeValueGlobal: changeClientDataType

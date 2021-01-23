@@ -1,6 +1,6 @@
 import {changeDirectionStatusType} from "../../../../../redux/Types/ProjectCreation/ProjectCreationReducerTypes";
 import {GetDirectionForDirection} from "../../Types/ProjectCreationSelectorsTypes";
-import {ProjectCreationEnum} from "../../../../../AppGlobalTypes/TypesComponents";
+import {ProjectCreationEnum} from "../../../../../AppGlobal/AppGlobalTypes/LinksComponents";
 
 export type ChoiceDirectionPropsType = {
     changeDirectionStatus: changeDirectionStatusType

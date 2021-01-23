@@ -33,7 +33,7 @@ import {
     saveOrderInfoThunkCreator
 } from "../../../redux/projectCreationReducer";
 import Preloader from "../../Common/Preloader/Preloader";
-import {AppStateType} from "../../../AppGlobalTypes/AppGlobalTypes";
+import {AppStateType} from "../../../AppGlobal/AppGlobalTypes/AppGlobalTypes";
 import {
     DispatchPropsType,
     MapStateProps,

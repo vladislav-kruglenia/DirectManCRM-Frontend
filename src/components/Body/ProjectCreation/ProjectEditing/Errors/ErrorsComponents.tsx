@@ -3,7 +3,7 @@ import style from "./Errors.module.scss"
 import {Typography} from "@material-ui/core";
 import {NavLink} from "react-router-dom";
 import {NoDirectionsPropsTypes} from "./Types/NoDirectionsTypes";
-import {ProjectCreationPages} from "../../../../../AppGlobalTypes/TypesComponents";
+import {ProjectCreationPages} from "../../../../../AppGlobal/AppGlobalTypes/LinksComponents";
 
 export let NoDirections: FC<NoDirectionsPropsTypes> = (props) => {
     return <div className={style.Error}>

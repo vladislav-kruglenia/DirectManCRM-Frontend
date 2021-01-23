@@ -1,5 +1,5 @@
 import {createSelector} from "reselect";
-import {AppStateType} from "../../../AppGlobalTypes/AppGlobalTypes";
+import {AppStateType} from "../../../AppGlobal/AppGlobalTypes/AppGlobalTypes";
 import {
     DirectionOrderType,
     DirectionType,

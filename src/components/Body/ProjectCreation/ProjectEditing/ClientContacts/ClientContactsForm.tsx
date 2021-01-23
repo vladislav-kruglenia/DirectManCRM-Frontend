@@ -32,7 +32,7 @@ export let EditContactsForm: FC<EditContactsFormPropsType> = (props) => {
     const Form = useFormik({
         initialValues: valuesForm,
         validationSchema: validationSchema,
-        onSubmit: (values) => {
+        onSubmit: (values: ClientContactType) => {
             console.log(values);
             props.changeClientData(values);
             props.setEditMode(false)

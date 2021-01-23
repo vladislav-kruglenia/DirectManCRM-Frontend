@@ -4,13 +4,15 @@ import { reducer as formReducer } from 'redux-form'
 import adminReducer from "./adminReducer";
 import authReducer from "./authReducer";
 import projectCreationReducer from "./projectCreationReducer";
-import {AppStateType} from "../AppGlobalTypes/AppGlobalTypes";
+import {AppStateType} from "../AppGlobal/AppGlobalTypes/AppGlobalTypes";
+import {fillOrderQuestionsReducer} from "./fillOrderQuestionsReducer";
 
 
 export const reducers = combineReducers({
     adminPage: adminReducer,
     auth: authReducer,
     projectCreation: projectCreationReducer,
+    fillOrderQuestions: fillOrderQuestionsReducer,
     form: formReducer
 });
 

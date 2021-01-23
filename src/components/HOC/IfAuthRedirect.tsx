@@ -1,7 +1,7 @@
 import React, {ComponentType, FC} from 'react'
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
-import {AppStateType} from "../../AppGlobalTypes/AppGlobalTypes";
+import {AppStateType} from "../../AppGlobal/AppGlobalTypes/AppGlobalTypes";
 import {MapStatePropsType} from "./Types/IfAuthRedirectTypes";
 
 let mapStateToPropsForRedirect = (state: AppStateType): MapStatePropsType => {

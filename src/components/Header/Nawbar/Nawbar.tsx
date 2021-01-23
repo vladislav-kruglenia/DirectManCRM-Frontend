@@ -4,10 +4,11 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText/ListItemText";
 import List from "@material-ui/core/List";
-import {NavBarLinks} from "../../../AppGlobalTypes/TypesComponents";
+import {NavBarLinks} from "../../../AppGlobal/AppGlobalTypes/LinksComponents";
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
 import AccountTreeIcon from '@material-ui/icons/AccountTree';
+import WorkIcon from '@material-ui/icons/Work';
 
 
 let NawBar = () => {
@@ -23,6 +24,10 @@ let NawBar = () => {
         <ListItem button component={Link} to={NavBarLinks.editTariffsData}>
             <ListItemIcon> <AccountTreeIcon/> </ListItemIcon>
             <ListItemText primary={'Редактирование тарифов'}/>
+        </ListItem>
+        <ListItem button component={Link} to={NavBarLinks.FillOrderQuestions}>
+            <ListItemIcon> <WorkIcon/> </ListItemIcon>
+            <ListItemText primary={'Заполнение брифа'}/>
         </ListItem>
     </List>
 };
