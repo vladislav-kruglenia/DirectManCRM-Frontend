@@ -1,0 +1,11 @@
+.AddButton{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  .icon{
+    display: flex;
+    padding: 0 5px;
+    /*border: 1px solid red;*/
+  }
+}

@@ -1,15 +1,9 @@
-import {
-    changeClientDataType,
-    changeDeadlineTariffType,
-    changeNameProjectType,
-    changePacketPriceType,
-    changeServiceInfoType,
-    changeServiceNameType,
-    changeServicePriceType,
-    changeTariffNameType,
-    ClientContactType
-} from "../../../../../../redux/Types/ProjectCreation/ProjectCreationReducerTypes";
 import {DisplayTypeEnum} from "./DisplayingDifferentDataTypes";
+import {ClientContactType} from "../../ContactContainer/Types/ContactContainerTypes";
+import {
+    changeClientDataType, changeDeadlineTariffType, changeNameProjectType, changePacketPriceType, changeServiceInfoType,
+    changeServiceNameType, changeServicePriceType, changeTariffNameType
+} from "../../../../redux/Types/ProjectCreation/ProjectCreationReducerTypes";
 
 export enum DisplayingDifferentDataEnum {
     price = "price",
@@ -49,6 +43,7 @@ export type ValueDisplayPropsType = {
     type: FormTypeEnum.number | FormTypeEnum.text | FormTypeEnum.grandForm,
     grandFormType?: GrandFormTypeEnum,
     grandFormComponent?: any,
+    isNotAllowedToExitEditMode?: boolean
     changeValueGlobal?: ChangeValueGlobalType
         | changeClientDataType
         | changeServiceNameType
@@ -71,6 +66,7 @@ export type EditModeInputPropsType = {
     grandFormType?: GrandFormTypeEnum,
     setEditMode: (status: boolean) => void,
     idNumbers: IdNumbersType,
+    isNotAllowedToExitEditMode: boolean
 }
 export type EditModeGrandFormPropsType = {
     valueGlobal: ClientContactType,
@@ -80,6 +76,7 @@ export type EditModeGrandFormPropsType = {
     grandFormComponent?: any
     setEditMode: (status: boolean) => void,
     idNumbers: IdNumbersType,
+    isNotAllowedToExitEditMode: boolean
 }
 
 export type InputFormType = {

@@ -1,6 +1,6 @@
 import {changeTariffStatusType} from "../../../../../redux/Types/ProjectCreation/ProjectCreationReducerTypes";
 import {TariffName, TariffsPlansType} from "../../Types/ProjectCreationСontainerTypes";
-import {ProjectCreationEnum} from "../../../../../AppGlobal/AppGlobalTypes/LinksComponents";
+import {ProjectCreationEnum} from "../../../../../AppGlobal/AppGlobalTypes/TypesComponents";
 
 export type TariffPlansPropsType = {
     changeTariffStatus: changeTariffStatusType

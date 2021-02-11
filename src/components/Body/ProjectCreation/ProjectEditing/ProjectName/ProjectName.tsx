@@ -1,10 +1,10 @@
 import React, {FC} from "react";
 import style from '../../Styles/ProjectCreation.module.scss'
-import ValueDisplay from "../DisplayingDifferentData/InputEditMode";
 import {PropsTypes} from "./Types/ProjectNameTypes";
-import {FormTypeEnum} from "../DisplayingDifferentData/Types/InputEditModeTypes";
-import {DisplayTypeEnum} from "../DisplayingDifferentData/Types/DisplayingDifferentDataTypes";
 import {Typography} from "@material-ui/core";
+import {DisplayTypeEnum} from "../../../../../AppGlobal/AppGlobalComponents/DisplayingDifferentData/Types/DisplayingDifferentDataTypes";
+import {FormTypeEnum} from "../../../../../AppGlobal/AppGlobalComponents/DisplayingDifferentData/Types/InputEditModeTypes";
+import {ValueDisplay} from "../../../../../AppGlobal/AppGlobalComponents/DisplayingDifferentData/InputEditMode";
 
 export let ProjectName: FC<PropsTypes> = ({nameProject, changeNameProject}) => {
     return <div className={style.Typography}>

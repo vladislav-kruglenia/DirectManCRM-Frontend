@@ -14,7 +14,7 @@ import {
     DELETE_TARIFFS_DATA_PR_CREATION
 } from "../../projectCreationReducer";
 import {ServicesType, TariffsInfoType, TariffsType} from "../../../api/Types/ApiTypes";
-import {ClientContactType} from "./ProjectCreationReducerTypes";
+import {ClientContactType} from "../../../AppGlobal/AppGlobalComponents/ContactContainer/Types/ContactContainerTypes";
 
 export type ClientContactFormType = {
     name: string | null,

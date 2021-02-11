@@ -1,4 +1,3 @@
-import {ProjectCreationEnum} from "../../../../AppGlobal/AppGlobalTypes/LinksComponents";
 import {
     addContactType,
     addServiceType,
@@ -15,7 +14,6 @@ import {
     changeServicePriceType,
     changeTariffNameType,
     changeTariffStatusType,
-    ClientContactType,
     deleteContactType,
     deleteServiceType,
     editTariffsInfoType,
@@ -24,6 +22,8 @@ import {
 } from "../../../../redux/Types/ProjectCreation/ProjectCreationReducerTypes";
 import {TariffsInfoType, TariffsOrderInfoType} from "../../../../api/Types/ApiTypes";
 import {GetDirectionForDirection} from "./ProjectCreationSelectorsTypes";
+import {ProjectCreationEnum} from "../../../../AppGlobal/AppGlobalTypes/TypesComponents";
+import {ClientContactType} from "../../../../AppGlobal/AppGlobalComponents/ContactContainer/Types/ContactContainerTypes";
 
 export type ProjectCreationContainerProps = MapStateProps & DispatchPropsType & OwnProps
 

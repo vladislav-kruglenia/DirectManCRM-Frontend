@@ -1,7 +1,8 @@
 import {ServicesType, TariffsInfoType, TariffsOrderInfoType, TariffsType} from "../../../api/Types/ApiTypes";
 import {
     ActionCreatorsType,
-    AddContactAC, AddingTariffsDataAC,
+    AddContactAC,
+    AddingTariffsDataAC,
     AddServiceAC,
     AddTariffAC,
     ChangeClientDataAC,
@@ -20,10 +21,14 @@ import {
     ChangeTariffPropertiesACType,
     ChangeTariffStatusAC,
     DeleteContactAC,
-    DeleteServiceAC, TariffDeleteAC, DeleteTariffsDataAC,
-    IdNumbersType, IdDirectionAndTariffType
+    DeleteServiceAC,
+    DeleteTariffsDataAC,
+    IdDirectionAndTariffType,
+    IdNumbersType,
+    TariffDeleteAC
 } from "./ActionCreators";
 import {CommonThunkType} from "../CommonTypes";
+import {ClientContactType} from "../../../AppGlobal/AppGlobalComponents/ContactContainer/Types/ContactContainerTypes";
 
 export type StateType = {
     userId: string | null,
@@ -32,13 +37,6 @@ export type StateType = {
     clientContacts: Array<ClientContactType>,
     directionsAndTariffs: TariffsInfoType,
 
-}
-
-export type ClientContactType = {
-    idClient: string,
-    name: string | null,
-    email: string | null,
-    phoneNumber: string | null,
 }
 
 export type GetNewStateKeysType = "directions" | "tariffs" | "services"

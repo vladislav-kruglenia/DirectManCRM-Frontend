@@ -1,9 +1,9 @@
 import {
     addContactType,
     changeClientDataType,
-    ClientContactType,
     deleteContactType
 } from "../../../../../../redux/Types/ProjectCreation/ProjectCreationReducerTypes";
+import {ClientContactType} from "../../../../../../AppGlobal/AppGlobalComponents/ContactContainer/Types/ContactContainerTypes";
 
 export type ClientContactsFCPropsType = {
     changeClientData: changeClientDataType
@@ -12,19 +12,3 @@ export type ClientContactsFCPropsType = {
     clientContacts: Array<ClientContactType>
 }
 
-export type ContactContainerPropsType = {
-    key: string,
-    contacts: ClientContactType,
-    changeData: changeClientDataType,
-    deleteContact: deleteContactType,
-}
-
-export type ContactPropsType = {
-    contacts: ClientContactType
-}
-
-export type EditAndDeletePropsType = {
-    contacts: ClientContactType,
-    deleteContact: deleteContactType,
-    setEditMode: (status: boolean) => void
-}

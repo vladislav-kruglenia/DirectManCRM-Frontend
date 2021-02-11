@@ -1,22 +1,25 @@
 import React, {FC} from "react";
-import {EditContactsFormPropsType} from "./Types/ClientContactsFormTypes";
-import {ClientContactType} from "../../../../../redux/Types/ProjectCreation/ProjectCreationReducerTypes";
+import {ChangeContactDataType, EditContactsFormPropsType} from "./Types/ClientContactsFormTypes";
 import * as yup from "yup";
 import {useFormik} from "formik";
-import style from "./Styles/ClientContacts.module.scss";
+import style from "./ContactContainer.module.scss";
 import {Button, TextField} from "@material-ui/core";
+import {ClientContactType} from "./Types/ContactContainerTypes";
 
 const validationSchema = yup.object({
     name: yup
         .string()
+        .nullable()
         .required('Это поле обязательно'),
     email: yup
         .string()
+        .nullable()
         .email('Введите корректную почту')
         .required('Это поле обязательно'),
     phoneNumber: yup
         .string()
-        .length(13,"Введите корректный номер телефона(13 символов)")
+        .nullable()
+        .length(13, "Введите корректный номер телефона(13 символов)")
         .required('Это поле обязательно'),
 
 });
@@ -29,12 +32,36 @@ export let EditContactsForm: FC<EditContactsFormPropsType> = (props) => {
         name: props.name,
         phoneNumber: props.phoneNumber
     };
+
+    let changeContactData: ChangeContactDataType;
+    switch (props.typeComponent) {
+        case "ProjectCreation": {
+            changeContactData = (values) => {
+                props.changeClientData
+                    ? props.changeClientData(values)
+                    : console.log("Ошибка ProjectCreation")
+            };
+
+            break
+        }
+        case "FillOrderQuestion": {
+            changeContactData = (values) => {
+            debugger
+                props.editResponseContact
+                    ? props.editResponseContact(props.indexQuestion, props.indexContact, values)
+                    :console.log("Нет функции editResponseContact")
+
+            };
+            break
+        }
+    }
+
     const Form = useFormik({
         initialValues: valuesForm,
         validationSchema: validationSchema,
         onSubmit: (values: ClientContactType) => {
             console.log(values);
-            props.changeClientData(values);
+            changeContactData(values);
             props.setEditMode(false)
         }
     });

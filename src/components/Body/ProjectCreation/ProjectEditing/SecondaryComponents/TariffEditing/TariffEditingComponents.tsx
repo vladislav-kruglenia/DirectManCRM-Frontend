@@ -1,7 +1,9 @@
 import React, {FC, useState} from "react";
 import style from "./TariffEditing.module.scss";
 import projectEditingStyle from "../../ProjectEditing.module.scss";
-import ValueDisplay from "../../DisplayingDifferentData/InputEditMode";
+import {DisplayTypeEnum} from "../../../../../../AppGlobal/AppGlobalComponents/DisplayingDifferentData/Types/DisplayingDifferentDataTypes";
+import {FormTypeEnum} from "../../../../../../AppGlobal/AppGlobalComponents/DisplayingDifferentData/Types/InputEditModeTypes";
+import {ValueDisplay} from "../../../../../../AppGlobal/AppGlobalComponents/DisplayingDifferentData/InputEditMode";
 import {
     AddNewServicePropsType,
     DeleteTariffPropsType,
@@ -13,8 +15,6 @@ import {
     DisplayTariffPropertiesPropsType,
     PaymentMethodPropsType
 } from "../Types/TariffEditingTypes";
-import {FormTypeEnum} from "../../DisplayingDifferentData/Types/InputEditModeTypes";
-import {DisplayTypeEnum} from "../../DisplayingDifferentData/Types/DisplayingDifferentDataTypes";
 import {IconButton, Typography} from "@material-ui/core";
 import EditIcon from '@material-ui/icons/Edit';
 import Button from "@material-ui/core/Button";

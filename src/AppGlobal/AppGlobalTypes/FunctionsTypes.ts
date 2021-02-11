@@ -1,0 +1,1 @@
+export type SetEditModeType = (value: boolean) => void

@@ -1,0 +1,61 @@
+.ContactContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 5px 0 0 0;
+  padding: 10px 0 0 10px;
+  /*border: 1px solid red;*/
+
+  .Contact {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    cursor: pointer;
+    /*border: 1px solid green;*/
+
+    .clientName {
+      max-width: 290px;
+      word-break: break-word;
+    }
+
+    .contactWrapper {
+      display: flex;
+      padding: 5px 0 0 0;
+      /*border: 1px solid chocolate;*/
+    }
+
+  }
+
+  .EditAndDeleteContainer {
+    width: 25%;
+    /*border: 1px solid gold*/;
+
+    .EditAndDelete {
+      display: none;
+      width: 100%;
+      /*border: 1px solid violet;*/
+    }
+  }
+
+  &:hover .EditAndDelete {
+    display: flex;
+    justify-content: flex-start;
+    /*border: 1px solid violet;*/
+  }
+}
+
+.EditContactsForm {
+  /*border: 1px solid green;*/
+
+  .inputs {
+    display: flex;
+    flex-direction: column;
+    min-height: 150px;
+    min-width: 290px;
+    /*border: 1px solid red;*/
+
+    .clientContactInput {
+      margin: 0 0 15px 0;
+    }
+  }
+}

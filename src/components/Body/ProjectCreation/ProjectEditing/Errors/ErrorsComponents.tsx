@@ -32,8 +32,3 @@ export let NoTariffs: FC<NoDirectionsPropsTypes> = (props) => {
     </div>
 };
 
-export let NoContacts: FC = () => {
-    return <Typography variant={'h5'} color={'error'} component={'div'}>
-        Контактов нет
-    </Typography>
-};

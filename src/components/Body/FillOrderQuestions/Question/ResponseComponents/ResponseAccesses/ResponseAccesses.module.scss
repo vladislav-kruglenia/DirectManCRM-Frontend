@@ -1,0 +1,95 @@
+.ResponseAccesses {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 18px;
+  /*border: 1px solid firebrick;*/
+
+  .responseAccessContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position:relative;
+    width: 30%;
+    min-width: 210px;
+    /*min-height: 175px;*/
+    margin: 10px 20px 10px 10px;
+    /*border: 1px solid fuchsia;*/
+
+
+    .displayAccessTitle {
+      margin: 0 0 5px 0;
+      cursor: pointer !important;
+
+      a {
+        color: black;
+      }
+    }
+
+    .DisplayResponseAccesses {
+      /*border: 1px solid forestgreen;*/
+
+
+      .accessTypeContainer {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin: 0 0 2px 0;
+        min-height: 30px;
+        cursor: pointer;
+        /*border: 1px solid darkblue;*/
+
+        .accessTypeName {
+          min-width: 65px;
+          font-style: italic;
+        }
+
+        .login {
+        }
+
+        .password {
+        }
+
+        .copyButton {
+          display: none;
+          padding: 0 0 0 5px;
+          cursor: pointer;
+        }
+
+        &:hover .copyButton{
+          display: block;
+        }
+      }
+    }
+
+    .ResponseAccessesForm {
+      display: flex;
+      flex-direction: column;
+      /*border: 1px solid darkgoldenrod;*/
+      width: 100%;
+
+      .inputContainer {
+        margin: 0 0 10px 0;
+        width: 100%;
+        /*border: 1px solid saddlebrown;*/
+        .input {
+          width: 100%
+        }
+      }
+
+      .button {
+      }
+    }
+
+    .editButtons {
+      display: none;
+      position: absolute;
+      top: 0;
+      right: 0;
+      /*border: 1px solid salmon;*/
+    }
+
+    &:hover .editButtons{
+      display: flex;
+    }
+  }
+}

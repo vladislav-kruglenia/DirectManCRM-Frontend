@@ -1,76 +1,101 @@
-import React, {FC, useState} from "react";
+import React, {FC} from "react";
 import style from "../FillOrderQuestions.module.scss";
-import {Button, TextField, Typography} from "@material-ui/core";
-import {DisplayResponseType, EditResponseFormProps, QuestionPropsTypes, ValuesFormType} from "./Types/QuestionTypes";
-import * as yup from "yup";
-import {useFormik} from "formik";
+import {Typography} from "@material-ui/core";
+import {
+    QuestionPropsTypes,
+    ResponseContactActionCreatorsType,
+    ResponseLinkActionCreatorsType,
+    TypesResponsesPropsType
+} from "./Types/QuestionTypes";
+import {ResponseText} from "./ResponseComponents/ResponseText/ResponseText";
+import {ResponseAccesses} from "./ResponseComponents/ResponseAccesses/ResponseAccesses";
+import {ResponseLinks} from "./ResponseComponents/ResponseLinks/ResponseLinks";
+import {ResponseContacts} from "./ResponseComponents/ResponseContacts/ResponseContacts";
+import {
+    LinkData,
+    ResponseAccessData, ResponseContactsData,
+    ResponseLinksData
+} from "../../../../redux/Types/FillOrderQuestions/FillOrderQuestionsReducerTypes";
 import {useDispatch} from "react-redux";
 import {actionCreators} from "../../../../redux/fillOrderQuestionsReducer";
+import {ClientContactType} from "../../../../AppGlobal/AppGlobalComponents/ContactContainer/Types/ContactContainerTypes";
+import {ErrorLoadingData} from "../Errors/ErrorsComponents";
 
 export let Question: FC<QuestionPropsTypes> = (props) => {
-    let [editMode, setEditMode] = useState(true);
     return <div className={style.questionContainer}>
         <Typography className={style.question} variant={'h5'}>
             {`${props.indexQuestion + 1}. ${props.question}`}
         </Typography>
-
-        {editMode
-            ? <EditResponseForm
-                indexQuestion={props.indexQuestion}
-                response={props.response}
-                setEditMode={(value: boolean) => setEditMode(value)}
-            />
-            : <DisplayResponse response={props.response} setEditMode={(value: boolean) => setEditMode(value)}/>
-        }
+        <TypesResponses indexQuestion={props.indexQuestion} response={props.response}/>
     </div>;
 };
 
-export let DisplayResponse: FC<DisplayResponseType> = (props) => {
-    return <div onDoubleClick={() => props.setEditMode(true)}>
-        <Typography component={'div'} className={style.response} variant={"subtitle1"}>
-            {props.response !== '' ? `${props.response}` : 'Поле не заполнено'}
-        </Typography>
-    </div>
-};
+export let TypesResponses: FC<TypesResponsesPropsType> = (props) => {
 
-const validationSchema = yup.object({
-    response: yup
-        .string()
-        .required('Это поле обязательно')
-});
-
-export let EditResponseForm: FC<EditResponseFormProps> = (props) => {
     let dispatch = useDispatch();
+
+    let responseContactActionCreators: ResponseContactActionCreatorsType = {
+        editResponseContact: (indexQuestion: number, indexContact: number, contactData: ClientContactType) => {
+            debugger
+            dispatch(actionCreators.editResponseContact(indexQuestion, indexContact, contactData))
+        },
+        deleteResponseContact: (indexQuestion: number, indexContact: number) => {
+            debugger
+            dispatch(actionCreators.deleteResponseContact(indexQuestion, indexContact))
+        },
+        addResponseContact: (indexQuestion: number) => {
+            dispatch(actionCreators.addResponseContact(indexQuestion))
+        }
+    };
+
+    let responseLinkActionCreators: ResponseLinkActionCreatorsType = {
+        editResponseLink: (indexQuestion: number, indexLink: number, linkData: LinkData) => {
+            dispatch(actionCreators.editResponseLink(indexQuestion, indexLink, linkData))
+        },
+        deleteResponseLink: (indexQuestion: number, indexLink: number) => {
+            dispatch(actionCreators.deleteResponseLink(indexQuestion, indexLink))
+        },
+        addResponseLink: (indexQuestion: number) => {
+            dispatch(actionCreators.addResponseLink(indexQuestion))
+        },
+    };
+
     let editResponseText = (indexQuestion: number, textResponse: string) => {
         dispatch(actionCreators.editResponseText(indexQuestion, textResponse))
     };
+    let editResponseAccess = (indexQuestion: number, indexAccess: number, accessData: ResponseAccessData) => {
+        dispatch(actionCreators.editResponseAccess(indexQuestion, indexAccess, accessData))
 
-    let valuesForm: ValuesFormType = {
-        response: props.response
     };
 
-    const Form = useFormik({
-        initialValues: valuesForm,
-        validationSchema: validationSchema,
-        onSubmit: (values: ValuesFormType) => {
-            console.log(values);
-            editResponseText(props.indexQuestion, values.response);
-            props.setEditMode(false)
-        }
-    });
 
-    return <form className={style.editResponseContainer} onSubmit={Form.handleSubmit}>
-        <TextField
-            className={style.editResponse}
-            id="response"
-            label="Ответ"
-            multiline
-            variant="outlined"
-            value={Form.values.response}
-            onChange={Form.handleChange}
-            error={Form.touched.response && Boolean(Form.errors.response)}
-            helperText={Form.touched.response && Form.errors.response}
-        />
-        <Button className={style.editButton} variant={"outlined"} color={"default"} type={"submit"}>Сохранить</Button>
-    </form>
+    switch (props.response.responseType) {
+        case "Text":
+            return <ResponseText
+                indexQuestion={props.indexQuestion}
+                responseData={props.response.data.textData}
+                isChanged={props.response.data.isChanged}
+                editResponseText={editResponseText}
+            />;
+        case "Accesses":
+            return <ResponseAccesses responseData={props.response.data as Array<ResponseAccessData>}
+                                     editResponseAccess={editResponseAccess}
+                                     indexQuestion={props.indexQuestion}
+            />;
+        case "Links":
+            return <ResponseLinks responseData={props.response.data as ResponseLinksData}
+                                  responseLinksObj={responseLinkActionCreators}
+                                  indexQuestion={props.indexQuestion}
+            />;
+        case "Contacts":
+            return <ResponseContacts
+                responseData={props.response.data as ResponseContactsData}
+                indexQuestion={props.indexQuestion}
+                actionCreators={responseContactActionCreators}
+            />;
+
+        default:
+            return <ErrorLoadingData/>;
+    }
 };
+

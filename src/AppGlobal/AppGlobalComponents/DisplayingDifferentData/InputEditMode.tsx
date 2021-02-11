@@ -1,5 +1,5 @@
 import style from "./Styles/InputEditMode.module.scss";
-import tariffEditingStyle from "./../SecondaryComponents/TariffEditing/TariffEditing.module.scss";
+import tariffEditingStyle from "./../../../components/Body/ProjectCreation/ProjectEditing/SecondaryComponents/TariffEditing/TariffEditing.module.scss";
 import React, {ChangeEvent, FC, useState} from "react";
 import {DisplayingDifferentData} from "./DisplayingDifferentData";
 import {
@@ -13,14 +13,13 @@ import {
 import {Button, TextField} from "@material-ui/core";
 
 
-let ValueDisplay: FC<ValueDisplayPropsType> = (props) => {
-
+export let ValueDisplay: FC<ValueDisplayPropsType> = (props) => {
     let [editModeHook, setEditModeHook] = useState(props.editModeStatus);
     let [editMode, setEditMode] = !props.setEditModeInProps
         ? [editModeHook, setEditModeHook]
         : [props.editModeStatus, props.setEditModeInProps];
 
-    return <div>
+    return <div className={style.ValueDisplay}>
         {!editMode
             ? <div onDoubleClick={() => setEditMode(true)}>
                 <DisplayingDifferentData
@@ -36,6 +35,7 @@ let ValueDisplay: FC<ValueDisplayPropsType> = (props) => {
                 idNumbers={props.idNumbers || {}}
                 grandFormType={props.grandFormType}
                 grandFormComponent = {props.grandFormComponent}
+                isNotAllowedToExitEditMode={props.isNotAllowedToExitEditMode || false}
                 setEditMode={(status: boolean) => {
                     setEditMode(status)
                 }}
@@ -46,12 +46,16 @@ let ValueDisplay: FC<ValueDisplayPropsType> = (props) => {
 
 let EditModeValue: FC<EditModeValuePropsType> = (props) => {
     let [value, changeValueHook] = useState(props.valueGlobal as string | number);
-    return <div onKeyDown={(event) => {
-        if (event.key === "Escape") {
+
+    let exitEditMode = () => {
+        if (!props.isNotAllowedToExitEditMode) {
             changeValueHook(props.valueGlobal as string | number);
             // changeValueHook(props.numberGlobal);
             props.setEditMode(false);
         }
+    };
+    return <div onKeyDown={(event) => {
+        if (event.key === "Escape") exitEditMode()
     }}>
         <div className={style.editLayer}>
             {props.type !== FormTypeEnum.grandForm
@@ -73,11 +77,7 @@ let EditModeValue: FC<EditModeValuePropsType> = (props) => {
         </div>
 
         <div className={style.transparentLayer}
-             onClick={() => {
-                 changeValueHook(props.valueGlobal as string | number);
-                 // changeValueHook(props.numberGlobal);
-                 props.setEditMode(false);
-             }}>{}</div>
+             onClick={() => exitEditMode()}>{}</div>
     </div>
 };
 
@@ -145,4 +145,3 @@ let InputText: FC<InputTextPropsType> = (props) => {
     </div>
 
 };
-export default ValueDisplay

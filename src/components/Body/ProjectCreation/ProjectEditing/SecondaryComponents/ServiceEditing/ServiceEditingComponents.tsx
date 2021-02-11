@@ -11,10 +11,13 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import * as yup from 'yup';
 import {useFormik} from "formik";
-import ValueDisplay from "../../DisplayingDifferentData/InputEditMode";
-import {DisplayTypeEnum} from "../../DisplayingDifferentData/Types/DisplayingDifferentDataTypes";
-import {FormTypeEnum, GrandFormTypeEnum} from "../../DisplayingDifferentData/Types/InputEditModeTypes";
 import {ServiceDataType} from "../../../../../../redux/Types/ProjectCreation/ProjectCreationReducerTypes";
+import {DisplayTypeEnum} from "../../../../../../AppGlobal/AppGlobalComponents/DisplayingDifferentData/Types/DisplayingDifferentDataTypes";
+import {
+    FormTypeEnum,
+    GrandFormTypeEnum
+} from "../../../../../../AppGlobal/AppGlobalComponents/DisplayingDifferentData/Types/InputEditModeTypes";
+import {ValueDisplay} from "../../../../../../AppGlobal/AppGlobalComponents/DisplayingDifferentData/InputEditMode";
 
 export let DisplayServiceData: FC<DisplayServiceDataPropsType> = (props) => {
     let [editModeStatus, changeEditModeStatus] = useState(props.serviceName === null || props.serviceName === "");

@@ -21,7 +21,7 @@ const AppContainer = () => {
         <BrowserRouter>
             <Provider store={store}>
                 <ThemeProvider theme={theme}>
-                <App/>
+                    <App/>
                 </ThemeProvider>
             </Provider>
         </BrowserRouter>
