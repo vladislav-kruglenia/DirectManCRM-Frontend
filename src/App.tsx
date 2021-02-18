@@ -3,9 +3,9 @@ import {BrowserRouter} from "react-router-dom"
 import Header from "./components/Header/Header";
 import {Provider} from "react-redux";
 import "./App.css"
-import store from "./redux/ReduxStore";
 import BodyContainer from "./components/Body/BodyContainerUI";
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
+import {store} from "./redux/ReduxToolkitStore";
 
 const theme = createMuiTheme({});
 

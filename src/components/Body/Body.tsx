@@ -6,6 +6,7 @@ import AdminPanel from "./AdminPanel/AdminPanel";
 import {NavBarLinks} from "../../AppGlobal/AppGlobalTypes/LinksComponents";
 import {FillOrderQuestions} from "./FillOrderQuestions/FillOrderQuestions";
 import {ProjectCreationEnum} from "../../AppGlobal/AppGlobalTypes/TypesComponents";
+import {EditingOrderQuestions} from "./EditingOrderQuestions/EditingOrderQuestions";
 
 
 
@@ -18,6 +19,7 @@ let Body = () => {
             <Route path={NavBarLinks.prCreation} render={()=><ProjectCreation type={ProjectCreationEnum.prCreation}/>}/>
             <Route path={NavBarLinks.editTariffsData} render={()=><ProjectCreation type={ProjectCreationEnum.editTariffsData}/>}/>
             <Route path={NavBarLinks.FillOrderQuestions} render={()=><FillOrderQuestions/>}/>
+            <Route path={NavBarLinks.EditingOrderQuestions} render={()=><EditingOrderQuestions/>}/>
         </Switch>
     </div>
 };

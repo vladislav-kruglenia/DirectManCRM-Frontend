@@ -11,27 +11,6 @@ import {
     getNamesTariffsDependingSelectedDirections,
     getUserId
 } from "./ProjectCreationSelectors";
-import {
-    addContact,
-    addService,
-    addTariff,
-    changeClientData,
-    changeDeadlineTariff,
-    changeDirectionStatus,
-    changeNameProject,
-    changePacketPrice,
-    changePaymentInFull,
-    changePaymentPackage, changeServiceInfo,
-    changeServiceName,
-    changeServicePrice,
-    changeTariffName,
-    changeTariffStatus,
-    deleteContact,
-    deleteService,
-    editTariffsInfoThunkCreator,
-    getTariffsInfoThunkCreator,
-    saveOrderInfoThunkCreator
-} from "../../../redux/projectCreationReducer";
 import Preloader from "../../Common/Preloader/Preloader";
 import {AppStateType} from "../../../AppGlobal/AppGlobalTypes/AppGlobalTypes";
 import {
@@ -40,6 +19,28 @@ import {
     OwnProps,
     ProjectCreationContainerProps
 } from "./Types/ProjectCreationСontainerTypes";
+import {
+    changeDirectionStatus,
+    changeTariffStatus,
+    addTariff,
+    addService,
+    deleteService,
+    changeServiceName,
+    changeTariffName,
+    changePaymentPackage,
+    changeServicePrice,
+    changePacketPrice,
+    changeDeadlineTariff,
+    changePaymentInFull,
+    changeNameProject,
+    changeClientData,
+    addContact,
+    deleteContact,
+    getTariffsInfoThunkCreator,
+    saveOrderInfoThunkCreator,
+    editTariffsInfoThunkCreator,
+    changeServiceInfo
+} from "../../../redux/projectCreationReducerImmer";
 
 let mapStateToProps = (state: AppStateType, props: OwnProps): MapStateProps => {
     let dataLoaded = state.projectCreation.dataLoaded;

@@ -29,6 +29,11 @@ let NawBar = () => {
             <ListItemIcon> <WorkIcon/> </ListItemIcon>
             <ListItemText primary={'Заполнение брифа'}/>
         </ListItem>
+        <ListItem button component={Link} to={NavBarLinks.EditingOrderQuestions}>
+            <ListItemIcon> <WorkIcon/> </ListItemIcon>
+            <ListItemText primary={'Редактирование вопросов брифа'}/>
+        </ListItem>
+
     </List>
 };
 

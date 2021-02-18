@@ -1,0 +1,40 @@
+.Links{
+  /*padding: 7px 0;*/
+  .numberLinks {
+    padding: 5px 0;
+
+    .DisplayNumberLinks {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 35%;
+      min-width: 225px;
+      min-height: 30px;
+      font-size: 17px;
+      font-weight: bold;
+      color: #0f0f0f;
+      /*border: 1px solid blueviolet;*/
+
+      .editButton{
+        display: none;
+      }
+
+      &:hover .editButton{
+        display: block;
+      }
+    }
+
+    .NumberLinksForm {
+      display: flex;
+      align-items: flex-start;
+      flex-wrap: wrap;
+
+      .textField {
+        margin: 0 5px 5px 0;
+      }
+
+      .formButton {
+      }
+    }
+  }
+}

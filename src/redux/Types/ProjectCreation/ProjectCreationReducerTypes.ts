@@ -7,18 +7,14 @@ import {
     AddTariffAC,
     ChangeClientDataAC,
     ChangeDeadlineTariffAC,
-    ChangeDirectionPropertiesACType,
     ChangeDirectionStatusAC,
     ChangeNameProjectAC,
     ChangePacketPriceAC,
     ChangePaymentInFullAC,
     ChangePaymentPackageAC,
-    ChangePropertiesACType,
     ChangeServiceNameAC,
     ChangeServicePriceAC,
-    ChangeServicePropertiesACType,
     ChangeTariffNameAC,
-    ChangeTariffPropertiesACType,
     ChangeTariffStatusAC,
     DeleteContactAC,
     DeleteServiceAC,
@@ -29,6 +25,40 @@ import {
 } from "./ActionCreators";
 import {CommonThunkType} from "../CommonTypes";
 import {ClientContactType} from "../../../AppGlobal/AppGlobalComponents/ContactContainer/Types/ContactContainerTypes";
+
+export type startStateProjectCreationType = {
+    userId: string | null,
+    dataLoaded: boolean,
+    nameProject: string,
+    clientContacts: Array<ClientContactType>,
+    directionsAndTariffs: Array<directionAndTariffs>
+}
+
+type directionAndTariffs = {
+    nameDirection: string,
+    idDirection: string,
+    selected: boolean,
+    paymentInFull: boolean,
+    namesTariffs: Array<tariffAndServices>
+}
+
+type tariffAndServices = {
+    tariffId: string,
+    tariffName: string | null,
+    tariffStatus: boolean,
+    packetPrice: number,
+    paymentPackage: boolean,
+    deadline: number,
+    services: Array<service>
+}
+
+type service = {
+    serviceName: string | null,
+    serviceStatus: boolean,
+    serviceId: string,
+    servicePrice: number
+}
+
 
 export type StateType = {
     userId: string | null,
@@ -41,12 +71,12 @@ export type StateType = {
 
 export type GetNewStateKeysType = "directions" | "tariffs" | "services"
 
-export type NewStateElementType = {
+/*export type NewStateElementType = {
     getNewState: (state: StateType, action: ChangePropertiesACType, elementStateKey: GetNewStateKeysType) => StateType
     directions: (state: StateType, action: ChangeDirectionPropertiesACType) => void,
     tariffs: (state: StateType, action: ChangeTariffPropertiesACType) => void,
     services: (state: StateType, action: ChangeServicePropertiesACType) => void,
-}
+}*/
 
 export type StateLayersType = {
     getClientContactsLayer: (currentState: StateType) => Array<ClientContactType>,
@@ -99,7 +129,7 @@ export type addingTariffsDataType = (data: TariffsInfoType) => AddingTariffsData
 export type deleteTariffsDataType = () => DeleteTariffsDataAC
 
 
-export type ServiceDataType = {serviceName: string | null, servicePrice: number}
+export type ServiceDataType = { serviceName: string | null, servicePrice: number }
 
 
 export type getTariffsInfoType = () => ThunkType
@@ -109,4 +139,32 @@ export type changeServiceInfoType = (idNumbers: IdNumbersType, serviceData: Serv
 
 export type ThunkType = CommonThunkType<StateType, ActionCreatorsType>
 //export type ThunkType = ThunkAction<Promise<void>, StateType, unknown, ActionCreatorsType>
+
+
+export type changeDirectionStatusSliceActionType = { propertyValue: boolean, idDirection: string }
+export type changeTariffStatusSliceActionType = { propertyValue: boolean, idTariff: string, idDirection: string }
+export type addTariffSliceActionType = { idDirection: string }
+export type addServiceSliceActionType = { idDirection: string, idTariff: string }
+export type deleteServiceSliceActionType = { idNumbers: IdNumbersType }
+export type deleteTariffSliceActionType = { idNumbers: IdDirectionAndTariffType }
+export type changeServiceNameSliceActionType = { idNumbers: IdNumbersType, propertyValue: string }
+export type changeTariffNameSliceActionType = { idNumbers: IdNumbersType, propertyValue: string }
+export type changePaymentPackageSliceActionType = { propertyValue: boolean, idTariff: string, idDirection: string }
+export type changeServicePriceSliceActionType = { idNumbers: IdNumbersType, propertyValue: number }
+export type changePacketPriceSliceActionType = { idNumbers: IdNumbersType, propertyValue: number }
+export type changeDeadlineTariffSliceActionType = { idNumbers: IdNumbersType, propertyValue: number }
+export type changePaymentInFullSliceActionType = { idDirection: string, propertyValue: boolean }
+export type changeNameProjectSliceActionType = { idNumbers: IdNumbersType | null, propertyValue: string }
+export type changeClientDataSliceActionType = { newClientData: ClientContactType }
+export type addContactSliceActionType = {}
+export type deleteContactSliceActionType = { idClient: string }
+export type addingTariffsDataSliceActionType = { data: TariffsInfoType }
+export type deleteTariffsDataSliceActionType = {}
+
+
+
+
+
+
+
 

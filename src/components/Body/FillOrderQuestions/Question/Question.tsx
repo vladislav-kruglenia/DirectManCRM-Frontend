@@ -13,8 +13,10 @@ import {ResponseLinks} from "./ResponseComponents/ResponseLinks/ResponseLinks";
 import {ResponseContacts} from "./ResponseComponents/ResponseContacts/ResponseContacts";
 import {
     LinkData,
-    ResponseAccessData, ResponseContactsData,
-    ResponseLinksData
+    ResponseAccessData,
+    ResponseContactsData,
+    ResponseLinksData,
+    ResponseTextData
 } from "../../../../redux/Types/FillOrderQuestions/FillOrderQuestionsReducerTypes";
 import {useDispatch} from "react-redux";
 import {actionCreators} from "../../../../redux/fillOrderQuestionsReducer";
@@ -71,10 +73,11 @@ export let TypesResponses: FC<TypesResponsesPropsType> = (props) => {
 
     switch (props.response.responseType) {
         case "Text":
+            let responseData = props.response.data as ResponseTextData;
             return <ResponseText
                 indexQuestion={props.indexQuestion}
-                responseData={props.response.data.textData}
-                isChanged={props.response.data.isChanged}
+                responseData={responseData.textData}
+                isChanged={responseData.isChanged}
                 editResponseText={editResponseText}
             />;
         case "Accesses":

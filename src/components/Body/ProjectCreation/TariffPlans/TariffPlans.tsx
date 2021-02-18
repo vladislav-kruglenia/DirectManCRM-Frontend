@@ -5,9 +5,9 @@ import {TariffPlanPropsType, TariffPlansPropsType, TariffType} from "./Types/Tar
 import {Button, IconButton, Switch, Typography} from "@material-ui/core";
 import {NoDirections, NoTariffs} from "../ProjectEditing/Errors/ErrorsComponents";
 import {useDispatch} from "react-redux";
-import {deleteTariff} from "../../../../redux/projectCreationReducer";
 import {IdDirectionAndTariffType} from "../../../../redux/Types/ProjectCreation/ActionCreators";
 import DeleteIcon from '@material-ui/icons/Delete';
+import {deleteTariff} from "../../../../redux/projectCreationReducerImmer";
 
 
 let TariffPlans: FC<TariffPlansPropsType> = (props) => {

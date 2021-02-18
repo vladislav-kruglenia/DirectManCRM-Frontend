@@ -10,9 +10,11 @@ import {
     CopyButtonPropsType,
     DeleteButtonPropsType,
     EditButtonPropsType,
+    LinkButtonPropsType,
     SaveButtonPropsType
 } from "./Type/MaterialButtonsTypes";
 import {CopyToClipboard} from "react-copy-to-clipboard";
+import LinkIcon from '@material-ui/icons/Link';
 
 export let DeleteButton: FC<DeleteButtonPropsType> = (props) => {
     return <IconButton size={props.size} onClick={() => props.onClickFunc()}>
@@ -25,6 +27,13 @@ export let EditButton: FC<EditButtonPropsType> = (props) => {
         <EditIcon fontSize={props.iconSize}/>
     </IconButton>
 };
+
+export let LinkButton: FC<LinkButtonPropsType> = (props) => {
+    return <IconButton size={props.size} href={props.link} target={"_blank"}>
+        <LinkIcon fontSize={props.iconSize}/>
+    </IconButton>
+};
+
 
 export let CopyButton: FC<CopyButtonPropsType> = (props) => {
     return <>
@@ -40,15 +49,21 @@ export let CopyButton: FC<CopyButtonPropsType> = (props) => {
 };
 
 export let AddButton: FC<AddButtonPropsType> = (props) => {
-    return <Button className={style.AddButton} size={props.size} onClick={() => {
-        props.onClickFunc()
-    }}>
+    let largeButton = props.largeButton ? props.largeButton : false;
+
+    return <Button
+        className={`${style.AddButton} ${largeButton && style.AddLargeButton}`}
+        size={props.size}
+        onClick={() => {
+            props.onClickFunc()
+        }}>
         <div className={style.icon}>
             <PlaylistAddIcon color={"action"} fontSize={props.iconSize}/>
         </div>
         <div>{props.buttonText}</div>
     </Button>
 };
+
 
 export let SaveButton: FC<SaveButtonPropsType> = (props) => {
     return <Button className={style.AddButton}

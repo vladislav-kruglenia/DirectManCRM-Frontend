@@ -5,16 +5,25 @@ import {
     ADD_NEW_TARIFF_PR_CREATION,
     ADDING_TARIFFS_DATA_PR_CREATION,
     CHANGE_CLIENT_DATA_PR_CREATION,
-    CHANGE_DIRECTION_PROPERTY_PR_CREATION,
     CHANGE_NAME_PROJECT_PR_CREATION,
-    CHANGE_SERVICE_PROPERTY_PR_CREATION,
-    CHANGE_TARIFF_PROPERTY_PR_CREATION,
     DELETE_CONTACT_PR_CREATION,
-    DELETE_SERVICE_PR_CREATION, TARIFF_DELETE_PR_CREATION,
-    DELETE_TARIFFS_DATA_PR_CREATION
+    DELETE_SERVICE_PR_CREATION,
+    DELETE_TARIFFS_DATA_PR_CREATION,
+    TARIFF_DELETE_PR_CREATION
 } from "../../projectCreationReducer";
 import {ServicesType, TariffsInfoType, TariffsType} from "../../../api/Types/ApiTypes";
 import {ClientContactType} from "../../../AppGlobal/AppGlobalComponents/ContactContainer/Types/ContactContainerTypes";
+import {
+    CHANGE_DIRECTION_PAYMENT_IN_FULL_PR_CREATION,
+    CHANGE_DIRECTION_STATUS_PR_CREATION,
+    CHANGE_SERVICE_NAME_PR_CREATION,
+    CHANGE_SERVICE_PRICE_PR_CREATION,
+    CHANGE_TARIFF_DEADLINE_PR_CREATION,
+    CHANGE_TARIFF_NAME_PR_CREATION,
+    CHANGE_TARIFF_PACKET_PRICE_PR_CREATION,
+    CHANGE_TARIFF_PAYMENT_PACKAGE_PR_CREATION,
+    CHANGE_TARIFF_STATUS_PR_CREATION
+} from "../../projectCreationReducerImmer";
 
 export type ClientContactFormType = {
     name: string | null,
@@ -55,54 +64,54 @@ export type ChangeNameProjectAC = {
     propertyValue: string
 }
 export type ChangeDirectionStatusAC = {
-    type: typeof CHANGE_DIRECTION_PROPERTY_PR_CREATION,
+    type: typeof CHANGE_DIRECTION_STATUS_PR_CREATION,
     propertyName: "selected",
     idDirection: string,
     propertyValue: boolean
 }
 export type ChangePaymentInFullAC = {
-    type: typeof CHANGE_DIRECTION_PROPERTY_PR_CREATION,
+    type: typeof CHANGE_DIRECTION_PAYMENT_IN_FULL_PR_CREATION,
     propertyName: "paymentInFull",
     idDirection: string,
     propertyValue: boolean
 }
 export type ChangeTariffStatusAC = {
-    type: typeof CHANGE_TARIFF_PROPERTY_PR_CREATION,
+    type: typeof CHANGE_TARIFF_STATUS_PR_CREATION,
     propertyName: "tariffStatus",
     propertyValue: boolean,
     idTariff: string,
     idDirection: string
 }
 export type ChangePaymentPackageAC = {
-    type: typeof CHANGE_TARIFF_PROPERTY_PR_CREATION,
+    type: typeof CHANGE_TARIFF_PAYMENT_PACKAGE_PR_CREATION,
     propertyName: "paymentPackage",
     propertyValue: boolean,
     idTariff: string,
     idDirection: string
 }
 export type ChangeTariffNameAC = {
-    type: typeof CHANGE_TARIFF_PROPERTY_PR_CREATION,
+    type: typeof CHANGE_TARIFF_NAME_PR_CREATION,
     propertyName: "tariffName",
     idDirection: string,
     idTariff: string,
-    propertyValue: string
+    tariffName: string,
 }
 export type ChangePacketPriceAC = {
-    type: typeof CHANGE_TARIFF_PROPERTY_PR_CREATION,
+    type: typeof CHANGE_TARIFF_PACKET_PRICE_PR_CREATION,
     propertyName: "packetPrice",
     idDirection: string,
     idTariff: string,
     propertyValue: number
 }
 export type ChangeDeadlineTariffAC = {
-    type: typeof CHANGE_TARIFF_PROPERTY_PR_CREATION,
+    type: typeof CHANGE_TARIFF_DEADLINE_PR_CREATION,
     propertyName: "deadline",
     idDirection: string,
     idTariff: string,
     propertyValue: number
 }
 export type ChangeServiceNameAC = {
-    type: typeof CHANGE_SERVICE_PROPERTY_PR_CREATION,
+    type: typeof CHANGE_SERVICE_NAME_PR_CREATION,
     propertyName: "serviceName",
     idDirection: string,
     idTariff: string,
@@ -110,7 +119,7 @@ export type ChangeServiceNameAC = {
     propertyValue: string
 }
 export type ChangeServicePriceAC = {
-    type: typeof CHANGE_SERVICE_PROPERTY_PR_CREATION,
+    type: typeof CHANGE_SERVICE_PRICE_PR_CREATION,
     propertyName: "servicePrice",
     idDirection: string,
     idTariff: string,
@@ -149,17 +158,17 @@ export type TariffDeleteAC = {
     idTariff: string
 }
 
-export type ChangeDirectionPropertiesACType = ChangeDirectionStatusAC | ChangePaymentInFullAC
-export type ChangeServicePropertiesACType = ChangeServiceNameAC | ChangeServicePriceAC
-export type ChangeTariffPropertiesACType = ChangeTariffStatusAC
+/*export type ChangeDirectionPropertiesACType = ChangeDirectionStatusAC | ChangePaymentInFullAC
+export type ChangeServicePropertiesACType = ChangeServiceNameAC | ChangeServicePriceAC*/
+/*export type ChangeTariffPropertiesACType = ChangeTariffStatusAC
     | ChangePaymentPackageAC
     | ChangeTariffNameAC
     | ChangePacketPriceAC
-    | ChangeDeadlineTariffAC
+    | ChangeDeadlineTariffAC*/
 
-export type ChangePropertiesACType = ChangeDirectionPropertiesACType
+/*export type ChangePropertiesACType = ChangeDirectionPropertiesACType
     | ChangeServicePropertiesACType
-    | ChangeTariffPropertiesACType
+    | ChangeTariffPropertiesACType*/
 
 
 export type ActionCreatorsType = ChangeClientDataAC

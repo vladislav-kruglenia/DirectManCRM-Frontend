@@ -10,6 +10,8 @@ export enum DisplayAccessesEnum {
     facebook = 'facebook'
 }
 
+export type OrderQuestionResponseTypes = "Text" | "Accesses" | "Links"| "Contacts"
+
 export type DisplayAccesses = 'direct' | 'google' | 'instagram' | 'facebook'
 
 export type ContactContainerComponentType = "ProjectCreation" | "FillOrderQuestion"

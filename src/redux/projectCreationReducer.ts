@@ -1,40 +1,10 @@
 import {v4 as uuidv4} from 'uuid';
-import {projectCreationAPI} from "../api/api";
-import {
-    addContactType,
-    addingTariffsDataType,
-    addServiceType,
-    addTariffType,
-    changeClientDataType,
-    changeDeadlineTariffType,
-    changeDirectionStatusType,
-    changeNameProjectType,
-    changePacketPriceType,
-    changePaymentInFullType,
-    changePaymentPackageType,
-    changeServiceInfoType,
-    changeServiceNameType,
-    changeServicePriceType,
-    changeTariffNameType,
-    changeTariffStatusType,
-    CopyStateType,
-    deleteContactType,
-    deleteServiceType,
-    deleteTariffsDataType,
-    deleteTariffType,
-    editTariffsInfoType,
-    getTariffsInfoType,
-    IndexesType,
-    NewStateElementType,
-    saveOrderInfoType,
-    StateLayersType,
-    StateType
-} from "./Types/ProjectCreation/ProjectCreationReducerTypes";
-import {ServicesType, TariffsType} from "../api/Types/ApiTypes";
-import {ActionCreatorsType, AddContactAC, ChangeClientDataAC} from "./Types/ProjectCreation/ActionCreators";
+import {StateType} from "./Types/ProjectCreation/ProjectCreationReducerTypes";
+import {ActionCreatorsType} from "./Types/ProjectCreation/ActionCreators";
+
 
 export const CHANGE_DIRECTION_PROPERTY_PR_CREATION = "CHANGE_DIRECTION_PROPERTY_PR_CREATION";
-export const CHANGE_TARIFF_PROPERTY_PR_CREATION = "CHANGE_TARIFF_NAME_PR_CREATION";
+export const CHANGE_TARIFF_PROPERTY_PR_CREATION = "CHANGE_TARIFF_PROPERTY_PR_CREATION";
 export const CHANGE_SERVICE_PROPERTY_PR_CREATION = "CHANGE_SERVICE_PROPERTY_PR_CREATION";
 export const ADD_NEW_TARIFF_PR_CREATION = "ADD_NEW_TARIFF_PR_CREATION";
 export const ADD_NEW_SERVICE_PR_CREATION = "ADD_NEW_SERVICE_PR_CREATION";
@@ -245,12 +215,12 @@ let startState: StateType = {
 const projectCreationReducer = (state: StateType = startState, action: ActionCreatorsType): StateType => {
     switch (action.type) {
         // Client contacts
-        case CHANGE_CLIENT_DATA_PR_CREATION: {
+        /*case CHANGE_CLIENT_DATA_PR_CREATION: {
             return NewStateForContacts.changeClientData(state, action);
-        }
-        case ADD_NEW_CONTACT_PR_CREATION: {
+        }*/
+        /*case ADD_NEW_CONTACT_PR_CREATION: {
             return NewStateForContacts.addNewContact(state, action);
-        }
+        }*/
         case DELETE_CONTACT_PR_CREATION: {
             return {
                 ...state,
@@ -267,19 +237,19 @@ const projectCreationReducer = (state: StateType = startState, action: ActionCre
         }
 
         // Direction properties
-        case CHANGE_DIRECTION_PROPERTY_PR_CREATION: {
+        /*case CHANGE_DIRECTION_PROPERTY_PR_CREATION: {
             return NewStateElementForChangeProperty.getNewState(state, action, "directions")
-        }
+        }*/
 
         // Tariff properties
-        case CHANGE_TARIFF_PROPERTY_PR_CREATION: {
+        /*case CHANGE_TARIFF_PROPERTY_PR_CREATION: {
             return NewStateElementForChangeProperty.getNewState(state, action, "tariffs")
         }
 
         // Service properties
         case CHANGE_SERVICE_PROPERTY_PR_CREATION: {
             return NewStateElementForChangeProperty.getNewState(state, action, "services")
-        }
+        }*/
 
         // Adding new elements
         case ADDING_TARIFFS_DATA_PR_CREATION: {
@@ -299,7 +269,7 @@ const projectCreationReducer = (state: StateType = startState, action: ActionCre
             }
         }
 
-        case ADD_NEW_TARIFF_PR_CREATION: {
+        /*case ADD_NEW_TARIFF_PR_CREATION: {
             let indexDirection = Indexes.getIndexDirection(state, action);
             let newState = CopyState.copyStateTariffs(state, indexDirection);
             StateLayers.getTariffLayer(newState, indexDirection).push(action.newElement);
@@ -334,13 +304,13 @@ const projectCreationReducer = (state: StateType = startState, action: ActionCre
             console.log(newState);
             debugger
             return newState
-        }
+        }*/
         default:
             return state
     }
 };
 
-let NewStateForContacts = {
+/*let NewStateForContacts = {
     changeClientData(state: StateType, action: ChangeClientDataAC) {
         let newState = CopyState.copyStateClientContacts(state);
         let indexClient = Indexes.getIndexClientContacts(state, action);
@@ -352,10 +322,11 @@ let NewStateForContacts = {
         StateLayers.getClientContactsLayer(newState).push(action.newElement);
         return newState
     }
-};
+};*/
 
 
 // Объект создан для разгрузки кода изменения свойства на уровне направления, тарифа и услуги
+/*
 export let NewStateElementForChangeProperty: NewStateElementType = {
     // Отдает скопированное состояние в зависимости от выбранного ключа для изменения
     getNewState(state, action, elementStateKey) {
@@ -388,9 +359,10 @@ export let NewStateElementForChangeProperty: NewStateElementType = {
         return {newState, element}
     }
 };
+*/
 
 // Инкапсулирует пути до directions, namesTariffs и services
-let StateLayers: StateLayersType = {
+/*let StateLayers: StateLayersType = {
     getClientContactsLayer: (currentState) => {
         return currentState.clientContacts
     },
@@ -403,10 +375,10 @@ let StateLayers: StateLayersType = {
     getServiceLayer: (currentState, indexDirection, indexTariff) => {
         return currentState.directionsAndTariffs[indexDirection].namesTariffs[indexTariff].services
     },
-};
+};*/
 
 // Возвращает копии State на уровнях directions, tariffsNames, services, clientContacts
-let CopyState: CopyStateType = {
+/*let CopyState: CopyStateType = {
     copyStateClientContacts(state) {
         return {
             ...state,
@@ -443,10 +415,10 @@ let CopyState: CopyStateType = {
         };
         return newState
     }
-};
+};*/
 
 // Отдает индексы directions, tariffsNames и services(ищет по id)
-let Indexes: IndexesType = {
+/*let Indexes: IndexesType = {
     // Удобно вызывать при использовании деструктуризации, когда нужно сразу несколько индексов
     getIndexes(state, action) {
         return {
@@ -474,18 +446,18 @@ let Indexes: IndexesType = {
         return state.directionsAndTariffs[indexDirection].namesTariffs[indexTariff].services
             .findIndex((s: ServicesType) => s.serviceId === action.idService);
     }
-};
+};*/
 
 // actionCreators ////////////////////
 
 //Client Contacts
-export let changeClientData: changeClientDataType = (newClientData) => {
+/*export let changeClientData: changeClientDataType = (newClientData) => {
     let {idClient} = newClientData;
     return {type: CHANGE_CLIENT_DATA_PR_CREATION, idClient, newClientData}
 };
 
 export let addContact: addContactType = () => {
-    let newElement/*: ClientContactType*/ = {
+    let newElement/!*: ClientContactType*!/ = {
         idClient: uuidv4(),
         name: null,
         email: null,
@@ -504,17 +476,17 @@ export let changeNameProject: changeNameProjectType = (idNumbers = null, propert
 
 // Direction properties
 export let changeDirectionStatus: changeDirectionStatusType = (propertyValue, idDirection) => {
-    return {type: CHANGE_DIRECTION_PROPERTY_PR_CREATION, propertyName: "selected", idDirection, propertyValue}
+    return {type: CHANGE_DIRECTION_STATUS_PR_CREATION, propertyName: "selected", idDirection, propertyValue}
 };
 
 export let changePaymentInFull: changePaymentInFullType = (idDirection, propertyValue) => {
-    return {type: CHANGE_DIRECTION_PROPERTY_PR_CREATION, propertyName: "paymentInFull", idDirection, propertyValue}
+    return {type: CHANGE_DIRECTION_PAYMENT_IN_FULL_PR_CREATION, propertyName: "paymentInFull", idDirection, propertyValue}
 };
 
 // Tariff properties
 export let changeTariffStatus: changeTariffStatusType = (propertyValue, idTariff, idDirection) => {
     return {
-        type: CHANGE_TARIFF_PROPERTY_PR_CREATION,
+        type: CHANGE_TARIFF_STATUS_PR_CREATION,
         propertyName: "tariffStatus",
         propertyValue,
         idTariff,
@@ -524,7 +496,7 @@ export let changeTariffStatus: changeTariffStatusType = (propertyValue, idTariff
 
 export let changePaymentPackage: changePaymentPackageType = (propertyValue, idTariff, idDirection) => {
     return {
-        type: CHANGE_TARIFF_PROPERTY_PR_CREATION,
+        type: CHANGE_TARIFF_PAYMENT_PACKAGE_PR_CREATION,
         propertyName: "paymentPackage",
         propertyValue,
         idTariff,
@@ -535,7 +507,7 @@ export let changePaymentPackage: changePaymentPackageType = (propertyValue, idTa
 export let changeTariffName: changeTariffNameType = (idNumbers, propertyValue) => {
     let {idDirection, idTariff} = idNumbers;
     propertyValue = propertyValue === '' ? 'Название не указано' : propertyValue;
-    return {type: CHANGE_TARIFF_PROPERTY_PR_CREATION, propertyName: "tariffName", idDirection, idTariff, propertyValue}
+    return {type: CHANGE_TARIFF_NAME_PR_CREATION, propertyName: "tariffName", idDirection, idTariff, propertyValue}
 };
 
 export let changePacketPrice: changePacketPriceType = (idNumbers, propertyValue) => {
@@ -664,7 +636,7 @@ export let changeServiceInfo: changeServiceInfoType = (idNumbers, serviceData) =
     serviceName = serviceName === null ? '' : serviceName;
     dispatch(changeServiceName(idNumbers, serviceName));
     dispatch(changeServicePrice(idNumbers, servicePrice))
-};
+};*/
 // thunkCreators
 
 export default projectCreationReducer

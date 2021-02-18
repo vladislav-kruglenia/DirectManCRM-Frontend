@@ -1,0 +1,27 @@
+.EditingOrderQuestions{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 0;
+  /*border: 1px solid red;*/
+
+  .EditingOrderQuestionsContainer{
+    padding: 30px 30px 20px 30px;
+    width: 80%;
+    min-width: 320px;
+    background-color: #ffffff;
+
+    .Questions{
+      padding: 15px 10px;
+      /*border: 1px solid blueviolet;*/
+      .Question{
+        margin: 0 0 20px 0;
+      }
+    }
+
+    .SaveButton{
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}

@@ -9,6 +9,11 @@ export type EditButtonPropsType = {
     iconSize?: 'inherit' | 'default' | 'small' | 'large',
     onClickFunc: () => void
 }
+export type LinkButtonPropsType = {
+    size?: 'small' | 'medium',
+    iconSize?: 'inherit' | 'default' | 'small' | 'large',
+    link: string
+}
 
 export type CopyButtonPropsType = {
     size?: 'small' | 'medium',
@@ -22,6 +27,7 @@ export type CopyButtonPropsType = {
 export type AddButtonPropsType = {
     size?: 'small' | 'medium',
     iconSize?: 'inherit' | 'default' | 'small' | 'large',
+    largeButton?: boolean,
     buttonText: string
     onClickFunc: () => void
 }

@@ -1,0 +1,60 @@
+.Accesses{
+  /*padding: 5px 0 0 0;*/
+  /*border: 1px solid black;*/
+
+  .Access{
+    min-height: 55px;
+    margin: 10px 0 0 0;
+    /*border: 1px solid red;*/
+
+    .AccessTypeDisplay{
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin: 0 0 0 10px;
+      /*border: 1px solid blueviolet;*/
+
+      .SelectingAccessType{
+        width: 30%;
+        min-width: 140px;
+        margin: 0 5px 0 0;
+        /*border: 1px solid hotpink;*/
+      }
+
+      .EditAndDeleteButtons{
+        display: flex;
+        justify-content: space-between;
+        width: 15%;
+        min-width: 85px;
+        /*border: 1px solid palegreen;*/
+      }
+    }
+
+    .AccessTypeForm{
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      min-height: 50px;
+      /*border: 1px solid lawngreen;*/
+
+      .inputs{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 80%;
+        min-width: 225px;
+        /*border: 1px solid #3f51b5;*/
+        .textField{
+          width: 47%;
+          min-width: 225px;
+          margin: 0 0 5px 0;
+        }
+      }
+
+      .formButton{
+        margin: 0 0 0 5px;
+      }
+    }
+  }
+}
+

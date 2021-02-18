@@ -2,7 +2,8 @@ export enum NavBarLinks{
     admin = '/admin',
     prCreation = '/projectCreation',
     editTariffsData = '/editTariffsData',
-    FillOrderQuestions = '/fill-order-questions'
+    FillOrderQuestions = '/fill-order-questions',
+    EditingOrderQuestions = '/editing-order-questions',
 }
 
 export enum ProjectCreationPages {
