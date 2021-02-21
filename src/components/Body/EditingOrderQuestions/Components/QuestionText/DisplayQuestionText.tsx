@@ -10,11 +10,14 @@ import {DisplayQuestionTextProps, EditAndDeleteQuestionTextProps} from "./Types/
 export let DisplayQuestionText: FC<DisplayQuestionTextProps> = (props) => {
     return <div className={style.DisplayQuestionText}>
         <Typography
+            component={'span'}
             variant={'h5'}
             className={style.text}>
-            1. Доступы к аккаунтам, где нужно настроить рекламу? Или создаем новые?
+            {`${props.indexQuestion + 1}. ${props.questionText}`}
         </Typography>
-        <EditAndDeleteQuestionText enableEditMode={() => props.enableEditMode()}/>
+        <EditAndDeleteQuestionText
+            deleteQuestion={() => props.deleteQuestion()}
+            enableEditMode={() => props.enableEditMode()}/>
     </div>
 };
 
@@ -25,8 +28,7 @@ export let EditAndDeleteQuestionText: FC<EditAndDeleteQuestionTextProps> = (prop
             size={"medium"}
         />
         <DeleteButton
-            onClickFunc={() => {
-            }}
+            onClickFunc={() => props.deleteQuestion()}
             size={"medium"}
         />
     </div>

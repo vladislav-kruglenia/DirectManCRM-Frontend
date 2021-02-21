@@ -6,7 +6,9 @@ import {ResponseContainerProps} from "./Types/ResponseContainerTypes";
 
 export let ResponseContainer:FC<ResponseContainerProps> = (props) => {
     return <div className={style.ResponseContainer}>
-        <SelectingTypeResponse/>
-        <TypesResponseBody typeResponse={props.typeResponse}/>
+        <SelectingTypeResponse
+            editResponseType={responseType => props.editResponseType(responseType)}
+            type={props.responseParams.type}/>
+        <TypesResponseBody indexQuestion={props.indexQuestion} responseParams={props.responseParams}/>
     </div>
 };

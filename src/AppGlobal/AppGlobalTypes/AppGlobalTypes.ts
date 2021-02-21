@@ -1,4 +1,4 @@
-import {reducers} from "../../redux/ReduxStore";
+import {reducers} from "../../redux/ReduxToolkitStore";
 
 export type AppStateType = ReturnType<typeof reducers>
 

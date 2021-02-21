@@ -5,16 +5,20 @@ import {Contacts} from "./TypesResponse/Contacts/Contacts";
 import {Text} from "./TypesResponse/Text/Text";
 import {Accesses} from "./TypesResponse/Accesses/Accesses";
 import {TypesResponseBodyProps} from "./Types/TypesResponseBodyTypes";
+import {AssessesTypeResponse} from "../../../../../../../redux/Types/EditingOrderQuestions/EditingOrderQuestionsReducerTypes";
+import {NoResponsesError} from "../../../Errors/Errors";
+import {ErrorComponent} from "../../../../../../../AppGlobal/AppGlobalComponents/MaterialUI/Error/ErrorComponent";
 
 export let TypesResponseBody: FC<TypesResponseBodyProps> = (props) => {
     let typeResponse;
-    switch (props.typeResponse) {
+    switch (props.responseParams.type) {
         case "Accesses":{
-            typeResponse = <Accesses/>;
+            let response = props.responseParams as AssessesTypeResponse;
+            typeResponse = <Accesses indexQuestion={props.indexQuestion} assessesData={response.assesses}/>;
             break
         }
         case "Links":{
-            typeResponse = <Links/>;
+            typeResponse = <Links indexQuestion={props.indexQuestion} numberLinks={props.responseParams.numberLinks}/>;
             break
         }
         case "Text":{
@@ -25,9 +29,14 @@ export let TypesResponseBody: FC<TypesResponseBodyProps> = (props) => {
             typeResponse = <Contacts/>;
             break
         }
-        default:{
-            typeResponse = <div>Ошибка клиента</div> //TODO: Сделать компоненту с ошибкой
+        case "None":{
+            typeResponse = <NoResponsesError/>;
+            break
         }
+        default:{
+            typeResponse = <ErrorComponent variant={"h5"}>Ошибка клиента</ErrorComponent>
+        }
+
     }
     return <div className={style.TypesResponseBody}>
         {typeResponse}

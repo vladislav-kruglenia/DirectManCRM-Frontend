@@ -12,14 +12,16 @@ const validationSchema = yup.object({
         .max(20, "Максимум 20 ссылок")
         .required('Это поле обязательно'),
 });
-export let NumberLinksForm: FC<NumberLinksFormProps> = () => {
+export let NumberLinksForm: FC<NumberLinksFormProps> = (props) => {
     let valuesForm: ValuesFormType = {
-        numberLinks: 5
+        numberLinks: props.numberLinks
     };
     const Form = useFormik({
         initialValues: valuesForm,
         validationSchema: validationSchema,
         onSubmit: (values: ValuesFormType) => {
+            props.editNumberLinks(values.numberLinks);
+            props.exitEditMode();
             console.log(values);
         }
     });

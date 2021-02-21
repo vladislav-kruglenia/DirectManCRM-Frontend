@@ -10,7 +10,7 @@ export enum DisplayAccessesEnum {
     facebook = 'facebook'
 }
 
-export type OrderQuestionResponseTypes = "Text" | "Accesses" | "Links"| "Contacts"
+export type OrderQuestionResponseTypes = "Text" | "Accesses" | "Links"| "Contacts" | "None"
 
 export type DisplayAccesses = 'direct' | 'google' | 'instagram' | 'facebook'
 

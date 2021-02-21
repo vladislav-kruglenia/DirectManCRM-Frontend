@@ -1,5 +1,8 @@
-import {OrderQuestionResponseTypes} from "../../../../../../../../AppGlobal/AppGlobalTypes/TypesComponents";
+import {ResponseType} from "../../../../../../../../redux/Types/EditingOrderQuestions/EditingOrderQuestionsReducerTypes";
 
 export type TypesResponseBodyProps = {
-    typeResponse: OrderQuestionResponseTypes
+    indexQuestion: number,
+    responseParams: ResponseType,
 }
+
+

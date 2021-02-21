@@ -4,9 +4,10 @@ import {QuestionTextFormProps} from "./Types/QuestionTextTypes";
 
 export let QuestionTextForm: FC<QuestionTextFormProps> = (props) => {
     return <OneInputText
-        formValue={"Текст вопроса"}
+        formValue={props.questionText}
         label={"Редактировать текст вопроса"}
         textFieldSize={"medium"}
         exitEditMode={() => props.exitEditMode()}
+        editText={text => props.editQuestionText(text)}
     />
 };

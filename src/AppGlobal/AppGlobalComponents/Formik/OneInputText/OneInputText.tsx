@@ -21,7 +21,8 @@ export let OneInputText:FC<OneInputTextProps> = ({formValue, ...props}) => {
         validationSchema: validationSchema,
         onSubmit: (values: ValuesFormType) => {
             console.log(values);
-            props.exitEditMode()
+            props.exitEditMode();
+            props.editText(values.formValue)
         }
     });
 

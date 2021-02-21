@@ -3,35 +3,42 @@ import React, {FC} from "react";
 import {SelectingAccessType} from "./SelectingAccessType";
 import {
     DeleteButton,
-    EditButton, LinkButton
+    EditButton,
+    LinkButton
 } from "../../../../../../../../../../AppGlobal/AppGlobalComponents/MaterialUI/MaterialButtons/MaterialButtons";
-import {AdvertisingLinks} from "../../../../../../../../../../AppGlobal/AppGlobalTypes/InternetLinks";
-import {AccessButtonsProps, AccessTypeDisplayProps} from "../Types/AccesseTypeDisplay";
+import {AccessButtonsProps, AccessTypeDisplayProps} from "../Types/AccesseTypeDisplayTypes";
 
 export let AccessTypeDisplay:FC<AccessTypeDisplayProps> = (props) => {
     return <div className={style.AccessTypeDisplay}>
-        <SelectingAccessType/>
-        <AccessButtons openEditMode={() => props.openEditMode()}/>
+        <SelectingAccessType
+            accessData={props.accessData}
+            accessTypesArr={props.accessTypesArr}
+            editAccessType={idAccess => props.editAccessType(idAccess)}
+        />
+        <AccessButtons
+            accessData={props.accessData}
+            openEditMode={() => props.openEditMode()}
+            deleteAccess={() => props.deleteAccess()}
+        />
     </div>
 };
 
 export let AccessButtons:FC<AccessButtonsProps> = (props) => {
     return <div className={style.EditAndDeleteButtons}>
         <LinkButton
-            link={AdvertisingLinks.direct}
+            link={props.accessData.accessLink}
             size={'small'}
             iconSize={"default"}
         />
         <EditButton
-            onClickFunc={() => props.openEditMode()}
             size={'small'}
             iconSize={"default"}
+            onClickFunc={() => props.openEditMode()}
         />
         <DeleteButton
-            onClickFunc={() => {
-            }}
             size={"small"}
             iconSize={"default"}
+            onClickFunc={() => props.deleteAccess()}
         />
     </div>
 };
