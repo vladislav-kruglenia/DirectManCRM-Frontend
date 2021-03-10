@@ -1,0 +1,13 @@
+.Projects{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border: 1px solid blueviolet;
+
+  .ProjectsContainer{
+    width: 48%;
+    min-width: 225px;
+    margin: 0 0 15px 0;
+    //border: 1px solid chocolate;
+  }
+}

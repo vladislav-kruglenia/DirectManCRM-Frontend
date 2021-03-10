@@ -28,7 +28,11 @@ export let Question: FC<QuestionPropsTypes> = (props) => {
         <Typography className={style.question} variant={'h5'}>
             {`${props.indexQuestion + 1}. ${props.question}`}
         </Typography>
-        <TypesResponses indexQuestion={props.indexQuestion} response={props.response}/>
+        <TypesResponses
+            indexQuestion={props.indexQuestion}
+            response={props.response}
+            displayOnly={props.displayOnly}
+        />
     </div>;
 };
 
@@ -38,11 +42,11 @@ export let TypesResponses: FC<TypesResponsesPropsType> = (props) => {
 
     let responseContactActionCreators: ResponseContactActionCreatorsType = {
         editResponseContact: (indexQuestion: number, indexContact: number, contactData: ClientContactType) => {
-            debugger
+        debugger
             dispatch(actionCreators.editResponseContact(indexQuestion, indexContact, contactData))
         },
         deleteResponseContact: (indexQuestion: number, indexContact: number) => {
-            debugger
+        debugger
             dispatch(actionCreators.deleteResponseContact(indexQuestion, indexContact))
         },
         addResponseContact: (indexQuestion: number) => {
@@ -78,23 +82,27 @@ export let TypesResponses: FC<TypesResponsesPropsType> = (props) => {
                 indexQuestion={props.indexQuestion}
                 responseData={responseData.textData}
                 isChanged={responseData.isChanged}
+                displayOnly={props.displayOnly}
                 editResponseText={editResponseText}
             />;
         case "Accesses":
             return <ResponseAccesses responseData={props.response.data as Array<ResponseAccessData>}
                                      editResponseAccess={editResponseAccess}
                                      indexQuestion={props.indexQuestion}
+                                     displayOnly={props.displayOnly}
             />;
         case "Links":
             return <ResponseLinks responseData={props.response.data as ResponseLinksData}
                                   responseLinksObj={responseLinkActionCreators}
                                   indexQuestion={props.indexQuestion}
+                                  displayOnly={props.displayOnly}
             />;
         case "Contacts":
             return <ResponseContacts
                 responseData={props.response.data as ResponseContactsData}
                 indexQuestion={props.indexQuestion}
                 actionCreators={responseContactActionCreators}
+                displayOnly={props.displayOnly}
             />;
 
         default:

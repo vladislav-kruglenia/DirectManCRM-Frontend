@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import style from "./EditingOrderQuestions.module.scss"
-import {AddButton, SaveButton} from "../../../AppGlobal/AppGlobalComponents/MaterialUI/MaterialButtons/MaterialButtons";
+import {AddButtonText, SaveButton} from "../../../AppGlobal/AppGlobalComponents/MaterialUI/MaterialButtons/MaterialButtons";
 import {QuestionText} from "./Components/QuestionText/QuestionText";
 import {ResponseContainer} from "./Components/ResponseContainer/ResponseContainer";
 import {EditResponseTypeAction, QuestionActions, QuestionProps} from "./Types/EditingOrderQuestionsTypes";
@@ -80,7 +80,7 @@ export let Questions = () => {
     return <div className={style.Questions}>
         <div className={style.questionContainer}>
             {questionsArrayComponents}
-            <AddButton
+            <AddButtonText
                 buttonText={'Добавить вопрос'}
                 size={"medium"}
                 onClickFunc={() => {addQuestionAction()}}

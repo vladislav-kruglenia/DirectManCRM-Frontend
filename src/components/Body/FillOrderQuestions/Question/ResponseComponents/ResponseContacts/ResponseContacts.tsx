@@ -2,7 +2,7 @@ import React, {FC} from "react";
 import style from "./ResponseContacts.module.scss"
 import {ResponseContactsPropsType} from "../Types/ResponseContactsTypes";
 import {ContactContainer} from "../../../../../../AppGlobal/AppGlobalComponents/ContactContainer/ContactContainer";
-import {AddButton} from "../../../../../../AppGlobal/AppGlobalComponents/MaterialUI/MaterialButtons/MaterialButtons";
+import {AddButtonText} from "../../../../../../AppGlobal/AppGlobalComponents/MaterialUI/MaterialButtons/MaterialButtons";
 import {NoContacts} from "../../../../../../AppGlobal/AppGlobalComponents/Errors/ErrorsComponents";
 
 
@@ -16,14 +16,12 @@ export let ResponseContacts: FC<ResponseContactsPropsType> = (props) => {
             deleteResponseContact={props.actionCreators.deleteResponseContact}
             editResponseContact={props.actionCreators.editResponseContact}
             contacts={contact}
+            displayOnly={props.displayOnly}
         />)
         : <NoContacts/>;
 
-    return <div className={style.ResponseContacts}>
-        <div className={style.contactsContainer}>
-            {Contacts}
-        </div>
-        <AddButton
+    const addButton = !props.displayOnly
+        ? <AddButtonText
             iconSize={"small"}
             size={"small"}
             buttonText={'Добавить контакт'}
@@ -31,5 +29,13 @@ export let ResponseContacts: FC<ResponseContactsPropsType> = (props) => {
                 props.actionCreators.addResponseContact(props.indexQuestion)
             }}
         />
+        : null;
+
+
+    return <div className={style.ResponseContacts}>
+        <div className={style.contactsContainer}>
+            {Contacts}
+        </div>
+        {addButton}
     </div>
 };

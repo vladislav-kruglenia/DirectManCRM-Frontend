@@ -4,12 +4,14 @@ export type ResponseTextPropsTypes = {
     indexQuestion: number,
     responseData: string,
     isChanged: boolean,
-    editResponseText: EditResponseText
+    editResponseText: EditResponseText,
+    displayOnly: boolean,
 }
 
 export type DisplayResponseType = {
     response: string,
-    setEditMode: (value: boolean) => void
+    setEditMode: (value: boolean) => void,
+    displayOnly: boolean,
 }
 export type EditResponseFormProps = {
     response: string,

@@ -17,6 +17,10 @@ let NawBar = () => {
             <ListItemIcon> <SupervisorAccountIcon/> </ListItemIcon>
             <ListItemText primary={'Панель администратора'}/>
         </ListItem>
+        <ListItem button component={Link} to={NavBarLinks.ClientAccount}>
+            <ListItemIcon> <SupervisorAccountIcon/> </ListItemIcon>
+            <ListItemText primary={'Аккаунт клиента'}/>
+        </ListItem>
         <ListItem button component={Link} to={NavBarLinks.prCreation}>
             <ListItemIcon> <AssignmentTurnedInIcon/> </ListItemIcon>
             <ListItemText primary={'Создание проекта'}/>
@@ -33,7 +37,6 @@ let NawBar = () => {
             <ListItemIcon> <WorkIcon/> </ListItemIcon>
             <ListItemText primary={'Редактирование вопросов брифа'}/>
         </ListItem>
-
     </List>
 };
 

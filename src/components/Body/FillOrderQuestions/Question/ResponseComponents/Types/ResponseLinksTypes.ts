@@ -8,7 +8,8 @@ import {DeleteResponseLink, EditResponseLink, ResponseLinkActionCreatorsType} fr
 export type ResponseLinksPropsType = {
     responseData: ResponseLinksData,
     indexQuestion: number,
-    responseLinksObj: ResponseLinkActionCreatorsType
+    responseLinksObj: ResponseLinkActionCreatorsType,
+    displayOnly: boolean,
 }
 
 export type ResponseLinkPropsType = {
@@ -17,6 +18,7 @@ export type ResponseLinkPropsType = {
     linkData: LinkData,
     editLinkData: EditResponseLink,
     deleteLinkData: DeleteResponseLink,
+    displayOnly: boolean,
 }
 
 export type DisplayResponseLinksPropsType = {
@@ -25,6 +27,7 @@ export type DisplayResponseLinksPropsType = {
     linkData: LinkData,
     setEditMode: SetEditModeType,
     deleteLinkData: DeleteResponseLink,
+    displayOnly: boolean,
 }
 
 export type ResponseLinksFormType = {

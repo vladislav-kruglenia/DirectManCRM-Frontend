@@ -7,6 +7,7 @@ import {NavBarLinks} from "../../AppGlobal/AppGlobalTypes/LinksComponents";
 import {FillOrderQuestions} from "./FillOrderQuestions/FillOrderQuestions";
 import {ProjectCreationEnum} from "../../AppGlobal/AppGlobalTypes/TypesComponents";
 import {EditingOrderQuestions} from "./EditingOrderQuestions/EditingOrderQuestions";
+import {ClientAccount} from "./Accounts/ClientAccount/ClientAccount";
 
 
 
@@ -20,6 +21,7 @@ let Body = () => {
             <Route path={NavBarLinks.editTariffsData} render={()=><ProjectCreation type={ProjectCreationEnum.editTariffsData}/>}/>
             <Route path={NavBarLinks.FillOrderQuestions} render={()=><FillOrderQuestions/>}/>
             <Route path={NavBarLinks.EditingOrderQuestions} render={()=><EditingOrderQuestions/>}/>
+            <Route path={NavBarLinks.ClientAccount} render={()=><ClientAccount/>}/>
         </Switch>
     </div>
 };

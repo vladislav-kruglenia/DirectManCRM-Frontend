@@ -1,0 +1,28 @@
+.TabsComponent{
+  display: flex;
+  align-items: center;
+
+  .TabLabel{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: none;
+    max-width: 200px;
+
+
+
+    .tabTitle{
+      margin: 0 5px 0 0;
+
+      white-space: nowrap; /* Запрещаем перенос строк */
+      overflow: hidden; /* Обрезаем все, что не помещается в область */
+      padding: 5px; /* Поля вокруг текста */
+      text-overflow: ellipsis; /* Добавляем многоточие */
+    }
+    .clearButton{
+      display: flex;
+      align-items: center;
+      //border: 1px solid darkviolet;
+    }
+  }
+}

@@ -6,6 +6,7 @@ export type ResponseAccessesPropsType = {
     responseData: Array<ResponseAccessData>,
     editResponseAccess: EditResponseAccess,
     indexQuestion: number,
+    displayOnly: boolean,
 }
 
 export type ResponseAccessPropsType = {
@@ -13,7 +14,8 @@ export type ResponseAccessPropsType = {
     indexQuestion: number,
     indexAccess: number,
     login: string,
-    password: string
+    password: string,
+    displayOnly: boolean,
     editResponseAccess: EditResponseAccess,
 }
 

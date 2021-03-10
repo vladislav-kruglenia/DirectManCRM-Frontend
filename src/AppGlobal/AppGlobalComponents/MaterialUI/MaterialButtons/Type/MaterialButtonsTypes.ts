@@ -4,6 +4,22 @@ export type DeleteButtonPropsType = {
     onClickFunc: () => void
 }
 
+export type AddButtonIconPropsType = {
+    size?: 'small' | 'medium',
+    iconSize?: 'inherit' | 'default' | 'small' | 'large',
+    onClickFunc: () => void
+}
+
+
+
+export type ClearButtonPropsType = {
+    size?: 'small' | 'medium',
+    iconSize?: 'inherit' | 'default' | 'small' | 'large',
+    onClickFunc: () => void
+}
+
+
+
 export type EditButtonPropsType = {
     size?: 'small' | 'medium',
     iconSize?: 'inherit' | 'default' | 'small' | 'large',

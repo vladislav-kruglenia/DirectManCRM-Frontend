@@ -1,12 +1,12 @@
 import React, {FC} from 'react';
 import {Redirect, Route, Switch} from "react-router-dom";
-import TariffPlans from "./TariffPlans/TariffPlans";
-import ProjectEditing from "./ProjectEditing/ProjectEditing";
+import TariffPlans from "./Components/TariffPlans/TariffPlans";
+import ProjectEditing from "./Components/ProjectEditing/ProjectEditing";
 import style from './Styles/ProjectCreation.module.scss'
-import {ProjectName} from "./ProjectEditing/ProjectName/ProjectName";
-import {ClientContactsComponent} from "./ProjectEditing/ClientContacts/ClientContactsComponent";
+import {ProjectName} from "./Components/ProjectEditing/ProjectName/ProjectName";
+import {ClientContactsComponent} from "./Components/ProjectEditing/ClientContacts/ClientContactsComponent";
 import {PropsTypes} from "./Types/ProjectCreationTypes";
-import {ChoiceDirection} from "./ChoiceDirection/ChoiceDirection";
+import {ChoiceDirection} from "./Components/ChoiceDirection/ChoiceDirection";
 import {Typography} from "@material-ui/core";
 import {ProjectCreationEnum} from "../../../AppGlobal/AppGlobalTypes/TypesComponents";
 

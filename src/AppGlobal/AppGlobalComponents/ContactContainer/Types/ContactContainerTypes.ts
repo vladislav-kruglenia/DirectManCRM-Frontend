@@ -24,6 +24,7 @@ export type ContactContainerProps = {
     indexContact?: number,
     editResponseContact?: EditResponseContact,
     deleteResponseContact?: DeleteResponseContact,
+    displayOnly?: boolean
 }
 
 

@@ -4,5 +4,6 @@ import {ResponseContactsData} from "../../../../../../redux/Types/FillOrderQuest
 export type ResponseContactsPropsType = {
     responseData: ResponseContactsData,
     indexQuestion: number,
-    actionCreators: ResponseContactActionCreatorsType
+    actionCreators: ResponseContactActionCreatorsType,
+    displayOnly: boolean,
 }

@@ -15,3 +15,11 @@ export type OrderQuestionResponseTypes = "Text" | "Accesses" | "Links"| "Contact
 export type DisplayAccesses = 'direct' | 'google' | 'instagram' | 'facebook'
 
 export type ContactContainerComponentType = "ProjectCreation" | "FillOrderQuestion"
+
+export enum ProjectsTypesEnum {
+    ProjectsInProgress = 'ProjectsInProgress',
+    FrozenProjects = 'FrozenProjects',
+    ManagedProjects = 'ManagedProjects',
+    CompletedProjects = 'CompletedProjects',
+
+}
