@@ -1,11 +1,12 @@
 import React from 'react';
-import {BrowserRouter} from "react-router-dom"
+import {BrowserRouter, Route} from "react-router-dom"
 import Header from "./components/Header/Header";
 import {Provider} from "react-redux";
 import "./App.css"
 import BodyContainer from "./components/Body/BodyContainerUI";
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
 import {store} from "./redux/ReduxToolkitStore";
+import {QueryParamProvider} from "use-query-params";
 
 const theme = createMuiTheme({});
 
@@ -19,11 +20,13 @@ let App = () => {
 const AppContainer = () => {
     return <>
         <BrowserRouter>
-            <Provider store={store}>
-                <ThemeProvider theme={theme}>
-                    <App/>
-                </ThemeProvider>
-            </Provider>
+            <QueryParamProvider ReactRouterRoute={Route}>
+                <Provider store={store}>
+                    <ThemeProvider theme={theme}>
+                        <App/>
+                    </ThemeProvider>
+                </Provider>
+            </QueryParamProvider>
         </BrowserRouter>
     </>
 };

@@ -6,6 +6,7 @@ import {combineReducers, configureStore, Store} from "@reduxjs/toolkit";
 import {AppStateType} from "../AppGlobal/AppGlobalTypes/AppGlobalTypes";
 import projectCreationReducer from "./projectCreationReducerImmer";
 import editingOrderQuestionsReducer from "./editingOrderQuestionsReducer";
+import clientAccountReducer from "./AccountsReducers/ClientAccountReducer/clientAccountReducer"
 
 export const reducers = combineReducers({
     adminPage: adminReducer,
@@ -13,6 +14,7 @@ export const reducers = combineReducers({
     projectCreation: projectCreationReducer,
     fillOrderQuestions: fillOrderQuestionsReducer,
     editingOrderQuestions: editingOrderQuestionsReducer,
+    clientAccount: clientAccountReducer,
     form: formReducer
 });
 

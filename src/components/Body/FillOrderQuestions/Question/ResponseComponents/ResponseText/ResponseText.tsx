@@ -15,31 +15,35 @@ import {DisplayTypeEnum} from "../../../../../../AppGlobal/AppGlobalComponents/D
 
 export let ResponseText: FC<ResponseTextPropsTypes> = (props) => {
     let [editMode, setEditMode] = useState(!props.isChanged);
-    return <div>
-        <ValueDisplay
-            type={FormTypeEnum.grandForm}
-            editModeStatus={editMode}
-            displayType={DisplayTypeEnum.component}
-            setEditModeInProps={value => setEditMode(value)}
-            isNotAllowedToExitEditMode={!props.isChanged}
-            displayComponent={<DisplayResponse response={props.responseData} setEditMode={(value: boolean) => setEditMode(value)}/>}
-            grandFormComponent={<EditResponseForm
-                indexQuestion={props.indexQuestion}
-                response={props.responseData}
-                setEditMode={(value: boolean) => setEditMode(value)}
-                editResponseText={props.editResponseText}
-            />}
-        />
-        {/*{editMode
-            ? <EditResponseForm
-                indexQuestion={props.indexQuestion}
-                response={props.responseData}
-                setEditMode={(value: boolean) => setEditMode(value)}
-                editResponseText={props.editResponseText}
+    if(!props.displayOnly){
+        return <div>
+            <ValueDisplay
+                type={FormTypeEnum.grandForm}
+                editModeStatus={editMode}
+                displayType={DisplayTypeEnum.component}
+                setEditModeInProps={value => setEditMode(value)}
+                isNotAllowedToExitEditMode={!props.isChanged}
+                displayComponent={<DisplayResponse
+                    response={props.responseData}
+                    displayOnly={false}
+                    setEditMode={(value: boolean) => setEditMode(value)}
+                />}
+                grandFormComponent={<EditResponseForm
+                    indexQuestion={props.indexQuestion}
+                    response={props.responseData}
+                    setEditMode={(value: boolean) => setEditMode(value)}
+                    editResponseText={props.editResponseText}
+                />}
             />
-            : <DisplayResponse response={props.responseData} setEditMode={(value: boolean) => setEditMode(value)}/>
-        }*/}
-    </div>;
+        </div>;
+    } else {
+        return <DisplayResponse
+            response={props.responseData}
+            displayOnly={true}
+            setEditMode={(value: boolean) => setEditMode(value)}
+        />
+    }
+
 };
 
 export let DisplayResponse: FC<DisplayResponseType> = (props) => {

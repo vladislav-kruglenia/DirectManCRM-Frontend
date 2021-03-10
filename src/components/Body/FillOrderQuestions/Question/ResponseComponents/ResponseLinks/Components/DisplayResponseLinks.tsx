@@ -7,15 +7,8 @@ import {
 } from "../../../../../../../AppGlobal/AppGlobalComponents/MaterialUI/MaterialButtons/MaterialButtons";
 
 export let DisplayResponseLinks: FC<DisplayResponseLinksPropsType> = (props) => {
-    return <div className={style.productName}>
-        <span>{`${props.indexLink + 1}. `}</span>
-        <a
-            rel={"noopener noreferrer"}
-            target={"_blank"}
-            href={props.linkData.productLink}>
-            {props.linkData.productName}
-        </a>
-        <span className={style.helperButtons}>
+    const displayButtons = !props.displayOnly
+        ?  <span className={style.helperButtons}>
                 <EditButton
                     onClickFunc={(() => props.setEditMode(true))}
                     iconSize={"small"}
@@ -26,6 +19,17 @@ export let DisplayResponseLinks: FC<DisplayResponseLinksPropsType> = (props) => 
                     iconSize={"small"}
                     size={'small'}
                 />
-            </span>
+        </span>
+        : null;
+
+    return <div className={style.productName}>
+        <span>{`${props.indexLink + 1}. `}</span>
+        <a
+            rel={"noopener noreferrer"}
+            target={"_blank"}
+            href={props.linkData.productLink}>
+            {props.linkData.productName}
+        </a>
+        {displayButtons}
     </div>
 };

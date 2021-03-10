@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import style from "./FillOrderQuestions.module.scss"
 import {Typography} from "@material-ui/core";
 import {useSelector} from "react-redux";
@@ -6,6 +6,7 @@ import {getNoDataStatusSelector, getQuestionsSelector} from "./FillOrderQuestion
 import {Question} from "./Question/Question";
 import {QuestionAndResponse} from "../../../redux/Types/FillOrderQuestions/FillOrderQuestionsReducerTypes";
 import {SaveButton} from "../../../AppGlobal/AppGlobalComponents/MaterialUI/MaterialButtons/MaterialButtons";
+import {QuestionsProps} from "./Types/FillOrderQuestionsTypes";
 
 export let FillOrderQuestions = () => {
     return <div className={style.FillOrderQuestions}>
@@ -16,9 +17,15 @@ export let FillOrderQuestions = () => {
     </div>
 };
 
-export let Questions = () => {
+export let Questions:FC<QuestionsProps> = (props) => {
     let questions = useSelector(getQuestionsSelector);
     let isNoData = useSelector(getNoDataStatusSelector);
+
+    const saveButton = !props.displayOnly
+        ? <div className={style.SaveButton}>
+            <SaveButton buttonText={'Отправить бриф'} size={"large"} disabled={isNoData} onClickFunc={()=>{}}/>
+        </div>
+        : null;
 
     let questionsComponents = questions.length > 0
         ? questions.map((question: QuestionAndResponse, index: number) => <Question
@@ -26,15 +33,14 @@ export let Questions = () => {
                 response={question.response}
                 question={question.question}
                 indexQuestion={index}
+                displayOnly={props.displayOnly || false}
             />
         )
         : "Упс.. Кажется брифе отсутствуют вопросы. Напишите нам в лс";
 
     return <div className={style.questions}>
         {questionsComponents}
-        <div className={style.SaveButton}>
-            <SaveButton buttonText={'Отправить бриф'} size={"large"} disabled={isNoData} onClickFunc={()=>{}}/>
-        </div>
+        {saveButton}
     </div>
 };
 

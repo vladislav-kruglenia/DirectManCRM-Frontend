@@ -8,10 +8,12 @@ import {ClientContactType} from "../../../../../AppGlobal/AppGlobalComponents/Co
 export type QuestionPropsTypes = {
     indexQuestion: number,
     question: string,
+    displayOnly: boolean,
     response: ResponsesTypes
 }
 
 export type TypesResponsesPropsType = {
+    displayOnly: boolean,
     response: ResponsesTypes,
     indexQuestion: number
 }

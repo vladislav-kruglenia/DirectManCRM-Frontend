@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from "react";
 import style from "./Accesses.module.scss"
 import styleTypesResponseBody from "../../TypesResponseBody.module.scss"
-import {AddButton} from "../../../../../../../../../AppGlobal/AppGlobalComponents/MaterialUI/MaterialButtons/MaterialButtons";
+import {AddButtonText} from "../../../../../../../../../AppGlobal/AppGlobalComponents/MaterialUI/MaterialButtons/MaterialButtons";
 import {AccessTypeDisplay} from "./Components/AccessTypeDisplay";
 import {AccessTypeForm} from "./Components/AccessTypeForm";
 import {ValueDisplay} from "../../../../../../../../../AppGlobal/AppGlobalComponents/DisplayingDifferentData/InputEditMode";
@@ -76,7 +76,7 @@ export let Accesses: FC<AccessesProps> = (props) => {
             Вам нужно указать название доступа и ссылку на него:
         </Typography>
         {accessesComponentsArr}
-        <AddButton
+        <AddButtonText
             buttonText={"Добавить доступ"} size={"small"} iconSize={"small"}
             onClickFunc={() => addAccessTypeAction(props.indexQuestion)}
         />
