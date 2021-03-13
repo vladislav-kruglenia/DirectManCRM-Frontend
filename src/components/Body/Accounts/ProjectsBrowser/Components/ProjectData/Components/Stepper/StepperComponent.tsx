@@ -24,7 +24,7 @@ export function HorizontalLinearStepper() {
         return skipped.has(step);
     };*/
     return (
-        <Stepper alternativeLabel className={style.Stepper} activeStep={activeStep}>
+        <Stepper activeStep={activeStep}>
             <Step completed={true}>
                 <StepLabel>Заполнение брифа</StepLabel>
             </Step>
@@ -35,8 +35,10 @@ export function HorizontalLinearStepper() {
                 <StepLabel>Настройка завершена</StepLabel>
             </Step>
             <Step completed={false}>
-                <StepLabel>Ведение рекламы</StepLabel>
+                <StepLabel optional={<Typography variant="caption">Optional</Typography>}>Ведение рекламы</StepLabel>
             </Step>
         </Stepper>
     );
 }
+
+

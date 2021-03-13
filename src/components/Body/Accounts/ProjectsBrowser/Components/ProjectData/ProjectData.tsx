@@ -1,5 +1,3 @@
-import React, {FC} from "react";
-import style from "./ProjectData.module.scss"
 import {ProjectName} from "./Components/ProjectName/ProjectName";
 import {StepperComponent} from "./Components/Stepper/StepperComponent";
 import {Deadline} from "./Components/Deadline/Deadline";
@@ -9,19 +7,19 @@ import {OrderedServices} from "./Components/OrderedServices/OrderedServices";
 import {StagesWorkMessages} from "./Components/StagesWorkMessages/StagesWorkMessages";
 import {Brief} from "./Components/Brief/Brief";
 import {Comments} from "./Components/Comments/Comments";
+import React, {FC} from "react";
 import {ProjectDataProps} from "./Types/ProjectData.types";
 
-
-export let ProjectData: FC<ProjectDataProps> = () => {
-    return <div className={style.ProjectData}>
+export let ProjectData:FC<ProjectDataProps> = () => {
+    return <div>
         <ProjectName/>
         <StepperComponent/>
         <Deadline/>
         <Debt/>
-        <OrderedServices/>
         <ProjectNotes/>
-        <Brief/>
+        <OrderedServices/>
         <StagesWorkMessages/>
+        <Brief/>
         <Comments/>
     </div>
 };
