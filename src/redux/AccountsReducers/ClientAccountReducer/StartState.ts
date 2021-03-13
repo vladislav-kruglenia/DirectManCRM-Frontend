@@ -32,7 +32,7 @@ export class StartStateClientAccount {
                 },
             ],
             links: this.links,
-            indexMainLink: this.indexMainLink
+            indexMainLink: this.indexMainLink,
         }
     }
 }
