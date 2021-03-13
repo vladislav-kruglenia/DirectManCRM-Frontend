@@ -1,9 +1,13 @@
 import style from "./OrderedServices.module.scss";
 import React, {useState} from "react";
 import {Checkbox, FormControlLabel, FormGroup, LinearProgress, Typography} from "@material-ui/core";
+import {TitleComponent} from "../Title/TitleComponent";
+import DoneAllIcon from '@material-ui/icons/DoneAll';
 
 export let OrderedServices = () => {
     return <div className={style.ProjectName}>
+        <TitleComponent titleIcon={<DoneAllIcon />} titleText={'Заказанные услуги'}/>
+
         <div className={style.TariffName}>Тариф СТАНДАРТ</div>
         <LinearProgressComponent/>
         <ServicesCheckboxes/>

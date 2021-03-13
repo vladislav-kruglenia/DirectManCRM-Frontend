@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import style from "./ProjectSelectionContainer.module.scss";
-import ProjectsComponentStyle from "../ProjectSelection.module.scss";
+import ProjectsSelectionStyle from "../ProjectSelection.module.scss";
 import {ProjectMainInfoProps, ProjectsContainerProps} from "./Types/ProjectsContainerTypes";
 import {Paper, Typography} from "@material-ui/core";
 
@@ -13,18 +13,33 @@ export let ProjectsSelectionContainer: FC<ProjectsContainerProps> = (props) => {
         updateProjectMainData={projectData => props.updateProjectMainData(projectData)}
     />);
 
-    return <Paper className={ProjectsComponentStyle.ProjectsContainer}>
-        <Typography variant={'h6'}>{props.title}</Typography>
+    return <Paper className={ProjectsSelectionStyle.ProjectsContainer}>
+        <Typography className={ProjectsSelectionStyle.projectsSelectionContainerTitle}
+                    component={'div'} variant={'h6'}>
+            {props.title}
+        </Typography>
+        <ProjectMainInfoTitles/>
         {projects}
     </Paper>
 };
 
 export let ProjectMainInfo:FC<ProjectMainInfoProps> = (props) => {
-    return <div className={style.ProjectMainInfo} onClick={() => {
+    return <div className={ProjectsSelectionStyle.ProjectMainInfo} onClick={() => {
         props.updateProjectMainData(props.projectMainData)
     }}>
-        <div className={style.ProjectName}>{props.projectMainData.projectName}</div>
-        <div className={style.ProjectDeadline}>01/06/2021</div>
+        <div className={ProjectsSelectionStyle.ProjectName}>{props.projectMainData.projectName}</div>
+        <div className={ProjectsSelectionStyle.ProjectDeadline}>01/06/2021</div>
     </div>;
 };
 
+
+export let ProjectMainInfoTitles = () => {
+    return <div className={ProjectsSelectionStyle.ProjectMainInfoTitles}>
+        <div className={ProjectsSelectionStyle.ProjectName}>
+            <Typography component={'div'} className={ProjectsSelectionStyle.titleProjectMainInfo}>Название проекта</Typography>
+        </div>
+        <div className={ProjectsSelectionStyle.ProjectDeadline}>
+            <Typography component={'div'} className={ProjectsSelectionStyle.titleProjectMainInfo}>Дата окончания работы</Typography>
+        </div>
+    </div>
+};

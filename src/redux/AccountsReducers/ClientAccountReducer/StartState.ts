@@ -9,7 +9,6 @@ export class StartStateClientAccount {
             {link: ClientAccountPages.Instructions, linkName: "Инструкции"},
             {link: ClientAccountPages.Feedback, linkName: "Обратная связь"}
         ];
-    //fdslfjdsfs
 
     indexMainLink = this._getStartIndexMainLink(this.links) === -1 ? 0 : this._getStartIndexMainLink(this.links);
 

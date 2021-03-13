@@ -51,7 +51,7 @@ export let ProjectsBrowser:FC<ProjectsBrowserProps> = ({projectsViewed, currentP
 
 
 
-    return <Paper className={style.Project}>
+    return <Paper className={style.ProjectsBrowser}>
         <TabsComponent
             projectsViewed={projectsViewed}
             currentProjectIndex={currentProjectIndex}
@@ -59,13 +59,15 @@ export let ProjectsBrowser:FC<ProjectsBrowserProps> = ({projectsViewed, currentP
             addTab={() => addTabAction()}
         />
         <Divider/>
-        <ProjectsBody
-            projectsViewed={projectsViewed}
-            currentProjectIndex={currentProjectIndex}
-            projectIdUrl={projectIdUrl}
-            addTab={() => addTabAction()}
-            updateProjectMainData={projectMainData => updateProjectMainDataAction(projectMainData)}
-        />
+        <div className={style.projectsBody}>
+            <ProjectsBody
+                projectsViewed={projectsViewed}
+                currentProjectIndex={currentProjectIndex}
+                projectIdUrl={projectIdUrl}
+                addTab={() => addTabAction()}
+                updateProjectMainData={projectMainData => updateProjectMainDataAction(projectMainData)}
+            />
+        </div>
     </Paper>
 };
 

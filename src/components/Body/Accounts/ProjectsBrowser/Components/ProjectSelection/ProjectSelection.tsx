@@ -6,7 +6,7 @@ import {ProjectSelectionProps} from "./Types/ProjectSelection.types";
 
 export let ProjectSelection: FC<ProjectSelectionProps> = ({currentProjectIndex, ...props}) => {
 
-    return <div className={style.Projects}>
+    return <div className={style.ProjectSelection}>
         <ProjectsSelectionContainer
             title={'Проекты в работе'}
             projectsMainData={projectsMainDataModel}

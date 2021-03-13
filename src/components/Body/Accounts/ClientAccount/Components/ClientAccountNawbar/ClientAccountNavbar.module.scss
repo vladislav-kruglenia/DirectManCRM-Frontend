@@ -1,4 +1,4 @@
-.ClientAccountNavBar{
+.ClientAccountNavBar {
   display: flex;
   flex-direction: column;
   min-width: 280px;
@@ -8,4 +8,26 @@
   padding: 5px 0 0 0;
   height: 50%;
   /*border: 1px solid blueviolet;*/
+
+  .projectsCollapse {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+    //border: 1px solid black;
+
+    .ListItemProject {
+      width: 255px;
+      //margin: 10px 10px 0 10px;
+      //border: 1px solid hotpink;
+
+      .TabIcon {
+        margin: 0 5px 0 0;
+      }
+
+      .itemTitle {
+        word-break: break-word;
+      }
+    }
+  }
 }
