@@ -10,6 +10,7 @@ export class StartStateClientAccount {
             {link: ClientAccountPages.Feedback, linkName: "Обратная связь"}
         ];
 
+    indexMainLink = this._getStartIndexMainLink(this.links) === -1 ? 0 : this._getStartIndexMainLink(this.links);
 
     private _getStartIndexMainLink(links: LinkClientAccountBody[]): number  {
         const PathName = window.location.pathname;
@@ -31,7 +32,7 @@ export class StartStateClientAccount {
                 },
             ],
             links: this.links,
-            indexMainLink: this._getStartIndexMainLink(this.links)
+            indexMainLink: this.indexMainLink
         }
     }
 }
