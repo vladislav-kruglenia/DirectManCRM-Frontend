@@ -1,4 +1,4 @@
-import {LinkClientAccountBody} from "../../../../../../../../../redux/AccountsReducers/ClientAccountReducer/Types/ClientAccountReducerTypes";
+import {LinkClientAccountBody} from "../../../../../../../../../redux/AccountsReducers/ClientAccountReducer/Types/ClientAccountReducer.types";
 
 export type BreadcrumbsComponentProps = {
     linkData: LinkClientAccountBody,

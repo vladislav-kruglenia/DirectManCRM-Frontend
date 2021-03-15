@@ -1,6 +1,6 @@
 import {AppStateType} from "../../../AppGlobal/AppGlobalTypes/AppGlobalTypes";
 import {createSelector} from "reselect";
-import {ProjectTabData} from "./Types/ClientAccountReducerTypes";
+import {ProjectTabData} from "./Types/ClientAccountReducer.types";
 
 const getProjectsViewed = (state: AppStateType) => state.clientAccount.viewedProjects;
 const getCurrentProjectIndex = (state: AppStateType) => state.clientAccount.currentProjectIndex;

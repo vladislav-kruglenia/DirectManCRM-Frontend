@@ -4,7 +4,7 @@ import {
     ProjectTabData,
     StartStateType,
     UpdateProjectMainDataPayload
-} from "./Types/ClientAccountReducerTypes";
+} from "./Types/ClientAccountReducer.types";
 import {v4 as uuidv4} from 'uuid';
 import {StartStateClientAccount} from "./StartState";
 

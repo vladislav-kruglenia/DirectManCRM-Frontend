@@ -2,7 +2,7 @@ import React from "react";
 import style from "./ClientAccount.module.scss";
 import {ClientAccountNavBar} from "./Components/ClientAccountNawbar/ClientAccountNavbar";
 import {ClientAccountBody} from "./Components/ClientAccountBody/ClientAccountBody";
-import {ProjectTabData} from "../../../../redux/AccountsReducers/ClientAccountReducer/Types/ClientAccountReducerTypes";
+import {ProjectTabData} from "../../../../redux/AccountsReducers/ClientAccountReducer/Types/ClientAccountReducer.types";
 import {useDispatch, useSelector} from "react-redux";
 import {
     getCurrentProjectIndexSelector, getIndexMainLinkClientAccountSelector, getLinksClientAccountSelector,

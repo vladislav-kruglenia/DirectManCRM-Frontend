@@ -1,0 +1,44 @@
+.Deadline{
+  //padding: 0 10px;
+  //border: 1px solid red;
+
+
+  .deadlinesContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 10px 0 0 0;
+    //border: 1px solid blue;
+
+    .dates{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-width: 240px;
+      width: 48%;
+      //border: 1px solid gold;
+
+      .date{
+        display: flex;
+        justify-content: space-between;
+        width: 70%;
+        min-width: 225px;
+        margin: 0 0 15px 0;
+        //border: 1px solid chocolate;
+
+        .dateTitle{
+          //border: 1px solid brown;
+        }
+        .dateValue{
+          //border: 1px solid brown;
+        }
+      }
+    }
+
+    .numberDays{
+      min-width: 240px;
+      width: 48%;
+      //border: 1px solid orange;
+    }
+  }
+}

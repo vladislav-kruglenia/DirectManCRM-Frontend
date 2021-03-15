@@ -1,7 +1,4 @@
-import {
-    ProjectMainData,
-    ProjectTabData
-} from "../../../../../redux/AccountsReducers/ClientAccountReducer/Types/ClientAccountReducerTypes";
+import {ProjectTabData} from "../../../../../redux/AccountsReducers/ClientAccountReducer/Types/ClientAccountReducer.types";
 
 export type ProjectsBrowserProps = {
     projectsViewed: ProjectTabData[],
@@ -9,10 +6,3 @@ export type ProjectsBrowserProps = {
     updateCurrentProjectIndex: (index: number) => void,
 }
 
-export type ProjectsBodyProps = {
-    projectIdUrl: string | null | undefined,
-    currentProjectIndex: number,
-    projectsViewed: ProjectTabData[],
-    addTab: () => void,
-    updateProjectMainData: (projectMainData: ProjectMainData) => void
-}

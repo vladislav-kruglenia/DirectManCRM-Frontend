@@ -1,4 +1,4 @@
-import {LinkClientAccountBody, StartStateType} from "./Types/ClientAccountReducerTypes";
+import {LinkClientAccountBody, StartStateType} from "./Types/ClientAccountReducer.types";
 import {ClientAccountPages} from "../../../AppGlobal/AppGlobalTypes/LinksComponents";
 import {v4 as uuidv4} from 'uuid';
 

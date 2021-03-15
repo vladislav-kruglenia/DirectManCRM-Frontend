@@ -1,7 +1,7 @@
 import {
     LinkClientAccountBody,
     ProjectTabData
-} from "../../../../../redux/AccountsReducers/ClientAccountReducer/Types/ClientAccountReducerTypes";
+} from "../../../../../redux/AccountsReducers/ClientAccountReducer/Types/ClientAccountReducer.types";
 
 export type ClientAccountBodyProps = {
     projectsViewed: ProjectTabData[],

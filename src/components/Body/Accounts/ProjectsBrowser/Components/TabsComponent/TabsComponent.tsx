@@ -5,7 +5,7 @@ import {useDispatch} from "react-redux";
 import {
     DeleteTabPayload,
     ProjectTabData
-} from "../../../../../../redux/AccountsReducers/ClientAccountReducer/Types/ClientAccountReducerTypes";
+} from "../../../../../../redux/AccountsReducers/ClientAccountReducer/Types/ClientAccountReducer.types";
 import {
     AddButtonIcon,
     ClearButton

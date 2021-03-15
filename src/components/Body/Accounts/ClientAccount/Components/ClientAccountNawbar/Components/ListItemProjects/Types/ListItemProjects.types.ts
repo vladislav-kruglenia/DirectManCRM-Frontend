@@ -1,8 +1,8 @@
 import {
     LinkClientAccountBody,
     ProjectTabData
-} from "../../../../../../../../../redux/AccountsReducers/ClientAccountReducer/Types/ClientAccountReducerTypes";
-import {ReactNodeArray} from "react";
+} from "../../../../../../../../../redux/AccountsReducers/ClientAccountReducer/Types/ClientAccountReducer.types";
+import {ReactNode, ReactNodeArray} from "react";
 
 export type ListItemProjectsProps = {
     linkData: LinkClientAccountBody,
@@ -11,6 +11,7 @@ export type ListItemProjectsProps = {
     editIndexMainLink: (index: number) => void,
     currentProjectIndex: number,
     projectsViewed: ProjectTabData[],
+    projectIcon: ReactNode,
     projectsTabs: ReactNodeArray,
 }
 export type ListItemProjectProps = {

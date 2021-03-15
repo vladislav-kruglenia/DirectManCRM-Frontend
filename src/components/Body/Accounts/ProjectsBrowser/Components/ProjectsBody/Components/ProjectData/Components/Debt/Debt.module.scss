@@ -1,0 +1,14 @@
+.Debt{
+  .debtContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .numberDebt{
+      font-size: 50px;
+    }
+    .debtPercentage{
+      font-size: 15px;
+    }
+  }
+
+}

@@ -1,6 +1,6 @@
 import React, {FC, useState} from "react";
 import style from "../../ClientAccountNavbar.module.scss"
-import {Collapse, ListItem, ListItemText, Typography} from "@material-ui/core";
+import {Collapse, ListItem, ListItemIcon, ListItemText, Typography} from "@material-ui/core";
 import {Link} from "react-router-dom";
 
 import List from "@material-ui/core/List";
@@ -12,18 +12,21 @@ export let ListItemProjects: FC<ListItemProjectsProps> = (props) => {
     const [open, setOpen] = useState(false);
 
     return <div>
-        <ListItem button
-                  selected={props.indexMainLink === props.index}
-                  onClick={() => {
-                      setOpen(!open);
-                      props.editIndexMainLink(props.index)
-                  }}
+        <ListItem selected={props.indexMainLink === props.index}
                   component={Link}
                   to={`${props.linkData.link}?id=${props.projectsViewed[props.currentProjectIndex].projectId}&projectName=${props.projectsViewed[props.currentProjectIndex].projectName}`}
         >
-            {/*<BusinessCenterIcon color={"action"}/>*/}
-            <ListItemText>{props.linkData.linkName}</ListItemText>
-            {open ? <ExpandLess/> : <ExpandMore/>}
+            <ListItemIcon>{props.projectIcon}</ListItemIcon>
+            <ListItemText
+                onClick={() => {
+                props.editIndexMainLink(props.index)
+            }}>
+                <Typography component={'span'} color={'textPrimary'}>{props.linkData.linkName}</Typography>
+            </ListItemText>
+            <div onClick={() => setOpen(!open)}>
+                {open ? <ExpandLess color={"action"}/> : <ExpandMore color={"action"}/>}
+            </div>
+
         </ListItem>
         <Collapse in={open} timeout="auto" unmountOnExit>
             <List className={style.projectsCollapse} component="div" disablePadding>
@@ -45,6 +48,7 @@ export let ListItemProject: FC<ListItemProjectProps> = (props) => {
         component={Link} to={props.link}
     >
         {/*<TabIcon className={style.TabIcon} fontSize={"small"} color={"action"}/>*/}
-        <Typography className={style.itemTitle} component={'div'} color={"textPrimary"}>{props.project.projectName}</Typography>
+        <Typography className={style.itemTitle} component={'div'}
+                    color={"textPrimary"}>{props.project.projectName}</Typography>
     </ListItem>
 };

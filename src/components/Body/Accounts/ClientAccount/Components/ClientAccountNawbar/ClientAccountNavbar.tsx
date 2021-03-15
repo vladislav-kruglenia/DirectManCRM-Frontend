@@ -1,20 +1,27 @@
 import React, {FC, ReactNodeArray, useEffect, useState} from "react";
 import style from "./ClientAccountNavbar.module.scss";
 import List from "@material-ui/core/List";
-import {ListItem, ListItemText, Paper} from "@material-ui/core";
+import {ListItem, ListItemIcon, ListItemText, Paper} from "@material-ui/core";
 import {Link} from "react-router-dom";
 import {ClientAccountNavBarProps, ListItemComponentProps} from "../../Types/ClientAccountNavbarTypes";
 import {
     LinkClientAccountBody,
     ProjectTabData
-} from "../../../../../../redux/AccountsReducers/ClientAccountReducer/Types/ClientAccountReducerTypes";
+} from "../../../../../../redux/AccountsReducers/ClientAccountReducer/Types/ClientAccountReducer.types";
 import {ClientAccountPages} from "../../../../../../AppGlobal/AppGlobalTypes/LinksComponents";
 import {useSelector} from "react-redux";
 import {getSelectedProjectsSelector} from "../../../../../../redux/AccountsReducers/ClientAccountReducer/ClientAccountSelectors";
 import {ListItemProject, ListItemProjects} from "./Components/ListItemProjects/ListItemProjects";
+import AmpStoriesIcon from '@material-ui/icons/AmpStories';
+import SettingsIcon from '@material-ui/icons/Settings';
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+import FeedbackIcon from '@material-ui/icons/Feedback';
 
 export let ClientAccountNavBar: FC<ClientAccountNavBarProps> = (props) => {
     const selectedProjects = useSelector(getSelectedProjectsSelector);
+    const iconItemsArray: ReactNodeArray = [
+        <AmpStoriesIcon/>, <SettingsIcon/>, <LibraryBooksIcon/>, <FeedbackIcon/>,
+    ];
 
     const generateLinkClientAccountProjects = (projectId: string, projectName: string): string => `projects?id=${projectId}&projectName=${projectName}`;
 
@@ -55,6 +62,7 @@ export let ClientAccountNavBar: FC<ClientAccountNavBarProps> = (props) => {
                 link={linkData.link}
                 linkText={linkData.linkName}
                 indexMainLink={props.indexMainLink}
+                itemIcon={iconItemsArray[index]}
                 editIndexMainLink={index1 => props.updateIndexMainLinkAction(index1)}
             />
         } else {
@@ -66,6 +74,7 @@ export let ClientAccountNavBar: FC<ClientAccountNavBarProps> = (props) => {
                 indexMainLink={props.indexMainLink}
                 projectsViewed={props.projectsViewed}
                 currentProjectIndex={props.currentProjectIndex}
+                projectIcon={iconItemsArray[0]}
                 editIndexMainLink={index1 => props.updateIndexMainLinkAction(index1)}
             />
         }
@@ -87,6 +96,7 @@ export let ListItemComponent: FC<ListItemComponentProps> = (props) => {
                       props.editIndexMainLink(props.index)
                   }}
                   component={Link} to={`${props.link}`}>
+            <ListItemIcon>{props.itemIcon}</ListItemIcon>
             <ListItemText>{props.linkText}</ListItemText>
         </ListItem>
     )

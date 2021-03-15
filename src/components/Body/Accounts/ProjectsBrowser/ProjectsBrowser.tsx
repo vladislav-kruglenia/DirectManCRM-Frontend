@@ -2,19 +2,18 @@ import React, {FC, useCallback, useEffect, useState} from "react";
 import style from "./ProjectsBrowser.module.scss"
 import {TabsComponent} from "./Components/TabsComponent/TabsComponent";
 import {Divider, Paper} from "@material-ui/core";
-import {ProjectSelection} from "./Components/ProjectSelection/ProjectSelection";
 import {useDispatch} from "react-redux";
 import {
     ProjectMainData,
     UpdateProjectMainDataPayload
-} from "../../../../redux/AccountsReducers/ClientAccountReducer/Types/ClientAccountReducerTypes";
-import {ProjectsBodyProps, ProjectsBrowserProps} from "./Types/ProjectsBrowser.types";
-import {ProjectData} from "./Components/ProjectData/ProjectData";
+} from "../../../../redux/AccountsReducers/ClientAccountReducer/Types/ClientAccountReducer.types";
+import {ProjectsBrowserProps} from "./Types/ProjectsBrowser.types";
 import {
     addTab,
     updateProjectMainData
 } from "../../../../redux/AccountsReducers/ClientAccountReducer/clientAccountReducer"
 import {StringParam, useQueryParam} from "use-query-params";
+import {ProjectsBody} from "./Components/ProjectsBody/ProjectsBody";
 
 
 export let ProjectsBrowser:FC<ProjectsBrowserProps> = ({projectsViewed, currentProjectIndex, ...props}) => {
@@ -72,19 +71,3 @@ export let ProjectsBrowser:FC<ProjectsBrowserProps> = ({projectsViewed, currentP
 };
 
 
-export let ProjectsBody:FC<ProjectsBodyProps> = ({projectsViewed, ...props}) => {
-    let [isProjectSelected, updateProjectSelectedStatus] = useState(!!props.projectIdUrl);
-
-    useEffect(() => {
-        updateProjectSelectedStatus(!!props.projectIdUrl);
-    },[props.currentProjectIndex, projectsViewed, props.projectIdUrl]);
-
-    if(isProjectSelected){
-        return <ProjectData projectIdUrl={props.projectIdUrl || ""}/>
-    } else {
-        return <ProjectSelection
-            currentProjectIndex={props.currentProjectIndex}
-            updateProjectMainData={projectMainData => props.updateProjectMainData(projectMainData)}
-        />
-    }
-};

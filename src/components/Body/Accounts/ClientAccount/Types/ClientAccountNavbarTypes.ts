@@ -1,7 +1,8 @@
 import {
     LinkClientAccountBody,
     ProjectTabData
-} from "../../../../../redux/AccountsReducers/ClientAccountReducer/Types/ClientAccountReducerTypes";
+} from "../../../../../redux/AccountsReducers/ClientAccountReducer/Types/ClientAccountReducer.types";
+import {ReactNode} from "react";
 
 export type ClientAccountNavBarProps = {
     projectsViewed: ProjectTabData[],
@@ -17,6 +18,7 @@ export type ListItemComponentProps = {
     link: string,
     linkText : string,
     indexMainLink: number,
+    itemIcon: ReactNode,
     editIndexMainLink: (index: number) => void,
 }
 
