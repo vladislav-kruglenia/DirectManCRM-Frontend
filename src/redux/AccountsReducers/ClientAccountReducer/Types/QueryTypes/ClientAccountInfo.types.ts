@@ -1,5 +1,5 @@
 export type ClientAccountInfoModel = {
-    // userId: string;
+    //userId: string;
     projectsInProgress: Array<MainProjectData>;
     managedProjects: Array<MainProjectData>;
     frozenProjects: Array<MainProjectData>;

@@ -1,0 +1,106 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+    subscription: Subscription
+}
+
+type Author {
+    firstName: String
+    id: Int!
+    lastName: String
+    posts: [Post!]!
+}
+
+type ClientAccountInfoModel {
+    completedProjects: [MainProjectData!]!
+    frozenProjects: [MainProjectData!]!
+    managedProjects: [MainProjectData!]!
+    projectsInProgress: [MainProjectData!]!
+    userId: String!
+}
+
+type Comment {
+    authorId: String!
+    authorLogin: String!
+    commentDate: String!
+    commentText: String!
+}
+
+type DatesProject {
+    numberDaysForProject: Float!
+    startDate: String!
+}
+
+type Debt {
+    amountDebt: Float
+    debtPercentage: Float
+    isExists: Boolean!
+}
+
+type MainProjectData {
+    deadline: String!
+    projectId: String!
+    projectName: String!
+    projectStatus: String!
+}
+
+type Mutation {
+    upvotePost(upvotePostData: UpvotePostInput!): [Post!]!
+}
+
+type OrderedService {
+    isReady: Boolean!
+    serviceName: String!
+}
+
+type OrderedServices {
+    services: [OrderedService!]!
+    tariffName: String!
+}
+
+type Post {
+    id: Int!
+    title: String!
+    votes: Int
+}
+
+type ProjectData {
+    briefId: String!
+    comments: [Comment!]!
+    dates: DatesProject!
+    dept: Debt!
+    orderedServices: OrderedServices!
+    projectNotes: String!
+    projectStages: [ProjectStage!]!
+}
+
+type ProjectInfoForClientModel {
+    deadline: String!
+    projectData: ProjectData!
+    projectId: String!
+    projectName: String!
+    projectStatus: String!
+}
+
+type ProjectStage {
+    isActive: Boolean!
+    stageType: String!
+}
+
+type Query {
+    getAuthor(id: Int!): Author!
+    getClientAccountInfo(userId: String!): ClientAccountInfoModel!
+    getProjectInfoForClient(projectId: String!): ProjectInfoForClientModel!
+}
+
+type Subscription {
+    postTitleUpdated: [Post!]!
+}
+
+input UpvotePostInput {
+    authorId: Float!
+    postId: Float!
+    title: String!
+}

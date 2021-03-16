@@ -1,7 +1,7 @@
 import style from "./TabsComponent.module.scss";
-import React, {FC} from "react";
+import React, {FC, memo} from "react";
 import {Tab, Tabs, Typography} from "@material-ui/core";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {
     DeleteTabPayload,
     ProjectTabData
@@ -13,8 +13,10 @@ import {
 import {TabLabelProps} from "./Types/TabLabel.types";
 import {deleteTab} from "../../../../../../redux/AccountsReducers/ClientAccountReducer/clientAccountReducer";
 import {TabsComponentProps} from "./Types/TabsComponent.types";
+import {getCurrentProjectIndexSelector} from "../../../../../../redux/AccountsReducers/ClientAccountReducer/ClientAccountSelectors";
 
 export let TabsComponent:FC<TabsComponentProps> = (props) => {
+    const currentProjectIndex = useSelector(getCurrentProjectIndexSelector);
 
     const dispatch = useDispatch();
     const actions = {
@@ -31,7 +33,7 @@ export let TabsComponent:FC<TabsComponentProps> = (props) => {
             indexTab={index}
             projectName={projectInfo.projectName}
             isOtherTabs={props.projectsViewed.length > 1}
-            currentProjectIndex={props.currentProjectIndex}
+            currentProjectIndex={currentProjectIndex}
             updateCurrentProjectIndex={value => props.updateCurrentIndex(value)}
             onDeleteTab={() => actions.deleteTabAction({projectId: projectInfo.projectId})}
         />}
@@ -46,7 +48,7 @@ export let TabsComponent:FC<TabsComponentProps> = (props) => {
     return <div className={style.TabsComponent}>
         <Tabs
             component={'div'}
-            value={props.currentProjectIndex}
+            value={currentProjectIndex}
             indicatorColor="primary"
             textColor="primary"
             // variant="scrollable"
@@ -57,6 +59,9 @@ export let TabsComponent:FC<TabsComponentProps> = (props) => {
         {addButton}
     </div>
 };
+
+export const TabsComponentMemo = memo(TabsComponent,
+    (prevProps, nextProps) => prevProps.projectsViewed === nextProps.projectsViewed);
 
 export let TabLabel: FC<TabLabelProps> = ({currentProjectIndex, indexTab, ...props}) => {
     const onDeleteTab = () => {

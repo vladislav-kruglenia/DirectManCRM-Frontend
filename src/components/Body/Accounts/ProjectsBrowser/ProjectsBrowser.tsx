@@ -23,10 +23,10 @@ export let ProjectsBrowser:FC<ProjectsBrowserProps> = ({projectsViewed, currentP
     const [startUrlParams, editStartUrlParams] = useState({projectId: projectIdUrl, projectName: projectNameUrl});
 
     const dispatch = useDispatch();
-    const updateProjectMainDataAction = useCallback((projectMainData: ProjectMainData) => {
+    const updateProjectMainDataAction = useCallback((projectMainData: ProjectMainData, currentProjectIndex: number) => {
         const action: UpdateProjectMainDataPayload = {currentProjectIndex, projectMainData};
         dispatch(updateProjectMainData(action))
-    }, [currentProjectIndex, dispatch]);
+    }, [dispatch]);
 
 
     const addTabAction = () => dispatch(addTab({}));
@@ -39,7 +39,7 @@ export let ProjectsBrowser:FC<ProjectsBrowserProps> = ({projectsViewed, currentP
             updateProjectMainDataAction({
                 projectId: startUrlParams.projectId || "",
                 projectName: startUrlParams.projectName || ""
-            });
+            }, currentProjectIndex);
             editStartUrlParams({projectId: '', projectName: ''})
         }
 
@@ -64,7 +64,7 @@ export let ProjectsBrowser:FC<ProjectsBrowserProps> = ({projectsViewed, currentP
                 currentProjectIndex={currentProjectIndex}
                 projectIdUrl={projectIdUrl}
                 addTab={() => addTabAction()}
-                updateProjectMainData={projectMainData => updateProjectMainDataAction(projectMainData)}
+                updateProjectMainData={(projectMainData, currentProjectIndex) => updateProjectMainDataAction(projectMainData, currentProjectIndex)}
             />
         </div>
     </Paper>

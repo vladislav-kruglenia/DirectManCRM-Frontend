@@ -1,4 +1,4 @@
-import {authAPI} from "../api/api";
+import {authAPI} from "../RestAPI/api";
 import {
     ActionCreatorsType,
     SaveAuthStatusAC,

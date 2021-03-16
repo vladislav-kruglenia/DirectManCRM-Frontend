@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useState} from "react";
-import {ProjectData} from "./Components/ProjectData/ProjectData";
-import {ProjectSelection} from "./Components/ProjectSelection/ProjectSelection";
+import {ProjectDataContainer} from "./Components/ProjectData/ProjectData";
+import {ProjectSelectionMemo} from "./Components/ProjectSelection/ProjectSelection";
 import {ProjectsBodyProps} from "./Types/ProjectsBody.types";
 
 export let ProjectsBody: FC<ProjectsBodyProps> = ({projectsViewed, ...props}) => {
@@ -11,11 +11,11 @@ export let ProjectsBody: FC<ProjectsBodyProps> = ({projectsViewed, ...props}) =>
     }, [props.currentProjectIndex, projectsViewed, props.projectIdUrl]);
 
     if (isProjectSelected) {
-        return <ProjectData projectIdUrl={props.projectIdUrl || ""}/>
+        return <ProjectDataContainer projectIdUrl={props.projectIdUrl || ""}/>
     } else {
-        return <ProjectSelection
-            currentProjectIndex={props.currentProjectIndex}
-            updateProjectMainData={projectMainData => props.updateProjectMainData(projectMainData)}
+        return <ProjectSelectionMemo
+            userId={"fea230b4-3b45-41cc-b98d-eb5dfa88e434"} //TODO: заменить индекс при настройке бизнес-логики
+            updateProjectMainData={(projectMainData, currentProjectIndex) => props.updateProjectMainData(projectMainData, currentProjectIndex)}
         />
     }
 };

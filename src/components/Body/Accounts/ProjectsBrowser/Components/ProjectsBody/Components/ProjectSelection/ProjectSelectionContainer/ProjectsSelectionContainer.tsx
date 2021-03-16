@@ -9,8 +9,9 @@ export let ProjectsSelectionContainer: FC<ProjectsContainerProps> = (props) => {
 
     const projects = props.projectsMainData.map((projectMainData: MainProjectData) => <ProjectMainInfo
         key={projectMainData.projectId}
+        currentProjectIndex={props.currentProjectIndex}
         projectMainData={projectMainData}
-        updateProjectMainData={projectData => props.updateProjectMainData(projectData)}
+        updateProjectMainData={(projectData, currentProjectIndex) => props.updateProjectMainData(projectData, currentProjectIndex)}
     />);
 
     return <Paper className={ProjectsSelectionStyle.ProjectsContainer}>
@@ -25,7 +26,8 @@ export let ProjectsSelectionContainer: FC<ProjectsContainerProps> = (props) => {
 
 export let ProjectMainInfo:FC<ProjectMainInfoProps> = (props) => {
     return <div className={ProjectsSelectionStyle.ProjectMainInfo} onClick={() => {
-        props.updateProjectMainData(props.projectMainData)
+        const {projectName, projectId} = props.projectMainData;
+        props.updateProjectMainData({projectName, projectId}, props.currentProjectIndex)
     }}>
         <div className={ProjectsSelectionStyle.ProjectName}>{props.projectMainData.projectName}</div>
         <div className={ProjectsSelectionStyle.ProjectDeadline}>{props.projectMainData.deadline}</div>

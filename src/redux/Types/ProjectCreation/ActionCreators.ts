@@ -11,7 +11,7 @@ import {
     DELETE_TARIFFS_DATA_PR_CREATION,
     TARIFF_DELETE_PR_CREATION
 } from "../../projectCreationReducer";
-import {ServicesType, TariffsInfoType, TariffsType} from "../../../api/Types/ApiTypes";
+import {ServicesType, TariffsInfoType, TariffsType} from "../../../RestAPI/Types/ApiTypes";
 import {ClientContactType} from "../../../AppGlobal/AppGlobalComponents/ContactContainer/Types/ContactContainerTypes";
 import {
     CHANGE_DIRECTION_PAYMENT_IN_FULL_PR_CREATION,

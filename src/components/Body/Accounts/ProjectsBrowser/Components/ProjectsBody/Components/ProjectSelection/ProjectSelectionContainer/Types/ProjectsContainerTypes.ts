@@ -3,11 +3,13 @@ import {MainProjectData} from "../../../../../../../../../../redux/AccountsReduc
 
 export type ProjectsContainerProps = {
     title: string,
-    projectsMainData: MainProjectData[]
-    updateProjectMainData: (projectMainData: ProjectMainData) => void
+    currentProjectIndex: number,
+    projectsMainData: MainProjectData[],
+    updateProjectMainData: (projectMainData: ProjectMainData, currentProjectIndex: number) => void,
 }
 
 export type ProjectMainInfoProps = {
+    currentProjectIndex: number,
     projectMainData: MainProjectData,
-    updateProjectMainData: (projectMainData: ProjectMainData) => void,
+    updateProjectMainData: (projectMainData: ProjectMainData, currentProjectIndex: number) => void,
 }

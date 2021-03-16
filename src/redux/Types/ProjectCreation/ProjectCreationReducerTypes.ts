@@ -1,4 +1,4 @@
-import {ServicesType, TariffsInfoType, TariffsOrderInfoType, TariffsType} from "../../../api/Types/ApiTypes";
+import {ServicesType, TariffsInfoType, TariffsOrderInfoType, TariffsType} from "../../../RestAPI/Types/ApiTypes";
 import {
     ActionCreatorsType,
     AddContactAC,

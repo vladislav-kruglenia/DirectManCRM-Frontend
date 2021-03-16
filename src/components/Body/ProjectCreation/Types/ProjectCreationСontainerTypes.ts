@@ -20,7 +20,7 @@ import {
     getTariffsInfoType,
     saveOrderInfoType
 } from "../../../../redux/Types/ProjectCreation/ProjectCreationReducerTypes";
-import {TariffsInfoType, TariffsOrderInfoType} from "../../../../api/Types/ApiTypes";
+import {TariffsInfoType, TariffsOrderInfoType} from "../../../../RestAPI/Types/ApiTypes";
 import {GetDirectionForDirection} from "./ProjectCreationSelectorsTypes";
 import {ProjectCreationEnum} from "../../../../AppGlobal/AppGlobalTypes/TypesComponents";
 import {ClientContactType} from "../../../../AppGlobal/AppGlobalComponents/ContactContainer/Types/ContactContainerTypes";

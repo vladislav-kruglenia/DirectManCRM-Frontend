@@ -1,4 +1,4 @@
-import {ServicesType, TariffsOrderType} from "../../../../api/Types/ApiTypes";
+import {ServicesType, TariffsOrderType} from "../../../../RestAPI/Types/ApiTypes";
 
 
 export type GetDirectionPrice = {

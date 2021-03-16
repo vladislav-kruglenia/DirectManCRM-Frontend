@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {FC, memo} from "react";
 import style from "./ProjectData.module.scss"
 import {ProjectName} from "./Components/ProjectName/ProjectName";
 import {StepperComponent} from "./Components/Stepper/StepperComponent";
@@ -9,48 +9,69 @@ import {OrderedServices} from "./Components/OrderedServices/OrderedServices";
 import {StagesWorkMessages} from "./Components/StagesWorkMessages/StagesWorkMessages";
 import {Brief} from "./Components/Brief/Brief";
 import {Comments} from "./Components/Comments/Comments";
-import {ProjectDataProps} from "./Types/ProjectData.types";
-import {ProjectInfoForClientModel} from "../../../../../../../../redux/AccountsReducers/ClientAccountReducer/Types/QueryTypes/ProjectInfoForClient.types";
-import {
-    DebtPercentageEnum,
-    ProjectStageEnum,
-    ProjectStatus
-} from "../../../../../../../../redux/AccountsReducers/ClientAccountReducer/Types/ClientAccount.enums";
+import {ProjectDataProps, QueryData, QueryVars} from "./Types/ProjectData.types";
+import {useQuery} from "@apollo/client";
+import {GetProjectData} from "../../../../../../../../GraphQLServer/Queries/Accounts/GetProjectInfoForClient";
+import {CircularProgress} from "@material-ui/core";
+
 
 export let ProjectData: FC<ProjectDataProps> = () => {
-    return <div className={style.ProjectData}>
-        <ProjectName projectName={projectInfo.projectName}/>
+    const {data, loading} = useQuery<QueryData, QueryVars>(GetProjectData,{
+        variables: {projectId: '1'/*props.projectIdUrl*/}//TODO: заменить индекс при настройке бизнес-логики
+    });
 
-        <StepperComponent projectStages={projectInfo.projectData.projectStages}/>
+    if(loading) return <CircularProgress />;
 
-        <Deadline
-            deadline={projectInfo.deadline}
-            startDate={projectInfo.projectData.dates.startDate}
-            numberDaysForProject={projectInfo.projectData.dates.numberDaysForProject}
-        />
+    if(data) {
+        console.log(data);
+        const {getProjectInfoForClient} = data;
+        const {projectData} = getProjectInfoForClient;
+        const {dates, dept, orderedServices} = projectData;
+        return <div className={style.ProjectData}>
+            <ProjectName projectName={getProjectInfoForClient.projectName}/>
 
-        <Debt
-            isExists={projectInfo.projectData.dept.isExists}
-            amountDebt={projectInfo.projectData.dept.amountDebt}
-            debtPercentage={projectInfo.projectData.dept.debtPercentage}
-        />
+            <StepperComponent projectStages={projectData.projectStages}/>
 
-        <OrderedServices
-            services={projectInfo.projectData.orderedServices.services}
-            tariffName={projectInfo.projectData.orderedServices.tariffName}
-        />
+            <Deadline
+                deadline={getProjectInfoForClient.deadline}
+                startDate={dates.startDate}
+                numberDaysForProject={dates.numberDaysForProject}
+            />
 
-        <ProjectNotes projectNotes={projectInfo.projectData.projectNotes}/>
+            <Debt
+                isExists={dept.isExists}
+                amountDebt={dept.amountDebt}
+                debtPercentage={dept.debtPercentage}
+            />
 
-        <Brief briefId={projectInfo.projectData.briefId}/>
+            <OrderedServices
+                services={orderedServices.services}
+                tariffName={orderedServices.tariffName}
+            />
 
-        <StagesWorkMessages/>
+            <ProjectNotes projectNotes={projectData.projectNotes}/>
 
-        <Comments/>
-    </div>
+            <Brief briefId={projectData.briefId}/>
+
+            <StagesWorkMessages/>
+
+            <Comments/>
+        </div>
+    }
+
+    return <>Error</>; // TODO: обработать ошибку
+
 };
 
-const projectInfo: ProjectInfoForClientModel = {
+export const ProjectDataContainer = memo(
+    ProjectData,
+    (prevProps:ProjectDataProps, nextProps:ProjectDataProps) => {
+        return prevProps.projectIdUrl === nextProps.projectIdUrl || nextProps.projectIdUrl === ""
+    }
+);
+
+/*
+const projectInfo1: ProjectInfoForClientModel = {
     projectId: '1',
     projectStatus: ProjectStatus.InProgress,
     projectName: 'Первый проект',
@@ -97,7 +118,7 @@ const projectInfo: ProjectInfoForClientModel = {
                 },
                 {
                     isReady: true,
-                    serviceName: 'Услуга2',
+                    serviceName: 'Услуга3',
                 },
 
             ],
@@ -115,4 +136,4 @@ const projectInfo: ProjectInfoForClientModel = {
             },
         ],
     },
-};
+};*/

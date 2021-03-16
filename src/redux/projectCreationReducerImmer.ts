@@ -1,5 +1,5 @@
 import {v4 as uuidv4} from 'uuid';
-import {projectCreationAPI} from "../api/api";
+import {projectCreationAPI} from "../RestAPI/api";
 import {
     addContactType,
     addingTariffsDataType,
@@ -27,7 +27,7 @@ import {
     saveOrderInfoType,
     startStateProjectCreationType
 } from "./Types/ProjectCreation/ProjectCreationReducerTypes";
-import {ServicesType, TariffsType} from "../api/Types/ApiTypes";
+import {ServicesType, TariffsType} from "../RestAPI/Types/ApiTypes";
 import {ActionCreatorsType} from "./Types/ProjectCreation/ActionCreators";
 import produce, {Draft} from "immer";
 

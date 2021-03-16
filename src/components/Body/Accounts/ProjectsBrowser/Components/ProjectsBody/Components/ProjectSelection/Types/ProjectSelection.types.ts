@@ -2,8 +2,8 @@ import {ProjectMainData} from "../../../../../../../../../redux/AccountsReducers
 import {ClientAccountInfoModel} from "../../../../../../../../../redux/AccountsReducers/ClientAccountReducer/Types/QueryTypes/ClientAccountInfo.types";
 
 export type ProjectSelectionProps = {
-    currentProjectIndex: number,
-    updateProjectMainData: (projectMainData: ProjectMainData) => void
+    updateProjectMainData: (projectMainData: ProjectMainData, currentProjectIndex: number) => void,
+    userId: string
 }
 
 export type MainProjectDataKeys = keyof ClientAccountInfoModel
@@ -13,4 +13,17 @@ export enum TypesProjectsEnum {
     managedProjects = "Замороженные проекты",
     frozenProjects = "Завершенные проекты",
     completedProjects = "Проекты на ведении",
+}
+
+export interface ClientAccountInfo extends ClientAccountInfoModel {
+    // userId: string
+}
+
+export type ProjectSelectionQueryData = {
+    getClientAccountInfo: ClientAccountInfo
+}
+
+
+export type ProjectSelectionQueryVars = {
+    userId: string
 }

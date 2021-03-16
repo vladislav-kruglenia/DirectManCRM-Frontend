@@ -8,5 +8,5 @@ export type ProjectsBodyProps = {
     currentProjectIndex: number,
     projectsViewed: ProjectTabData[],
     addTab: () => void,
-    updateProjectMainData: (projectMainData: ProjectMainData) => void
+    updateProjectMainData: (projectMainData: ProjectMainData, currentProjectIndex: number) => void
 }

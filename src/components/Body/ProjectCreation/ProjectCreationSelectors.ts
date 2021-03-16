@@ -6,7 +6,7 @@ import {
     ServicesType,
     TariffsInfoType,
     TariffsOrderType, TariffsType
-} from "../../../api/Types/ApiTypes";
+} from "../../../RestAPI/Types/ApiTypes";
 import {GetDirectionForDirection, GetTariffsForTariffs, GetTotalPriceType} from "./Types/ProjectCreationSelectorsTypes";
 
 // TODO: Отрефакторить. Код не читабельный
