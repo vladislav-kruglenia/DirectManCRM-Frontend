@@ -1,0 +1,19 @@
+.projectStatusIndicator{
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  //border: 1px solid brown;
+}
+
+.projectInProgress{
+  background-color: #eb5a46;
+}
+.projectManaged{
+  background-color: #ff9f1a;
+}
+.projectFrozen{
+  background-color: #f2d600;
+}
+.projectCompleted{
+  background-color: #61bd4f;
+}

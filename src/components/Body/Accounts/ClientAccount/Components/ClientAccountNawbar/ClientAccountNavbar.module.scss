@@ -22,11 +22,18 @@
       //margin: 10px 10px 0 10px;
       //border: 1px solid hotpink;
 
-      .TabIcon {
-        margin: 0 5px 0 0;
+      .icon{
+        display: flex;
+        justify-content: center;
+        //border: 1px solid red;
       }
+      
+      /*.TabIcon {
+        margin: 0 5px 0 0;
+      }*/
 
       .itemTitle {
+        padding: 0 0 0 10px;
         word-break: break-word;
       }
     }

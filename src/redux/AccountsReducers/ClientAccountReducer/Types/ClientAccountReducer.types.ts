@@ -1,4 +1,5 @@
 import {ClientAccountPages} from "../../../../AppGlobal/AppGlobalTypes/LinksComponents";
+import {ProjectStatus} from "./ClientAccount.enums";
 
 export type StartStateType = {
     currentProjectIndex: number,
@@ -12,6 +13,7 @@ export type ProjectTabData = {
     projectName: string,
     projectId: string,
     idProjectTab: string,
+    projectStatus: ProjectStatus | "",
 }
 
 export type DeleteTabPayload = {
@@ -21,7 +23,15 @@ export type DeleteTabPayload = {
 export type UpdateProjectMainDataPayload = {
     projectMainData:  ProjectMainData,
     currentProjectIndex: number,
+    projectStatus: ProjectStatus | "",
 }
+
+export type UpdateProjectStatusPayload = {
+    projectStatus: ProjectStatus | "",
+    currentProjectIndex: number,
+}
+
+
 
 export type ProjectMainData = {
     projectName: string,

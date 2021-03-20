@@ -28,6 +28,7 @@ export class StartStateClientAccount {
                     isProjectSelected: false,
                     projectName: "",
                     projectId: "",
+                    projectStatus: "",
                     idProjectTab: uuidv4(),
                 },
             ],

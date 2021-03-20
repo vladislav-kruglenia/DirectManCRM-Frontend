@@ -11,7 +11,6 @@ import {
     ClientAccountInfoModel,
     MainProjectData
 } from "../../../../../../../../redux/AccountsReducers/ClientAccountReducer/Types/QueryTypes/ClientAccountInfo.types";
-import {ProjectStatus} from "../../../../../../../../redux/AccountsReducers/ClientAccountReducer/Types/ClientAccount.enums";
 import {useQuery} from "@apollo/client";
 import {GetClientAccountData} from "../../../../../../../../GraphQLServer/Queries/Accounts/GetClientAccountInfo";
 import {ProjectsSelectionContainer} from "./ProjectSelectionContainer/ProjectsSelectionContainer";
@@ -20,7 +19,7 @@ import {useSelector} from "react-redux";
 import {getCurrentProjectIndexSelector} from "../../../../../../../../redux/AccountsReducers/ClientAccountReducer/ClientAccountSelectors";
 
 
-export let ProjectSelection: FC<ProjectSelectionProps> = (props) => {
+export const ProjectSelection: FC<ProjectSelectionProps> = (props) => {
     const currentProjectIndex = useSelector(getCurrentProjectIndexSelector);
 
     const getContainersWithProjectsMainData = useCallback((mainProjectData: ClientAccountInfoModel) => {
@@ -37,7 +36,7 @@ export let ProjectSelection: FC<ProjectSelectionProps> = (props) => {
                     currentProjectIndex={currentProjectIndex}
                     title={TypesProjectsEnum[projectsArr[0]]}
                     projectsMainData={projectsArr[1]}
-                    updateProjectMainData={(projectMainData, currentProjectIndex) => props.updateProjectMainData(projectMainData, currentProjectIndex)}
+                    updateProjectMainData={(projectMainData, currentProjectIndex, projectStatus) => props.updateProjectMainData(projectMainData, currentProjectIndex, projectStatus)}
                 />
             });
     }, [props, currentProjectIndex]);

@@ -20,20 +20,28 @@ let clientAccountReducer = createSlice<StartStateType, SliceCaseReducers<StartSt
                 idProjectTab: uuidv4(),
                 projectName: "",
                 projectId: "",
-                isProjectSelected: false
+                isProjectSelected: false,
+                projectStatus: "",
             };
             state.viewedProjects = [...state.viewedProjects, newProjectTab]
         },
 
         updateProjectMainData(state, action: PayloadAction<UpdateProjectMainDataPayload>) {
+            const {projectStatus, projectMainData, currentProjectIndex} = action.payload;
             const newProjectData: ProjectTabData = {
-                ...action.payload.projectMainData,
+                ...projectMainData,
                 isProjectSelected: true,
-                idProjectTab: state.viewedProjects[action.payload.currentProjectIndex].idProjectTab,
+                idProjectTab: state.viewedProjects[currentProjectIndex].idProjectTab,
+                projectStatus: projectStatus,
             };
 
             state.viewedProjects[action.payload.currentProjectIndex] = newProjectData
         },
+
+        /*updateProjectStatus(state, action: PayloadAction<UpdateProjectStatusPayload>){
+            const {currentProjectIndex, projectStatus} = action.payload;
+            state.viewedProjects[currentProjectIndex].projectStatus = projectStatus;
+        },*/
 
 
         deleteTab(state, action: PayloadAction<DeleteTabPayload>) {
@@ -61,7 +69,9 @@ export const {
     deleteTab,
     updateProjectMainData,
     updateCurrentProjectIndex,
-    updateIndexMainLink
+    updateIndexMainLink,
+    // updateProjectStatus,
 } = clientAccountReducer.actions;
+
 
 export default clientAccountReducer.reducer

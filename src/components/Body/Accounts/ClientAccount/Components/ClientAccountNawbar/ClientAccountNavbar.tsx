@@ -16,6 +16,7 @@ import AmpStoriesIcon from '@material-ui/icons/AmpStories';
 import SettingsIcon from '@material-ui/icons/Settings';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import FeedbackIcon from '@material-ui/icons/Feedback';
+import {ProjectStatus} from "../../../../../../redux/AccountsReducers/ClientAccountReducer/Types/ClientAccount.enums";
 
 export let ClientAccountNavBar: FC<ClientAccountNavBarProps> = (props) => {
     const selectedProjects = useSelector(getSelectedProjectsSelector);
@@ -23,7 +24,9 @@ export let ClientAccountNavBar: FC<ClientAccountNavBarProps> = (props) => {
         <AmpStoriesIcon/>, <SettingsIcon/>, <LibraryBooksIcon/>, <FeedbackIcon/>,
     ];
 
-    const generateLinkClientAccountProjects = (projectId: string, projectName: string): string => `projects?id=${projectId}&projectName=${projectName}`;
+    const generateLinkClientAccountProjects = (projectId: string, projectName: string, projectStatus: ProjectStatus | ""): string =>{
+        return `projects?id=${projectId}&projectName=${projectName}&projectStatus=${projectStatus}`
+    };
 
 
     // Динамическое изменение списка открытых вкладок с проектами. На выходе имеем массив элементов ListItem без null
@@ -40,7 +43,8 @@ export let ClientAccountNavBar: FC<ClientAccountNavBarProps> = (props) => {
                     updateIndexMainLinkToProjects={() => props.updateIndexMainLinkAction(0)}
                     link={generateLinkClientAccountProjects(
                         project && project.projectId,
-                        project && project.projectName
+                        project && project.projectName,
+                        project && project.projectStatus,
                     )}
                 />
                 : null

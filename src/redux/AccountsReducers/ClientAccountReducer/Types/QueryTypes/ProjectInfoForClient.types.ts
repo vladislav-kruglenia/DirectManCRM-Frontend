@@ -42,10 +42,10 @@ export interface ProjectDates {
 
 export interface ProjectData {
     projectStages: Array<ProjectStage>,
-    dates: ProjectDates // Todo: поменять данные для бэкенда
+    dates: ProjectDates
     dept: Debt,
-    orderedServices: OrderedServices, // Todo: поменять данные для бэкенда
-    projectNotes: string, // Todo: поменять данные для бэкенда
+    orderedServices: OrderedServices,
+    projectNotes: string,
     briefId: string,
     comments: Array<Comment>,
 }

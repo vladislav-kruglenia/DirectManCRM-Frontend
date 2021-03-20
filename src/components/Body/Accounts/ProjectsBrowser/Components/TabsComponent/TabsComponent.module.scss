@@ -11,12 +11,17 @@
 
 
 
+
+
+
+
     .tabTitle{
       margin: 0 5px 0 0;
-
+      //border: 1px solid red;
+      
       white-space: nowrap; /* Запрещаем перенос строк */
       overflow: hidden; /* Обрезаем все, что не помещается в область */
-      padding: 5px; /* Поля вокруг текста */
+      padding: 0 5px 0 10px; /* Поля вокруг текста */
       text-overflow: ellipsis; /* Добавляем многоточие */
     }
     .clearButton{

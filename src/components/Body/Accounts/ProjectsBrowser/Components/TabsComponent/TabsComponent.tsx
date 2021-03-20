@@ -1,21 +1,18 @@
 import style from "./TabsComponent.module.scss";
 import React, {FC, memo} from "react";
-import {Tab, Tabs, Typography} from "@material-ui/core";
+import {Tab, Tabs} from "@material-ui/core";
 import {useDispatch, useSelector} from "react-redux";
 import {
     DeleteTabPayload,
     ProjectTabData
 } from "../../../../../../redux/AccountsReducers/ClientAccountReducer/Types/ClientAccountReducer.types";
-import {
-    AddButtonIcon,
-    ClearButton
-} from "../../../../../../AppGlobal/AppGlobalComponents/MaterialUI/MaterialButtons/MaterialButtons";
-import {TabLabelProps} from "./Types/TabLabel.types";
+import {AddButtonIcon} from "../../../../../../AppGlobal/AppGlobalComponents/MaterialUI/MaterialButtons/MaterialButtons";
 import {deleteTab} from "../../../../../../redux/AccountsReducers/ClientAccountReducer/clientAccountReducer";
 import {TabsComponentProps} from "./Types/TabsComponent.types";
 import {getCurrentProjectIndexSelector} from "../../../../../../redux/AccountsReducers/ClientAccountReducer/ClientAccountSelectors";
+import {TabLabel} from "./Components/TabLabel/TabLabel";
 
-export let TabsComponent:FC<TabsComponentProps> = (props) => {
+export let TabsComponent: FC<TabsComponentProps> = (props) => {
     const currentProjectIndex = useSelector(getCurrentProjectIndexSelector);
 
     const dispatch = useDispatch();
@@ -32,6 +29,7 @@ export let TabsComponent:FC<TabsComponentProps> = (props) => {
             projectsArrayLength={props.projectsViewed.length}
             indexTab={index}
             projectName={projectInfo.projectName}
+            projectStatus={projectInfo.projectStatus}
             isOtherTabs={props.projectsViewed.length > 1}
             currentProjectIndex={currentProjectIndex}
             updateCurrentProjectIndex={value => props.updateCurrentIndex(value)}
@@ -63,34 +61,5 @@ export let TabsComponent:FC<TabsComponentProps> = (props) => {
 export const TabsComponentMemo = memo(TabsComponent,
     (prevProps, nextProps) => prevProps.projectsViewed === nextProps.projectsViewed);
 
-export let TabLabel: FC<TabLabelProps> = ({currentProjectIndex, indexTab, ...props}) => {
-    const onDeleteTab = () => {
-        props.onDeleteTab();
-        /*Индекс выбранной вкладки уменьшается на 1 только в том случае,
-        когда индекс закрываемой вкладки меньше индекса выбранной вкладки,
-        либо, когда индекс выбранной вкладки равен индексу закрываемой вкладки и эта позиция последняя в списке.
-        Во всех остальных случаях индекс выбранной вкладки не изменяется.*/
-        let newCurrentIndex = indexTab < currentProjectIndex || (indexTab === currentProjectIndex && currentProjectIndex === props.projectsArrayLength - 1)
-            ? currentProjectIndex - 1
-            : currentProjectIndex;
-
-        props.updateCurrentProjectIndex(newCurrentIndex);
-    };
-
-    const clearButton = props.isOtherTabs && <ClearButton
-            iconSize={"small"}
-            size={"small"}
-            onClickFunc={() => onDeleteTab()}
-        />;
-
-    return <div className={style.TabLabel}>
-        <Typography className={style.tabTitle} component={'div'} variant={"body1"}
-                    onClick={() => props.updateCurrentProjectIndex(indexTab)}
-        >
-            {props.projectName || 'Новая вкладка'}
-        </Typography>
-        <div className={style.clearButton}>{clearButton}</div>
-    </div>
-};
 
 

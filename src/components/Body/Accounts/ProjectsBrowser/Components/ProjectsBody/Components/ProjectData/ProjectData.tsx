@@ -15,9 +15,9 @@ import {GetProjectData} from "../../../../../../../../GraphQLServer/Queries/Acco
 import {CircularProgress} from "@material-ui/core";
 
 
-export let ProjectData: FC<ProjectDataProps> = () => {
+export let ProjectData: FC<ProjectDataProps> = (props) => {
     const {data, loading} = useQuery<QueryData, QueryVars>(GetProjectData,{
-        variables: {projectId: '1'/*props.projectIdUrl*/}//TODO: заменить индекс при настройке бизнес-логики
+        variables: {projectId: props.projectIdUrl}//TODO: заменить индекс при настройке бизнес-логики
     });
 
     if(loading) return <CircularProgress />;
@@ -63,7 +63,7 @@ export let ProjectData: FC<ProjectDataProps> = () => {
 
 };
 
-export const ProjectDataContainer = memo(
+export const ProjectDataMemo = memo(
     ProjectData,
     (prevProps:ProjectDataProps, nextProps:ProjectDataProps) => {
         return prevProps.projectIdUrl === nextProps.projectIdUrl || nextProps.projectIdUrl === ""
