@@ -1,4 +1,4 @@
-import React, {FC, ReactNode, useEffect, useState} from "react";
+import React, {FC, memo, ReactNode, useEffect, useState} from "react";
 import {Breadcrumbs, Paper, Typography} from "@material-ui/core";
 import style from "../../ClientAccountBody.module.scss";
 import {BreadcrumbsComponentProps} from "./Types/Breadcrumbs.types";
@@ -27,3 +27,5 @@ export let BreadcrumbsComponent: FC<BreadcrumbsComponentProps> = (props) => {
         </Breadcrumbs>
     </Paper>
 };
+
+export const BreadcrumbsComponentMemo = memo(BreadcrumbsComponent);

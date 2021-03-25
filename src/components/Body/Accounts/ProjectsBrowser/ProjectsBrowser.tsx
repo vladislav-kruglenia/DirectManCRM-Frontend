@@ -1,6 +1,6 @@
-import React, {FC, useCallback, useEffect, useState} from "react";
+import React, {FC, memo, useCallback, useEffect, useState} from "react";
 import style from "./ProjectsBrowser.module.scss"
-import {TabsComponent} from "./Components/TabsComponent/TabsComponent";
+import {TabsComponentMemo} from "./Components/TabsComponent/TabsContainer";
 import {Divider, Paper} from "@material-ui/core";
 import {useDispatch} from "react-redux";
 import {
@@ -13,7 +13,7 @@ import {
     updateProjectMainData
 } from "../../../../redux/AccountsReducers/ClientAccountReducer/clientAccountReducer"
 import {StringParam, useQueryParam} from "use-query-params";
-import {ProjectsBody} from "./Components/ProjectsBody/ProjectsBody";
+import {ProjectsBodyMemo} from "./Components/ProjectsBody/ProjectsBody";
 import {ProjectStatus} from "../../../../redux/AccountsReducers/ClientAccountReducer/Types/ClientAccount.enums";
 
 
@@ -36,10 +36,11 @@ export let ProjectsBrowser: FC<ProjectsBrowserProps> = ({projectsViewed, current
         }, [dispatch]);
 
 
-    const addTabAction = () => dispatch(addTab({}));
+    const addTabAction = useCallback(() => {
+        return dispatch(addTab({}))
+    }, [dispatch]);
 
     useEffect(() => {
-        debugger
         if (!startUrlParams.projectId && !startUrlParams.projectName) {
             // При обновлении projectsViewed нужно обновить данные url
             const {projectId, projectName, projectStatus} = projectsViewed[currentProjectIndex];
@@ -62,23 +63,26 @@ export let ProjectsBrowser: FC<ProjectsBrowserProps> = ({projectsViewed, current
 
 
     return <Paper className={style.ProjectsBrowser}>
-        <TabsComponent
+        <TabsComponentMemo
             projectsViewed={projectsViewed}
             currentProjectIndex={currentProjectIndex}
-            updateCurrentIndex={index => props.updateCurrentProjectIndex(index)}
-            addTab={() => addTabAction()}
+            updateCurrentIndex={props.updateCurrentProjectIndex}
+            addTab={addTabAction}
         />
-        <Divider/>
+        <Divider component={'div'}/>
         <div className={style.projectsBody}>
-            <ProjectsBody
-                projectsViewed={projectsViewed}
+            <ProjectsBodyMemo
                 currentProjectIndex={currentProjectIndex}
                 projectIdUrl={projectIdUrl}
-                addTab={() => addTabAction()}
-                updateProjectMainData={(projectMainData, currentProjectIndex, projectStatus) => updateProjectMainDataAction(projectMainData, currentProjectIndex, projectStatus)}
+                addTab={addTabAction}
+                updateProjectMainData={updateProjectMainDataAction}
             />
         </div>
     </Paper>
 };
+
+
+export const ProjectsBrowserMemo = memo(ProjectsBrowser);
+
 
 

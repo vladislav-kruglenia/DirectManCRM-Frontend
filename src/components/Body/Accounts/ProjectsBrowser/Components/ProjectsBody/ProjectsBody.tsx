@@ -1,24 +1,27 @@
-import React, {FC, useEffect, useState} from "react";
+import React, {FC, memo, useEffect, useState} from "react";
 import {ProjectDataMemo} from "./Components/ProjectData/ProjectData";
-import {ProjectSelectionMemo} from "./Components/ProjectSelection/ProjectSelection";
+import {ProjectSelectionContainerMemo} from "./Components/ProjectSelection/ProjectSelectionContainer";
 import {ProjectsBodyProps} from "./Types/ProjectsBody.types";
 
-export let ProjectsBody: FC<ProjectsBodyProps> = ({projectsViewed, ...props}) => {
+export const ProjectsBody: FC<ProjectsBodyProps> = (props) => {
     let [isProjectSelected, updateProjectSelectedStatus] = useState(!!props.projectIdUrl);
 
     useEffect(() => {
         updateProjectSelectedStatus(!!props.projectIdUrl);
-    }, [props.currentProjectIndex, projectsViewed, props.projectIdUrl]);
+    }, [props.currentProjectIndex, /*projectsViewed,*/ props.projectIdUrl]);
 
     if (isProjectSelected) {
         return <ProjectDataMemo projectIdUrl={props.projectIdUrl || ""}/>
     } else {
-        return <ProjectSelectionMemo
+        return <ProjectSelectionContainerMemo
             userId={"fea230b4-3b45-41cc-b98d-eb5dfa88e434"} //TODO: заменить индекс при настройке бизнес-логики
-            updateProjectMainData={(projectMainData, currentProjectIndex, projectStatus) => props.updateProjectMainData(projectMainData, currentProjectIndex, projectStatus)}
+            updateProjectMainData={props.updateProjectMainData}
         />
     }
 };
+
+export const ProjectsBodyMemo = memo(ProjectsBody);
+
 
 
 

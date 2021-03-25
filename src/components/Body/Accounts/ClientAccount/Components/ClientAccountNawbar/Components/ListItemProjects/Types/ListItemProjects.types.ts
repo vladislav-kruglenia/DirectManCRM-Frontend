@@ -17,8 +17,7 @@ export type ListItemProjectsProps = {
 export type ListItemProjectProps = {
     project: ProjectTabData,
     index: number,
-    currentProjectIndex: number,
-    link: string,
+    isSelected: boolean,
     updateCurrentProjectIndex: (index: number) => void,
-    updateIndexMainLinkToProjects: () => void,
+    updateIndexMainLinkToProjects: (indexProject: number) => void,
 }

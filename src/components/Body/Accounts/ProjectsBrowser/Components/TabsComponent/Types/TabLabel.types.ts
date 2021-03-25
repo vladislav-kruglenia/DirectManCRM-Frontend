@@ -1,13 +1,15 @@
-import {ProjectStatus} from "../../../../../../../redux/AccountsReducers/ClientAccountReducer/Types/ClientAccount.enums";
+import {
+    DeleteTabPayload,
+    ProjectTabData
+} from "../../../../../../../redux/AccountsReducers/ClientAccountReducer/Types/ClientAccountReducer.types";
 
 export type TabLabelProps = {
     isOtherTabs: boolean,
     indexTab: number,
     projectsArrayLength: number,
     currentProjectIndex: number,
-    projectName: string | null,
-    projectStatus: ProjectStatus | "",
-    onDeleteTab: () => void,
+    projectInfo: ProjectTabData,
+    onDeleteTab: (payload: DeleteTabPayload) => void,
     updateCurrentProjectIndex: (value: number) => void,
 }
 

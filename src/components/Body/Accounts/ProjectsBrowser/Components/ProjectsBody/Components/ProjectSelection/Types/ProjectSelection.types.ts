@@ -2,10 +2,15 @@ import {ProjectMainData} from "../../../../../../../../../redux/AccountsReducers
 import {ClientAccountInfoModel} from "../../../../../../../../../redux/AccountsReducers/ClientAccountReducer/Types/QueryTypes/ClientAccountInfo.types";
 import {ProjectStatus} from "../../../../../../../../../redux/AccountsReducers/ClientAccountReducer/Types/ClientAccount.enums";
 
+
 export type ProjectSelectionProps = {
     userId: string,
+    // currentProjectIndex: number,
+    clientAccountInfo: ClientAccountInfo,
     updateProjectMainData: (projectMainData: ProjectMainData, currentProjectIndex: number, projectStatus: ProjectStatus | "") => void,
 }
+
+
 
 export type MainProjectDataKeys = keyof ClientAccountInfoModel
 

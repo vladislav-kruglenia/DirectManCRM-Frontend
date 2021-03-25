@@ -1,18 +1,18 @@
-import React, {FC} from "react";
+import React, {FC, memo} from "react";
 import style from "./ClientAccountBody.module.scss";
 import {Instructions} from "./Components/Instructions/Instructions";
 import {Feedback} from "./Components/Feedback/Feedback";
 import {Settings} from "./Components/Settings/Settings";
 import {Redirect, Route, Switch} from "react-router";
 import {ClientAccountPages, NavBarLinks} from "../../../../../../AppGlobal/AppGlobalTypes/LinksComponents";
-import {ProjectsBrowser} from "../../../ProjectsBrowser/ProjectsBrowser";
+import {ProjectsBrowserMemo} from "../../../ProjectsBrowser/ProjectsBrowser";
 import {ClientAccountBodyProps} from "../../Types/ClientAccountBodyTypes";
-import {BreadcrumbsComponent} from "./Components/Breadcrumbs/Breadcrumbs";
+import {BreadcrumbsComponentMemo} from "./Components/Breadcrumbs/Breadcrumbs";
 
 export let ClientAccountBody: FC<ClientAccountBodyProps> = (props) => {
 
     return <div className={style.ClientAccountBody}>
-        <BreadcrumbsComponent
+        <BreadcrumbsComponentMemo
             linkData={props.linksClientAccount[props.indexMainLink]}
             indexMainLink={props.indexMainLink}
             currentProjectName={props.projectsViewed[props.currentProjectIndex].projectName}
@@ -20,7 +20,7 @@ export let ClientAccountBody: FC<ClientAccountBodyProps> = (props) => {
         <Switch>
             <Route exact path={`${NavBarLinks.ClientAccount}`}
                    render={() => <Redirect to={`${ClientAccountPages.Projects}`}/>}/>
-            <Route path={`${ClientAccountPages.Projects}`} render={() => <ProjectsBrowser
+            <Route path={`${ClientAccountPages.Projects}`} render={() => <ProjectsBrowserMemo
                 currentProjectIndex={props.currentProjectIndex}
                 projectsViewed={props.projectsViewed}
                 updateCurrentProjectIndex={index => props.updateCurrentProjectIndex(index)}
@@ -31,4 +31,6 @@ export let ClientAccountBody: FC<ClientAccountBodyProps> = (props) => {
         </Switch>
     </div>
 };
+
+export const ClientAccountBodyMemo = memo(ClientAccountBody);
 

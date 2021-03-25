@@ -6,3 +6,9 @@ export type TabsComponentProps = {
     updateCurrentIndex: (index: number) => void,
     addTab: () => void,
 }
+
+export type AddTabButtonProps = {
+    projectsViewed: ProjectTabData[],
+    updateCurrentIndex: (index: number) => void,
+    addTab: () => void,
+}

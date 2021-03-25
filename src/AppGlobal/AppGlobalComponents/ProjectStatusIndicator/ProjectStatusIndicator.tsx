@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {FC, memo} from "react";
 import style from "./ProjectStatusIndicator.module.scss";
 import {ProjectStatus} from "../../../redux/AccountsReducers/ClientAccountReducer/Types/ClientAccount.enums";
 import {ProjectStatusIndicatorProps} from "./ProjectStatusIndicator.types";
@@ -27,3 +27,5 @@ export const ProjectStatusIndicator: FC<ProjectStatusIndicatorProps> = (props) =
     }
     return <div className={`${style.projectStatusIndicator} ${indicatorColor}`}/>
 };
+
+export const ProjectStatusIndicatorMemo = memo(ProjectStatusIndicator);

@@ -1,14 +1,19 @@
-import React from "react";
+import React, {memo, useCallback} from "react";
 import style from "./ClientAccount.module.scss";
-import {ClientAccountNavBar} from "./Components/ClientAccountNawbar/ClientAccountNavbar";
-import {ClientAccountBody} from "./Components/ClientAccountBody/ClientAccountBody";
+import {ClientAccountNavBarMemo} from "./Components/ClientAccountNawbar/ClientAccountNavbar";
+import {ClientAccountBodyMemo} from "./Components/ClientAccountBody/ClientAccountBody";
 import {ProjectTabData} from "../../../../redux/AccountsReducers/ClientAccountReducer/Types/ClientAccountReducer.types";
 import {useDispatch, useSelector} from "react-redux";
 import {
-    getCurrentProjectIndexSelector, getIndexMainLinkClientAccountSelector, getLinksClientAccountSelector,
+    getCurrentProjectIndexSelector,
+    getIndexMainLinkClientAccountSelector,
+    getLinksClientAccountSelector,
     getProjectsViewedSelector
 } from "../../../../redux/AccountsReducers/ClientAccountReducer/ClientAccountSelectors";
-import {updateCurrentProjectIndex, updateIndexMainLink} from "../../../../redux/AccountsReducers/ClientAccountReducer/clientAccountReducer";
+import {
+    updateCurrentProjectIndex,
+    updateIndexMainLink
+} from "../../../../redux/AccountsReducers/ClientAccountReducer/clientAccountReducer";
 
 export let ClientAccount = () => {
     const projectsViewed: ProjectTabData[] = useSelector(getProjectsViewedSelector);
@@ -17,29 +22,32 @@ export let ClientAccount = () => {
     const linksClientAccount = useSelector(getLinksClientAccountSelector);
 
     const dispatch = useDispatch();
-    const updateCurrentProjectIndexAction = (index: number) => {
+    const updateCurrentProjectIndexAction = useCallback((index: number) => {
         dispatch(updateCurrentProjectIndex(index))
-    };
-    const updateIndexMainLinkAction = (index: number) => dispatch(updateIndexMainLink(index));
+    },[dispatch]);
+    const updateIndexMainLinkAction = useCallback((index: number) => {
+        dispatch(updateIndexMainLink(index))
+    }, [dispatch]);
 
 
     return <div className={style.ClientAccount}>
-        <ClientAccountNavBar
+        <ClientAccountNavBarMemo
             projectsViewed={projectsViewed}
             currentProjectIndex={currentProjectIndex}
             indexMainLink={indexMainLink}
             linksClientAccount={linksClientAccount}
-            updateIndexMainLinkAction={index => updateIndexMainLinkAction(index)}
-            updateCurrentProjectIndex={index => updateCurrentProjectIndexAction(index)}
+            updateIndexMainLinkAction={updateIndexMainLinkAction}
+            updateCurrentProjectIndex={updateCurrentProjectIndexAction}
         />
-        <ClientAccountBody
+        <ClientAccountBodyMemo
             projectsViewed={projectsViewed}
             currentProjectIndex={currentProjectIndex}
             indexMainLink={indexMainLink}
             linksClientAccount={linksClientAccount}
-            updateIndexMainLinkAction={index => updateIndexMainLinkAction(index)}
-            updateCurrentProjectIndex={index => updateCurrentProjectIndexAction(index)}
+            updateIndexMainLinkAction={updateIndexMainLinkAction}
+            updateCurrentProjectIndex={updateCurrentProjectIndexAction}
         />
     </div>
 };
 
+export const ClientAccountMemo = memo(ClientAccount);
