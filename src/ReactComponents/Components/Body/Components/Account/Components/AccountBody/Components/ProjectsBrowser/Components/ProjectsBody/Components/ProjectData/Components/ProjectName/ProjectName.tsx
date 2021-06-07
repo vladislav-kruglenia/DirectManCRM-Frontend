@@ -8,22 +8,25 @@ import {ProjectNameForm} from "./Components/ProjectNameForm/ProjectNameForm";
 
 
 export const ProjectName: FC<ProjectNameTypeProps> = (props) => {
-    const {projectName} = props;
+    const {projectName, isAccessToEdit} = props;
     const [editMode, setEditMode] = useState(false);
+    const DisplayProjectNameComponent = <DisplayProjectName projectName={props.projectName}/>;
 
-    return (
+    if(isAccessToEdit) return (
         <ValueDisplay
             displayType={DisplayTypeEnum.component}
             type={FormTypeEnum.grandForm}
             editModeStatus={editMode}
             setEditModeInProps={value => setEditMode(value)}
-            displayComponent={<DisplayProjectName projectName={props.projectName}/>}
+            displayComponent={DisplayProjectNameComponent}
             grandFormComponent={<ProjectNameForm
                 projectName={projectName}
                 exitEditMode={() => setEditMode(false)}
             />}
         />
     )
+
+    return DisplayProjectNameComponent;
 };
 
 

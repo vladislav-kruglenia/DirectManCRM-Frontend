@@ -24,7 +24,10 @@ export let ProjectData: FC<ProjectDataProps> = (props) => {
     const {dates, dept, orderedServices} = projectData;
 
     return <div className={style.ProjectData}>
-        <ProjectName projectName={projectName}/>
+        <ProjectName
+            projectName={projectName}
+            isAccessToEdit={true}
+        />
 
         <StepperComponent projectStages={projectData.projectStages}/>
 
