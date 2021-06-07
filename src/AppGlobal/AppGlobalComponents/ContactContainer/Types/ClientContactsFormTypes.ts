@@ -1,11 +1,11 @@
 import {
     changeClientDataType
-} from "../../../../redux/Types/ProjectCreation/ProjectCreationReducerTypes";
-import {ClientContactFormType} from "../../../../redux/Types/ProjectCreation/ActionCreators";
+} from "../../../../Redux/Reducers/ProjectCreation/Types/ProjectCreation.types";
+import {ClientContactFormType} from "../../../../Redux/Reducers/ProjectCreation/Types/ActionCreators.types";
 import {ReturnKeysReduxForm} from "../../../AppGlobalTypes/AppGlobalTypes";
 import {ClientContactType} from "./ContactContainerTypes";
 import {ContactContainerComponentType} from "../../../AppGlobalTypes/TypesComponents";
-import {EditResponseContact} from "../../../../components/Body/FillOrderQuestions/Question/Types/QuestionTypes";
+import {EditResponseContact} from "../../../../ReactComponents/Components/Body/Components/FillOrderQuestions/Question/Types/QuestionTypes";
 
 export type EditingContactsPropsType = {
     changeValueGlobal: changeClientDataType

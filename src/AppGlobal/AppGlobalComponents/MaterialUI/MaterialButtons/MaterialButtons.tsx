@@ -12,6 +12,7 @@ import {
     DeleteButtonPropsType,
     EditButtonPropsType,
     LinkButtonPropsType,
+    OutlinedButtonPropsType,
     SaveButtonPropsType
 } from "./Type/MaterialButtonsTypes";
 import {CopyToClipboard} from "react-copy-to-clipboard";
@@ -89,6 +90,17 @@ export let SaveButton: FC<SaveButtonPropsType> = (props) => {
                    color={"primary"}
                    size={props.size}
                    disabled={props.disabled}
+                   onClick={() => {
+                       props.onClickFunc()
+                   }}>
+        {props.buttonText}
+    </Button>
+};
+
+export const OutlinedButton: FC<OutlinedButtonPropsType> = (props) => {
+    return <Button variant={"outlined"}
+                   color={ "primary"}
+                   size={props.size}
                    onClick={() => {
                        props.onClickFunc()
                    }}>

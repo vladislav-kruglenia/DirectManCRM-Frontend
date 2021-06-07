@@ -1,4 +1,4 @@
-import {ProjectStatus} from "../../../redux/AccountsReducers/ClientAccountReducer/Types/ClientAccount.enums";
+import {ProjectStatus} from "../../../Redux/Reducers/Account/Types/ClientAccount.enums";
 
 export type ProjectStatusIndicatorProps = {
     projectStatus: ProjectStatus | ""

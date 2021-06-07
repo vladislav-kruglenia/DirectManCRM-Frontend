@@ -39,7 +39,7 @@ export let EditContactsForm: FC<EditContactsFormPropsType> = (props) => {
             changeContactData = (values) => {
                 props.changeClientData
                     ? props.changeClientData(values)
-                    : console.log("Ошибка ProjectCreation")
+                    : console.log("Ошибка Types")
             };
 
             break

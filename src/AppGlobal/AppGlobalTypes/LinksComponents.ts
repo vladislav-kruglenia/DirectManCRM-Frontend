@@ -4,17 +4,18 @@ export enum NavBarLinks {
     editTariffsData = '/editTariffsData',
     FillOrderQuestions = '/fill-order-questions',
     EditingOrderQuestions = '/editing-order-questions',
-    ClientAccount = '/client-account'
+    Account = '/account'
 }
 
-export enum ClientAccountPages {
-    Projects = `/client-account/projects`,
-    ChooseProject = `/client-account/projects/choose-project`,
-    Project = `/client-account/projects/project`,
+export enum AccountPages {
+    Projects = `/account/projects`,
+    ChooseProject = `/account/projects/choose-project`,
+    Project = `/account/projects/project`,
 
-    Settings = `/client-account/settings`,
-    Instructions = `/client-account/instructions`,
-    Feedback = `/client-account/feedback`,
+    Profile = `/account/profile`,
+    Instructions = `/account/instructions`,
+    Feedback = `/account/feedback`,
+    NewProject = `/account/new-project`,
 }
 
 export enum ProjectCreationPages {

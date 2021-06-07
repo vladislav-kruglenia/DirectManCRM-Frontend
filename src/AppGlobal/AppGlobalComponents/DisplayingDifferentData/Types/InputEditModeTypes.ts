@@ -3,7 +3,7 @@ import {ClientContactType} from "../../ContactContainer/Types/ContactContainerTy
 import {
     changeClientDataType, changeDeadlineTariffType, changeNameProjectType, changePacketPriceType, changeServiceInfoType,
     changeServiceNameType, changeServicePriceType, changeTariffNameType
-} from "../../../../redux/Types/ProjectCreation/ProjectCreationReducerTypes";
+} from "../../../../Redux/Reducers/ProjectCreation/Types/ProjectCreation.types";
 
 export enum DisplayingDifferentDataEnum {
     price = "price",

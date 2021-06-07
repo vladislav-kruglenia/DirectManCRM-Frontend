@@ -12,7 +12,7 @@ const validationSchema = yup.object({
         .required('Это поле обязательно'),
 });
 
-export let OneInputText:FC<OneInputTextProps> = ({formValue, ...props}) => {
+export const OneInputText:FC<OneInputTextProps> = ({formValue, ...props}) => {
     let valuesForm: ValuesFormType = {
         formValue
     };

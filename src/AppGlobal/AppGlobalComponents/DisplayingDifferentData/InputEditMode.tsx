@@ -1,5 +1,5 @@
 import style from "./Styles/InputEditMode.module.scss";
-import tariffEditingStyle from "../../../components/Body/ProjectCreation/Components/ProjectEditing/SecondaryComponents/TariffEditing/TariffEditing.module.scss";
+import tariffEditingStyle from "../../../ReactComponents/Components/Body/Components/ProjectCreation/Components/ProjectEditing/SecondaryComponents/TariffEditing/TariffEditing.module.scss";
 import React, {ChangeEvent, FC, useState} from "react";
 import {DisplayingDifferentData} from "./DisplayingDifferentData";
 import {

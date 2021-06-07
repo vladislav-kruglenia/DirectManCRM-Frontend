@@ -5,7 +5,7 @@ import {ValueDisplay} from "../DisplayingDifferentData/InputEditMode";
 import {FormTypeEnum} from "../DisplayingDifferentData/Types/InputEditModeTypes";
 import {DisplayTypeEnum} from "../DisplayingDifferentData/Types/DisplayingDifferentDataTypes";
 import {EditContactsForm} from "./ClientContactsForm";
-import projectEditingStyle from "../../../components/Body/ProjectCreation/Components/ProjectEditing/ProjectEditing.module.scss";
+import projectEditingStyle from "../../../ReactComponents/Components/Body/Components/ProjectCreation/Components/ProjectEditing/ProjectEditing.module.scss";
 import PhoneIcon from '@material-ui/icons/Phone';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import {ContactContainerProps, ContactPropsType, EditAndDeletePropsType} from "./Types/ContactContainerTypes";

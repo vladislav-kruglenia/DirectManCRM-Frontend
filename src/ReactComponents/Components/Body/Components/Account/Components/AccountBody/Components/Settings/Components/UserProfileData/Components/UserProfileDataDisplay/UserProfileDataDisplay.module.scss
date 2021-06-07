@@ -1,0 +1,34 @@
+.UserProfileDataDisplay{
+  //margin: 15px 0 0 0;
+  padding: 0 5px;
+  position: relative;
+  cursor: pointer;
+
+  .UserValue{
+    display: flex;
+    align-items: center;
+    margin: 0 0 10px 0;
+    //border: 1px solid brown;
+
+    .label{
+      margin: 0 10px 0 0;
+    }
+
+    .value{
+      //max-width: 215px;
+      font-size: 18px;
+      word-break: break-word;
+    }
+  }
+
+  .editButton{
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  &:hover .editButton{
+    display: block;
+  }
+}

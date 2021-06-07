@@ -1,11 +1,11 @@
 import {
     changeClientDataType,
     deleteContactType
-} from "../../../../redux/Types/ProjectCreation/ProjectCreationReducerTypes";
+} from "../../../../Redux/Reducers/ProjectCreation/Types/ProjectCreation.types";
 import {
     DeleteResponseContact,
     EditResponseContact
-} from "../../../../components/Body/FillOrderQuestions/Question/Types/QuestionTypes";
+} from "../../../../ReactComponents/Components/Body/Components/FillOrderQuestions/Question/Types/QuestionTypes";
 import {ContactContainerComponentType} from "../../../AppGlobalTypes/TypesComponents";
 
 export type ClientContactType = {
