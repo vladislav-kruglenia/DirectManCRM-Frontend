@@ -1,20 +1,22 @@
 import {useCallback, useEffect, useState} from "react";
-import {OrderedService} from "../../../../../../../../../../../../../../../Redux/Reducers/Account/Types/QueryTypes/ProjectInfoForClient.types";
+import {OrderedService} from "../../../../../../../../../../../../../../../../../Redux/Reducers/Account/Types/QueryTypes/ProjectInfoForClient.types";
 
 export let useReadyServicesPercentage = (services: OrderedService[]) => {
     const getSumReadyServices = useCallback(() => {
-        if (services.length === 0) return 0;
+        const numberServices = services.length;
+
+        if (numberServices === 0) return 0;
 
         let sumReadyServices = 0;
         services.forEach(service => {
             sumReadyServices = service.isReady ? sumReadyServices + 1 : sumReadyServices
         });
 
-        return Math.round(sumReadyServices / services.length * 100)
+        return Math.round(sumReadyServices / numberServices * 100)
 
     }, [services]);
 
-    let [readyServicesPercentage, updatePercentage] = useState(getSumReadyServices());
+    const [readyServicesPercentage, updatePercentage] = useState(getSumReadyServices());
 
     useEffect(() => {
         updatePercentage(getSumReadyServices())

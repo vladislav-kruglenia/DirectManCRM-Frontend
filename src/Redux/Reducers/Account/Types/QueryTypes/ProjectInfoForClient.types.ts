@@ -43,7 +43,7 @@ export interface ProjectDates {
 export interface ProjectData {
     projectStages: Array<ProjectStage>,
     dates: ProjectDates
-    dept: Debt,
+    /*dept: Debt,*/
     orderedServices: OrderedServices,
     projectNotes: string,
     briefId: string,

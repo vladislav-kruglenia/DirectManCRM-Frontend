@@ -18,7 +18,7 @@ export let Deadline:FC<DeadlineProps> = (props) => {
                     <div className={style.dateValue}>{props.deadline}</div>
                 </div>
             </div>
-            <div className={style.numberDays}>Количество дней на работу: {props.numberDaysForProject}</div>
+            {/*<div className={style.numberDays}>Количество дней на работу: {props.numberDaysForProject}</div>*/}
         </div>
     </section>
 };

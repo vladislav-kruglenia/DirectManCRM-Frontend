@@ -3,25 +3,22 @@ import style from "./ProjectData.module.scss"
 import {ProjectName} from "./Components/ProjectName/ProjectName";
 import {StepperComponent} from "./Components/Stepper/StepperComponent";
 import {Deadline} from "./Components/Deadline/Deadline";
-import {Debt} from "./Components/Debt/Debt";
 import {ProjectNotes} from "./Components/ProjectNotes/ProjectNotes";
 import {OrderedServices} from "./Components/OrderedServices/OrderedServices";
-import {StagesWorkMessages} from "./Components/StagesWorkMessages/StagesWorkMessages";
 import {Brief} from "./Components/Brief/Brief";
 import {Comments} from "./Components/Comments/Comments";
 import {ProjectDataProps} from "./Types/ProjectData.types";
 import {
-    DebtPercentageEnum,
     ProjectStageEnum,
     ProjectStatus
 } from "../../../../../../../../../../../../../Redux/Reducers/Account/Types/ClientAccount.enums";
 import {ProjectInfoForClientModel} from "../../../../../../../../../../../../../Redux/Reducers/Account/Types/QueryTypes/ProjectInfoForClient.types";
 
 
-export let ProjectData: FC<ProjectDataProps> = (props) => {
+export const ProjectData: FC<ProjectDataProps> = () => {
 
     const {projectName, deadline, projectData } = projectInfo1;
-    const {dates, dept, orderedServices} = projectData;
+    const {dates, orderedServices} = projectData;
 
     return <div className={style.ProjectData}>
         <ProjectName
@@ -37,12 +34,6 @@ export let ProjectData: FC<ProjectDataProps> = (props) => {
             numberDaysForProject={dates.numberDaysForProject}
         />
 
-        <Debt
-            isExists={dept.isExists}
-            amountDebt={dept.amountDebt}
-            debtPercentage={dept.debtPercentage}
-        />
-
         <OrderedServices
             services={orderedServices.services}
             tariffName={orderedServices.tariffName}
@@ -51,8 +42,6 @@ export let ProjectData: FC<ProjectDataProps> = (props) => {
         <ProjectNotes projectNotes={projectData.projectNotes}/>
 
         <Brief briefId={projectData.briefId}/>
-
-        <StagesWorkMessages/>
 
         <Comments/>
     </div>
@@ -69,7 +58,7 @@ const projectInfo1: ProjectInfoForClientModel = {
     projectId: '1',
     projectStatus: ProjectStatus.InProgress,
     projectName: 'Первый проект',
-    deadline: '01.01.2020',
+    deadline: '01/01/2020',
     projectData: {
         projectStages: [
             {
@@ -94,11 +83,6 @@ const projectInfo1: ProjectInfoForClientModel = {
             numberDaysForProject: 11,
             startDate: "01/10/2020"
         },
-        dept: {
-            isExists: true,
-            amountDebt: 4000,
-            debtPercentage: DebtPercentageEnum.TenPercent,
-        },
         orderedServices: {
             tariffName: 'Тариф СТАНДАРТ',
             services: [
@@ -107,11 +91,11 @@ const projectInfo1: ProjectInfoForClientModel = {
                     serviceName: 'Услуга1',
                 },
                 {
-                    isReady: true,
+                    isReady: false,
                     serviceName: 'Услуга2',
                 },
                 {
-                    isReady: true,
+                    isReady: false,
                     serviceName: 'Услуга3',
                 },
 

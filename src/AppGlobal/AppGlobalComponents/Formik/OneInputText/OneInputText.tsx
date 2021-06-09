@@ -12,7 +12,9 @@ const validationSchema = yup.object({
         .required('Это поле обязательно'),
 });
 
-export const OneInputText:FC<OneInputTextProps> = ({formValue, ...props}) => {
+export const OneInputText:FC<OneInputTextProps> = (props) => {
+    const {multiline, formValue} = props;
+
     let valuesForm: ValuesFormType = {
         formValue
     };
@@ -30,6 +32,7 @@ export const OneInputText:FC<OneInputTextProps> = ({formValue, ...props}) => {
             <TextField className={style.textField} id="formValue"
                        label={props.label} variant="outlined" size={props.textFieldSize}
                        value={Form.values.formValue}
+                       multiline={multiline}
                        onChange={Form.handleChange}
                        error={Form.touched.formValue && Boolean(Form.errors.formValue)}
                        helperText={Form.touched.formValue && Form.errors.formValue}
