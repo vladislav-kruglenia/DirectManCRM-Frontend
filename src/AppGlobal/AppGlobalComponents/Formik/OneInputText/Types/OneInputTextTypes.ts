@@ -2,7 +2,9 @@ export type OneInputTextProps = {
     formValue: string,
     label: string,
     textFieldSize: 'small' | 'medium',
-    multiline?: boolean,
+    isMultiline?: boolean,
+    isReset?: boolean,
+    textFieldVariant?: "standard" | "outlined",
     exitEditMode: () => void,
     editText: (text: string) => void
 }

@@ -13,7 +13,8 @@ const validationSchema = yup.object({
 });
 
 export const OneInputText:FC<OneInputTextProps> = (props) => {
-    const {multiline, formValue} = props;
+    const {isMultiline, formValue, isReset, textFieldVariant} = props;
+
 
     let valuesForm: ValuesFormType = {
         formValue
@@ -21,25 +22,28 @@ export const OneInputText:FC<OneInputTextProps> = (props) => {
     const Form = useFormik({
         initialValues: valuesForm,
         validationSchema: validationSchema,
-        onSubmit: (values: ValuesFormType) => {
+        onSubmit: (values: ValuesFormType, { resetForm }) => {
             console.log(values);
             props.exitEditMode();
-            props.editText(values.formValue)
+            props.editText(values.formValue);
+            if(isReset) resetForm();
         }
     });
 
     return <form className={style.OneInputText} onSubmit={Form.handleSubmit}>
             <TextField className={style.textField} id="formValue"
-                       label={props.label} variant="outlined" size={props.textFieldSize}
+                       label={props.label} variant={textFieldVariant || "outlined"} size={props.textFieldSize}
                        value={Form.values.formValue}
-                       multiline={multiline}
+                       multiline={isMultiline}
                        onChange={Form.handleChange}
                        error={Form.touched.formValue && Boolean(Form.errors.formValue)}
                        helperText={Form.touched.formValue && Form.errors.formValue}
                        autoFocus={true}
             />
             <Button className={style.formButton} size={"small"} href={''}
-                    color="default" variant="outlined" type="submit">
+                    color="default" variant="outlined" type="submit"
+                    disabled={!Boolean(Form.values.formValue)}
+            >
                 Сохранить
             </Button>
         </form>

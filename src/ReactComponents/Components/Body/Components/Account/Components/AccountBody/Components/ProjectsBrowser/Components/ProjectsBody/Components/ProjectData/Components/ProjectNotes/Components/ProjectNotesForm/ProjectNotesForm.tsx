@@ -10,7 +10,7 @@ export const ProjectNotesForm:FC<ProjectNotesFormProps> = (props) => {
         <OneInputText
             textFieldSize={"medium"}
             label={'Описание проекта'}
-            multiline={true}
+            isMultiline={true}
             formValue={textForm}
             exitEditMode={exitEditMode}
             editText={editText}

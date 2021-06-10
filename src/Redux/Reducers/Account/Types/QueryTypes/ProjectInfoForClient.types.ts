@@ -6,6 +6,7 @@ export interface Comment {
     commentDate: string,
     authorId: string,
     authorLogin: string,
+    commentId: string,
 }
 
 

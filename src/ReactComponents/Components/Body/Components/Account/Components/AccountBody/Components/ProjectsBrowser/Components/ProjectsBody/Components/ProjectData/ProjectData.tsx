@@ -18,7 +18,7 @@ import {ProjectInfoForClientModel} from "../../../../../../../../../../../../../
 export const ProjectData: FC<ProjectDataProps> = () => {
 
     const {projectName, deadline, projectData } = projectInfo1;
-    const {dates, orderedServices} = projectData;
+    const {dates, orderedServices, comments} = projectData;
 
     return <div className={style.ProjectData}>
         <ProjectName
@@ -41,9 +41,10 @@ export const ProjectData: FC<ProjectDataProps> = () => {
 
         <ProjectNotes projectNotes={projectData.projectNotes}/>
 
+        <Comments comments={comments}/>
+
         <Brief briefId={projectData.briefId}/>
 
-        <Comments/>
     </div>
 };
 
@@ -108,10 +109,26 @@ const projectInfo1: ProjectInfoForClientModel = {
         comments: [
             {
                 authorId: 'e368defb-bb8c-41ee-a1db-1558cde1f7a3',
-                authorLogin: 'ema1',
-                commentDate: '01.01.2020',
-                commentText: 'Первый комментарий',
+                authorLogin: 'Antony1',
+                commentDate: '15:34 01.01.2020',
+                commentText: 'Третий комментарий',
+                commentId: "15151514171"
             },
+            {
+                authorId: 'e368defb-bb8c-41ee-a1db-1558cde1f7a3',
+                authorLogin: 'Antony1',
+                commentDate: '15:34 01.01.2020',
+                commentText: 'Второй комментарий',
+                commentId: "656463464576535"
+            },
+            {
+                authorId: 'e368defb-bb8c-41ee-a1db-1558cde1f7a3',
+                authorLogin: 'Antony1',
+                commentDate: '15:34 01.01.2020',
+                commentText: 'Первый комментарий',
+                commentId: "151543434345454523231"
+            },
+
         ],
     },
 };
