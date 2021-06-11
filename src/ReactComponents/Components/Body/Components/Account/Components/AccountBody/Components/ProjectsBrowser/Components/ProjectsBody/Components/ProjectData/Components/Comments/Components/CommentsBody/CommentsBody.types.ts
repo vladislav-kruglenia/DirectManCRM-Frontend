@@ -1,5 +1,5 @@
-import {Comment} from "../../../../../../../../../../../../../../../../../Redux/Reducers/Account/Types/QueryTypes/ProjectInfoForClient.types";
+import {CommentType} from "../../../../../../../../../../../../../../../../../Redux/Reducers/Account/Types/QueryTypes/ProjectInfoForClient.types";
 
 export type CommentsBodyProps = {
-    comments: Comment[],
+    comments: CommentType[],
 }

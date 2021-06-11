@@ -1,15 +1,15 @@
 import React, {FC} from "react";
 import style from "./CommentsBody.module.scss"
-import {CommentsBodyForm} from "./Components/CommentsBodyForm/CommentsBodyForm";
-import {CommentsDisplay} from "./Components/CommentsDisplay/CommentsDisplay";
+import {MainCommentsForm} from "./Components/MainCommentsForm/MainCommentsForm";
+import {CommentsArr} from "./Components/CommentsArr/CommentsArr";
 import {CommentsBodyProps} from "./CommentsBody.types";
 
 export const CommentsBody:FC<CommentsBodyProps> = (props) => {
     const {comments} = props;
 
     return <div className={style.CommentsBody}>
-        <CommentsBodyForm/>
-        <CommentsDisplay comments={comments}/>
+        <MainCommentsForm startText={''}/>
+        <CommentsArr comments={comments}/>
     </div>
 };
 

@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import style from "./CommentContainer.module.scss"
-import {UserLogo} from "../../../../../../../../../../../../../../../../../../../AppGlobal/AppGlobalComponents/UserLogo/UserLogo";
-import {UserLogoVariant} from "../../../../../../../../../../../../../../../../../../../AppGlobal/AppGlobalComponents/UserLogo/UserLogo.types";
+import {UserLogo} from "../../../../../../../../../../../../../../../../../../../../../AppGlobal/AppGlobalComponents/UserLogo/UserLogo";
+import {UserLogoVariant} from "../../../../../../../../../../../../../../../../../../../../../AppGlobal/AppGlobalComponents/UserLogo/UserLogo.types";
 import {CommentContainerProps} from "./CommentContainer.types";
 
 export const CommentContainer:FC<CommentContainerProps> = (props) => {

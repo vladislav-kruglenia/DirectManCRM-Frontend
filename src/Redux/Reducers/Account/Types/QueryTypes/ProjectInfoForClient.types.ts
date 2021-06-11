@@ -1,7 +1,7 @@
 import {MainProjectData} from "./ClientAccountInfo.types";
 import {DebtPercentageEnum, ProjectStageEnum} from "../ClientAccount.enums";
 
-export interface Comment {
+export interface CommentType {
     commentText: string,
     commentDate: string,
     authorId: string,
@@ -48,7 +48,7 @@ export interface ProjectData {
     orderedServices: OrderedServices,
     projectNotes: string,
     briefId: string,
-    comments: Array<Comment>,
+    comments: Array<CommentType>,
 }
 
 

@@ -5,6 +5,7 @@ export type OneInputTextProps = {
     isMultiline?: boolean,
     isReset?: boolean,
     textFieldVariant?: "standard" | "outlined",
+    autoFocus?: boolean,
     exitEditMode: () => void,
     editText: (text: string) => void
 }

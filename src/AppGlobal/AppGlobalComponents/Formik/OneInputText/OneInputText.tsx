@@ -13,7 +13,7 @@ const validationSchema = yup.object({
 });
 
 export const OneInputText:FC<OneInputTextProps> = (props) => {
-    const {isMultiline, formValue, isReset, textFieldVariant} = props;
+    const {isMultiline, formValue, isReset, textFieldVariant, autoFocus} = props;
 
 
     let valuesForm: ValuesFormType = {
@@ -38,7 +38,7 @@ export const OneInputText:FC<OneInputTextProps> = (props) => {
                        onChange={Form.handleChange}
                        error={Form.touched.formValue && Boolean(Form.errors.formValue)}
                        helperText={Form.touched.formValue && Form.errors.formValue}
-                       autoFocus={true}
+                       autoFocus={autoFocus}
             />
             <Button className={style.formButton} size={"small"} href={''}
                     color="default" variant="outlined" type="submit"

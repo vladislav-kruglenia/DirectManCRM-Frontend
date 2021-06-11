@@ -115,7 +115,7 @@ const projectInfo1: ProjectInfoForClientModel = {
                 commentId: "15151514171"
             },
             {
-                authorId: 'e368defb-bb8c-41ee-a1db-1558cde1f7a3',
+                authorId: '1',
                 authorLogin: 'Antony1',
                 commentDate: '15:34 01.01.2020',
                 commentText: 'Второй комментарий',
