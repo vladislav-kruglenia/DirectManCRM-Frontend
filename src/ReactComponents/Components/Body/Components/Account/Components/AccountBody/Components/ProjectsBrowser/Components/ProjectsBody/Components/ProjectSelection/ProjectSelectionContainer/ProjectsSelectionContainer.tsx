@@ -2,8 +2,8 @@ import React, {FC} from "react";
 import ProjectsSelectionStyle from "../ProjectSelection.module.scss";
 import {ProjectMainInfoProps, ProjectsContainerProps} from "./Types/ProjectsContainerTypes";
 import {Paper, Typography} from "@material-ui/core";
-import {MainProjectData} from "../../../../../../../../../../../../../../Redux/Reducers/Account/Types/QueryTypes/ClientAccountInfo.types";
-import {ProjectStatus} from "../../../../../../../../../../../../../../Redux/Reducers/Account/Types/ClientAccount.enums";
+import {MainProjectData} from "../../../../../../../../../../../../../../GraphQLServer/QueryTypes/ClientAccountInfo.types";
+import {ProjectStatus} from "../../../../../../../../../../../../../../Redux/Reducers/Account/Types/Account.enums";
 
 export let ProjectsSelectionContainer: FC<ProjectsContainerProps> = (props) => {
     if(props.projectsMainData.length === 0) return null;

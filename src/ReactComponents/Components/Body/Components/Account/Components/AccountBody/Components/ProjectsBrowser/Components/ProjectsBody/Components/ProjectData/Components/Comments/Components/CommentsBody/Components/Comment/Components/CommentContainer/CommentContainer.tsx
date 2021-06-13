@@ -11,6 +11,6 @@ export const CommentContainer:FC<CommentContainerProps> = (props) => {
         <div className={style.logo}>
             <UserLogo variant={UserLogoVariant.small}/>
         </div>
-        {DisplayComponent}
+        <div className={style.displayComponent}>{DisplayComponent}</div>
     </div>
 };

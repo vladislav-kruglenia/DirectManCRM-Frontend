@@ -2,7 +2,7 @@ import React, {FC, memo, ReactNodeArray, useMemo} from "react";
 import {MainProjectDataKeys, ProjectSelectionProps, TypesProjectsEnum} from "./Types/ProjectSelection.types";
 import {useSelector} from "react-redux";
 import {getCurrentProjectIndexSelector} from "../../../../../../../../../../../../../Redux/Reducers/Account/Account.selectors";
-import {MainProjectData} from "../../../../../../../../../../../../../Redux/Reducers/Account/Types/QueryTypes/ClientAccountInfo.types";
+import {MainProjectData} from "../../../../../../../../../../../../../GraphQLServer/QueryTypes/ClientAccountInfo.types";
 import {ProjectsSelectionContainer} from "./ProjectSelectionContainer/ProjectsSelectionContainer";
 import style from "./ProjectSelection.module.scss";
 

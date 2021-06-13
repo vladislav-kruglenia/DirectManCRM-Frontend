@@ -3,7 +3,6 @@ import React, {FC, memo, useCallback} from "react";
 import {Tab, Tabs} from "@material-ui/core";
 import {useDispatch, useSelector} from "react-redux";
 import {
-    DeleteTabPayload,
     ProjectTabData
 } from "../../../../../../../../../../../Redux/Reducers/Account/Types/Account.types";
 import {deleteTab} from "../../../../../../../../../../../Redux/Reducers/Account/Account.reducer";
@@ -11,6 +10,7 @@ import {TabsComponentProps} from "./Types/TabsComponent.types";
 import {getCurrentProjectIndexSelector} from "../../../../../../../../../../../Redux/Reducers/Account/Account.selectors";
 import {TabLabelMemo} from "./Components/TabLabel/TabLabel";
 import {AddTabButtonMemo} from "./Components/AddTabButton/AddTabButton";
+import {DeleteTabPayload} from "../../../../../../../../../../../Redux/Reducers/Account/Types/Actions.types";
 
 export let TabsContainer: FC<TabsComponentProps> = (props) => {
     const currentProjectIndex = useSelector(getCurrentProjectIndexSelector);

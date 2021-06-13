@@ -7,8 +7,9 @@ import {CommentsBodyProps} from "./CommentsBody.types";
 export const CommentsBody:FC<CommentsBodyProps> = (props) => {
     const {comments} = props;
 
+
     return <div className={style.CommentsBody}>
-        <MainCommentsForm startText={''}/>
+        <MainCommentsForm/>
         <CommentsArr comments={comments}/>
     </div>
 };

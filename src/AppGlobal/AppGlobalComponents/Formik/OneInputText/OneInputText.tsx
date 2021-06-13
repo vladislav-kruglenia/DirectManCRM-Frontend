@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {FC, useEffect} from "react";
 import style from "./OneInputText.module.scss"
 import * as yup from "yup";
 import {Button, TextField} from "@material-ui/core";
@@ -13,22 +13,32 @@ const validationSchema = yup.object({
 });
 
 export const OneInputText:FC<OneInputTextProps> = (props) => {
-    const {isMultiline, formValue, isReset, textFieldVariant, autoFocus} = props;
+    const {isMultiline, formValue, isReset, textFieldVariant, autoFocus, onBlur} = props;
 
-
-    let valuesForm: ValuesFormType = {
+    const valuesForm: ValuesFormType = {
         formValue
     };
+
     const Form = useFormik({
         initialValues: valuesForm,
         validationSchema: validationSchema,
+        enableReinitialize: true,
         onSubmit: (values: ValuesFormType, { resetForm }) => {
             console.log(values);
             props.exitEditMode();
             props.editText(values.formValue);
             if(isReset) resetForm();
-        }
+        },
     });
+
+    useEffect(() => {
+        Form.values.formValue = formValue
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[formValue]);
+
+    const handleBlur = () => {
+        if(onBlur) onBlur(Form.values.formValue)
+    };
 
     return <form className={style.OneInputText} onSubmit={Form.handleSubmit}>
             <TextField className={style.textField} id="formValue"
@@ -39,6 +49,7 @@ export const OneInputText:FC<OneInputTextProps> = (props) => {
                        error={Form.touched.formValue && Boolean(Form.errors.formValue)}
                        helperText={Form.touched.formValue && Form.errors.formValue}
                        autoFocus={autoFocus}
+                       onBlur={handleBlur}
             />
             <Button className={style.formButton} size={"small"} href={''}
                     color="default" variant="outlined" type="submit"

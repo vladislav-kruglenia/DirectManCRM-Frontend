@@ -5,9 +5,10 @@ import {CommentForm} from "./Components/CommentForm/CommentForm";
 
 export const useTypeCommentDisplay = (dto: UseTypeCommentDisplayDTO) => {
     const {isEditMode, displayProps, formProps} = dto;
+    const {isMainForm} = formProps;
     const [editMode, setEditMode] = useState(isEditMode);
 
     return editMode
-        ? <CommentForm {...formProps} exitEditMode={() => setEditMode(false)}/>
+        ? <CommentForm {...formProps} exitEditMode={() => {if(!isMainForm) setEditMode(false)}}/>
         : <CommentDisplay {...displayProps} initialEditMode={() => setEditMode(true)}/>
 };

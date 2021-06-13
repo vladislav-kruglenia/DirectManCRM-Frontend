@@ -1,4 +1,4 @@
-import {ProjectInfoForClientModel} from "../../../../../../../../../../../../../../Redux/Reducers/Account/Types/QueryTypes/ProjectInfoForClient.types";
+import {ProjectInfoForClientModel} from "../../../../../../../../../../../../../../GraphQLServer/QueryTypes/ProjectInfoForClient.types";
 
 export type ProjectDataProps = {
     projectIdUrl: string,

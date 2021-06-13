@@ -6,7 +6,7 @@ import StepLabel from '@material-ui/core/StepLabel';
 import TimelineIcon from '@material-ui/icons/Timeline';
 import {TitleComponent} from "../Title/TitleComponent";
 import {HorizontalLinearStepperProps, ProjectStageTitlesEnum, StepperProps} from "./Stepper.types";
-import {ProjectStage} from "../../../../../../../../../../../../../../../Redux/Reducers/Account/Types/QueryTypes/ProjectInfoForClient.types";
+import {ProjectStage} from "../../../../../../../../../../../../../../../GraphQLServer/QueryTypes/ProjectInfoForClient.types";
 
 
 export const StepperComponent: FC<StepperProps> = (props) => {

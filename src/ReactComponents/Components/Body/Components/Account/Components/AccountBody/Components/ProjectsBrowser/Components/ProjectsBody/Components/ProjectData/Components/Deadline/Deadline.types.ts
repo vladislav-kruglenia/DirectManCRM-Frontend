@@ -1,4 +1,4 @@
-import {ProjectDates} from "../../../../../../../../../../../../../../../Redux/Reducers/Account/Types/QueryTypes/ProjectInfoForClient.types";
+import {ProjectDates} from "../../../../../../../../../../../../../../../GraphQLServer/QueryTypes/ProjectInfoForClient.types";
 
 export interface DeadlineProps extends ProjectDates{
     deadline: string,

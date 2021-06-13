@@ -1,5 +1,5 @@
 import {AccountPages} from "../../../../AppGlobal/AppGlobalTypes/LinksComponents";
-import {ProjectStatus} from "./ClientAccount.enums";
+import {ProjectStatus} from "./Account.enums";
 
 export type StartStateType = {
     currentProjectIndex: number,
@@ -13,22 +13,10 @@ export type ProjectTabData = {
     projectName: string,
     projectId: string,
     idProjectTab: string,
+    textMainForm: string,
     projectStatus: ProjectStatus | "",
-}
+    response: ResponseComment,
 
-export type DeleteTabPayload = {
-    projectId: string,
-}
-
-export type UpdateProjectMainDataPayload = {
-    projectMainData:  ProjectMainData,
-    currentProjectIndex: number,
-    projectStatus: ProjectStatus | "",
-}
-
-export type UpdateProjectStatusPayload = {
-    projectStatus: ProjectStatus | "",
-    currentProjectIndex: number,
 }
 
 
@@ -42,4 +30,9 @@ export type ProjectMainData = {
 export type LinkClientAccountBody = {
     link: AccountPages,
     linkName: string
+}
+
+export type ResponseComment = {
+    isResponse: boolean,
+    commentDestination: string,
 }

@@ -1,4 +1,4 @@
-import {ProjectStage} from "../../../../../../../../../../../../../../../Redux/Reducers/Account/Types/QueryTypes/ProjectInfoForClient.types";
+import {ProjectStage} from "../../../../../../../../../../../../../../../GraphQLServer/QueryTypes/ProjectInfoForClient.types";
 
 export type StepperProps = {
     projectStages: ProjectStage[]

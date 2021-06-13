@@ -4,8 +4,7 @@ import {TabsComponentMemo} from "./Components/TabsComponent/TabsContainer";
 import {Divider, Paper} from "@material-ui/core";
 import {useDispatch} from "react-redux";
 import {
-    ProjectMainData,
-    UpdateProjectMainDataPayload
+    ProjectMainData
 } from "../../../../../../../../../Redux/Reducers/Account/Types/Account.types";
 import {ProjectsBrowserProps} from "./Types/ProjectsBrowser.types";
 import {
@@ -14,7 +13,8 @@ import {
 } from "../../../../../../../../../Redux/Reducers/Account/Account.reducer"
 import {StringParam, useQueryParam} from "use-query-params";
 import {ProjectsBodyMemo} from "./Components/ProjectsBody/ProjectsBody";
-import {ProjectStatus} from "../../../../../../../../../Redux/Reducers/Account/Types/ClientAccount.enums";
+import {ProjectStatus} from "../../../../../../../../../Redux/Reducers/Account/Types/Account.enums";
+import {UpdateProjectMainDataPayload} from "../../../../../../../../../Redux/Reducers/Account/Types/Actions.types";
 
 
 export let ProjectsBrowser: FC<ProjectsBrowserProps> = ({projectsViewed, currentProjectIndex, ...props}) => {

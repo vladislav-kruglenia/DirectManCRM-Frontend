@@ -15,7 +15,11 @@ export const CommentDisplay:FC<CommentDisplayProps> = (props) => {
             <CommentDate date={date}/>
         </div>
         <CommentText text={text}/>
-        <CommentButtonsArr initialEditMode={initialEditMode} isReadOnly={isReadOnly}/>
+        <CommentButtonsArr
+            authorName={authorName}
+            initialEditMode={initialEditMode}
+            isReadOnly={isReadOnly}
+        />
     </div>
 };
 

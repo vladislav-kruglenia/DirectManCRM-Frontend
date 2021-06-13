@@ -1,8 +1,9 @@
 import React, {useMemo} from "react";
 import {Comment} from "../Comment/Comment";
-import {CommentType} from "../../../../../../../../../../../../../../../../../../../Redux/Reducers/Account/Types/QueryTypes/ProjectInfoForClient.types";
+import {CommentType} from "../../../../../../../../../../../../../../../../../../../GraphQLServer/QueryTypes/ProjectInfoForClient.types";
 
 export const useCommentsComponents = (comments: CommentType[]) => {
+
     return useMemo(() => {
         return comments.map((comment: CommentType) => {
             const {commentText, commentDate, authorLogin, commentId, authorId} = comment;
@@ -13,7 +14,7 @@ export const useCommentsComponents = (comments: CommentType[]) => {
                     authorName: authorLogin,
                     date: commentDate,
                     text: commentText,
-                    isReadOnly: authorId === "1" //Todo: поменять на userId из state
+                    isReadOnly: authorId !== "1" //Todo: поменять на userId из state
                 }}
                 formProps={{startText: commentText, editText: text => {}}}
             />

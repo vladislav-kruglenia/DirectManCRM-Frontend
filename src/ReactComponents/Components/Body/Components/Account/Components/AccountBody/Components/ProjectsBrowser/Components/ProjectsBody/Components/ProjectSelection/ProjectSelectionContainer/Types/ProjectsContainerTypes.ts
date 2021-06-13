@@ -1,6 +1,6 @@
 import {ProjectMainData} from "../../../../../../../../../../../../../../../Redux/Reducers/Account/Types/Account.types";
-import {MainProjectData} from "../../../../../../../../../../../../../../../Redux/Reducers/Account/Types/QueryTypes/ClientAccountInfo.types";
-import {ProjectStatus} from "../../../../../../../../../../../../../../../Redux/Reducers/Account/Types/ClientAccount.enums";
+import {MainProjectData} from "../../../../../../../../../../../../../../../GraphQLServer/QueryTypes/ClientAccountInfo.types";
+import {ProjectStatus} from "../../../../../../../../../../../../../../../Redux/Reducers/Account/Types/Account.enums";
 
 export type ProjectsContainerProps = {
     title: string,

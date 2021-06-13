@@ -1,7 +1,7 @@
 import {
-    DeleteTabPayload,
     ProjectTabData
 } from "../../../../../../../../../../../../Redux/Reducers/Account/Types/Account.types";
+import {DeleteTabPayload} from "../../../../../../../../../../../../Redux/Reducers/Account/Types/Actions.types";
 
 export type TabLabelProps = {
     isOtherTabs: boolean,

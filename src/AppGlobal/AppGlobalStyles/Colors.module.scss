@@ -1,6 +1,16 @@
+
+
 $primaryColor: #14213d;
-$darkPrimaryColor: $primaryColor - 100;
-$lightPrimaryColor: $primaryColor + 40;
+$darkPrimaryColor: scale_color($primaryColor, $lightness: -90%);
+$lightPrimaryColor: scale_color($primaryColor,$lightness: 10%);
+
+
+
+//$darkPrimaryColor: $primaryColor - 100;
+//$lightPrimaryColor: $primaryColor + 40;
 
 
 $backgroundColor: #e5e5e5
+
+
+

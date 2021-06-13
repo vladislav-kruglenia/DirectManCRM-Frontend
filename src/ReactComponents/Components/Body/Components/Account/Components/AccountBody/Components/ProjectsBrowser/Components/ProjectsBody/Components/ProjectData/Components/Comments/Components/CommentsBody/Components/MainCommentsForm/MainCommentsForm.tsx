@@ -1,19 +1,22 @@
 import React, {FC} from "react";
-import {CommentContainer} from "../Comment/Components/CommentContainer/CommentContainer";
 import {MainCommentsFormProps} from "./MainCommentsForm.types";
-import {CommentForm} from "../Comment/Components/CommentForm/CommentForm";
+import {Comment} from "../Comment/Comment";
 
-export const MainCommentsForm:FC<MainCommentsFormProps> = (props) => {
-    const {startText} = props;
-
-    return <CommentContainer
-        DisplayComponent={
-            <CommentForm
-                startText={startText}
-                editText={text => {}}
-                exitEditMode={() => {}}
-            />
-        }
-    />
+export const MainCommentsForm:FC<MainCommentsFormProps> = () => {
+   return <Comment
+       isEditMode={true}
+       formProps={{
+           editText: text => {},
+           startText: "",
+           isMainForm: true,
+       }}
+       displayProps={{
+           isReadOnly: true,
+           text: "",
+           authorName: 'vlad',
+           date: "01/01"
+       }}
+   />
 };
+
 

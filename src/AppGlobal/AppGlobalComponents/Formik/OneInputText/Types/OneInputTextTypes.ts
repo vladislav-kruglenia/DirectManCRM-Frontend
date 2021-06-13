@@ -6,6 +6,7 @@ export type OneInputTextProps = {
     isReset?: boolean,
     textFieldVariant?: "standard" | "outlined",
     autoFocus?: boolean,
+    onBlur?: (text: string) => void,
     exitEditMode: () => void,
     editText: (text: string) => void
 }

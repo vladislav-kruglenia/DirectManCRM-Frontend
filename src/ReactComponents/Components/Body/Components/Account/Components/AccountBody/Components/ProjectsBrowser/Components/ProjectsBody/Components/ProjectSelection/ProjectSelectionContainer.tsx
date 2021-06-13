@@ -1,8 +1,8 @@
 import React, {FC, memo} from "react";
 import {ProjectSelectionMemo} from "./ProjectSelection";
 import {ProjectSelectionContainerProps} from "./Types/ProjectSelectionContainer.types";
-import {ClientAccountInfoModel} from "../../../../../../../../../../../../../Redux/Reducers/Account/Types/QueryTypes/ClientAccountInfo.types";
-import {ProjectStatus} from "../../../../../../../../../../../../../Redux/Reducers/Account/Types/ClientAccount.enums";
+import {ClientAccountInfoModel} from "../../../../../../../../../../../../../GraphQLServer/QueryTypes/ClientAccountInfo.types";
+import {ProjectStatus} from "../../../../../../../../../../../../../Redux/Reducers/Account/Types/Account.enums";
 
 
 export const ProjectSelectionContainer: FC<ProjectSelectionContainerProps> = (props) => {

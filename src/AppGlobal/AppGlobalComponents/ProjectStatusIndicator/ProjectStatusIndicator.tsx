@@ -1,6 +1,6 @@
 import React, {FC, memo} from "react";
 import style from "./ProjectStatusIndicator.module.scss";
-import {ProjectStatus} from "../../../Redux/Reducers/Account/Types/ClientAccount.enums";
+import {ProjectStatus} from "../../../Redux/Reducers/Account/Types/Account.enums";
 import {ProjectStatusIndicatorProps} from "./ProjectStatusIndicator.types";
 
 export const ProjectStatusIndicator: FC<ProjectStatusIndicatorProps> = (props) => {

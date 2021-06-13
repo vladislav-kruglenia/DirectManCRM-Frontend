@@ -1,7 +1,6 @@
 import {applyMiddleware, combineReducers, compose, createStore, Store} from "redux";
 import thunkMiddleware from "redux-thunk"
 import { reducer as formReducer } from 'redux-form'
-import adminReducer from "./Reducers/Admin/Admin.reducer";
 import authReducer from "./Reducers/Auth/Auth.reducer";
 import projectCreationReducer from "./Reducers/ProjectCreation/ProjectCreation.reducer";
 import {AppStateType} from "../AppGlobal/AppGlobalTypes/AppGlobalTypes";
@@ -9,7 +8,6 @@ import {fillOrderQuestionsReducer} from "./Reducers/FillOrderQuestions/FillOrder
 
 
 export const reducers = combineReducers({
-    adminPage: adminReducer,
     auth: authReducer,
     projectCreation: projectCreationReducer,
     fillOrderQuestions: fillOrderQuestionsReducer,

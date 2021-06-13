@@ -1,5 +1,5 @@
 import {useCallback, useEffect, useState} from "react";
-import {OrderedService} from "../../../../../../../../../../../../../../../../../Redux/Reducers/Account/Types/QueryTypes/ProjectInfoForClient.types";
+import {OrderedService} from "../../../../../../../../../../../../../../../../../GraphQLServer/QueryTypes/ProjectInfoForClient.types";
 
 export let useReadyServicesPercentage = (services: OrderedService[]) => {
     const getSumReadyServices = useCallback(() => {

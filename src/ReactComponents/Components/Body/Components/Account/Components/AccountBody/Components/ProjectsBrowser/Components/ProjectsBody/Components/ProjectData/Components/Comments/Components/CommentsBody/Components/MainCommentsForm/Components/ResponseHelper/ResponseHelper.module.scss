@@ -1,0 +1,20 @@
+.ResponseHelper{
+  position: absolute;
+  top: -5px;
+  right: 0;
+  z-index: 50;
+
+  .responseHelperWrapper{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    .textResponse{
+      margin: 0 5px 0 0;
+
+      .userName{
+        font-weight: bold;
+      }
+    }
+  }
+}

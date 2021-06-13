@@ -1,5 +1,5 @@
 import {MainProjectData} from "./ClientAccountInfo.types";
-import {DebtPercentageEnum, ProjectStageEnum} from "../ClientAccount.enums";
+import {DebtPercentageEnum, ProjectStageEnum} from "../../Redux/Reducers/Account/Types/Account.enums";
 
 export interface CommentType {
     commentText: string,
