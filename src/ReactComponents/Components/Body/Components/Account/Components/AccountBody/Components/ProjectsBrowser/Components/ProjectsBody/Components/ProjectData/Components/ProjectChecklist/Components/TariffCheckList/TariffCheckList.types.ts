@@ -1,5 +1,6 @@
 import {OrderedService} from "../../../../../../../../../../../../../../../../../GraphQLServer/QueryTypes/ProjectInfoForClient.types";
 
-export type CheckListProps = {
-    services: OrderedService[],
+export type TariffCheckListProps = {
+    servicesArr: OrderedService[],
+    tariffName: string,
 }

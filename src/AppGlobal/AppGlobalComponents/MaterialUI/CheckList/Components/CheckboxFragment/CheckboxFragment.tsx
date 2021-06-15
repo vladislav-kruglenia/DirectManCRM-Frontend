@@ -6,7 +6,7 @@ export const CheckboxFragment:FC<CheckboxFragmentProps> = (props) => {
     const {isChecked} = props;
     const [checked, editChecked] = useState(isChecked);
 
-    return <React.Fragment>
+    return <div>
         <Checkbox
             checked={checked}
             onChange={() => {
@@ -16,5 +16,5 @@ export const CheckboxFragment:FC<CheckboxFragmentProps> = (props) => {
             color="primary"
             size={"small"}
         />
-    </React.Fragment>
+    </div>
 };

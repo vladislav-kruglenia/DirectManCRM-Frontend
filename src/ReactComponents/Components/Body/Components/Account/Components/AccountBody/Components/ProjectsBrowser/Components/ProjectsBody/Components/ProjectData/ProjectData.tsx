@@ -4,7 +4,7 @@ import {ProjectName} from "./Components/ProjectName/ProjectName";
 import {StepperComponent} from "./Components/Stepper/StepperComponent";
 import {Deadline} from "./Components/Deadline/Deadline";
 import {ProjectNotes} from "./Components/ProjectNotes/ProjectNotes";
-import {OrderedServices} from "./Components/OrderedServices/OrderedServices";
+import {ProjectChecklist} from "./Components/ProjectChecklist/ProjectChecklist";
 import {Brief} from "./Components/Brief/Brief";
 import {Comments} from "./Components/Comments/Comments";
 import {ProjectDataProps} from "./Types/ProjectData.types";
@@ -33,7 +33,7 @@ export const ProjectData: FC<ProjectDataProps> = () => {
             numberDaysForProject={dates.numberDaysForProject}
         />
 
-        <OrderedServices
+        <ProjectChecklist
             services={orderedServices.services}
             tariffName={orderedServices.tariffName}
         />

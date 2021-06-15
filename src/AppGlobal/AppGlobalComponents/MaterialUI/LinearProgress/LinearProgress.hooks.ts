@@ -1,26 +1,26 @@
 import {useCallback, useEffect, useState} from "react";
-import {OrderedService} from "../../../../../../../../../../../../../../../../../GraphQLServer/QueryTypes/ProjectInfoForClient.types";
+import {ChecklistItem} from "../CheckList/CheckList.types";
 
-export let useReadyServicesPercentage = (services: OrderedService[]) => {
+export const useReadyChecklistPercentage = (checklistItems: ChecklistItem[]) => {
     const getSumReadyServices = useCallback(() => {
-        const numberServices = services.length;
+        const numberServices = checklistItems.length;
 
         if (numberServices === 0) return 0;
 
         let sumReadyServices = 0;
-        services.forEach(service => {
+        checklistItems.forEach(service => {
             sumReadyServices = service.isReady ? sumReadyServices + 1 : sumReadyServices
         });
 
         return Math.round(sumReadyServices / numberServices * 100)
 
-    }, [services]);
+    }, [checklistItems]);
 
     const [readyServicesPercentage, updatePercentage] = useState(getSumReadyServices());
 
     useEffect(() => {
         updatePercentage(getSumReadyServices())
-    }, [services, getSumReadyServices]);
+    }, [checklistItems, getSumReadyServices]);
 
     return readyServicesPercentage
 };

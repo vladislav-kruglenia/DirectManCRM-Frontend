@@ -1,4 +1,4 @@
 import {OrderedServices} from "../../../../../../../../../../../../../../../GraphQLServer/QueryTypes/ProjectInfoForClient.types";
 
-export interface OrderedServicesProps extends OrderedServices{}
+export interface ProjectChecklistProps extends OrderedServices{}
 

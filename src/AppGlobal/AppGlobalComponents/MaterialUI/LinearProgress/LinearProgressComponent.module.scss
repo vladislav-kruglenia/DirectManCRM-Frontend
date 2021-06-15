@@ -1,0 +1,20 @@
+.LinearProgressComponent {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 0 0;
+  //border: 1px solid blue;
+
+  .linearProgressContainer {
+    width: 92%;
+    display: flex;
+    align-items: center;
+    margin: 0 0 0 10px;
+    //border: 1px solid orangered;
+
+    .linearProgress {
+      width: 100%;
+      //border: 1px solid fuchsia;
+
+    }
+  }
+}
