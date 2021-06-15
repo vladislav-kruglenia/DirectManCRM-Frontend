@@ -20,13 +20,13 @@ import LinkIcon from '@material-ui/icons/Link';
 import ClearIcon from '@material-ui/icons/Clear';
 import AddIcon from '@material-ui/icons/Add';
 
-export let DeleteButton: FC<DeleteButtonPropsType> = (props) => {
+export const DeleteButton: FC<DeleteButtonPropsType> = (props) => {
     return <IconButton size={props.size} onClick={() => props.onClickFunc()}>
         <DeleteIcon fontSize={props.iconSize}/>
     </IconButton>
 };
 
-export let AddButtonIcon: FC<AddButtonIconPropsType> = (props) => {
+export const AddButtonIcon: FC<AddButtonIconPropsType> = (props) => {
     return <IconButton size={props.size} onClick={() => props.onClickFunc()}>
         <AddIcon fontSize={props.iconSize}/>
     </IconButton>
@@ -34,27 +34,27 @@ export let AddButtonIcon: FC<AddButtonIconPropsType> = (props) => {
 
 
 
-export let ClearButton: FC<ClearButtonPropsType> = (props) => {
+export const ClearButton: FC<ClearButtonPropsType> = (props) => {
     return <div className={style.ClearButton} onClick={props.onClickFunc}>
         <ClearIcon color={"action"} fontSize={props.iconSize}/>
     </div>
 };
 
 
-export let EditButton: FC<EditButtonPropsType> = (props) => {
+export const EditButton: FC<EditButtonPropsType> = (props) => {
     return <IconButton size={props.size} onClick={() => props.onClickFunc()}>
         <EditIcon fontSize={props.iconSize}/>
     </IconButton>
 };
 
-export let LinkButton: FC<LinkButtonPropsType> = (props) => {
+export const LinkButton: FC<LinkButtonPropsType> = (props) => {
     return <IconButton size={props.size} href={props.link} target={"_blank"}>
         <LinkIcon fontSize={props.iconSize}/>
     </IconButton>
 };
 
 
-export let CopyButton: FC<CopyButtonPropsType> = (props) => {
+export const CopyButton: FC<CopyButtonPropsType> = (props) => {
     return <>
         <CopyToClipboard onCopy={() => {
             props.onClickFunc()
@@ -67,7 +67,7 @@ export let CopyButton: FC<CopyButtonPropsType> = (props) => {
     </>
 };
 
-export let AddButtonText: FC<AddButtonPropsType> = (props) => {
+export const AddButtonText: FC<AddButtonPropsType> = (props) => {
     let largeButton = props.largeButton ? props.largeButton : false;
 
     return <Button
@@ -84,7 +84,7 @@ export let AddButtonText: FC<AddButtonPropsType> = (props) => {
 };
 
 
-export let SaveButton: FC<SaveButtonPropsType> = (props) => {
+export const SaveButton: FC<SaveButtonPropsType> = (props) => {
     return <Button className={style.AddButton}
                    variant={"contained"}
                    color={"primary"}
@@ -99,7 +99,7 @@ export let SaveButton: FC<SaveButtonPropsType> = (props) => {
 
 export const OutlinedButton: FC<OutlinedButtonPropsType> = (props) => {
     return <Button variant={"outlined"}
-                   color={ "primary"}
+                   color={props.color || "primary"}
                    size={props.size}
                    onClick={() => {
                        props.onClickFunc()

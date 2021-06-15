@@ -24,7 +24,7 @@ export const ProjectName: FC<ProjectNameTypeProps> = (props) => {
                 exitEditMode={() => setEditMode(false)}
             />}
         />
-    )
+    );
 
     return DisplayProjectNameComponent;
 };

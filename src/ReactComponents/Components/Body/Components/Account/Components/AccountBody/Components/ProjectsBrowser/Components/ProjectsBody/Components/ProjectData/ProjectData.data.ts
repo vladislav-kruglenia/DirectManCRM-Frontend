@@ -10,21 +10,18 @@ export const projectInfo1: ProjectInfoForClientModel = {
     projectName: 'Первый проект',
     deadline: '01/01/2020',
     projectData: {
+        indexActiveStage: 0,
         projectStages: [
             {
-                isActive: false,
                 stageType: ProjectStageEnum.KeysCollection,
             },
             {
-                isActive: true,
                 stageType: ProjectStageEnum.AdSetup,
             },
             {
-                isActive: false,
                 stageType: ProjectStageEnum.ManagedProject,
             },
             {
-                isActive: false,
                 stageType: ProjectStageEnum.SetupReady,
             },
 

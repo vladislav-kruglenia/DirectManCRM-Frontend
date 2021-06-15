@@ -50,6 +50,7 @@ export interface SaveButtonPropsType extends CommonButtonsTypes{
 
 export interface OutlinedButtonPropsType extends CommonButtonsTypes{
     buttonText: string,
+    color?: 'inherit' | 'primary' | 'secondary' | 'default'
 }
 
 

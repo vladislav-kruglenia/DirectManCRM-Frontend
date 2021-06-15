@@ -31,7 +31,6 @@ export interface OrderedServices {
 
 
 export interface ProjectStage {
-    isActive: boolean,
     stageType: ProjectStageEnum,
 }
 
@@ -42,13 +41,14 @@ export interface ProjectDates {
 }
 
 export interface ProjectData {
-    projectStages: Array<ProjectStage>,
+    indexActiveStage: number,
+    projectStages: ProjectStage[],
     dates: ProjectDates
-    /*dept: Debt,*/
     orderedServices: OrderedServices,
     projectNotes: string,
     briefId: string,
-    comments: Array<CommentType>,
+    comments: CommentType[],
+    /*dept: Debt,*/
 }
 
 

@@ -9,14 +9,17 @@ import {Brief} from "./Components/Brief/Brief";
 import {Comments} from "./Components/Comments/Comments";
 import {ProjectDataProps} from "./Types/ProjectData.types";
 import {projectInfo1} from "./ProjectData.data";
+import {ProjectMenu} from "./Components/ProjectMenu/ProjectMenu";
 
 
 export const ProjectData: FC<ProjectDataProps> = () => {
 
-    const {projectName, deadline, projectData } = projectInfo1;
+    const {projectName, deadline, projectData} = projectInfo1;
     const {dates, orderedServices, comments} = projectData;
 
     return <div className={style.ProjectData}>
+        <ProjectMenu/>
+
         <ProjectName
             projectName={projectName}
             isAccessToEdit={true}
@@ -50,5 +53,6 @@ export const ProjectDataMemo = memo(
         return prevProps.projectIdUrl === nextProps.projectIdUrl || nextProps.projectIdUrl === ""
     }
 );
+
 
 

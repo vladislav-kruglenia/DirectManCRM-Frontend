@@ -1,0 +1,14 @@
+.MenuItemFragment{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  .iconWrapper{
+    display: flex;
+    margin: 0 10px 0 0;
+    //border: 1px solid blue;
+  }
+  .textWrapper{
+
+  }
+}
