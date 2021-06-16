@@ -4,10 +4,10 @@ $primaryColor: #14213d;
 $darkPrimaryColor: scale_color($primaryColor, $lightness: -90%);
 $lightPrimaryColor: scale_color($primaryColor,$lightness: 10%);
 
-
-
-//$darkPrimaryColor: $primaryColor - 100;
-//$lightPrimaryColor: $primaryColor + 40;
+$colorInProgress: #eb5a46;
+$colorManaged: #ff9f1a;
+$colorFrozen: #f2d600;
+$colorCompleted: #61bd4f;
 
 
 $backgroundColor: #e5e5e5

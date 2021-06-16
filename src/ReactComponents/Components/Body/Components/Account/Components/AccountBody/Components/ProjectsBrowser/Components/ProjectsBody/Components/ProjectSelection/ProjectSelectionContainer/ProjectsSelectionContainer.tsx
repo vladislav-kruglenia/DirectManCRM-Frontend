@@ -1,12 +1,15 @@
 import React, {FC} from "react";
 import ProjectsSelectionStyle from "../ProjectSelection.module.scss";
-import {ProjectMainInfoProps, ProjectsContainerProps} from "./Types/ProjectsContainerTypes";
-import {Paper, Typography} from "@material-ui/core";
+import {ProjectsContainerProps} from "./ProjectsContainer.types";
+import {Paper} from "@material-ui/core";
 import {MainProjectData} from "../../../../../../../../../../../../../../GraphQLServer/QueryTypes/ClientAccountInfo.types";
-import {ProjectStatus} from "../../../../../../../../../../../../../../Redux/Reducers/Account/Types/Account.enums";
+import {ProjectMainInfo} from "./Components/ProjectMainInfo/ProjectMainInfo";
+import {ProjectMainInfoTitles} from "./Components/ProjectMainInfoTitles/ProjectMainInfoTitles";
+import {ProjectsSelectionContainerTitle} from "./Components/ProjectsSelectionContainerTitle/ProjectsSelectionContainerTitle";
 
-export let ProjectsSelectionContainer: FC<ProjectsContainerProps> = (props) => {
-    if(props.projectsMainData.length === 0) return null;
+export const ProjectsSelectionContainer: FC<ProjectsContainerProps> = (props) => {
+    const {projectType, title} = props;
+    if (props.projectsMainData.length === 0) return null;
 
     const projects = props.projectsMainData.map((projectMainData: MainProjectData) => <ProjectMainInfo
         key={projectMainData.projectId}
@@ -16,36 +19,9 @@ export let ProjectsSelectionContainer: FC<ProjectsContainerProps> = (props) => {
     />);
 
     return <Paper className={ProjectsSelectionStyle.ProjectsContainer}>
-        <Typography className={ProjectsSelectionStyle.projectsSelectionContainerTitle}
-                    component={'div'} variant={'h6'}>
-            {props.title}
-        </Typography>
+        <ProjectsSelectionContainerTitle title={title} projectType={projectType}/>
         <ProjectMainInfoTitles/>
         {projects}
     </Paper>
 };
 
-
-
-export let ProjectMainInfo:FC<ProjectMainInfoProps> = (props) => {
-    return <div className={ProjectsSelectionStyle.ProjectMainInfo} onClick={() => {
-        const {projectName, projectId, projectStatus} = props.projectMainData;
-        props.updateProjectMainData({projectName, projectId}, props.currentProjectIndex, projectStatus as ProjectStatus);
-        // TODO: может быть ошибка с неправильно написанным статусом проекта
-    }}>
-        <div className={ProjectsSelectionStyle.ProjectName}>{props.projectMainData.projectName}</div>
-        <div className={ProjectsSelectionStyle.ProjectDeadline}>{props.projectMainData.deadline}</div>
-    </div>;
-};
-
-
-export let ProjectMainInfoTitles = () => {
-    return <div className={ProjectsSelectionStyle.ProjectMainInfoTitles}>
-        <div className={ProjectsSelectionStyle.ProjectName}>
-            <Typography component={'div'} className={ProjectsSelectionStyle.titleProjectMainInfo}>Название проекта</Typography>
-        </div>
-        <div className={ProjectsSelectionStyle.ProjectDeadline}>
-            <Typography component={'div'} className={ProjectsSelectionStyle.titleProjectMainInfo}>Дата окончания работы</Typography>
-        </div>
-    </div>
-};

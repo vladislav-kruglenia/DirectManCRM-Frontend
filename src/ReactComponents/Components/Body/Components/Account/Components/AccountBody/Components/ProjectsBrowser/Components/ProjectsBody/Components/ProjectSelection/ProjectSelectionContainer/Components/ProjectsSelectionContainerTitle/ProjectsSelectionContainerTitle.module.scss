@@ -1,0 +1,37 @@
+@import "../../../../../../../../../../../../../../../../AppGlobal/AppGlobalStyles/Colors.module";
+
+@mixin backgroundColorMixin($color) {
+  background-color: rgba($color, 0.9);
+}
+
+.ProjectsSelectionContainerTitle {
+  font-weight: bold;
+  color: #ffffff;
+  //border: 1px solid brown;
+
+  .titleWrapper {
+    display: flex;
+    justify-content: center;
+
+    border-radius: 5px;
+
+  }
+
+  .completedBackground {
+    @include backgroundColorMixin($colorCompleted);
+  }
+
+  .frozenBackground {
+    @include backgroundColorMixin($colorFrozen);
+  }
+
+  .managedBackground {
+    @include backgroundColorMixin($colorManaged);
+  }
+
+  .inProgressBackground {
+    @include backgroundColorMixin($colorInProgress);
+  }
+}
+
+

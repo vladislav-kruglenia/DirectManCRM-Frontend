@@ -1,5 +1,5 @@
-import style from "./TabsComponent.module.scss";
 import React, {FC, memo, useCallback} from "react";
+import style from "./TabsComponent.module.scss";
 import {Tab, Tabs} from "@material-ui/core";
 import {useDispatch, useSelector} from "react-redux";
 import {
@@ -12,7 +12,7 @@ import {TabLabelMemo} from "./Components/TabLabel/TabLabel";
 import {AddTabButtonMemo} from "./Components/AddTabButton/AddTabButton";
 import {DeleteTabPayload} from "../../../../../../../../../../../Redux/Reducers/Account/Types/Actions.types";
 
-export let TabsContainer: FC<TabsComponentProps> = (props) => {
+export const TabsContainer: FC<TabsComponentProps> = (props) => {
     const currentProjectIndex = useSelector(getCurrentProjectIndexSelector);
 
     const dispatch = useDispatch();

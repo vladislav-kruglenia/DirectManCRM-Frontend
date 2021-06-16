@@ -1,10 +1,10 @@
 import React, {FC, memo, ReactNodeArray, useMemo} from "react";
+import style from "./ProjectSelection.module.scss";
 import {MainProjectDataKeys, ProjectSelectionProps, TypesProjectsEnum} from "./Types/ProjectSelection.types";
 import {useSelector} from "react-redux";
 import {getCurrentProjectIndexSelector} from "../../../../../../../../../../../../../Redux/Reducers/Account/Account.selectors";
 import {MainProjectData} from "../../../../../../../../../../../../../GraphQLServer/QueryTypes/ClientAccountInfo.types";
 import {ProjectsSelectionContainer} from "./ProjectSelectionContainer/ProjectsSelectionContainer";
-import style from "./ProjectSelection.module.scss";
 
 export const ProjectSelection: FC<ProjectSelectionProps> = (props) => {
     const currentProjectIndex = useSelector(getCurrentProjectIndexSelector);
@@ -25,11 +25,14 @@ export const ProjectSelection: FC<ProjectSelectionProps> = (props) => {
 
         return projectsMainData
             .map((projectsArr: [MainProjectDataKeys, Array<MainProjectData>]) => {
+                const [projectType, projectsDataArr] = projectsArr;
+
                 return <ProjectsSelectionContainer
-                    key={projectsArr[0]}
+                    key={projectType}
                     currentProjectIndex={currentProjectIndex}
-                    title={TypesProjectsEnum[projectsArr[0]]}
-                    projectsMainData={projectsArr[1]}
+                    title={TypesProjectsEnum[projectType]}
+                    projectsMainData={projectsDataArr}
+                    projectType={projectType}
                     updateProjectMainData={props.updateProjectMainData}
                 />
             });
