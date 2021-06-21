@@ -1,1 +1,14 @@
-.ProjectSelection{}
+.Settings{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  .userDataContainer{
+    width: 45%;
+    //border: 1px solid forestgreen;
+  }
+
+  .notificationsContainer{
+    width: 53%;
+  }
+}

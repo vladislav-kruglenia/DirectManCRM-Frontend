@@ -5,7 +5,7 @@ import {CheckboxItem} from "./Components/CheckboxItem/CheckboxItem";
 
 export const CheckList: FC<CheckListProps> = (props) => {
     const checkboxItems = props.checklistItems.map((item: ChecklistItem) => (
-        <CheckboxItem checkboxItem={item}/>
+        <CheckboxItem key={item.itemName} checkboxItem={item}/>
     ));
 
     return <div className={style.CheckList}>

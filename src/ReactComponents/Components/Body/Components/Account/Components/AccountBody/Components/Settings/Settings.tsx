@@ -2,10 +2,17 @@ import React from "react";
 import style from "./Settings.module.scss";
 import {UserProfileData} from "./Components/UserProfileData/UserProfileData";
 import {ChangePassword} from "./Components/ChangePassword/ChangePassword";
+import {Notifications} from "./Components/Notifications/Notifications";
 
-export let Settings = () => {
+export const Settings = () => {
     return <div className={style.Settings}>
-        <UserProfileData/>
-        <ChangePassword/>
+        <div className={style.userDataContainer}>
+            <UserProfileData/>
+            <ChangePassword/>
+        </div>
+        <div className={style.notificationsContainer}>
+            <Notifications/>
+        </div>
     </div>
 };
+

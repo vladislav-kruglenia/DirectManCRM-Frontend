@@ -40,8 +40,8 @@ export const TabsContainer: FC<TabsComponentProps> = (props) => {
             value={currentProjectIndex}
             indicatorColor="primary"
             textColor="primary"
-            // variant="scrollable"
-            // scrollButtons="auto"
+            variant="scrollable"
+            scrollButtons="auto"
         >
             {tabsArray}
         </Tabs>
