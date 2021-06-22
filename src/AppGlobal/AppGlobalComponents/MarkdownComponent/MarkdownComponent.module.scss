@@ -1,0 +1,28 @@
+.MarkdownComponent{
+  h1{
+    text-align: center;
+  }
+  
+  h2{
+    margin: 10px 0 0 0;
+    padding: 0 0 5px 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  h3{
+    margin: 10px 0 0 0;
+  }
+
+  p{
+    padding: 0 10px;
+  }
+
+  hr{
+    color: #e0e0e0;
+    margin: 0 0 10px 0;
+    padding: 0;
+  }
+  ul{
+    padding: 0 40px;
+  }
+}

@@ -1,8 +1,11 @@
 import React from "react";
 import style from "./Instructions.module.scss";
+import {InstructionsBody} from "./Components/InstructionsBody/InstructionsBody";
 
-export let Instructions = () => {
+export const Instructions = () => {
+
     return <div className={style.Instructions}>
-        Instructions
+        <InstructionsBody/>
     </div>
 };
+
