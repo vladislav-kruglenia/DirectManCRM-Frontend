@@ -1,11 +1,14 @@
-import React from "react";
+import React, {FC} from "react";
 import style from "./Instructions.module.scss";
 import {InstructionsBody} from "./Components/InstructionsBody/InstructionsBody";
+import {InstructionsProps} from "./Instructions.types";
+import {useInstructionButtonsCallbacks} from "./Instructions.hooks";
 
-export const Instructions = () => {
+export const Instructions:FC<InstructionsProps> = () => {
+    const instructionsButtonsCallbacks = useInstructionButtonsCallbacks();
 
     return <div className={style.Instructions}>
-        <InstructionsBody/>
+        <InstructionsBody instructionButtons={instructionsButtonsCallbacks}/>
     </div>
 };
 

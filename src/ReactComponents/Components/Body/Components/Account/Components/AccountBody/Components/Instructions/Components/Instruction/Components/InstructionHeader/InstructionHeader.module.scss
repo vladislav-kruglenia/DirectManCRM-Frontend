@@ -1,0 +1,12 @@
+@import "../../../../../../../../../../../../../AppGlobal/AppGlobalStyles/Colors.module";
+
+.InstructionHeader{
+    display: flex;
+    justify-content: space-between;
+
+    padding: 10px 15px;
+    background-color: scale_color($backgroundColor,$lightness: 50%);
+    border-radius: 7px;
+
+    margin: 0 0 15px 0;
+}

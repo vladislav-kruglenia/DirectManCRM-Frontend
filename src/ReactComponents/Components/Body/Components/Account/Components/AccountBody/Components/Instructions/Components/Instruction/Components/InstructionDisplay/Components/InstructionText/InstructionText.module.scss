@@ -1,0 +1,16 @@
+.InstructionText {
+}
+
+.openMode {
+  height: auto;
+}
+
+.closedMode {
+  height: 230px;
+  overflow: hidden;
+}
+
+.animated {
+  transition-property: max-height;
+  transition-duration: 1s;
+}

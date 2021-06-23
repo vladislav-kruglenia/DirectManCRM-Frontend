@@ -7,7 +7,7 @@ import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import {
     AddButtonIconPropsType,
-    AddButtonPropsType, ClearButtonPropsType,
+    AddButtonPropsType, ClearButtonPropsType, CloneButtonPropsType,
     CopyButtonPropsType,
     DeleteButtonPropsType,
     EditButtonPropsType,
@@ -31,7 +31,6 @@ export const AddButtonIcon: FC<AddButtonIconPropsType> = (props) => {
         <AddIcon fontSize={props.iconSize}/>
     </IconButton>
 };
-
 
 
 export const ClearButton: FC<ClearButtonPropsType> = (props) => {
@@ -67,8 +66,17 @@ export const CopyButton: FC<CopyButtonPropsType> = (props) => {
     </>
 };
 
+export const CloneButton: FC<CloneButtonPropsType> = (props) => {
+    return <>
+        <IconButton size={props.size} onClick={props.onClickFunc}>
+            <FileCopyIcon fontSize={props.iconSize}/>
+        </IconButton>
+    </>
+};
+
+
 export const AddButtonText: FC<AddButtonPropsType> = (props) => {
-    let largeButton = props.largeButton ? props.largeButton : false;
+    const largeButton = props.largeButton ? props.largeButton : false;
 
     return <Button
         className={`${style.AddButton} ${largeButton && style.AddLargeButton}`}

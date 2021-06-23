@@ -3,11 +3,13 @@ import style from "./Instruction.module.scss"
 import {Paper} from "@material-ui/core";
 import {InstructionDisplay} from "./Components/InstructionDisplay/InstructionDisplay";
 import {InstructionProps} from "./Instruction.types";
+import {InstructionHeader} from "./Components/InstructionHeader/InstructionHeader";
 
 export const Instruction:FC<InstructionProps> = (props) => {
-    const {instructionText} = props;
+    const {instructionText, instructionButtons} = props;
 
     return <Paper className={style.Instruction}>
+        <InstructionHeader instructionButtons={instructionButtons}/>
         <InstructionDisplay instructionText={instructionText}/>
         {/*<FormInstruction/>*/}
     </Paper>

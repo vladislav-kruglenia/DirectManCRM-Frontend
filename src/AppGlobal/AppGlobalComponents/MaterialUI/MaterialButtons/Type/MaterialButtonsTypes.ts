@@ -36,6 +36,11 @@ export interface CopyButtonPropsType extends CommonIconButtonsTypes{
     copyText: string,
 }
 
+export interface CloneButtonPropsType extends CommonIconButtonsTypes{
+}
+
+
+
 
 
 export interface AddButtonPropsType extends CommonIconButtonsTypes{

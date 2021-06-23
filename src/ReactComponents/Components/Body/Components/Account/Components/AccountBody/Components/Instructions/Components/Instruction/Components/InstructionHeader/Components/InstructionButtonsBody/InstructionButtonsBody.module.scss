@@ -1,0 +1,11 @@
+.InstructionButtonsBody{
+  display: flex;
+  //border: 1px solid blueviolet;
+
+  .button{
+    display: flex;
+    align-items: center;
+
+    //border: 1px solid gold;
+  }
+}
