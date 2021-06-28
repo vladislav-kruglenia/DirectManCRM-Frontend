@@ -5,7 +5,8 @@ import {combineReducers, configureStore, Store} from "@reduxjs/toolkit";
 import {AppStateType} from "../AppGlobal/AppGlobalTypes/AppGlobalTypes";
 import projectCreationReducer from "./Reducers/ProjectCreation/ProjectCreation.reducer.immer";
 import editingOrderQuestionsReducer from "./Reducers/EditingOrderQuestions/EditingOrderQuestions.reducer";
-import accountReducer from "./Reducers/Account/Account.reducer"
+import accountReducer from "./Reducers/Account/Account.reducer";
+import instructionsReducer from "./Reducers/Instructions/Instructions.reducer";
 
 export const reducers = combineReducers({
     auth: authReducer,
@@ -13,7 +14,8 @@ export const reducers = combineReducers({
     fillOrderQuestions: fillOrderQuestionsReducer,
     editingOrderQuestions: editingOrderQuestionsReducer,
     account: accountReducer,
-    form: formReducer
+    form: formReducer,
+    instructions: instructionsReducer,
 });
 
 export const store:Store<AppStateType> = configureStore({
