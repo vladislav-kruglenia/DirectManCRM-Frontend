@@ -2,4 +2,5 @@ import {InstructionButtonsFuncTypes} from "../Instruction/Components/Instruction
 
 export type InstructionsBodyProps = {
     instructionButtons: InstructionButtonsFuncTypes,
+    isReadOnly: boolean,
 }

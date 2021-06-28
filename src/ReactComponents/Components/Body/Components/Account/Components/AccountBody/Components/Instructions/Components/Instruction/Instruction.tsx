@@ -6,10 +6,11 @@ import {InstructionProps} from "./Instruction.types";
 import {InstructionHeader} from "./Components/InstructionHeader/InstructionHeader";
 
 export const Instruction:FC<InstructionProps> = (props) => {
-    const {instructionText, instructionButtons} = props;
+    const {instructionText, instructionButtons, isReadOnly} = props;
+    const InstructionHeaderComponent = !isReadOnly && <InstructionHeader instructionButtons={instructionButtons}/>;
 
     return <Paper className={style.Instruction}>
-        <InstructionHeader instructionButtons={instructionButtons}/>
+        {InstructionHeaderComponent}
         <InstructionDisplay instructionText={instructionText}/>
         {/*<FormInstruction/>*/}
     </Paper>

@@ -3,4 +3,5 @@ import {InstructionButtonsFuncTypes} from "./Components/InstructionHeader/Compon
 export type InstructionProps = {
     instructionText: string,
     instructionButtons: InstructionButtonsFuncTypes,
+    isReadOnly: boolean,
 }

@@ -8,7 +8,10 @@ export const Instructions:FC<InstructionsProps> = () => {
     const instructionsButtonsCallbacks = useInstructionButtonsCallbacks();
 
     return <div className={style.Instructions}>
-        <InstructionsBody instructionButtons={instructionsButtonsCallbacks}/>
+        <InstructionsBody
+            instructionButtons={instructionsButtonsCallbacks}
+            isReadOnly={false}
+        />
     </div>
 };
 
