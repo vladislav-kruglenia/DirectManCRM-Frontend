@@ -6,7 +6,7 @@ import {InstructionsBodyProps} from "./InstructionsBody.types";
 
 
 export const InstructionsBody:FC<InstructionsBodyProps> = (props) => {
-    const {instructionButtons, isReadOnly} = props;
+    const {instructionButtons, isReadOnly, editInstructionText} = props;
 
 
     return <div>
@@ -14,11 +14,13 @@ export const InstructionsBody:FC<InstructionsBodyProps> = (props) => {
             instructionText={instruction1}
             instructionButtons={instructionButtons}
             isReadOnly={isReadOnly}
+            editInstructionText={editInstructionText}
         />
         <Instruction
             instructionText={instruction2}
             instructionButtons={instructionButtons}
             isReadOnly={isReadOnly}
+            editInstructionText={editInstructionText}
         />
     </div>
 };

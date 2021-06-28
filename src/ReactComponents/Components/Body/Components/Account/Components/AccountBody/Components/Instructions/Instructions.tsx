@@ -11,7 +11,9 @@ export const Instructions:FC<InstructionsProps> = () => {
         <InstructionsBody
             instructionButtons={instructionsButtonsCallbacks}
             isReadOnly={false}
+            editInstructionText={text => {}}
         />
+
     </div>
 };
 

@@ -8,10 +8,12 @@ export type OneInputTextProps = {
     autoFocus?: boolean,
     onBlur?: (text: string) => void,
     exitEditMode: () => void,
-    editText: (text: string) => void
+    editText: EditTextFuncType,
 }
 
 export type ValuesFormType = {
     formValue: string,
 }
+
+export type EditTextFuncType = (text: string) => void
 
