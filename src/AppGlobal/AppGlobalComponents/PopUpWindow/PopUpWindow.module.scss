@@ -1,0 +1,45 @@
+.PopUpWindow {
+  position: absolute;
+  //top: 35px;
+  top: 120%;
+  left: 0;
+  z-index: 2;
+  background-color: white;
+  //border: 1px solid hotpink;
+
+
+  .popUpWindowBody {
+    width: 20vw;
+    min-height: 40vh;
+    padding: 10px;
+    position: relative;
+    background-color: white;
+    z-index: 2;
+
+    .title{
+      display: flex;
+      justify-content: center;
+      margin: 0 0 5px 0;
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    .clearButtonContainer {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+    }
+  }
+
+  .exitOpenModeLayer{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top:0;
+    left: 0;
+    //background-color: #eb5a46;
+    z-index: 1;
+  }
+}
+
+

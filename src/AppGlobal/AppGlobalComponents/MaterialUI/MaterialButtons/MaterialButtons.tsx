@@ -21,27 +21,27 @@ import ClearIcon from '@material-ui/icons/Clear';
 import AddIcon from '@material-ui/icons/Add';
 
 export const DeleteButton: FC<DeleteButtonPropsType> = (props) => {
-    return <IconButton size={props.size} onClick={() => props.onClickFunc()}>
+    return <IconButton size={props.size} onClick={props.onClickFunc}>
         <DeleteIcon fontSize={props.iconSize}/>
     </IconButton>
 };
 
 export const AddButtonIcon: FC<AddButtonIconPropsType> = (props) => {
-    return <IconButton size={props.size} onClick={() => props.onClickFunc()}>
+    return <IconButton size={props.size} onClick={props.onClickFunc}>
         <AddIcon fontSize={props.iconSize}/>
     </IconButton>
 };
 
 
 export const ClearButton: FC<ClearButtonPropsType> = (props) => {
-    return <div className={style.ClearButton} onClick={props.onClickFunc}>
+    return <IconButton className={style.ClearButton} onClick={props.onClickFunc} size={props.size}>
         <ClearIcon color={"action"} fontSize={props.iconSize}/>
-    </div>
+    </IconButton>
 };
 
 
 export const EditButton: FC<EditButtonPropsType> = (props) => {
-    return <IconButton size={props.size} onClick={() => props.onClickFunc()}>
+    return <IconButton size={props.size} onClick={props.onClickFunc}>
         <EditIcon fontSize={props.iconSize}/>
     </IconButton>
 };
@@ -55,10 +55,7 @@ export const LinkButton: FC<LinkButtonPropsType> = (props) => {
 
 export const CopyButton: FC<CopyButtonPropsType> = (props) => {
     return <>
-        <CopyToClipboard onCopy={() => {
-            props.onClickFunc()
-        }}
-                         text={props.copyText}>
+        <CopyToClipboard onCopy={() => props.onClickFunc()} text={props.copyText}>
             <IconButton size={props.size}>
                 <FileCopyIcon fontSize={props.iconSize}/>
             </IconButton>
@@ -81,9 +78,7 @@ export const AddButtonText: FC<AddButtonPropsType> = (props) => {
     return <Button
         className={`${style.AddButton} ${largeButton && style.AddLargeButton}`}
         size={props.size}
-        onClick={() => {
-            props.onClickFunc()
-        }}>
+        onClick={props.onClickFunc}>
         <div className={style.icon}>
             <PlaylistAddIcon color={"action"} fontSize={props.iconSize}/>
         </div>

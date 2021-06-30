@@ -1,3 +1,5 @@
+import {HandleClickType} from "../../../../AppGlobalTypes/AppGlobalTypes";
+
 export interface IconButtonsSizeProps {
     size?: 'small' | 'medium',
     iconSize?: 'inherit' | 'default' | 'small' | 'large',
@@ -9,11 +11,11 @@ export interface ButtonsSizeProps {
 }
 
 export interface CommonIconButtonsTypes extends IconButtonsSizeProps{
-    onClickFunc: () => void
+    onClickFunc: HandleClickType | VoidFunction
 }
 
 export interface CommonButtonsTypes extends ButtonsSizeProps{
-    onClickFunc: () => void,
+    onClickFunc: VoidFunction,
 }
 
 export interface DeleteButtonPropsType extends CommonIconButtonsTypes{
@@ -34,6 +36,7 @@ export interface LinkButtonPropsType extends IconButtonsSizeProps{
 
 export interface CopyButtonPropsType extends CommonIconButtonsTypes{
     copyText: string,
+    onClickFunc: VoidFunction,
 }
 
 export interface CloneButtonPropsType extends CommonIconButtonsTypes{
