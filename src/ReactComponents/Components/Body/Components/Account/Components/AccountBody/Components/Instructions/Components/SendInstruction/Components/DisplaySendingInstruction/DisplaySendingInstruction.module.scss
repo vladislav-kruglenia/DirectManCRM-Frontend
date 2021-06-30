@@ -1,0 +1,13 @@
+@import "../../SendInstruction.module";
+
+.DisplaySendingInstruction{
+  margin: 5px 0 0 0;
+
+  .title{
+    @include TitlePoint;
+  }
+
+  .instructionBodyComponent{
+    padding: 10px;
+  }
+}

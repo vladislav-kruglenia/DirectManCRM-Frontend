@@ -5,11 +5,14 @@ import {InstructionButtonsBody} from "./Components/InstructionButtonsBody/Instru
 import {InstructionHeaderProps} from "./InstructionHeader.types";
 
 export const InstructionHeader:FC<InstructionHeaderProps> = (props) => {
-    const {instructionButtons} = props;
+    const {instructionButtons, instructionMainData} = props;
 
     return <div className={style.InstructionHeader}>
-        <TypeInstruction/>
-        <InstructionButtonsBody instructionButtons={instructionButtons}/>
+        <TypeInstruction typeInstruction={instructionMainData.typeInstructions}/>
+        <InstructionButtonsBody
+            instructionMainData={instructionMainData}
+            instructionButtons={instructionButtons}
+        />
     </div>
 };
 

@@ -1,12 +1,15 @@
-import React from "react";
+import React, {FC} from "react";
 import style from "./TypeInstruction.module.scss"
 import {NativeSelectComponent} from "../../../../../../../../../../../../../../../AppGlobal/AppGlobalComponents/MaterialUI/NativeSelect/NativeSelectComponent";
 import {
     InstructionTypeEnum,
     InstructionTypeNameEnum
 } from "../../../../../../../../../../../../../../../AppGlobal/AppGlobalTypes/InstructionsGlobal.types";
+import {TypeInstructionProps} from "./TypeInstruction.types";
 
-export const TypeInstruction = () => {
+export const TypeInstruction:FC<TypeInstructionProps> = (props) => {
+    const {typeInstruction} = props;
+
     const OptionArr = [
         <option key={InstructionTypeEnum.Client} value={InstructionTypeEnum.Client}>
             {InstructionTypeNameEnum[InstructionTypeEnum.Client]}
@@ -22,7 +25,7 @@ export const TypeInstruction = () => {
             errorText={"Тип инструкции не выбран"}
             editOptionValue={() => {}}
             OptionsArray={OptionArr}
-            optionValue={InstructionTypeEnum.Client}
+            optionValue={typeInstruction}
         />
     </div>
 };

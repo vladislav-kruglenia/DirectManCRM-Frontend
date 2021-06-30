@@ -6,22 +6,26 @@ import {ValueDisplay} from "../../../../../../../../../../../AppGlobal/AppGlobal
 import {DisplayTypeEnum} from "../../../../../../../../../../../AppGlobal/AppGlobalComponents/DisplayingDifferentData/Types/DisplayingDifferentDataTypes";
 import {FormTypeEnum} from "../../../../../../../../../../../AppGlobal/AppGlobalComponents/DisplayingDifferentData/Types/InputEditModeTypes";
 import {FormInstruction} from "./Components/FormInstruction/FormInstruction";
-import {UseInstructionComponentsDTO} from "./Instruction.types";
+import {UseInstructionBodyComponentDTO, UseInstructionHeaderComponentsDTO} from "./Instruction.types";
 
-export const useInstructionHeaderComponent = (dto: UseInstructionComponentsDTO) => {
-    const {isReadOnly, instructionButtons, setEditMode} = dto;
+export const useInstructionHeaderComponent = (dto: UseInstructionHeaderComponentsDTO) => {
+    const {isReadOnly, instructionButtons, setEditMode, instructionMainData } = dto;
 
     const instructionButtonsFunc: InstructionButtonsFuncTypes = {
         ...instructionButtons,
         editInstruction: () => setEditMode(true)
     };
-    const InstructionHeaderComponent = !isReadOnly && <InstructionHeader instructionButtons={instructionButtonsFunc}/>;
+    const InstructionHeaderComponent = !isReadOnly && <InstructionHeader
+        instructionMainData={instructionMainData}
+        instructionButtons={instructionButtonsFunc}
+    />;
 
     return {InstructionHeaderComponent}
 };
 
-export const useInstructionBodyComponent = (dto: UseInstructionComponentsDTO) => {
-    const {isReadOnly, instructionText, setEditMode, editMode, editInstructionText} = dto;
+export const useInstructionBodyComponent = (dto: UseInstructionBodyComponentDTO) => {
+    const {isReadOnly, setEditMode, editMode, editInstructionText} = dto;
+    const {instructionText} = dto.instructionMainData;
 
     const InstructionDisplayComponent = <InstructionDisplay instructionText={instructionText}/>;
 

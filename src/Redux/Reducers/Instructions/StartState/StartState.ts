@@ -1,4 +1,5 @@
 import {SendModeParams, StartStateType} from "./StartState.types";
+import {InstructionMainDataService} from "./Services/InstructionMainDataService";
 
 export class InstructionsReducerStartState{
     private readonly isSendMode: boolean;
@@ -8,8 +9,7 @@ export class InstructionsReducerStartState{
         this.isSendMode = false;
         this.sendModeParams = {
             destinations: [],
-            instructionId: "",
-            instructionText: "",
+            instructionMainData: new InstructionMainDataService().instructionMainDataEmpty,
         }
     }
 
@@ -20,3 +20,4 @@ export class InstructionsReducerStartState{
         }
     }
 }
+

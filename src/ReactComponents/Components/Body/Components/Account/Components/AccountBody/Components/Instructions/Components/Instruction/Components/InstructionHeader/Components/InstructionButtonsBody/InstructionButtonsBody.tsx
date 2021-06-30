@@ -8,7 +8,10 @@ import {
 import {InstructionButtonsBodyProps} from "./InstructionButtonsBody.types";
 
 export const InstructionButtonsBody: FC<InstructionButtonsBodyProps> = (props) => {
-    const {editInstruction, cloneInstruction, deleteInstruction, sendInstruction} = props.instructionButtons;
+    const {instructionId, instructionText, typeInstructions} = props.instructionMainData;
+    const {
+        editInstruction, cloneInstruction, deleteInstruction, sendInstruction,
+    } = props.instructionButtons;
 
     return <div className={style.InstructionButtonsBody}>
         <div className={style.button}>
@@ -29,7 +32,7 @@ export const InstructionButtonsBody: FC<InstructionButtonsBodyProps> = (props) =
         <div className={style.button}>
             <OutlinedButton
                 buttonText={"Отправить"}
-                onClickFunc={sendInstruction}
+                onClickFunc={() => sendInstruction({instructionId, instructionText, typeInstructions})}
             />
         </div>
     </div>

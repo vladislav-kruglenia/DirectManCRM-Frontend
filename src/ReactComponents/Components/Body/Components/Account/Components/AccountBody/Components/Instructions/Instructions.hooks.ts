@@ -2,13 +2,12 @@ import {InstructionButtonsFuncTypes} from "./Components/Instruction/Components/I
 import {useInstructionsReducerActions} from "../../../../../../../../../Redux/Reducers/Instructions/Hooks/Actions.hooks";
 
 export const useInstructionButtonsCallbacks = ():InstructionButtonsFuncTypes => {
-    const {editSendModeAction} = useInstructionsReducerActions();
-    const sendInstruction = () => editSendModeAction(true);
+    const {activateSendModeAction} = useInstructionsReducerActions();
 
     return {
-        sendInstruction,
         editInstruction: () => alert("edit"),
         cloneInstruction: () => alert("clone"),
         deleteInstruction: () => alert("delete"),
+        sendInstruction: (dto) => activateSendModeAction(dto),
     }
 };
