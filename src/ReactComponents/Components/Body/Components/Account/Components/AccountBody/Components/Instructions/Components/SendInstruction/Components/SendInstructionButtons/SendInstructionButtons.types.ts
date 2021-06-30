@@ -1,5 +1,5 @@
 import {InstructionMainData} from "../../../InstructionsBody/InstructionsBody.types";
 
-export type DisplaySendingInstructionProps = {
+export type SendInstructionButtonsProps = {
     instructionMainData: InstructionMainData,
 }
